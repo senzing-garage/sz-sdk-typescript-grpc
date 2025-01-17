@@ -1,0 +1,34 @@
+{
+  "name": "@senzing/sz-sdk-nodejs-grpc_examples",
+  "version": "0.0.1",
+  "description": "examples for using @senzing/serve-grpc with nodejs",
+  "main": "index.js",
+  "type":"module",
+  "scripts": {
+    "szconfig/addDataSource.ts": "tsx szconfig/addDataSource.ts",
+    "szconfig/constructor.ts": "tsx szconfig/constructor.ts",
+    "szconfig/createAndClose.ts": "tsx szconfig/createAndClose.ts",
+    "szconfig/createExportImportClose.ts": "tsx szconfig/createExportImportClose.ts",
+    "szconfig/deleteDataSource.ts": "tsx szconfig/deleteDataSource.ts",
+    "szconfig/exportConfig.ts": "tsx szconfig/exportConfig.ts",
+    "szconfig/getDataSources.ts": "tsx szconfig/getDataSources.ts",
+    "szconfig/szconfig/importConfig.ts": "tsx szconfig/importConfig.ts",
+    "szdiagnostic/checkDataStorePerformance.ts":"tsx szdiagnostic/checkDataStorePerformance.ts",
+    "szdiagnostic/getDatastoreInfo.ts":"tsx szdiagnostic/getDatastoreInfo.ts",
+    "szdiagnostic/getFeature.ts":"tsx szdiagnostic/getFeature.ts",
+    "szdiagnostic/purgeRepository.ts": "tsx szdiagnostic/purgeRepository.ts",
+    "szdiagnostic/reinitialize.ts":"tsx szdiagnostic/reinitialize.ts",
+    "szengine/addRecord.ts":"tsx szengine/addRecord.ts",
+    "szengine/exportJsonStream.ts":"tsx szengine/exportJsonStream.ts",
+    "szengine/primeEngine.ts":"tsx szengine/primeEngine.ts",
+    "szproduct/getVersion.ts": "tsx szproduct/getVersion.ts",
+    "szproduct/getLicense.ts": "tsx szproduct/getLicense.ts",
+    "grpc_tools_node_protoc/helloworld.ts": "tsx grpc_tools_node_protoc/helloworld.ts"
+  },
+  "keywords": [
+    "senzing",
+    "entity-resolution"
+  ],
+  "author": "",
+  "license": "MIT"
+}

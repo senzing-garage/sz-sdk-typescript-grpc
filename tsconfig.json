@@ -1,0 +1,39 @@
+{
+    "compilerOptions": {
+      "target": "es2020",
+      "composite": true,
+      "module": "commonjs",
+      "lib": [
+        "es6",
+        "es2020", "esnext"
+      ],
+      "allowJs": false,
+      "outDir": "dist/@senzing/sz-sdk-nodejs-grpc",
+      "rootDir": "./",
+      "strict": true,
+      "noImplicitAny": true,
+      "esModuleInterop": true,
+      "resolveJsonModule": true,
+      "removeComments": false,
+      "sourceMap": true,
+      "declaration": true,
+      "noEmitOnError": true
+    },
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "dist",
+      "dist/**/*",
+      "node_modules",
+      "examples",
+      "examples/*",
+      "examples/**",
+      "examples/**/*",
+      "szconfig",
+      "src/**/*d.ts",
+      "package-lock.json",
+      "package.json",
+      "build/build.js"
+    ]
+}
