@@ -78,12 +78,12 @@ and access it using the `senzing_grpc` Python package.
         "compilerOptions": {
             "module": "commonjs",
             "esModuleInterop": true,
-            "target": "es6",
+            "target": "es2020",
             "moduleResolution": "node",
             "sourceMap": true,
             "outDir": "dist"
         },
-        "lib": ["es2015"]
+        "lib": ["es2020"]
     }
     ```
 
