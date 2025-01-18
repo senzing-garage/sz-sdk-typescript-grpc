@@ -1,5 +1,5 @@
-import { SzAbstractFactory, SzEngineFlags } from '../../dist/@senzing/sz-sdk-nodejs-grpc';
-import { SzEngine } from '../../dist/@senzing/sz-sdk-nodejs-grpc/szEngine';
+import { SzAbstractFactory, SzEngineFlags } from '../../dist/@senzing/sz-sdk-typescript-grpc';
+import { SzEngine } from '../../dist/@senzing/sz-sdk-typescript-grpc/szEngine';
 
 const szParamFactory = new SzAbstractFactory(`0.0.0.0:8261`);
 const szEngine       = szParamFactory.createEngine();

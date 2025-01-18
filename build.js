@@ -14,20 +14,20 @@ const _filesToExclude = [
 
 // move tsbuild info file if exists
 
-if(fs.existsSync(path.join('.', ...'dist/@senzing/sz-sdk-nodejs-grpc/tsconfig.tsbuildinfo'.split('/')))) {
+if(fs.existsSync(path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc/tsconfig.tsbuildinfo'.split('/')))) {
     fs.renameSync(
-        path.join('.', ...'dist/@senzing/sz-sdk-nodejs-grpc/tsconfig.tsbuildinfo'.split('/')), 
-        path.join('.', ...'dist/@senzing/sz-sdk-nodejs-grpc.tsbuildinfo'.split('/'))
+        path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc/tsconfig.tsbuildinfo'.split('/')), 
+        path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc.tsbuildinfo'.split('/'))
     );
 }
 
-// flatten "dist/@senzing/sz-sdk-nodejs-grpc/src" -> "dist/@senzing/sz-sdk-nodejs-grpc"
+// flatten "dist/@senzing/sz-sdk-typescript-grpc/src" -> "dist/@senzing/sz-sdk-typescript-grpc"
 // first
-fs.cpSync(path.join('.', ...'dist/@senzing/sz-sdk-nodejs-grpc/src'.split('/')), path.join('.', ...'dist/@senzing/sz-sdk-nodejs-grpc'.split('/')), { recursive: true});
-fs.rmSync(path.join('.', ...'dist/@senzing/sz-sdk-nodejs-grpc/src'.split('/')), { recursive: true, force: true });
+fs.cpSync(path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc/src'.split('/')), path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc'.split('/')), { recursive: true});
+fs.rmSync(path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc/src'.split('/')), { recursive: true, force: true });
 
 // copy js/ts files in "/src" to package dir
-fs.cpSync(path.join('.','src'), path.join('.', ...'dist/@senzing/sz-sdk-nodejs-grpc'.split('/')), { recursive: true, filter: (filename) => {
+fs.cpSync(path.join('.','src'), path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc'.split('/')), { recursive: true, filter: (filename) => {
     return !_filesToExclude.includes(filename);
 } }, (err) => {
     if (err) {
@@ -89,7 +89,7 @@ let afterFileRenaming = () => {
     try {
         const results = replaceInFile({
             files:  [
-                'dist/@senzing/sz-sdk-nodejs-grpc/**/grpc.js',
+                'dist/@senzing/sz-sdk-typescript-grpc/**/grpc.js',
             ],
             from:   ["szconfig_pb.js","szconfigmanager_pb.js","szdiagnostic_pb.js","szengine_pb.js","szproduct_pb.js"],
             to:     "index.js"
@@ -105,7 +105,7 @@ let afterFileRenaming = () => {
         });
         replaceInFile({
             files:  [
-                'dist/@senzing/sz-sdk-nodejs-grpc/**/grpc.d.ts',
+                'dist/@senzing/sz-sdk-typescript-grpc/**/grpc.d.ts',
             ],
             from:   ["./szconfig_pb","./szconfigmanager_pb","./szdiagnostic_pb","./szengine_pb","./szproduct_pb"],
             to:     "./index"
@@ -128,15 +128,15 @@ let afterFileRenaming = () => {
 // go through each module directory and rename the service file(s) ending in "_gprc_pb.js" and "_gprc_pb.d.ts"
 // to "gprc.js"/"grpc.d.ts"
 //renameModuleFiles([
-//    ["./dist/@senzing/sz-sdk-nodejs-grpc/**/**_grpc_pb.js", "grpc.js"],
-//    ["./dist/@senzing/sz-sdk-nodejs-grpc/**/**_grpc_pb.d.ts", "grpc.d.ts"]
+//    ["./dist/@senzing/sz-sdk-typescript-grpc/**/**_grpc_pb.js", "grpc.js"],
+//    ["./dist/@senzing/sz-sdk-typescript-grpc/**/**_grpc_pb.d.ts", "grpc.d.ts"]
 //])
 //.then(
 //    (filesRenamed) => {
 //        // now do the same thing for index files
 //        renameModuleFiles([
-//            ["./dist/@senzing/sz-sdk-nodejs-grpc/**/**_pb.js", "index.js"],
-//            ["./dist/@senzing/sz-sdk-nodejs-grpc/**/**_pb.d.ts", "index.d.ts"]
+//            ["./dist/@senzing/sz-sdk-typescript-grpc/**/**_pb.js", "index.js"],
+//            ["./dist/@senzing/sz-sdk-typescript-grpc/**/**_pb.d.ts", "index.d.ts"]
 //        ]).then((_fR2) => {
 //            let _result = filesRenamed.concat(_fR2);
 //            console.log('Renamed Package Files: \n\r');

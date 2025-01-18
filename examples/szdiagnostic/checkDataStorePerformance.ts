@@ -1,5 +1,5 @@
-import { SzAbstractFactory, SzAbstractFactoryOptions } from '../../dist/@senzing/sz-sdk-nodejs-grpc';
-import { CHECK_DATASTORE_PERFORMANCE_RESPONSE } from '../../dist/@senzing/sz-sdk-nodejs-grpc/types/szDiagnostic';
+import { SzAbstractFactory, SzAbstractFactoryOptions } from '../../dist/@senzing/sz-sdk-typescript-grpc';
+import { CHECK_DATASTORE_PERFORMANCE_RESPONSE } from '../../dist/@senzing/sz-sdk-typescript-grpc/types/szDiagnostic';
 
 const szParamFactory = new SzAbstractFactory(`0.0.0.0:8261`);
 const szDiagnostic   = szParamFactory.createDiagnostic();

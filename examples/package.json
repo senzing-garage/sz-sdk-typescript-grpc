@@ -1,5 +1,5 @@
 {
-  "name": "@senzing/sz-sdk-nodejs-grpc_examples",
+  "name": "@senzing/sz-sdk-typescript-grpc-examples",
   "version": "0.0.1",
   "description": "examples for using @senzing/serve-grpc with nodejs",
   "main": "index.js",

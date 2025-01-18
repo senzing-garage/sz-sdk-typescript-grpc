@@ -1,4 +1,4 @@
-import { SzAbstractFactory } from '../../dist/@senzing/sz-sdk-nodejs-grpc';
+import { SzAbstractFactory } from '../../dist/@senzing/sz-sdk-typescript-grpc';
 
 const szParamFactory = new SzAbstractFactory(`0.0.0.0:8261`);
 const szEngine       = szParamFactory.createEngine();

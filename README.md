@@ -101,7 +101,7 @@ and access it using the `senzing_grpc` Python package.
     
     and paste the following in to the file:
     ```typescript
-    import { SzAbstractFactory } from '@senzing/sz-sdk-nodejs-grpc';
+    import { SzAbstractFactory } from '@senzing/sz-sdk-typescript-grpc';
 
     const szParamFactory = new SzAbstractFactory(`0.0.0.0:8261`);
     const szProduct      = szParamFactory.createProduct();

@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-      "target": "es2020",
+      "target": "ES2020",
       "composite": true,
       "module": "commonjs",
       "lib": [
@@ -8,7 +8,7 @@
         "es2020", "esnext"
       ],
       "allowJs": false,
-      "outDir": "dist/@senzing/sz-sdk-nodejs-grpc",
+      "outDir": "dist/@senzing/sz-sdk-typescript-grpc",
       "rootDir": "./",
       "strict": true,
       "noImplicitAny": true,
