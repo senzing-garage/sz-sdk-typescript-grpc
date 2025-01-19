@@ -4,7 +4,7 @@ import { ADD_DATASOURCE_RESPONSE } from "../types/szConfig";
 
 // ---------------  abstract config from main package
 export interface SzAbstractConfig {
-    addDataSource(configHandle: number, dataSourceCode: string): Promise<ADD_DATASOURCE_RESPONSE | SzError>;
+    addDataSource(configHandle: number, dataSourceCode: string): Promise<string | SzError>;
     closeConfig(configHandle: number): Promise<unknown | SzError>;
     createConfig(): Promise<number | SzError>;
     deleteDataSource(configHandle: number, dataSourceCode: string): Promise<any | SzError>;

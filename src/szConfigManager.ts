@@ -11,8 +11,8 @@ import { SzError } from './senzing/SzError';
 /**
  * SzConfigManager class.
  * 
- * @todo add error surface
- * @todo add logging
+ * @name SzConfigManager
+ * @class
  */
 export class SzConfigManager implements SzAbstractConfigManager {
     private connectionString: string;
@@ -21,6 +21,59 @@ export class SzConfigManager implements SzAbstractConfigManager {
     /** See {@link https://github.com/senzing-garage/knowledge-base/blob/main/lists/senzing-component-ids.md} */
     public productId = "5051";
 
+    /**
+     * Adds a Senzing configuration JSON document to the Senzing database.
+     * @param configDefinition The Senzing configuration JSON document.
+     * @returns {Promise<number | SzError>} A configuration identifier as Promise<number>.
+     */
+    addConfig(configDefinition: string): Promise<number | SzError> | undefined {
+        return new Promise<number | SzError>((resolve, reject) => {
+            if(!this.client){
+                reject('no connection present');
+                return
+            }
+            const request = new AddConfigRequest();
+            this.client.addConfig(request, (err, res: AddConfigResponse) => {
+                if(err) {
+                    let _err = newException(err.details);
+                    reject(_err);
+                    throw _err;
+                    return
+                }
+                //console.log("RESPONSE:\n\r", result);
+                resolve( res.getResult() );
+            });
+        });
+    }
+    /**
+     * Retrieves a specific Senzing configuration JSON document from the Senzing database.
+     * @param configId The configuration identifier of the desired Senzing Engine configuration JSON document to retrieve.
+     * @returns {Promise<string>} JSON document containing the Senzing configuration.
+     */
+    getConfig(configId: number): Promise<string | SzError> | undefined {
+        return new Promise<string | SzError>((resolve, reject) => {
+            if(!this.client){
+                reject('no connection present');
+                return
+            }
+            const request = new GetConfigRequest();
+            request.setConfigid(configId);
+            this.client.getConfig(request, (err, res: GetConfigResponse) => {
+                if(err) {
+                    let _err = newException(err.details);
+                    reject(_err);
+                    throw _err;
+                    return
+                }
+                //console.log("RESPONSE:\n\r", result);
+                resolve( res.getResult() );
+            });
+        });
+    }
+    /**
+     * Retrieves a list of Senzing configurations from the Senzing database.
+     * @returns {Promise<string>} JSON document containing Senzing configurations.
+     */
     getConfigs(): Promise<string | SzError> {
         return new Promise<string | SzError>((resolve, reject) => {
             if(!this.client){
@@ -41,6 +94,10 @@ export class SzConfigManager implements SzAbstractConfigManager {
             return undefined;
         });
     }
+    /**
+     * Retrieves from the Senzing database the configuration identifier of the default Senzing configuration.
+     * @returns {Promise<number>} identifier which identifies the current configuration in use.
+     */
     getDefaultConfigId(): Promise<number | SzError> | undefined {
         return new Promise<number | SzError>((resolve, reject) => {
             if(!this.client){
@@ -62,18 +119,30 @@ export class SzConfigManager implements SzAbstractConfigManager {
             return -1;
         });
     }
-    setDefaultConfigId(configId: number): void {
-        if(!this.client){
-            throw new Error('no connection present');
-        }
-        const request = new SetDefaultConfigIdRequest();
-        request.setConfigid(configId);
-        this.client.setDefaultConfigId(request, (err, res: SetDefaultConfigIdResponse) => {
-            if(err) {
-                throw newException(err.details);
-                return;
+    /**
+     * Replaces and sets a new configuration identifier in the Senzing database. 
+     * To serialize modifying of the configuration identifier, 
+     * 
+     * @see replaceDefaultConfigId
+     * @param configId The configuration identifier of the Senzing Engine configuration to use as the default.
+     * @returns {Promise<undefined | SzError>} for async flow control
+     */
+    setDefaultConfigId(configId: number): Promise<undefined | SzError> | undefined {
+        return new Promise<undefined | SzError>((resolve, reject) => {
+            if(!this.client){
+                throw new Error('no connection present');
             }
-            //console.log("RESPONSE:\n\r", result);
+            const request = new SetDefaultConfigIdRequest();
+            request.setConfigid(configId);
+            this.client.setDefaultConfigId(request, (err, res: SetDefaultConfigIdResponse) => {
+                if(err) {
+                    let _err = newException(err.details);
+                    reject(_err);
+                    throw _err;
+                    return;
+                }
+                //console.log("RESPONSE:\n\r", result);
+            });
         });
     }
 
@@ -86,46 +155,17 @@ export class SzConfigManager implements SzAbstractConfigManager {
             this.client             = new SzConfigManagerClient(this.connectionString, this.credentials);
         }
     }
-
-    addConfig(configDefinition: string): Promise<number | SzError> | undefined {
-        return new Promise<number | SzError>((resolve, reject) => {
-            if(!this.client){
-                reject('no connection present');
-                return
-            }
-            const request = new AddConfigRequest();
-            this.client.addConfig(request, (err, res: AddConfigResponse) => {
-                if(err) {
-                    let _err = newException(err.details);
-                    reject(_err);
-                    throw _err;
-                    return
-                }
-                //console.log("RESPONSE:\n\r", result);
-                resolve( res.getResult() );
-            });
-        });
-    }
-    getConfig(configId: number): Promise<string | SzError> | undefined {
-        return new Promise<string | SzError>((resolve, reject) => {
-            if(!this.client){
-                reject('no connection present');
-                return
-            }
-            const request = new GetConfigRequest();
-            request.setConfigid(configId);
-            this.client.getConfig(request, (err, res: GetConfigResponse) => {
-                if(err) {
-                    let _err = newException(err.details);
-                    reject(_err);
-                    throw _err;
-                    return
-                }
-                //console.log("RESPONSE:\n\r", result);
-                resolve( res.getResult() );
-            });
-        });
-    }
+    /**
+     * Replaces the old configuration identifier with a new configuration identifier 
+     * in the Senzing database. It is like a “compare-and-swap” instruction to serialize 
+     * concurrent editing of configuration. If {@param currentDefaultConfigId} is no longer 
+     * the “current configuration identifier”, the operation will fail. To simply set 
+     * the default configuration ID, use {@link module:SzConfigManager#setSefaultConfigId}.
+     * 
+     * @param currentDefaultConfigId The configuration identifier to replace.
+     * @param newDefaultConfigId  The configuration identifier to use as the default.
+     * @returns {Promise<undefined>} for async flow control
+     */
     replaceDefaultConfigId(currentDefaultConfigId: number, newDefaultConfigId: number) {
         return new Promise<string>((resolve, reject) => {
             if(!this.client){
@@ -142,8 +182,6 @@ export class SzConfigManager implements SzAbstractConfigManager {
                     throw _err;
                     return
                 }
-                //console.log("RESPONSE:\n\r", result);
-                //resolve( res.getResult() );
             });
         });
     }
