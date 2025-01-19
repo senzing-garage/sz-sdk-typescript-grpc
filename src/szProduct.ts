@@ -3,15 +3,15 @@ import { GetVersionRequest, GetVersionResponse, GetLicenseRequest, GetLicenseRes
 import { SzProductClient } from './szproduct/szproduct_grpc_pb';
 import { SzAbstractProduct } from './abstracts/szAbstractProduct';
 import { SzAbstractFactoryOptions } from './szfactorycreator/szFactoryCreator';
-import { SzNoGrpcConnectionError } from './senzing/SzError';
+import { SzError, SzNoGrpcConnectionError } from './senzing/SzError';
 
 // --------------- user facing "grpc.SzProduct" inheriting from SzAbstractProduct
 
 /**
- * SzProduct class.
+ * SzProduct
  * 
- * @todo add error surface
- * @todo add logging
+ * @class
+ * @name SzProduct
  */
 export class SzProduct implements SzAbstractProduct {
     private connectionString: string;
@@ -29,7 +29,11 @@ export class SzProduct implements SzAbstractProduct {
             this.client             = new SzProductClient(this.connectionString, this.credentials);
         }
     }
-    getLicense(): Promise<{[key: string]: any} | Error> {
+    /**
+     * Retrieves information about the currently used license.
+     * @returns {Promise<{[key: string]: any} | SzError>} JSON document containing Senzing license metadata.
+     */
+    getLicense(): Promise<{[key: string]: any} | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
@@ -48,9 +52,10 @@ export class SzProduct implements SzAbstractProduct {
         });
     }
     /**
-     * @returns Promise
+     * Returns the version of Senzing.
+     * @returns {Promise<{[key: string]: any} | SzError>} JSON document containing metadata about the Senzing Engine version being used.
      */
-    getVersion(): Promise<{[key: string]: any} | Error> {
+    getVersion(): Promise<{[key: string]: any} | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
