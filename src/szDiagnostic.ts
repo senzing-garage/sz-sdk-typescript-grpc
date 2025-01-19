@@ -19,7 +19,7 @@ export class SzDiagnostic implements SzAbstractDiagnostic {
     private credentials: grpc.ChannelCredentials;
     private client;
     /** See {@link https://github.com/senzing-garage/knowledge-base/blob/main/lists/senzing-component-ids.md} */
-    public productId = "5056";
+    public productId = "5052";
 
     constructor(parameters: SzAbstractFactoryOptions) {
         const { connectionString, credentials } = parameters;
