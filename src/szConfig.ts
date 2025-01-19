@@ -33,7 +33,7 @@ export class SzConfig implements SzAbstractConfig {
     }
     /**
      * The addDataSource method adds a data source to an existing in-memory configuration.
-     * @param configHandle An identifier of an in-memory configuration. Usually created by the create or load methods.
+     * @param configHandle An identifier of an in-memory configuration. Usually created by the {@link module:SzConfig#create} or {@link module:SzConfig#load} methods.
      * @param dataSourceCode Name of data source code to add.
      * @returns {Promise<string | SzError>} JSON document listing the newly created data source
      */
@@ -53,14 +53,13 @@ export class SzConfig implements SzAbstractConfig {
                     return;
                 }
                 let result = res.getResult();
-                //console.log("RESPONSE:\n\r", result);
                 resolve(result);
             });
         });
     }
     /**
      * Cleans up the Senzing SzConfig object pointed to by the config_handle.
-     * @param configHandle An identifier of an in-memory configuration. Usually created by the createConfig or importConfig methods.
+     * @param configHandle An identifier of an in-memory configuration. Usually created by the {@link module:SzConfig#createConfig} or {@link module:SzConfig#importConfig} methods.
      * @returns {Promise<undefined | SzError>} for async flow control.
      */
     closeConfig(configHandle: number) {
@@ -84,10 +83,11 @@ export class SzConfig implements SzAbstractConfig {
     /**
      * Creates an in-memory Senzing configuration from the g2config.json template configuration 
      * file located in the PIPELINE.RESOURCEPATH path. A handle is returned to identify 
-     * the in-memory configuration. The handle is used by the addDataSource, 
-     * listDataSources, deleteDataSource, and exportConfig methods. 
-     * The handle is terminated by the closeConfig method.
-     * @returns {Promise<number | SzError>}A pointer to an in-memory Senzing configuration as Promise<number>
+     * the in-memory configuration. The handle is used by the {@link module:SzConfig#addDataSource}, 
+     * {@link module:SzConfig#listDataSources}, {@link module:SzConfig#deleteDataSource}, 
+     * and {@link module:SzConfig#exportConfig} methods. 
+     * The handle is terminated by the {@link module:SzConfig#closeConfig} method.
+     * @returns {Promise<number | SzError>} pointer to an in-memory Senzing configuration
      */
     createConfig(): Promise<number | SzError> {
         return new Promise<number | SzError>((resolve, reject) => {
@@ -109,7 +109,8 @@ export class SzConfig implements SzAbstractConfig {
     }
     /**
      * Removes a data source from an existing in-memory configuration.
-     * @param configHandle An identifier of an in-memory configuration. Usually created by the create or load methods.
+     * @param configHandle An identifier of an in-memory configuration. Usually created by the {@link module:SzConfig#create} 
+     * or {@link module:SzConfig#load} methods.
      * @param dataSourceCode Name of data source code to delete.
      * @returns {Promise<undefined | SzError>} for async flow control
      */
@@ -136,8 +137,8 @@ export class SzConfig implements SzAbstractConfig {
     }
     /**
      * Creates a JSON string representation of the Senzing SzConfig object.
-     * @param configHandle  An identifier of an in-memory configuration. Usually created by the create or load methods.
-     * @returns {Promise<string | SzError>} containing a JSON Document representation of the Senzing SzConfig object as Promise<string>.
+     * @param configHandle  An identifier of an in-memory configuration. Usually created by the {@link module:SzConfig#create} or {@link module:SzConfig#load} methods.
+     * @returns {Promise<string | SzError>} containing a JSON Document representation of the Senzing SzConfig object.
      */
     exportConfig(configHandle: number) {
         return new Promise((resolve, reject) => {
@@ -160,7 +161,7 @@ export class SzConfig implements SzAbstractConfig {
     }
     /**
      * returns a JSON document of data sources contained in an in-memory configuration.
-     * @param configHandle An identifier of an in-memory configuration. Usually created by the create or load methods.
+     * @param configHandle An identifier of an in-memory configuration. Usually created by the {@link module:SzConfig#create} or {@link module:SzConfig#load} methods.
      * @returns {Promise<string | SzError>} containing a JSON document listing all of the data sources.
      */
     getDataSources(configHandle: number) {
@@ -185,8 +186,9 @@ export class SzConfig implements SzAbstractConfig {
     /**
      * Initializes an in-memory Senzing SzConfig object from a 
      * JSON string. A handle is returned to identify the in-memory configuration. 
-     * The handle is used by the addDataSource, getDataSources, deleteDataSource, 
-     * and save methods. The handle is terminated by the close method.
+     * The handle is used by the {@link module:SzConfig#addDataSource}, {@link module:SzConfig#getDataSources}, 
+     * {@link module:SzConfig#deleteDataSource}, and {@link module:SzConfig#save} methods. 
+     * The handle is terminated by the {@link module:SzConfig#close} method.
      * @param configDefinition 
      * @returns {Promise<number | SzError>}
      */

@@ -24,7 +24,7 @@ export class SzConfigManager implements SzAbstractConfigManager {
     /**
      * Adds a Senzing configuration JSON document to the Senzing database.
      * @param configDefinition The Senzing configuration JSON document.
-     * @returns {Promise<number | SzError>} A configuration identifier as Promise<number>.
+     * @returns {Promise<number | SzError>} A configuration identifier.
      */
     addConfig(configDefinition: string): Promise<number | SzError> | undefined {
         return new Promise<number | SzError>((resolve, reject) => {
@@ -97,7 +97,7 @@ export class SzConfigManager implements SzAbstractConfigManager {
     }
     /**
      * Retrieves from the Senzing database the configuration identifier of the default Senzing configuration.
-     * @returns {Promise<number>} identifier which identifies the current configuration in use.
+     * @returns {Promise<number | SzError>} identifier which identifies the current configuration in use.
      */
     getDefaultConfigId(): Promise<number | SzError> | undefined {
         return new Promise<number | SzError>((resolve, reject) => {
