@@ -26,6 +26,11 @@ export class SzRetryableError extends SzError {}
 /** System failure, can't continue. */
 export class SzUnrecoverableError extends SzError {}
 
+/** Temporary Error for non-dev-complete feature */
+export class SzNotYetImplementedError extends SzError {
+    override message = "Feature Not Yet Implemented";
+}
+
 // ----------------------------------------------------------------------------
 // Detail exceptions for SzBadInputException
 // - Processing did not complete.
