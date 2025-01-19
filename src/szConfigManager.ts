@@ -143,7 +143,6 @@ export class SzConfigManager implements SzAbstractConfigManager {
                     throw _err;
                     return;
                 }
-                //console.log("RESPONSE:\n\r", result);
             });
         });
     }
