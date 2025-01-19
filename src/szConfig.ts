@@ -4,7 +4,7 @@ import { SzConfigClient } from './szconfig/szconfig_grpc_pb';
 import { SzAbstractConfig } from './abstracts/szAbstractConfig';
 import { SzAbstractFactoryOptions } from './szfactorycreator/szFactoryCreator';
 import { newException } from './szHelpers';
-import { SzError } from './senzing/SzError';
+import { SzError, SzNoGrpcConnectionError } from './senzing/SzError';
 import { ADD_DATASOURCE_RESPONSE } from './types/szConfig';
 
 // --------------- user facing "grpc.SzConfig" inheriting from SzAbstractConfig
@@ -12,6 +12,8 @@ import { ADD_DATASOURCE_RESPONSE } from './types/szConfig';
 /**
  * SzConfig
  * 
+ * @class
+ * @name SzConfig
  */
 export class SzConfig implements SzAbstractConfig {
     private connectionString: string;
@@ -33,15 +35,14 @@ export class SzConfig implements SzAbstractConfig {
      * The addDataSource method adds a data source to an existing in-memory configuration.
      * @param configHandle An identifier of an in-memory configuration. Usually created by the create or load methods.
      * @param dataSourceCode Name of data source code to add.
-     * @returns JSON document listing the newly created data source as Promise<string>
+     * @returns {Promise<string | SzError>} JSON document listing the newly created data source
      */
     addDataSource(configHandle: number, dataSourceCode: string) {
         return new Promise<string | SzError>((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
-
             const request = new AddDataSourceRequest();
             request.setConfighandle(configHandle);
             request.setDatasourcecode(dataSourceCode);
@@ -60,12 +61,12 @@ export class SzConfig implements SzAbstractConfig {
     /**
      * Cleans up the Senzing SzConfig object pointed to by the config_handle.
      * @param configHandle An identifier of an in-memory configuration. Usually created by the createConfig or importConfig methods.
-     * @returns Promise<undefined> for async flow control.
+     * @returns {Promise<undefined | SzError>} for async flow control.
      */
     closeConfig(configHandle: number) {
         return new Promise<boolean | undefined>((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
 
@@ -76,7 +77,6 @@ export class SzConfig implements SzAbstractConfig {
                     reject( newException(err.details) )
                     return;
                 }
-                //console.log("RESPONSE:\n\r", result);
                 resolve(undefined);
             });
         });
@@ -87,12 +87,12 @@ export class SzConfig implements SzAbstractConfig {
      * the in-memory configuration. The handle is used by the addDataSource, 
      * listDataSources, deleteDataSource, and exportConfig methods. 
      * The handle is terminated by the closeConfig method.
-     * @returns A pointer to an in-memory Senzing configuration as Promise<number>
+     * @returns {Promise<number | SzError>}A pointer to an in-memory Senzing configuration as Promise<number>
      */
     createConfig(): Promise<number | SzError> {
         return new Promise<number | SzError>((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
 
@@ -111,12 +111,12 @@ export class SzConfig implements SzAbstractConfig {
      * Removes a data source from an existing in-memory configuration.
      * @param configHandle An identifier of an in-memory configuration. Usually created by the create or load methods.
      * @param dataSourceCode Name of data source code to delete.
-     * @returns Promise<undefined> for async flow control
+     * @returns {Promise<undefined | SzError>} for async flow control
      */
     deleteDataSource(configHandle: number, dataSourceCode: string) {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
 
@@ -137,12 +137,12 @@ export class SzConfig implements SzAbstractConfig {
     /**
      * Creates a JSON string representation of the Senzing SzConfig object.
      * @param configHandle  An identifier of an in-memory configuration. Usually created by the create or load methods.
-     * @returns A Promise<string> containing a JSON Document representation of the Senzing SzConfig object as Promise<string>.
+     * @returns {Promise<string | SzError>} containing a JSON Document representation of the Senzing SzConfig object as Promise<string>.
      */
     exportConfig(configHandle: number) {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
 
@@ -161,12 +161,12 @@ export class SzConfig implements SzAbstractConfig {
     /**
      * returns a JSON document of data sources contained in an in-memory configuration.
      * @param configHandle An identifier of an in-memory configuration. Usually created by the create or load methods.
-     * @returns A Promise<string> containing a JSON document listing all of the data sources.
+     * @returns {Promise<string | SzError>} containing a JSON document listing all of the data sources.
      */
     getDataSources(configHandle: number) {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
 
@@ -188,12 +188,12 @@ export class SzConfig implements SzAbstractConfig {
      * The handle is used by the addDataSource, getDataSources, deleteDataSource, 
      * and save methods. The handle is terminated by the close method.
      * @param configDefinition 
-     * @returns 
+     * @returns {Promise<number | SzError>}
      */
     importConfig(configDefinition: string) {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
 
@@ -204,7 +204,6 @@ export class SzConfig implements SzAbstractConfig {
                     reject( newException(err.details) )
                     return;
                 }
-                //console.log("RESPONSE:\n\r", result);
                 resolve(res.getResult() as number);
             });
         });

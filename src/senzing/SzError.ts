@@ -31,6 +31,11 @@ export class SzNotYetImplementedError extends SzError {
     override message = "Feature Not Yet Implemented";
 }
 
+/** GRPC only error that is handed back when connection is not present */
+export class SzNoGrpcConnectionError extends SzError {
+    override message = "No Connection Configured";
+}
+
 // ----------------------------------------------------------------------------
 // Detail exceptions for SzBadInputException
 // - Processing did not complete.

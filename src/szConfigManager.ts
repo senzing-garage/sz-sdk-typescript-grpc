@@ -4,7 +4,7 @@ import { SzConfigManagerClient } from './szconfigmanager/szconfigmanager_grpc_pb
 import { SzAbstractConfigManager } from './abstracts/szAbstractConfigManager';
 import { SzAbstractFactoryOptions } from './szfactorycreator/szFactoryCreator';
 import { newException } from './szHelpers';
-import { SzError } from './senzing/SzError';
+import { SzError, SzNoGrpcConnectionError } from './senzing/SzError';
 
 // --------------- user facing "grpc.SzConfigManager" inheriting from SzAbstractConfigManager
 
@@ -29,7 +29,7 @@ export class SzConfigManager implements SzAbstractConfigManager {
     addConfig(configDefinition: string): Promise<number | SzError> | undefined {
         return new Promise<number | SzError>((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new AddConfigRequest();
@@ -53,7 +53,7 @@ export class SzConfigManager implements SzAbstractConfigManager {
     getConfig(configId: number): Promise<string | SzError> | undefined {
         return new Promise<string | SzError>((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new GetConfigRequest();
@@ -77,7 +77,8 @@ export class SzConfigManager implements SzAbstractConfigManager {
     getConfigs(): Promise<string | SzError> {
         return new Promise<string | SzError>((resolve, reject) => {
             if(!this.client){
-                throw new Error('no connection present');
+                reject(new SzNoGrpcConnectionError());
+                return
             }
 
             const request = new GetConfigsRequest();
@@ -101,7 +102,7 @@ export class SzConfigManager implements SzAbstractConfigManager {
     getDefaultConfigId(): Promise<number | SzError> | undefined {
         return new Promise<number | SzError>((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new GetDefaultConfigIdRequest();
@@ -130,7 +131,8 @@ export class SzConfigManager implements SzAbstractConfigManager {
     setDefaultConfigId(configId: number): Promise<undefined | SzError> | undefined {
         return new Promise<undefined | SzError>((resolve, reject) => {
             if(!this.client){
-                throw new Error('no connection present');
+                reject(new SzNoGrpcConnectionError());
+                return
             }
             const request = new SetDefaultConfigIdRequest();
             request.setConfigid(configId);
@@ -169,7 +171,7 @@ export class SzConfigManager implements SzAbstractConfigManager {
     replaceDefaultConfigId(currentDefaultConfigId: number, newDefaultConfigId: number) {
         return new Promise<string>((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new ReplaceDefaultConfigIdRequest();
