@@ -63,28 +63,7 @@ and access it using the `senzing_grpc` Python package.
     ```console
     mkdir my-new-senzing-ts-project &&
     cd my-new-senzing-ts-project && 
-    npm init -y && 
-    npm install --save-dev typescript
-    ```
-
-    Create the tsconfig file if you haven't already:
-    ```console
-    touch tsconfig.json
-    ```
-
-    and paste in the following:
-    ```json
-    {
-        "compilerOptions": {
-            "module": "commonjs",
-            "esModuleInterop": true,
-            "target": "es2020",
-            "moduleResolution": "node",
-            "sourceMap": true,
-            "outDir": "dist"
-        },
-        "lib": ["es2020"]
-    }
+    npx tsc --init
     ```
 
 1. Add the `sz-sdk-typescript-grpc` package to your project:
@@ -95,8 +74,18 @@ and access it using the `senzing_grpc` Python package.
 
 1. Create a new TS file:
 
+    1. Option #1: Download the helloworld example from Github:
+
     ```console
-    touch main.ts
+curl -X GET \
+    --output ./helloworld.ts \
+    https://raw.githubusercontent.com/senzing-garage/sz-sdk-typescript-grpc/refs/heads/main/examples/helloworld/helloworld.ts
+    ```
+
+    2. Option #2: create a file from scratch:
+
+    ```console
+    touch helloworld.ts
     ```
     
     and paste the following in to the file:
@@ -115,8 +104,32 @@ and access it using the `senzing_grpc` Python package.
         });
     ```
 
-1. Run the new ts file you created on the last step:
+1. Run the ts file you created on the last step:
 
     ```console
-        tsx main.ts
+        npx tsx helloworld.ts
     ```
+
+
+## Development
+
+1. Clone the repository:
+
+```console
+git clone https://github.com/senzing-garage/sz-sdk-typescript-grpc.git &&
+cd sz-sdk-typescript-grpc
+```
+
+2. Install dependencies
+
+```console
+npm install
+```
+
+3. Make distributable npm package:
+
+    ```
+    make clean && make
+    ```
+
+4. The previous step will have created a new file in the `dist/@senzing` directory. The file will be in the format `dist/@senzing/senzing-sz-sdk-typescript-grpc-X.X.X.tgz`. This file can be imported for use in local projects withought pulling the public version from npm.
