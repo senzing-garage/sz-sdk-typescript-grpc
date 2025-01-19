@@ -4,16 +4,15 @@ import { SzDiagnosticClient } from './szdiagnostic/szdiagnostic_grpc_pb';
 import { SzAbstractDiagnostic } from './abstracts/szAbstractDiagnostic';
 import { SzAbstractFactoryOptions } from './szfactorycreator/szFactoryCreator';
 import { newException } from './szHelpers';
-import { SzError } from './senzing/SzError';
+import { SzError, SzNoGrpcConnectionError } from './senzing/SzError';
 import { CHECK_DATASTORE_PERFORMANCE_RESPONSE } from './types/szDiagnostic';
 
 // --------------- user facing "grpc.SzDiagnostic" inheriting from SzAbstractDiagnostic
 
 /**
- * SzDiagnostic class.
- * 
- * @todo add error surface
- * @todo add logging
+ * SzDiagnostic
+ * @class
+ * @name SzDiagnostic
  */
 export class SzDiagnostic implements SzAbstractDiagnostic {
     private connectionString: string;
@@ -31,11 +30,15 @@ export class SzDiagnostic implements SzAbstractDiagnostic {
             this.client             = new SzDiagnosticClient(this.connectionString, this.credentials);
         }
     }
-
+    /**
+     * Performs inserts to determine rate of insertion.
+     * @param secondsToRun Duration of the test in seconds.
+     * @returns {Promise<CHECK_DATASTORE_PERFORMANCE_RESPONSE | SzError>} A JSON document
+     */
     checkDataStorePerformance(secondsToRun: number): Promise<CHECK_DATASTORE_PERFORMANCE_RESPONSE | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new CheckDatastorePerformanceRequest();
@@ -53,10 +56,14 @@ export class SzDiagnostic implements SzAbstractDiagnostic {
             });
         });
     }
+    /**
+     * Returns details of the datastore currently in use by Senzing.
+     * @returns {Promise<string | SzError>}
+     */
     getDatastoreInfo(): Promise<string | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new GetDatastoreInfoRequest();
@@ -73,10 +80,16 @@ export class SzDiagnostic implements SzAbstractDiagnostic {
             });
         });
     }
+    /**
+     * Returns diagnostic information of a feature. Not recommended for use.
+     * @experimental
+     * @param featureId The identifier of the feature to describe.
+     * @returns {Promise<string | SzError>} A string containing a JSON document
+     */
     getFeature(featureId: number): Promise<string | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new GetFeatureRequest();
@@ -94,11 +107,15 @@ export class SzDiagnostic implements SzAbstractDiagnostic {
             });
         });
     }
+    /**
+     * Removes every record in the Senzing repository.
+     * @returns {Promise<undefined | SzError>} for async flow control.
+     */
     purgeRepository(): Promise<undefined | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
-                return;
+                reject(new SzNoGrpcConnectionError());
+                return
             }
             const request = new PurgeRepositoryRequest();
             this.client.purgeRepository(request, (err, res: PurgeRepositoryResponse) => {
@@ -112,10 +129,15 @@ export class SzDiagnostic implements SzAbstractDiagnostic {
             });
         });
     }
+    /**
+     * Not intended for external use but not explicitly private either.
+     * @internal
+     * @param configId 
+     */
     reinitialize(configId: number): Promise<undefined | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new ReinitializeRequest();

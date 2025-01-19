@@ -3,6 +3,7 @@ import { GetVersionRequest, GetVersionResponse, GetLicenseRequest, GetLicenseRes
 import { SzProductClient } from './szproduct/szproduct_grpc_pb';
 import { SzAbstractProduct } from './abstracts/szAbstractProduct';
 import { SzAbstractFactoryOptions } from './szfactorycreator/szFactoryCreator';
+import { SzNoGrpcConnectionError } from './senzing/SzError';
 
 // --------------- user facing "grpc.SzProduct" inheriting from SzAbstractProduct
 
@@ -31,7 +32,7 @@ export class SzProduct implements SzAbstractProduct {
     getLicense(): Promise<{[key: string]: any} | Error> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new GetLicenseRequest();
@@ -52,7 +53,7 @@ export class SzProduct implements SzAbstractProduct {
     getVersion(): Promise<{[key: string]: any} | Error> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new GetVersionRequest();

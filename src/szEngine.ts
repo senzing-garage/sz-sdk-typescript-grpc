@@ -4,7 +4,7 @@ import { SzEngineClient } from './szengine/szengine_grpc_pb';
 import { SzAbstractEngine } from './abstracts/szAbstractEngine';
 import { SzAbstractFactoryOptions } from './szfactorycreator/szFactoryCreator';
 import { asString, bigIntToNumber, entityIdsAsJsonString, entityIdsToAvoidAsJson, newException, recordIdsAsJsonString, recordKeysToAvoidAsJson, requiredDataSourcesAsJson } from './szHelpers';
-import { SzError, SzNotYetImplementedError } from './senzing/SzError';
+import { SzError, SzNoGrpcConnectionError, SzNotYetImplementedError } from './senzing/SzError';
 import { SzEngineFlags } from './senzing';
 import { SzGetVirtualEntityByRecordIdRequestParametersJson, SzRecordIdentifierPair } from './types/szEngine';
 
@@ -89,7 +89,7 @@ export class SzEngine implements SzAbstractEngine {
     closeExport(exportHandle: number) {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new CloseExportRequest();
@@ -112,7 +112,7 @@ export class SzEngine implements SzAbstractEngine {
     countRedoRecords(): Promise<number | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new CountRedoRecordsRequest();
@@ -137,7 +137,7 @@ export class SzEngine implements SzAbstractEngine {
     deleteRecord(dataSourceCode: string, recordId: string, flags: BigInt | number = 0): Promise<string | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new DeleteRecordRequest();
@@ -259,7 +259,7 @@ export class SzEngine implements SzAbstractEngine {
     findInterestingEntitiesByEntityId(entityId: number, flags: BigInt | number = SzEngineFlags.SZ_ENTITY_DEFAULT_FLAGS): Promise<string | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new FindInterestingEntitiesByEntityIdRequest();
@@ -280,7 +280,7 @@ export class SzEngine implements SzAbstractEngine {
     findInterestingEntitiesByRecordId(dataSourceCode: string, recordId: string, flags: BigInt | number = 0): Promise<string | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new FindInterestingEntitiesByRecordIdRequest();
@@ -311,7 +311,7 @@ export class SzEngine implements SzAbstractEngine {
     findNetworkByEntityId(entityIds: string | Array<number | string>, maxDegrees?: number, buildOutDegrees?: number, buildOutMaxEntities?: number, flags: BigInt | number = SzEngineFlags.SZ_FIND_NETWORK_DEFAULT_FLAGS) {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             let findNetworkEntityIds = entityIdsAsJsonString(entityIds);
@@ -349,7 +349,7 @@ export class SzEngine implements SzAbstractEngine {
     findNetworkByRecordId(recordKeys: Array<[string, string | number]>, maxDegrees?: number, buildOutDegrees?: number, buildOutMaxEntities?: number, flags: BigInt | number = SzEngineFlags.SZ_FIND_NETWORK_DEFAULT_FLAGS) {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             let findNetworkRecordIds = recordIdsAsJsonString(recordKeys);
@@ -396,7 +396,7 @@ export class SzEngine implements SzAbstractEngine {
     ) {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new FindPathByEntityIdRequest();
@@ -446,7 +446,7 @@ export class SzEngine implements SzAbstractEngine {
     ) {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new FindPathByRecordIdRequest();
@@ -481,7 +481,7 @@ export class SzEngine implements SzAbstractEngine {
     getActiveConfigId(): Promise<number | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new GetActiveConfigIdRequest();
@@ -506,7 +506,7 @@ export class SzEngine implements SzAbstractEngine {
     getEntityByEntityId(entityId: number, flags: BigInt | number = SzEngineFlags.SZ_ENTITY_DEFAULT_FLAGS): Promise<string | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new GetEntityByEntityIdRequest();
@@ -534,7 +534,7 @@ export class SzEngine implements SzAbstractEngine {
     getEntityByRecordId(dataSourceCode: string, recordId: string, flags: BigInt | number = SzEngineFlags.SZ_ENTITY_DEFAULT_FLAGS): Promise<string | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new GetEntityByRecordIdRequest();
@@ -563,7 +563,7 @@ export class SzEngine implements SzAbstractEngine {
     getRecord(dataSourceCode: string, recordId: string, flags: BigInt | number = SzEngineFlags.SZ_RECORD_DEFAULT_FLAGS): Promise<string | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new GetRecordRequest();
@@ -589,7 +589,7 @@ export class SzEngine implements SzAbstractEngine {
     getRedoRecord(): Promise<string | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new GetRedoRecordRequest();
@@ -612,7 +612,7 @@ export class SzEngine implements SzAbstractEngine {
     getStats(): Promise<string | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new GetStatsRequest();
@@ -637,7 +637,7 @@ export class SzEngine implements SzAbstractEngine {
     getVirtualEntityByRecordId(recordKeys: Array<[string, string | number]>, flags: BigInt | number = SzEngineFlags.SZ_VIRTUAL_ENTITY_DEFAULT_FLAGS): Promise<string | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new GetVirtualEntityByRecordIdRequest();
@@ -666,7 +666,7 @@ export class SzEngine implements SzAbstractEngine {
     howEntityByEntityId(entityId: number, flags: BigInt | number = SzEngineFlags.SZ_HOW_ENTITY_DEFAULT_FLAGS): Promise<string | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new HowEntityByEntityIdRequest();
@@ -693,7 +693,7 @@ export class SzEngine implements SzAbstractEngine {
     preprocessRecord(recordDefinition: string, flags: BigInt | number = SzEngineFlags.SZ_RECORD_DEFAULT_FLAGS): Promise<string | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new PreprocessRecordRequest();
@@ -718,7 +718,7 @@ export class SzEngine implements SzAbstractEngine {
     primeEngine() {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new PrimeEngineRequest();
@@ -742,7 +742,7 @@ export class SzEngine implements SzAbstractEngine {
     processRedoRecord(redoRecord: string, flags: BigInt | number = 0): Promise<string | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new ProcessRedoRecordRequest();
@@ -769,7 +769,7 @@ export class SzEngine implements SzAbstractEngine {
     reevaluateEntity(entityId: number, flags: BigInt | number = 0): Promise<string | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new ReevaluateEntityRequest();
@@ -797,7 +797,7 @@ export class SzEngine implements SzAbstractEngine {
     reevaluateRecord(dataSourceCode: string, recordId: string, flags: BigInt | number = 0): Promise<string | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new ReevaluateRecordRequest();
@@ -819,7 +819,7 @@ export class SzEngine implements SzAbstractEngine {
     reinitialize(configId: number) {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new ReinitializeRequest();
@@ -845,7 +845,7 @@ export class SzEngine implements SzAbstractEngine {
     searchByAttributes(attributes: string | Map<any, any> | {[key: string] : any}, flags: BigInt | number = SzEngineFlags.SZ_SEARCH_BY_ATTRIBUTES_DEFAULT_FLAGS, searchProfile: string = "") : Promise<string | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new SearchByAttributesRequest();
@@ -872,7 +872,7 @@ export class SzEngine implements SzAbstractEngine {
     whyEntities(entityId1: number, entityId2: number, flags: BigInt | number = SzEngineFlags.SZ_WHY_ENTITIES_DEFAULT_FLAGS) {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new WhyEntitiesRequest();
@@ -901,7 +901,7 @@ export class SzEngine implements SzAbstractEngine {
     whyRecordInEntity(dataSourceCode: string, recordId: string, flags: BigInt | number = SzEngineFlags.SZ_WHY_RECORDS_DEFAULT_FLAGS) {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new WhyRecordInEntityRequest();
@@ -936,7 +936,7 @@ export class SzEngine implements SzAbstractEngine {
     ) {
         return new Promise((resolve, reject) => {
             if(!this.client){
-                reject('no connection present');
+                reject(new SzNoGrpcConnectionError());
                 return
             }
             const request = new WhyRecordsRequest();
