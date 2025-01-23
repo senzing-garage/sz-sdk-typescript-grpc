@@ -33,10 +33,10 @@ export class SzConfig implements SzAbstractConfig {
      * Adds a data source to an existing in-memory configuration.
      * @param configHandle An identifier of an in-memory configuration. Usually created by the {@link module:SzConfig#createConfig} or {@link module:SzConfig#importConfig} methods.
      * @param dataSourceCode Name of data source code to add.
-     * @returns {Promise<string | SzError>} JSON document listing the newly created data source
+     * @returns {Promise<string>} JSON document listing the newly created data source
      */
     addDataSource(configHandle: number, dataSourceCode: string) {
-        return new Promise<string | SzError>((resolve, reject) => {
+        return new Promise<string>((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
                 return
@@ -136,7 +136,7 @@ export class SzConfig implements SzAbstractConfig {
     /**
      * Creates a JSON string representation of the Senzing SzConfig object.
      * @param configHandle  An identifier of an in-memory configuration. Usually created by the {@link module:SzConfig#createConfig} or {@link module:SzConfig#importConfig} methods.
-     * @returns {Promise<string | SzError>} containing a JSON Document representation of the Senzing SzConfig object.
+     * @returns {Promise<string>} containing a JSON Document representation of the Senzing SzConfig object.
      */
     exportConfig(configHandle: number) {
         return new Promise((resolve, reject) => {
@@ -153,16 +153,16 @@ export class SzConfig implements SzAbstractConfig {
                     return;
                 }
                 //console.log("RESPONSE:\n\r", result);
-                resolve(JSON.parse(res.getResult()));
+                resolve(res.getResult());
             });
         });
     }
     /**
      * Returns a JSON document of data sources contained in an in-memory configuration.
      * @param configHandle An identifier of an in-memory configuration. Usually created by the {@link module:SzConfig#createConfig} or {@link module:SzConfig#importConfig} methods.
-     * @returns {Promise<string | SzError>} containing a JSON document listing all of the data sources.
+     * @returns {Promise<string[]>} containing a JSON document listing all of the data sources.
      */
-    getDataSources(configHandle: number) {
+    getDataSources(configHandle: number): Promise<string[]> {
         return new Promise((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
@@ -188,7 +188,7 @@ export class SzConfig implements SzAbstractConfig {
      * {@link module:SzConfig#deleteDataSource}, and {@link module:SzConfig#save} methods. 
      * The handle is terminated by the {@link module:SzConfig#close} method.
      * @param configDefinition 
-     * @returns {Promise<number | SzError>}
+     * @returns {Promise<number>}
      */
     importConfig(configDefinition: string) {
         return new Promise((resolve, reject) => {

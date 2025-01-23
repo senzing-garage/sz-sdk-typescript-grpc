@@ -12,7 +12,8 @@ MAKEFILE_PATH := $(abspath $(firstword $(MAKEFILE_LIST)))
 MAKEFILE_DIRECTORY := $(shell dirname $(MAKEFILE_PATH))
 DIST_DIRECTORY := $(MAKEFILE_DIRECTORY)/dist
 NS_DIRECTORY := $(DIST_DIRECTORY)/@senzing
-TARGET_DIRECTORY := $(DIST_DIRECTORY)/@senzing/sz-sdk-typescript-grpc
+#TARGET_DIRECTORY := $(DIST_DIRECTORY)/@senzing/sz-sdk-typescript-grpc
+TARGET_DIRECTORY := $(NS_DIRECTORY)/sz-sdk-typescript-grpc
 BUILD_VERSION := $(shell git describe --always --tags --abbrev=0 --dirty  | sed 's/v//')
 BUILD_TAG := $(shell git describe --always --tags --abbrev=0  | sed 's/v//')
 BUILD_ITERATION := $(shell git log $(BUILD_TAG)..HEAD --oneline | wc -l | sed 's/^ *//')

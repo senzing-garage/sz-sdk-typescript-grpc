@@ -346,7 +346,7 @@ export class SzEngine implements SzAbstractEngine {
      * @param flags Flags used to control information returned. Defaults to SzEngineFlags.SZ_FIND_PATH_DEFAULT_FLAGS.
      * @returns A JSON document as Promise<string>.
      */
-    findNetworkByRecordId(recordKeys: Array<[string, string | number]>, maxDegrees?: number, buildOutDegrees?: number, buildOutMaxEntities?: number, flags: BigInt | number = SzEngineFlags.SZ_FIND_NETWORK_DEFAULT_FLAGS) {
+    findNetworkByRecordId(recordKeys: Array<[string, number | string]>, maxDegrees?: number, buildOutDegrees?: number, buildOutMaxEntities?: number, flags: BigInt | number = SzEngineFlags.SZ_FIND_NETWORK_DEFAULT_FLAGS) {
         return new Promise((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());

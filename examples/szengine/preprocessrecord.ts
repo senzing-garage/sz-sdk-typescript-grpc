@@ -4,7 +4,7 @@ const szParamFactory = new SzAbstractFactory(`0.0.0.0:8261`);
 const szEngine       = szParamFactory.createEngine();
 
 const DATA_SOURCE_CODE = "TEST";
-const FLAGS = SzEngineFlags.SZ_WITH_INFO;
+const FLAGS = SzEngineFlags.SZ_RECORD_DEFAULT_FLAGS;
 const RECORD_DEFINITION = {
     "RECORD_TYPE": "PERSON",
     "PRIMARY_NAME_LAST": "Smith",
@@ -21,6 +21,6 @@ const RECORD_DEFINITION = {
 };
 const RECORD_ID = "1";
 
-await szEngine.addRecord(DATA_SOURCE_CODE, RECORD_ID, RECORD_DEFINITION, FLAGS).then((resp) => {
+await szEngine.preprocessRecord(JSON.stringify(RECORD_DEFINITION), FLAGS).then((resp) => {
     console.log(`RESULT #${RECORD_ID}:\n${resp}`);
 });
