@@ -24,10 +24,10 @@ export class SzConfigManager implements SzAbstractConfigManager {
     /**
      * Adds a Senzing configuration JSON document to the Senzing database.
      * @param configDefinition The Senzing configuration JSON document.
-     * @returns {Promise<number | SzError>} A configuration identifier.
+     * @returns {Promise<number>} A configuration identifier.
      */
-    addConfig(configDefinition: string): Promise<number | SzError> | undefined {
-        return new Promise<number | SzError>((resolve, reject) => {
+    addConfig(configDefinition: string): Promise<number> {
+        return new Promise<number>((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
                 return
@@ -50,8 +50,8 @@ export class SzConfigManager implements SzAbstractConfigManager {
      * @param configId The configuration identifier of the desired Senzing Engine configuration JSON document to retrieve.
      * @returns {Promise<string>} JSON document containing the Senzing configuration.
      */
-    getConfig(configId: number): Promise<string | SzError> | undefined {
-        return new Promise<string | SzError>((resolve, reject) => {
+    getConfig(configId: number): Promise<string> {
+        return new Promise<string>((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
                 return
@@ -74,8 +74,8 @@ export class SzConfigManager implements SzAbstractConfigManager {
      * Retrieves a list of Senzing configurations from the Senzing database.
      * @returns {Promise<string>} JSON document containing Senzing configurations.
      */
-    getConfigs(): Promise<string | SzError> {
-        return new Promise<string | SzError>((resolve, reject) => {
+    getConfigs(): Promise<string> {
+        return new Promise<string>((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
                 return
@@ -99,8 +99,8 @@ export class SzConfigManager implements SzAbstractConfigManager {
      * Retrieves from the Senzing database the configuration identifier of the default Senzing configuration.
      * @returns {Promise<number | SzError>} identifier which identifies the current configuration in use.
      */
-    getDefaultConfigId(): Promise<number | SzError> | undefined {
-        return new Promise<number | SzError>((resolve, reject) => {
+    getDefaultConfigId(): Promise<number> {
+        return new Promise<number>((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
                 return
