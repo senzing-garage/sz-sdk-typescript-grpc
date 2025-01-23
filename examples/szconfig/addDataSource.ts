@@ -1,10 +1,9 @@
-import { SzAbstractFactory, SzAbstractFactoryOptions } from '../../dist/@senzing/sz-sdk-typescript-grpc';
+import { SzAbstractFactory as szAbstractFactoryCreator, SzAbstractFactoryOptions } from '../../dist/@senzing/sz-sdk-typescript-grpc';
 
-const szParamFactory        = new SzAbstractFactory(`0.0.0.0:8261`);
-const szConfig              = szParamFactory.createConfig();
-//const DATA_SOURCE_CODE      = "WL1";
-const DATASOURCES_TO_ADD    = ['CUSTOMERS','BCONN']; // works
-//const DATASOURCES_TO_ADD    = ['CUSTOMERS', 'REFERENCE', 'WATCHLIST'];
+const SzAbstractFactory        = new szAbstractFactoryCreator(`0.0.0.0:8261`);
+const szConfig              = SzAbstractFactory.createConfig();
+const DATASOURCES_TO_ADD    = ['CUSTOMERS']; // works
+//const DATASOURCES_TO_ADD    = ['CUSTOMERS', 'REFERENCE', 'WATCHLIST']; // doesn't work
 
 // create new config and get handle
 szConfig.createConfig().then((configHandle) => {
@@ -14,17 +13,8 @@ szConfig.createConfig().then((configHandle) => {
         promises.push( szConfig.addDataSource(configHandle as number, DATA_SOURCE_CODE) );
     });
     Promise.all(promises).then((results) => {
-        console.log('wuz up? ');
+        console.log('Added DataSources: ', results);
     })
-    /*
-    Promise.all(DATASOURCES_TO_ADD.map((DATA_SOURCE_CODE) => {
-        return szConfig.addDataSource(configHandle as number, DATA_SOURCE_CODE)
-    })).then((result)=>{
-                // just for debug lets list out datasources
-                szConfig.exportConfig(configHandle as number).then((conf) => {
-                    console.log(`new config: \n\r`, conf);
-                });
-    })*/
     /*szConfig.addDataSource(configHandle as number, DATA_SOURCE_CODE).
     then((result)=>{
         console.log(`ADDED to #${configHandle}:\n\r`, result);
