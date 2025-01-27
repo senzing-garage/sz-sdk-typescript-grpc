@@ -90,12 +90,10 @@ curl -X GET \
     
     and paste the following in to the file:
     ```typescript
-    import { SzAbstractFactory } from '@senzing/sz-sdk-typescript-grpc';
+    import { SzEnvironment } from '@senzing/sz-sdk-typescript-grpc';
+    const szEnvironment  = new SzEnvironment({connectionString: `0.0.0.0:8261`});
 
-    const szParamFactory = new SzAbstractFactory(`0.0.0.0:8261`);
-    const szProduct      = szParamFactory.createProduct();
-
-    szProduct.getVersion().
+    szEnvironment.product.getVersion().
         then((result)=>{
             console.log("RESPONSE:\n\r", result);
         }).
@@ -115,20 +113,20 @@ curl -X GET \
 
 1. Clone the repository:
 
-```console
-git clone https://github.com/senzing-garage/sz-sdk-typescript-grpc.git &&
-cd sz-sdk-typescript-grpc
-```
+    ```console
+    git clone https://github.com/senzing-garage/sz-sdk-typescript-grpc.git &&
+    cd sz-sdk-typescript-grpc
+    ```
 
 2. Install dependencies
 
-```console
-npm install
-```
+    ```console
+    npm install
+    ```
 
 3. Make distributable npm package:
 
-    ```
+    ```console
     make clean && make
     ```
 
