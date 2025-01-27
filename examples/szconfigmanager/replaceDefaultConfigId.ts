@@ -1,18 +1,16 @@
-import { SzAbstractFactory as szAbstractFactoryCreator } from '../../dist/@senzing/sz-sdk-typescript-grpc';
+import { SzEnvironment } from '@senzing/sz-sdk-typescript-grpc';
 
-const SzAbstractFactory         = new szAbstractFactoryCreator(`0.0.0.0:8261`);
-const szConfig                  = SzAbstractFactory.createConfig();
-const szConfigManager           = SzAbstractFactory.createConfigManager();
+const szEnvironment         = new SzEnvironment({connectionString: `0.0.0.0:8261`});
 
-szConfigManager.getDefaultConfigId().then((currentDefaultConfigId) => {
+szEnvironment.configManager.getDefaultConfigId().then((currentDefaultConfigId) => {
     // create new config
-    szConfigManager.getConfig(currentDefaultConfigId)?.then((currentConfigDefinition) => {
-        szConfig.importConfig(currentConfigDefinition).then((currentConfigHandle) => {
-            szConfig.addDataSource(currentConfigHandle as number, `REPLACE_DEFAULT_CONFIG_ID_${Date.toString()}`).then(() => {
-                szConfig.exportConfig(currentConfigHandle as number).then((newConfigDefinition) => {
-                    szConfigManager.addConfig(newConfigDefinition as string).then((newConfigId) => {
+    szEnvironment.configManager.getConfig(currentDefaultConfigId)?.then((currentConfigDefinition) => {
+        szEnvironment.config.importConfig(currentConfigDefinition).then((currentConfigHandle) => {
+            szEnvironment.config.addDataSource(currentConfigHandle as number, `REPLACE_DEFAULT_CONFIG_ID_${Date.toString()}`).then(() => {
+                szEnvironment.config.exportConfig(currentConfigHandle as number).then((newConfigDefinition) => {
+                    szEnvironment.configManager.addConfig(newConfigDefinition as string).then((newConfigId) => {
                         // replace config id
-                        szConfigManager.replaceDefaultConfigId(currentDefaultConfigId, newConfigId);
+                        szEnvironment.configManager.replaceDefaultConfigId(currentDefaultConfigId, newConfigId);
                     })
                 });
             })

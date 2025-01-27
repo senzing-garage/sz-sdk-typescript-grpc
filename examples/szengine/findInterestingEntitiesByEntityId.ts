@@ -1,11 +1,8 @@
-import { SzAbstractFactory as szAbstractFactoryCreator, SzAbstractFactoryOptions, SzEngineFlags } from '../../dist/@senzing/sz-sdk-typescript-grpc';
+import { SzEnvironment, SzEngineFlags } from '@senzing/sz-sdk-typescript-grpc';
 
-const SzAbstractFactory         = new szAbstractFactoryCreator(`0.0.0.0:8261`);
-const szEngine                  = SzAbstractFactory.createEngine();
-const FLAGS                     = SzEngineFlags.SZ_WITH_INFO
-const ENTITY_ID                 = 1;
+const szEnvironment  = new SzEnvironment({connectionString: `0.0.0.0:8261`});
 
-szEngine.findInterestingEntitiesByEntityId(ENTITY_ID, FLAGS).then((result) => {
+szEnvironment.engine.findInterestingEntitiesByEntityId(1, SzEngineFlags.SZ_WITH_INFO).then((result) => {
     console.log(`RESULT: ${result}`);
 }).catch((err) => {
     console.error(err);

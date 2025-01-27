@@ -1,4 +1,6 @@
-import { SzAbstractFactory as szAbstractFactoryCreator, SzAbstractFactoryOptions, SzEngineFlags } from '../../dist/@senzing/sz-sdk-typescript-grpc';
+import { SzEngine } from '@senzing/sz-sdk-typescript-grpc';
 
-const SzAbstractFactory         = new szAbstractFactoryCreator(`0.0.0.0:8261`);
-const szEngine                  = SzAbstractFactory.createEngine();
+/**
+ * Example of initializing the SzEngine class without the SzEnvironment syntax sugar
+ */
+const szEngine                  = new SzEngine({connectionString: `0.0.0.0:8261`});

@@ -1,18 +1,16 @@
-import { SzAbstractFactory as szAbstractFactoryCreator } from '../../dist/@senzing/sz-sdk-typescript-grpc';
+import { SzEnvironment } from '@senzing/sz-sdk-typescript-grpc';
 
-const SzAbstractFactory         = new szAbstractFactoryCreator(`0.0.0.0:8261`);
-const szConfig                  = SzAbstractFactory.createConfig();
-const szConfigManager           = SzAbstractFactory.createConfigManager();
+const szEnvironment         = new SzEnvironment({connectionString: `0.0.0.0:8261`});
 
-szConfigManager.getDefaultConfigId().then((oldConfigId)=> {
+szEnvironment.configManager.getDefaultConfigId().then((oldConfigId)=> {
     // create new config
-    szConfigManager.getConfig(oldConfigId).then((oldConfigDefinition) => {
-        szConfig.importConfig(oldConfigDefinition).then((oldConfigHandle) => {
-            szConfig.addDataSource(oldConfigHandle as number, `REPLACE_DEFAULT_CONFIG_ID_${Date.toString()}`).then(()=> {
-                szConfig.exportConfig(oldConfigHandle as number).then((newConfigDefinition) => {
-                    szConfigManager.addConfig(newConfigDefinition as string).then((newConfigId) => {
+    szEnvironment.configManager.getConfig(oldConfigId).then((oldConfigDefinition) => {
+        szEnvironment.config.importConfig(oldConfigDefinition).then((oldConfigHandle) => {
+            szEnvironment.config.addDataSource(oldConfigHandle as number, `REPLACE_DEFAULT_CONFIG_ID_${Date.toString()}`).then(()=> {
+                szEnvironment.config.exportConfig(oldConfigHandle as number).then((newConfigDefinition) => {
+                    szEnvironment.configManager.addConfig(newConfigDefinition as string).then((newConfigId) => {
                         // replace config id
-                        szConfigManager.setDefaultConfigId(newConfigId);
+                        szEnvironment.configManager.setDefaultConfigId(newConfigId);
                     })
                 });
             })

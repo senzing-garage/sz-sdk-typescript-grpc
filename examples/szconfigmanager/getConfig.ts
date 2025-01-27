@@ -1,5 +1,11 @@
-import { SzAbstractFactory as szAbstractFactoryCreator, SzAbstractFactoryOptions, SzEngineFlags } from '../../dist/@senzing/sz-sdk-typescript-grpc';
+import { SzEnvironment } from '@senzing/sz-sdk-typescript-grpc';
 
-const SzAbstractFactory         = new szAbstractFactoryCreator(`0.0.0.0:8261`);
-const szConfig                  = SzAbstractFactory.createConfig();
-const szConfigManager           = SzAbstractFactory.createConfigManager();
+const szEnvironment         = new SzEnvironment({connectionString: `0.0.0.0:8261`});
+
+szEnvironment.configManager.getDefaultConfigId().then((configId: number) => {
+    szEnvironment.configManager.getConfig(configId).then((configList) => {
+        console.log(`Config: \n\r${configList}`);
+    }).catch((err) => {
+        console.error(err);
+    });
+})

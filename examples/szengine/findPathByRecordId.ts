@@ -1,11 +1,8 @@
-import { SzAbstractFactory as szAbstractFactoryCreator, SzAbstractFactoryOptions, SzEngineFlags } from '../../dist/@senzing/sz-sdk-typescript-grpc';
+import { SzEnvironment, SzEngineFlags } from '@senzing/sz-sdk-typescript-grpc';
 
-const SzAbstractFactory         = new szAbstractFactoryCreator(`0.0.0.0:8261`);
-const szEngine                  = SzAbstractFactory.createEngine();
+const szEnvironment  = new SzEnvironment({connectionString: `0.0.0.0:8261`});
 
-const FLAGS                     = SzEngineFlags.SZ_FIND_NETWORK_DEFAULT_FLAGS;
-
-szEngine.findPathByRecordId(
+szEnvironment.engine.findPathByRecordId(
     "CUSTOMERS", 
     "1001", 
     "CUSTOMERS", 
@@ -13,7 +10,7 @@ szEngine.findPathByRecordId(
     2, 
     [], 
     [], 
-    FLAGS).
+    SzEngineFlags.SZ_FIND_NETWORK_DEFAULT_FLAGS).
 then((result) => {
     console.log(`RESULT: ${result}`);
 }).catch((err) => {

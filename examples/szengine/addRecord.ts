@@ -1,7 +1,6 @@
-import { SzAbstractFactory, SzEngineFlags } from '../../dist/@senzing/sz-sdk-typescript-grpc';
+import { SzEnvironment, SzEngineFlags } from '@senzing/sz-sdk-typescript-grpc';
 
-const szParamFactory = new SzAbstractFactory(`0.0.0.0:8261`);
-const szEngine       = szParamFactory.createEngine();
+const szEnvironment  = new SzEnvironment({connectionString: `0.0.0.0:8261`});
 
 const DATA_SOURCE_CODE = "TEST";
 const FLAGS = SzEngineFlags.SZ_WITH_INFO;
@@ -21,6 +20,6 @@ const RECORD_DEFINITION = {
 };
 const RECORD_ID = "1";
 
-await szEngine.addRecord(DATA_SOURCE_CODE, RECORD_ID, RECORD_DEFINITION, FLAGS).then((resp) => {
+await szEnvironment.engine.addRecord(DATA_SOURCE_CODE, RECORD_ID, RECORD_DEFINITION, FLAGS).then((resp) => {
     console.log(`RESULT #${RECORD_ID}:\n${resp}`);
 });

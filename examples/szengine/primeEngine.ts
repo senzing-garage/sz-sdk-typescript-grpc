@@ -1,8 +1,7 @@
-import { SzAbstractFactory } from '../../dist/@senzing/sz-sdk-typescript-grpc';
+import { SzEnvironment, SzEngineFlags } from '@senzing/sz-sdk-typescript-grpc';
 
-const szParamFactory = new SzAbstractFactory(`0.0.0.0:8261`);
-const szEngine       = szParamFactory.createEngine();
+const szEnvironment  = new SzEnvironment({connectionString: `0.0.0.0:8261`});
 
-szEngine.primeEngine().then((res) => {
+szEnvironment.engine.primeEngine().then((res) => {
     console.log('engine priming');
 });

@@ -1,9 +1,8 @@
-import { SzAbstractFactory, SzEngineFlags } from '../../dist/@senzing/sz-sdk-typescript-grpc';
+import { SzEnvironment, SzEngineFlags } from '@senzing/sz-sdk-typescript-grpc';
 
-const szParamFactory = new SzAbstractFactory(`0.0.0.0:8261`);
-const szEngine       = szParamFactory.createEngine();
+const szEnvironment  = new SzEnvironment({connectionString: `0.0.0.0:8261`});
 
-szEngine.reevaluateRecord("CUSTOMERS", "1001", SzEngineFlags.SZ_WITH_INFO).then((result) => {
+szEnvironment.engine.reevaluateRecord("CUSTOMERS", "1001", SzEngineFlags.SZ_WITH_INFO).then((result) => {
     console.log(`RESULT: ${result}`);
 }).catch((err) => {
     console.error(err);
