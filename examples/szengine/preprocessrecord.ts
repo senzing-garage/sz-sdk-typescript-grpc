@@ -1,6 +1,6 @@
-import { SzEnvironment, SzEngineFlags } from '@senzing/sz-sdk-typescript-grpc';
+import { SzGrpcEnvironment, SzEngineFlags } from '@senzing/sz-sdk-typescript-grpc';
 
-const szEnvironment  = new SzEnvironment({connectionString: `0.0.0.0:8261`});
+const szEnvironment  = new SzGrpcEnvironment({connectionString: `0.0.0.0:8261`});
 
 const DATA_SOURCE_CODE = "TEST";
 const FLAGS = SzEngineFlags.SZ_RECORD_DEFAULT_FLAGS;

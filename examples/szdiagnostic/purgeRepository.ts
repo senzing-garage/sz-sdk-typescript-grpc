@@ -1,6 +1,6 @@
-import { SzEnvironment } from '@senzing/sz-sdk-typescript-grpc';
+import { SzGrpcEnvironment } from '@senzing/sz-sdk-typescript-grpc';
 
-const szEnvironment  = new SzEnvironment({connectionString: `0.0.0.0:8261`});
+const szEnvironment  = new SzGrpcEnvironment({connectionString: `0.0.0.0:8261`});
 
 // ------------ WARNING
 // ------------ This will remove all loaded and entity resolved data from the Senzing repository, use with caution!

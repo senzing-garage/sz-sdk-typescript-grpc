@@ -1,14 +1,14 @@
 import * as grpc from '@grpc/grpc-js';
-import { SzAbstractEnvironment, SzAbstractEnvironmentOptions } from './abstracts/szAbstractEnviroment';
-import { SzConfig as SzConfigGrpc } from './szConfig';
+import { SzEnvironment, SzEnvironmentOptions } from './abstracts/szEnviroment';
+import { SzGrpcConfig } from './szGrpcConfig';
 import { SzConfigClient } from './szconfig/szconfig_grpc_pb';
-import { SzConfigManager as SzConfigManagerGrpc } from './szConfigManager';
+import { SzGrpcConfigManager } from './szGrpcConfigManager';
 import { SzConfigManagerClient } from './szconfigmanager/szconfigmanager_grpc_pb';
-import { SzDiagnostic as SzDiagnosticGrpc } from './szDiagnostic';
+import { SzGrpcDiagnostic } from './szGrpcDiagnostic';
 import { SzDiagnosticClient } from './szdiagnostic/szdiagnostic_grpc_pb';
-import { SzEngine as SzEngineGrpc } from './szEngine';
+import { SzGrpcEngine } from './szGrpcEngine';
 import { SzEngineClient } from './szengine/szengine_grpc_pb';
-import { SzProduct as SzProductGrpc } from './szProduct';
+import { SzGrpcProduct } from './szGrpcProduct';
 import { SzProductClient } from './szproduct/szproduct_grpc_pb';
 
 export const DEFAULT_CONNECTION_STRING: string = `0.0.0.0:8261`;
@@ -20,7 +20,7 @@ export const DEFAULT_CHANNEL_OPTIONS = {
 }
 export const DEFAULT_CONNECTION_READY_TIMEOUT = 1000;
 
-export interface SzEnvironmentOptions extends SzAbstractEnvironmentOptions { 
+export interface SzGrpcEnvironmentOptions extends SzEnvironmentOptions { 
     connectionString?: string, 
     credentials?: grpc.ChannelCredentials,
     grpcOptions?: grpc.ChannelOptions,
@@ -32,14 +32,14 @@ export interface SzEnvironmentOptions extends SzAbstractEnvironmentOptions {
 // ----- that matches the class being instantiated
 
 // from grpc package
-export class SzEnvironment extends SzAbstractEnvironment {
+export class SzGrpcEnvironment extends SzEnvironment {
 
     // ---------------- private properties used in public read-only getters ----------------
-    protected _config: SzConfigGrpc | undefined;
-    protected _configManager: SzConfigManagerGrpc | undefined;
-    protected _diagnostic: SzDiagnosticGrpc | undefined;
-    protected _engine: SzEngineGrpc | undefined;
-    protected _product: SzProductGrpc | undefined;
+    protected _config: SzGrpcConfig | undefined;
+    protected _configManager: SzGrpcConfigManager | undefined;
+    protected _diagnostic: SzGrpcDiagnostic | undefined;
+    protected _engine: SzGrpcEngine | undefined;
+    protected _product: SzGrpcProduct | undefined;
     
     // ------------------------------ grpc specific properties -----------------------------
     private _connectionString: string             = DEFAULT_CONNECTION_STRING;
@@ -59,7 +59,7 @@ export class SzEnvironment extends SzAbstractEnvironment {
             if(!this._configClient) this._configClient = new SzConfigClient(this.connectionString, this.credentials, this._grpcOptions);
 
             // create new config manager with ref to client
-            if(!this._config) this._config = new SzConfigGrpc({ client: this._configClient, grpcOptions: this._grpcOptions });
+            if(!this._config) this._config = new SzGrpcConfig({ client: this._configClient, grpcOptions: this._grpcOptions });
         }
         return this._config;
     }
@@ -69,7 +69,7 @@ export class SzEnvironment extends SzAbstractEnvironment {
             if(!this._configManagerClient) this._configManagerClient = new SzConfigManagerClient(this.connectionString, this.credentials, this._grpcOptions );
 
             // create new config manager with ref to client
-            if(!this._configManager) this._configManager = new SzConfigManagerGrpc({ client: this._configManagerClient, grpcOptions: this._grpcOptions });
+            if(!this._configManager) this._configManager = new SzGrpcConfigManager({ client: this._configManagerClient, grpcOptions: this._grpcOptions });
         }
         return this._configManager;
     }
@@ -79,7 +79,7 @@ export class SzEnvironment extends SzAbstractEnvironment {
             if(!this._diagnosticClient) this._diagnosticClient = new SzDiagnosticClient(this.connectionString, this.credentials, this._grpcOptions);
 
             // create new diagnostic with ref to client
-            if(!this._diagnostic) this._diagnostic = new SzDiagnosticGrpc({ client: this._diagnosticClient, grpcOptions: this._grpcOptions });
+            if(!this._diagnostic) this._diagnostic = new SzGrpcDiagnostic({ client: this._diagnosticClient, grpcOptions: this._grpcOptions });
         }
         return this._diagnostic;
     }
@@ -89,7 +89,7 @@ export class SzEnvironment extends SzAbstractEnvironment {
             if(!this._engineClient) this._engineClient = new SzEngineClient(this.connectionString, this.credentials, this._grpcOptions);
 
             // create new engine with ref to client
-            if(!this._engine) this._engine = new SzEngineGrpc({ client: this._engineClient, grpcOptions: this._grpcOptions });
+            if(!this._engine) this._engine = new SzGrpcEngine({ client: this._engineClient, grpcOptions: this._grpcOptions });
         }
         return this._engine;
     }
@@ -99,7 +99,7 @@ export class SzEnvironment extends SzAbstractEnvironment {
             if(!this._productClient) this._productClient = new SzProductClient(this.connectionString, this.credentials, this._grpcOptions);
 
             // create new product with ref to client
-            if(!this._product) this._product = new SzProductGrpc({ client: this._productClient, grpcOptions: this._grpcOptions });
+            if(!this._product) this._product = new SzGrpcProduct({ client: this._productClient, grpcOptions: this._grpcOptions });
         }
         return this._product;
     }
@@ -161,7 +161,7 @@ export class SzEnvironment extends SzAbstractEnvironment {
     // --------------------------------- end alias getters --------------------------------
 
 
-    constructor(parameters: SzEnvironmentOptions) {
+    constructor(parameters: SzGrpcEnvironmentOptions) {
         super(parameters);
 
         // store grpc specific connection params for lazy client init

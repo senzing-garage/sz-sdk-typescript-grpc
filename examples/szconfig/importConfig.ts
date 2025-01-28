@@ -1,6 +1,6 @@
-import { SzEnvironment } from '@senzing/sz-sdk-typescript-grpc';
+import { SzGrpcEnvironment } from '@senzing/sz-sdk-typescript-grpc';
 
-const szEnvironment         = new SzEnvironment({connectionString: `0.0.0.0:8261`});
+const szEnvironment         = new SzGrpcEnvironment({connectionString: `0.0.0.0:8261`});
 
 // first get default config id from config manager
 await szEnvironment.configManager.getDefaultConfigId();

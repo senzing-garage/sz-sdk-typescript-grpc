@@ -1,6 +1,6 @@
-import { SzEnvironment, SzEngineFlags } from '@senzing/sz-sdk-typescript-grpc';
+import { SzGrpcEnvironment, SzEngineFlags } from '@senzing/sz-sdk-typescript-grpc';
 
-const szEnvironment  = new SzEnvironment({connectionString: `0.0.0.0:8261`});
+const szEnvironment  = new SzGrpcEnvironment({connectionString: `0.0.0.0:8261`});
 
 szEnvironment.engine.findInterestingEntitiesByRecordId("TEST", "1", SzEngineFlags.SZ_WITH_INFO).then((result) => {
     console.log(`RESULT: ${result}`);

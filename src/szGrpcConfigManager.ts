@@ -1,28 +1,27 @@
 import * as grpc from '@grpc/grpc-js';
 import { AddConfigRequest, AddConfigResponse, GetConfigRequest, GetConfigResponse, GetConfigsRequest, GetDefaultConfigIdRequest, GetDefaultConfigIdResponse, ReplaceDefaultConfigIdRequest, ReplaceDefaultConfigIdResponse, SetDefaultConfigIdRequest, SetDefaultConfigIdResponse} from './szconfigmanager/szconfigmanager_pb';
 import { SzConfigManagerClient } from './szconfigmanager/szconfigmanager_grpc_pb';
-import { SzAbstractConfigManager } from './abstracts/szAbstractConfigManager';
+import { SzConfigManager } from './abstracts/szConfigManager';
 import { newException } from './szHelpers';
 import { SzError, SzNoGrpcConnectionError } from './senzing/SzError';
-import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzEnvironmentOptions } from './szEnvironment';
+import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzGrpcEnvironmentOptions } from './szGrpcEnvironment';
+import { SzGrpcBase } from './abstracts/szGrpcBase';
 
 // strong typed version of the default abstract options specific to this implementation 
 // prevents accidentally passing the wrong type of client to constructor
 /** options to initialize SzConfigManager class */
-export interface SzConfigManagerOptions extends SzEnvironmentOptions { 
+export interface SzGrpcConfigManagerOptions extends SzGrpcEnvironmentOptions { 
     client?: SzConfigManagerClient
 }
 
 /**
  * SzConfigManager class.
  * 
- * @name SzConfigManager
+ * @name SzGrpcConfigManager
  * @class
  */
-export class SzConfigManager implements SzAbstractConfigManager {
+export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
     private _client;
-    private grpcOptions                 = DEFAULT_CHANNEL_OPTIONS; 
-    public grpcConnectionReadyTimeOut   = DEFAULT_CONNECTION_READY_TIMEOUT;
     /** See {@link https://github.com/senzing-garage/knowledge-base/blob/main/lists/senzing-component-ids.md} */
     public productId = "5051";
 
@@ -46,7 +45,7 @@ export class SzConfigManager implements SzAbstractConfigManager {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -76,7 +75,7 @@ export class SzConfigManager implements SzAbstractConfigManager {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -106,7 +105,7 @@ export class SzConfigManager implements SzAbstractConfigManager {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -136,7 +135,7 @@ export class SzConfigManager implements SzAbstractConfigManager {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -171,7 +170,7 @@ export class SzConfigManager implements SzAbstractConfigManager {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -190,12 +189,9 @@ export class SzConfigManager implements SzAbstractConfigManager {
         });
     }
 
-    constructor(parameters: SzConfigManagerOptions) {
+    constructor(parameters: SzGrpcConfigManagerOptions) {
         const { connectionString, credentials, client, grpcOptions, grpcConnectionReadyTimeOut } = parameters;
-        
-        if(grpcConnectionReadyTimeOut) {
-            this.grpcConnectionReadyTimeOut = grpcConnectionReadyTimeOut;
-        }
+        super(parameters);
         if(client) {
             // if client was passed in use/reuse that
             this._client            = client;
@@ -228,7 +224,7 @@ export class SzConfigManager implements SzAbstractConfigManager {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;

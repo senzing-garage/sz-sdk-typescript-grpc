@@ -1,26 +1,27 @@
 import * as grpc from '@grpc/grpc-js';
 import { GetVersionRequest, GetVersionResponse, GetLicenseRequest, GetLicenseResponse } from './szproduct/szproduct_pb';
 import { SzProductClient } from './szproduct/szproduct_grpc_pb';
-import { SzAbstractProduct } from './abstracts/szAbstractProduct';
+import { SzProduct } from './abstracts/szProduct';
 import { SzError, SzNoGrpcConnectionError } from './senzing/SzError';
-import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzEnvironmentOptions } from './szEnvironment';
+import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzGrpcEnvironmentOptions } from './szGrpcEnvironment';
+import { SzGrpcBase } from './abstracts/szGrpcBase';
 
-// --------------- user facing "grpc.SzProduct" inheriting from SzAbstractProduct
-
-export interface SzProductOptions extends SzEnvironmentOptions { 
+/** options to initialize the {@link:SzGrpcProduct} class with */
+export interface SzGrpcProductOptions extends SzGrpcEnvironmentOptions { 
     client?: SzProductClient
 }
 
 /**
- * SzProduct
+ * Access the Senzing Product module via gRPC
  * 
  * @class
- * @name SzProduct
+ * @name SzGrpcProduct
  */
-export class SzProduct implements SzAbstractProduct {
+export class SzGrpcProduct extends SzGrpcBase implements SzProduct {
     private _client: SzProductClient;
-    private grpcOptions                 = DEFAULT_CHANNEL_OPTIONS; 
-    public grpcConnectionReadyTimeOut   = DEFAULT_CONNECTION_READY_TIMEOUT;
+    //private grpcOptions                 = DEFAULT_CHANNEL_OPTIONS; 
+    //public grpcConnectionReadyTimeOut   = DEFAULT_CONNECTION_READY_TIMEOUT;
+    
     /** See {@link https://github.com/senzing-garage/knowledge-base/blob/main/lists/senzing-component-ids.md} */
     public productId = "5056";
     
@@ -33,9 +34,9 @@ export class SzProduct implements SzAbstractProduct {
         return this._client;
     }
 
-    constructor(parameters: SzProductOptions) {
+    constructor(parameters: SzGrpcProductOptions) {
         const { connectionString, credentials, client, grpcOptions, grpcConnectionReadyTimeOut } = parameters;
-        
+        super(parameters);
         if(grpcConnectionReadyTimeOut) {
             this.grpcConnectionReadyTimeOut = grpcConnectionReadyTimeOut;
         }
@@ -64,7 +65,7 @@ export class SzProduct implements SzAbstractProduct {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -92,7 +93,7 @@ export class SzProduct implements SzAbstractProduct {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;

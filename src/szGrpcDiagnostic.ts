@@ -1,27 +1,24 @@
 import * as grpc from '@grpc/grpc-js';
 import { CheckDatastorePerformanceRequest, CheckDatastorePerformanceResponse, GetDatastoreInfoRequest, GetDatastoreInfoResponse, GetFeatureRequest, GetFeatureResponse, PurgeRepositoryRequest, PurgeRepositoryResponse, ReinitializeRequest, ReinitializeResponse } from './szdiagnostic/szdiagnostic_pb';
 import { SzDiagnosticClient } from './szdiagnostic/szdiagnostic_grpc_pb';
-import { SzAbstractDiagnostic } from './abstracts/szAbstractDiagnostic';
+import { SzDiagnostic } from './abstracts/szDiagnostic';
 import { newException } from './szHelpers';
 import { SzError, SzNoGrpcConnectionError } from './senzing/SzError';
 import { CHECK_DATASTORE_PERFORMANCE_RESPONSE } from './types/szDiagnostic';
-import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzEnvironmentOptions } from './szEnvironment';
+import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzGrpcEnvironmentOptions } from './szGrpcEnvironment';
+import { SzGrpcBase } from './abstracts/szGrpcBase';
 
-// --------------- user facing "grpc.SzDiagnostic" inheriting from SzAbstractDiagnostic
-export interface SzDiagnosticOptions extends SzEnvironmentOptions { 
+export interface SzGrpcDiagnosticOptions extends SzGrpcEnvironmentOptions { 
     client?: SzDiagnosticClient
 }
 
 /**
  * SzDiagnostic
  * @class
- * @name SzDiagnostic
+ * @name SzGrpcDiagnostic
  */
-export class SzDiagnostic implements SzAbstractDiagnostic {
+export class SzGrpcDiagnostic extends SzGrpcBase implements SzDiagnostic {
     private _client: SzDiagnosticClient;
-    private grpcOptions                 = DEFAULT_CHANNEL_OPTIONS; 
-    public grpcConnectionReadyTimeOut   = DEFAULT_CONNECTION_READY_TIMEOUT;
-    
     /** See {@link https://github.com/senzing-garage/knowledge-base/blob/main/lists/senzing-component-ids.md} */
     public productId = "5052";
     
@@ -34,9 +31,9 @@ export class SzDiagnostic implements SzAbstractDiagnostic {
         return this._client;
     }
 
-    constructor(parameters: SzDiagnosticOptions) {
+    constructor(parameters: SzGrpcDiagnosticOptions) {
         const { connectionString, credentials, client, grpcOptions, grpcConnectionReadyTimeOut } = parameters;
-        
+        super(parameters);
         if(grpcConnectionReadyTimeOut) {
             this.grpcConnectionReadyTimeOut = grpcConnectionReadyTimeOut;
         }
@@ -66,7 +63,7 @@ export class SzDiagnostic implements SzAbstractDiagnostic {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -97,7 +94,7 @@ export class SzDiagnostic implements SzAbstractDiagnostic {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -129,7 +126,7 @@ export class SzDiagnostic implements SzAbstractDiagnostic {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -160,7 +157,7 @@ export class SzDiagnostic implements SzAbstractDiagnostic {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -189,7 +186,7 @@ export class SzDiagnostic implements SzAbstractDiagnostic {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;

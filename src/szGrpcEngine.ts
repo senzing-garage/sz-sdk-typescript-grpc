@@ -1,26 +1,23 @@
 import * as grpc from '@grpc/grpc-js';
 import { AddRecordRequest, AddRecordResponse, CloseExportRequest, CloseExportResponse, CountRedoRecordsRequest, CountRedoRecordsResponse, DeleteRecordRequest, DeleteRecordResponse, ExportJsonEntityReportRequest, ExportJsonEntityReportResponse, FetchNextRequest, FetchNextResponse, FindInterestingEntitiesByEntityIdRequest, FindInterestingEntitiesByEntityIdResponse, FindInterestingEntitiesByRecordIdRequest, FindInterestingEntitiesByRecordIdResponse, FindNetworkByEntityIdRequest, FindNetworkByEntityIdResponse, FindNetworkByRecordIdRequest, FindNetworkByRecordIdResponse, FindPathByEntityIdRequest, FindPathByEntityIdResponse, FindPathByRecordIdRequest, FindPathByRecordIdResponse, GetActiveConfigIdRequest, GetActiveConfigIdResponse, GetEntityByEntityIdRequest, GetEntityByEntityIdResponse, GetEntityByRecordIdRequest, GetEntityByRecordIdResponse, GetRecordRequest, GetRecordResponse, GetRedoRecordRequest, GetRedoRecordResponse, GetStatsRequest, GetStatsResponse, GetVirtualEntityByRecordIdRequest, GetVirtualEntityByRecordIdResponse, HowEntityByEntityIdRequest, HowEntityByEntityIdResponse, PreprocessRecordRequest, PreprocessRecordResponse, PrimeEngineRequest, PrimeEngineResponse, ProcessRedoRecordRequest, ProcessRedoRecordResponse, ReevaluateEntityRequest, ReevaluateEntityResponse, ReevaluateRecordRequest, ReevaluateRecordResponse, ReinitializeRequest, ReinitializeResponse, SearchByAttributesRequest, SearchByAttributesResponse, StreamExportJsonEntityReportRequest, StreamExportJsonEntityReportResponse, WhyEntitiesRequest, WhyEntitiesResponse, WhyRecordInEntityRequest, WhyRecordInEntityResponse, WhyRecordsRequest, WhyRecordsResponse } from './szengine/szengine_pb';
 import { SzEngineClient } from './szengine/szengine_grpc_pb';
-import { SzAbstractEngine } from './abstracts/szAbstractEngine';
-//import { SzAbstractFactoryOptions } from './szfactorycreator/szFactoryCreator';
-import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzEnvironmentOptions } from './szEnvironment';
+import { SzEngine } from './abstracts/szEngine';
+import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzGrpcEnvironmentOptions } from './szGrpcEnvironment';
 import { asString, bigIntToNumber, entityIdsAsJsonString, entityIdsToAvoidAsJson, newException, recordIdsAsJsonString, recordKeysToAvoidAsJson, requiredDataSourcesAsJson } from './szHelpers';
 import { SzError, SzNoGrpcConnectionError, SzNotYetImplementedError } from './senzing/SzError';
 import { SzEngineFlags } from './senzing';
-import { SzGetVirtualEntityByRecordIdRequestParametersJson, SzRecordIdentifierPair } from './types/szEngine';
+import { SzGrpcBase } from './abstracts/szGrpcBase';
 
 /** strong typed version of the default abstract options specific to this implementation */
-export interface SzEngineOptions extends SzEnvironmentOptions { 
+export interface SzGrpcEngineOptions extends SzGrpcEnvironmentOptions { 
     client?: SzEngineClient
 }
 
 /**
- * Senzing engine module access gRPC class
+ * Access the Senzing Engine module via gRPC
  */
-export class SzEngine implements SzAbstractEngine {
+export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
     private _client: SzEngineClient;
-    private grpcOptions                 = DEFAULT_CHANNEL_OPTIONS; 
-    public grpcConnectionReadyTimeOut   = DEFAULT_CONNECTION_READY_TIMEOUT;
     
     /** See {@link https://github.com/senzing-garage/knowledge-base/blob/main/lists/senzing-component-ids.md} */
     public productId = "5053";
@@ -34,12 +31,10 @@ export class SzEngine implements SzAbstractEngine {
         return this._client;
     }
 
-    constructor(parameters: SzEngineOptions) {
+    constructor(parameters: SzGrpcEngineOptions) {
         const { connectionString, credentials, client, grpcOptions, grpcConnectionReadyTimeOut } = parameters;
-        
-        if(grpcConnectionReadyTimeOut) {
-            this.grpcConnectionReadyTimeOut = grpcConnectionReadyTimeOut;
-        }
+        super(parameters);
+
         if(client) {
             // if client was passed in use/reuse that
             this._client            = client;
@@ -91,7 +86,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject('no connection present');
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -126,7 +121,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -155,7 +150,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -186,7 +181,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -249,7 +244,7 @@ export class SzEngine implements SzAbstractEngine {
     exportJsonEntityReportIterator(flags: BigInt | number = SzEngineFlags.SZ_EXPORT_DEFAULT_FLAGS) {
         return new Promise(async (resolve, reject) => {
             reject(new SzNotYetImplementedError());
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -320,7 +315,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -347,7 +342,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -388,7 +383,7 @@ export class SzEngine implements SzAbstractEngine {
             if(!findNetworkEntityIds) {
                 throw new Error("could not parse entity id's from parameter");
             } else {
-                this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+                this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                     if(err) {
                         reject( err )
                         return;
@@ -432,7 +427,7 @@ export class SzEngine implements SzAbstractEngine {
             if(!findNetworkRecordIds) {
                 throw new Error("could not parse record id's from parameter");
             } else {
-                this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+                this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                     if(err) {
                         reject( err )
                         return;
@@ -481,7 +476,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -537,7 +532,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -578,7 +573,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -609,7 +604,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -643,7 +638,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -678,7 +673,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -710,7 +705,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -739,7 +734,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -770,7 +765,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -805,7 +800,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -838,7 +833,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -869,7 +864,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -899,7 +894,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -932,7 +927,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -966,7 +961,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -994,7 +989,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -1026,7 +1021,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -1059,7 +1054,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -1094,7 +1089,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -1135,7 +1130,7 @@ export class SzEngine implements SzAbstractEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.grpcConnectionReadyTimeOut, (err) => {
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;

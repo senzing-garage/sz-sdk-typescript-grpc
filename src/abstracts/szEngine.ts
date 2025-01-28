@@ -1,6 +1,6 @@
 
 // ---------------  abstract diagnostic from main package
-export interface SzAbstractEngine {
+export interface SzEngine {
     addRecord(dataSourceCode: string, recordId: string, recordDefinition: string, flags: number): void;
     closeExport(exportHandle: number): void;
     countRedoRecords(): void;

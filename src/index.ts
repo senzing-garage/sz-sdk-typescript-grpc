@@ -1,8 +1,8 @@
-export { SzEnvironment, SzEnvironmentOptions } from "./szEnvironment";
+export { SzGrpcEnvironment, SzGrpcEnvironmentOptions } from "./szGrpcEnvironment";
 export { SzEngineFlags } from "./senzing/SzEngineFlags";
-export { SzConfig, SzConfigOptions } from "./szConfig";
-export { SzConfigManager, SzConfigManagerOptions } from "./szConfigManager";
-export { SzDiagnostic, SzDiagnosticOptions } from "./szDiagnostic";
-export { SzEngine, SzEngineOptions } from "./szEngine";
-export { SzProduct, SzProductOptions } from "./szProduct";
+export { SzGrpcConfig } from "./szGrpcConfig";
+export { SzGrpcConfigManager } from "./szGrpcConfigManager";
+export { SzGrpcDiagnostic } from "./szGrpcDiagnostic";
+export { SzGrpcEngine } from "./szGrpcEngine";
+export { SzGrpcProduct } from "./szGrpcProduct";
 export * from "./senzing/SzError";
