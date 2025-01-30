@@ -1,6 +1,6 @@
 ## Running the examples from this repository
 
-1. Install the dependencies required to build:
+1. Install the dependencies required to build from this repositories root directory:
 
 ```console
 npm install

@@ -1,7 +1,7 @@
 {
   "name": "@senzing/sz-sdk-typescript-grpc-examples",
   "version": "0.0.1",
-  "description": "examples for using @senzing/serve-grpc with nodejs",
+  "description": "examples for using @senzing/serve-grpc with @senzing/sz-sdk-typescript-grpc",
   "main": "index.js",
   "type":"module",
   "scripts": {
