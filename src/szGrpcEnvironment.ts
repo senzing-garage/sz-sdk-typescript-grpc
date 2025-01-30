@@ -11,48 +11,143 @@ import { SzEngineClient } from './szengine/szengine_grpc_pb';
 import { SzGrpcProduct } from './szGrpcProduct';
 import { SzProductClient } from './szproduct/szproduct_grpc_pb';
 
+// -------------- sane defaults for initializing when arguments not provided --------------
+/** default connection string to initialize with if none provided */
 export const DEFAULT_CONNECTION_STRING: string = `0.0.0.0:8261`;
+/** default channel credentials to initialize with if none provided */
 export const DEFAULT_CREDENTIALS = grpc.credentials.createInsecure();
+/** defualt channel options if none provided 
+* @see https://github.com/grpc/grpc/blob/618a3f561d4a93f263cca23abad086ed8f4d5e86/include/grpc/impl/codegen/grpc_types.h#L142 
+*/
 export const DEFAULT_CHANNEL_OPTIONS = {
     "grpc.keepalive_time_ms": 1500,
-    "grpc.keepalive_timeout_ms": 1500,
-    "grpc.client_idle_timeout_ms": 1500
+    "grpc.keepalive_timeout_ms": 3000,
+    "grpc.client_idle_timeout_ms": 5000
 }
-export const DEFAULT_CONNECTION_READY_TIMEOUT = 1000;
+/** default time in seconds to wait for connection/reconnection to service(s) */
+export const DEFAULT_CONNECTION_READY_TIMEOUT = 1;
 
 export interface SzGrpcEnvironmentOptions extends SzEnvironmentOptions { 
+    /** the grpc connection string. `${HOST}:${PORT}` */
     connectionString?: string, 
+    /** 
+     * channel credentials to use for authentication. defaults to "grpc.credentials.createInsecure()"
+     * @see https://grpc.io/docs/guides/auth/
+     */
     credentials?: grpc.ChannelCredentials,
+    /** @see https://github.com/grpc/grpc/blob/618a3f561d4a93f263cca23abad086ed8f4d5e86/include/grpc/impl/codegen/grpc_types.h#L142 */
     grpcOptions?: grpc.ChannelOptions,
+    /** 
+     * this will be an instance of any of the Senzing grpc client modules generated from the protoc 
+     * This will be overriden in the derived class with the specific client type that applies to that class 
+    */
     client?: any,
+    /** the amount to wait in seconds before giving up on establishing a connection to the grpc server */
     grpcConnectionReadyTimeOut?: number
 }
 
 // ----- concrete options with options only accepting the correct type of client
 // ----- that matches the class being instantiated
-
-// from grpc package
+/**
+ * SzGrpcEnvironment
+ * Creates a new Senzing Environment instance for use with creating and calling the gRpc modules 
+ * and methods.
+ */
 export class SzGrpcEnvironment extends SzEnvironment {
 
     // ---------------- private properties used in public read-only getters ----------------
+    /** 
+     * instance of {@link SzGrpcConfig}.
+     * autocreated when user calls {@link getConfig} on first attempt.
+     * @internal
+    */
     protected _config: SzGrpcConfig | undefined;
+    /** 
+     * instance of {@link SzGrpcConfigManager}.
+     * autocreated when user calls {@link getConfigManager} on first attempt.
+     * @internal
+    */
     protected _configManager: SzGrpcConfigManager | undefined;
+    /** 
+     * instance of {@link SzGrpcDiagnostic}.
+     * autocreated when user calls {@link getDiagnostic} on first attempt.
+     * @internal
+    */
     protected _diagnostic: SzGrpcDiagnostic | undefined;
+    /** 
+     * instance of {@link SzGrpcEngine}
+     * autocreated when user calls {@link getEngine} on first attempt.
+     * @internal
+    */
     protected _engine: SzGrpcEngine | undefined;
+    /** 
+     * instance of {@link SzGrpcProduct}.
+     * autocreated when user calls {@link getProduct} on first attempt.
+     * @internal
+    */
     protected _product: SzGrpcProduct | undefined;
     
     // ------------------------------ grpc specific properties -----------------------------
+    /** the grpc connection string. `${HOST}:${PORT}` 
+     * @internal */
     private _connectionString: string             = DEFAULT_CONNECTION_STRING;
+    /** 
+     * channel credentials to use for authentication. defaults to "grpc.credentials.createInsecure()"
+     * @see https://grpc.io/docs/guides/auth/
+     * @internal */
     private _credentials: grpc.ChannelCredentials = DEFAULT_CREDENTIALS;
+    /** 
+     * @see https://github.com/grpc/grpc/blob/618a3f561d4a93f263cca23abad086ed8f4d5e86/include/grpc/impl/codegen/grpc_types.h#L142 
+     * @internal
+    */
     private _grpcOptions: grpc.ChannelOptions     = DEFAULT_CHANNEL_OPTIONS;
-    private _configClient: SzConfigClient | undefined; 
+    /** 
+     * instance of the gRPC client used for connecting to services in {@link SzGrpcConfig}.
+     * autocreated when user calls {@link getConfig} on first attempt.
+     * @internal
+    */
+    private _configClient: SzConfigClient | undefined;
+    /** 
+     * instance of the gRPC client used for connecting to services in {@link SzGrpcConfigManager}.
+     * autocreated when user calls {@link getConfigManager} on first attempt.
+     * @internal
+    */
     private _configManagerClient: SzConfigManagerClient | undefined; 
+    /** 
+     * instance of the gRPC client used for connecting to services in {@link SzGrpcDiagnostic}.
+     * autocreated when user calls {@link getDiagnostic} on first attempt.
+     * @internal
+    */
     private _diagnosticClient: SzDiagnosticClient | undefined; 
+    /** 
+     * instance of the gRPC client used for connecting to services in {@link SzGrpcEngine}.
+     * autocreated when user calls {@link getEngine} on first attempt.
+     * @internal
+    */
     private _engineClient: SzEngineClient | undefined; 
+    /** 
+     * instance of the gRPC client used for connecting to services in {@link SzGrpcProduct}.
+     * autocreated when user calls {@link getProduct} on first attempt.
+     * @internal
+    */
     private _productClient: SzProductClient | undefined;
 
     // ----------------------------- lazy getters (read only) ------------------------------
     // --------------------------- will lazy load on first access --------------------------
+    /** 
+     * Gets the currently active configuration ID for the {@link SzEnvironment}.
+     * 
+     * @return {Promise<number>} The currently active configuration ID.
+    */
+    public getActiveConfigId() {
+        return this.engine.getActiveConfigId();
+    }
+
+    /** 
+     * instance of {@link SzGrpcConfig}.
+     * autocreates the class instance on first call if not already created.
+     * @return {SzGrpcConfig}
+    */
     public getConfig() {
         if(!this._config || !this._configClient) {
             // create new grpc client
@@ -63,6 +158,11 @@ export class SzGrpcEnvironment extends SzEnvironment {
         }
         return this._config;
     }
+    /** 
+     * instance of {@link SzGrpcConfigManager}.
+     * autocreates the class instance on first call if not already created.
+     * @return {SzGrpcConfigManager}
+    */
     public getConfigManager() {
         if(!this._configManager || !this._configManagerClient) {
             // create new grpc client
@@ -73,6 +173,11 @@ export class SzGrpcEnvironment extends SzEnvironment {
         }
         return this._configManager;
     }
+    /** 
+     * instance of {@link SzGrpcDiagnostic}.
+     * autocreates the class instance on first call if not already created.
+     * @return {SzGrpcDiagnostic}
+    */
     public getDiagnostic() {
         if(!this._diagnostic || !this._diagnosticClient) {
             // create new grpc client
@@ -83,6 +188,11 @@ export class SzGrpcEnvironment extends SzEnvironment {
         }
         return this._diagnostic;
     }
+    /** 
+     * instance of {@link SzGrpcEngine}.
+     * autocreates the class instance on first call if not already created.
+     * @return {SzGrpcDiagnostic}
+    */
     public getEngine() {
         if(!this._engine || !this._engineClient) {
             // create new grpc client
@@ -93,6 +203,11 @@ export class SzGrpcEnvironment extends SzEnvironment {
         }
         return this._engine;
     }
+    /** 
+     * instance of {@link SzGrpcDiagnostic}.
+     * autocreates the class instance on first call if not already created.
+     * @return {SzGrpcDiagnostic}
+    */
     public getProduct() {
         if(!this._product || !this._productClient) {
             // create new grpc client
@@ -105,56 +220,56 @@ export class SzGrpcEnvironment extends SzEnvironment {
     }
 
     // -------------------------------- start alias getters --------------------------------
+    /** 
+     * the grpc connection string. `${HOST}:${PORT}` 
+     * @readonly
+     */
     public get connectionString() {
         return this._connectionString;
     }
-    public set connectionString(value: string) {
-        let oldValue = this._connectionString;
-        if(value !== oldValue) {
-            this._connectionString = value;
-
-            // update any existing client connections
-            if(this._configClient) {
-                this._configClient = new SzConfigClient(this.connectionString, this.credentials, this._grpcOptions);
-                if(this._config) {
-                    this._config.client = this._configClient;
-                }
-            }
-        }
-        this._connectionString = value;
-    }
+    /** 
+     * channel credentials to use for authentication. defaults to "grpc.credentials.createInsecure()"
+     * @see https://grpc.io/docs/guides/auth/
+     * @readonly
+     */
     public get credentials() {
         return this._credentials;
-    }
-    public set credentials(value) {
-        let oldValue = this._credentials;
-        if(value !== oldValue) {
-            // update any existing client connections
-        }
-        this._credentials = value;
     }
     public get grpcOptions() {
         return this._grpcOptions;
     }
-    public set grpcOptions(value) {
-        let oldValue = this._grpcOptions;
-        if(JSON.stringify(oldValue) !== JSON.stringify(value)) {
-            // grpc option(s) have changed, reinit client connectsion
-        }
-        this._grpcOptions = value;
-    }
+    /** 
+     * getter alias of {@link getConfig}.  Syntax sugar for using {@link getConfig} as if it were a property ie `MySenzingEnvironment.config.createConfig()`.
+     * @return {SzGrpcConfig}
+    */
     public get config() {
         return this.getConfig();
     }
+    /** 
+     * getter alias of {@link getConfigManager}.  Syntax sugar for using {@link getConfigManager} as if it were a property ie `MySenzingEnvironment.configManager.getDefaultConfigId()`.
+     * @return {SzGrpcConfigManager}
+    */
     public get configManager() {
         return this.getConfigManager();
     }
+    /** 
+     * getter alias of {@link getDiagnostic}.  Syntax sugar for using {@link getDiagnostic} as if it were a property ie `MySenzingEnvironment.diagnostic.getDatastoreInfo()`.
+     * @return {SzGrpcDiagnostic}
+    */
     public get diagnostic() {
         return this.getDiagnostic();
     }
+    /** 
+     * getter alias of {@link getEngine}.  Syntax sugar for using {@link getEngine} as if it were a property ie `MySenzingEnvironment.engine.getActiveConfigId()`.
+     * @return {SzGrpcEngine}
+    */
     public get engine() {
         return this.getEngine();
     }
+    /** 
+     * getter alias of {@link getProduct}.  Syntax sugar for using {@link getProduct} as if it were a property ie `MySenzingEnvironment.product.getVersion()`.
+     * @return {SzGrpcProduct}
+    */
     public get product() {
         return this.getProduct();
     }
@@ -167,11 +282,17 @@ export class SzGrpcEnvironment extends SzEnvironment {
         // store grpc specific connection params for lazy client init
         // in getters
         const { connectionString, credentials, grpcOptions } = parameters;
-        if(connectionString)    this.connectionString   = connectionString;
-        if(credentials)         this.credentials        = credentials ;
-        if(grpcOptions)         this.grpcOptions        = grpcOptions ;
+        if(connectionString)    this._connectionString   = connectionString;
+        if(credentials)         this._credentials        = credentials ;
+        if(grpcOptions)         this._grpcOptions        = grpcOptions ;
     }
-
+    /**
+     * Reinitializes the {@link SzGrpcEngine} with the specified configuration ID.
+     * Used by {@link SzGrpcEnvironment}. Not intended to be called directly by end-users.
+     * 
+     * @param configId 
+     * @internal
+    */
     public reinitialize(configId: number) {
 
         if(this._diagnostic) {

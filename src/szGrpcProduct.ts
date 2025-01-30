@@ -18,10 +18,9 @@ export interface SzGrpcProductOptions extends SzGrpcEnvironmentOptions {
  * @name SzGrpcProduct
  */
 export class SzGrpcProduct extends SzGrpcBase implements SzProduct {
+    /** @interal */
     private _client: SzProductClient;
-    //private grpcOptions                 = DEFAULT_CHANNEL_OPTIONS; 
-    //public grpcConnectionReadyTimeOut   = DEFAULT_CONNECTION_READY_TIMEOUT;
-    
+
     /** See {@link https://github.com/senzing-garage/knowledge-base/blob/main/lists/senzing-component-ids.md} */
     public productId = "5056";
     
@@ -57,9 +56,9 @@ export class SzGrpcProduct extends SzGrpcBase implements SzProduct {
     }
     /**
      * Retrieves information about the currently used license.
-     * @returns {Promise<{[key: string]: any} | SzError>} JSON document containing Senzing license metadata.
+     * @returns {Promise<{[key: string]: any}>} JSON document containing Senzing license metadata.
      */
-    getLicense(): Promise<{[key: string]: any} | SzError> {
+    getLicense(): Promise<{[key: string]: any}> {
         return new Promise((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
@@ -85,9 +84,9 @@ export class SzGrpcProduct extends SzGrpcBase implements SzProduct {
     }
     /**
      * Returns the version of Senzing.
-     * @returns {Promise<{[key: string]: any} | SzError>} JSON document containing metadata about the Senzing Engine version being used.
+     * @returns {Promise<{[key: string]: any}>} JSON document containing metadata about the Senzing Engine version being used.
      */
-    getVersion(): Promise<{[key: string]: any} | SzError> {
+    getVersion(): Promise<{[key: string]: any}> {
         return new Promise((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
