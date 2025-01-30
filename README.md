@@ -90,8 +90,8 @@ curl -X GET \
     
     and paste the following in to the file:
     ```typescript
-    import { SzEnvironment } from '@senzing/sz-sdk-typescript-grpc';
-    const szEnvironment  = new SzEnvironment({connectionString: `0.0.0.0:8261`});
+    import { SzGrpcEnvironment } from '@senzing/sz-sdk-typescript-grpc';
+    const szEnvironment  = new SzGrpcEnvironment({connectionString: `0.0.0.0:8261`});
 
     szEnvironment.product.getVersion().
         then((result)=>{
