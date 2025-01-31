@@ -1,0 +1,30 @@
+{
+  "name": "sz-sdk-typescript-grpc",
+  "version": "0.0.1",
+  "scripts": {
+    "build": "npm run tsc && node --disable-warning=ExperimentalWarning build.js",
+    "clean": "rm -fR dist/@senzing/sz-sdk-typescript-grpc && rm -fR dist/@senzing/sz-sdk-typescript-grpc.tsbuildinfo",
+    "compile": "npm run tsc",
+    "package": "cd dist/\\@senzing\\/sz-sdk-typescript-grpc && npm pack",
+    "postpackage": "node post-pack.js",
+    "examples:ts:helloworld": "tsx examples/static/helloworld.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "./node_modules/typescript/bin/tsc"
+  },
+  "author": "",
+  "license": "MIT",
+  "description": "",
+  "devDependencies": {
+    "@grpc/grpc-js": "^1.12.5",
+    "@grpc/proto-loader": "^0.7.13",
+    "@types/google-protobuf": "^3.15.12",
+    "google-protobuf": "^3.21.4",
+    "grpc-tools": "^1.12.4",
+    "replace-in-file": "^8.3.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "grpc": "^1.24.11"
+  }
+}
