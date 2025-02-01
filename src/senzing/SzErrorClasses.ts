@@ -2,7 +2,10 @@
 // Base SzError
 // ----------------------------------------------------------------------------
 
-/** Base exception for Sz related javascript code. */
+/** Base exception for Sz related javascript code. 
+ * @group Errors
+ * @hideconstructor
+*/
 export class SzError extends Error {}
 
 // ----------------------------------------------------------------------------
@@ -11,27 +14,50 @@ export class SzError extends Error {}
 //   the calling program.
 // ----------------------------------------------------------------------------
 
-/** The user-supplied input contained an error. */
+/** 
+ * The user-supplied input contained an error. 
+ * @group Errors
+ * @hideconstructor
+ */
 export class SzBadInputError extends SzError {}
 
-/** The program can provide a remedy and continue. */
+/** 
+ * The program can provide a remedy and continue. 
+ * @group Errors
+ * @hideconstructor
+ */
 export class SzConfigurationError extends SzError {}
 
-/** The program can provide a remedy and continue. */
+/** The program can provide a remedy and continue. 
+ * @group Errors
+ * @hideconstructor
+*/
 export class SzReplaceConflictError extends SzError {}
 
-/** The program can provide a remedy and continue.*/
+/** The program can provide a remedy and continue.
+ * @hideconstructor
+ * @group Errors
+*/
 export class SzRetryableError extends SzError {}
 
-/** System failure, can't continue. */
+/** System failure, can't continue. 
+ * @hideconstructor
+ * @group Errors
+*/
 export class SzUnrecoverableError extends SzError {}
 
-/** Temporary Error for non-dev-complete feature */
+/** Temporary Error for non-dev-complete feature 
+ * @hideconstructor
+ * @group Errors
+*/
 export class SzNotYetImplementedError extends SzError {
     override message = "Feature Not Yet Implemented";
 }
 
-/** GRPC only error that is handed back when connection is not present */
+/** GRPC only error that is handed back when connection is not present 
+ * @hideconstructor
+ * @group Errors
+*/
 export class SzNoGrpcConnectionError extends SzError {
     override message = "No Connection Configured";
 }
@@ -44,10 +70,16 @@ export class SzNoGrpcConnectionError extends SzError {
 // - Processing may continue.
 // ----------------------------------------------------------------------------
 
-/** "Not found */
+/** "Not found 
+ * @group Errors
+ * @hideconstructor
+*/
 export class SzNotFoundError extends SzBadInputError {}
 
-/** Unknown DataSource */
+/** Unknown DataSource 
+ * @group Errors
+ * @hideconstructor
+*/
 export class SzUnknownDataSourceError extends SzBadInputError {}
 
 
@@ -59,10 +91,16 @@ export class SzUnknownDataSourceError extends SzBadInputError {}
 // - Processing may continue.
 // ----------------------------------------------------------------------------
 
-/** Database connection lost */
+/** Database connection lost 
+ * @group Errors
+ * @hideconstructor
+*/
 export class SzDatabaseConnectionLostError extends SzRetryableError {}
 
-/** Retry timeout exceeded time limit */
+/** Retry timeout exceeded time limit 
+ * @group Errors
+ * @hideconstructor
+*/
 export class SzRetryTimeoutExceededError extends SzRetryableError {}
 
 // ----------------------------------------------------------------------------
@@ -72,14 +110,26 @@ export class SzRetryTimeoutExceededError extends SzRetryableError {}
 // - Processing cannot continue.
 // ----------------------------------------------------------------------------
 
-/** Database exception*/
+/** Database exception
+ * @group Errors
+ * @hideconstructor
+*/
 export class SzDatabaseError extends SzUnrecoverableError {}
 
-/** License exception */
+/** License exception 
+ * @hideconstructor
+ * @group Errors
+*/
 export class SzLicenseError extends SzUnrecoverableError {}
 
-/** Not initialized */
+/** Not initialized 
+ * @hideconstructor
+ * @group Errors
+*/
 export class SzNotInitializedError extends SzUnrecoverableError {}
 
-/** Could not handle exception */
+/** Could not handle exception 
+ * @hideconstructor
+ * @group Errors
+*/
 export class SzUnhandledError extends SzUnrecoverableError {}
