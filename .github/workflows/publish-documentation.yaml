@@ -1,9 +1,14 @@
-name: "Publish Documentation"
+name: Publish documentation
 
 on:
   push:
-    branches:
-      - [main]
+    branches: [main]
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+"
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -26,8 +31,7 @@ jobs:
 
       - name: Build documentation
         id: build-documentation
-        run:
-          npm run build:docs
+        run: npm run build:docs
 
       - name: Upload static files as artifact
         id: upload-documentation
