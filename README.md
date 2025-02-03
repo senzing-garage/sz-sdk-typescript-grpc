@@ -26,15 +26,6 @@ that communicates with a [Senzing gRPC server].
 The Senzing `sz-sdk-typescript-grpc` packages enable TypeScript or NodeJS to call Senzing library functions
 across a network to a [Senzing gRPC server].
 
-The `sz-sdk-typescript-grpc` package implements the following [sz-sdk-typescript] interfaces:
-
-1. [SzConfig]
-1. [SzConfigMgr]
-1. [SzDiagnostic]
-1. [SzEngine]
-1. [SzProduct]
-
-
 ## Use
 
 The following example shows how to start a Senzing gRPC server Docker container
@@ -89,7 +80,7 @@ curl -X GET \
     ```
     
     and paste the following in to the file:
-    
+
     ```typescript
     import { SzGrpcEnvironment } from '@senzing/sz-sdk-typescript-grpc';
     const szEnvironment  = new SzGrpcEnvironment({connectionString: `0.0.0.0:8261`});
