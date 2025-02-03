@@ -1,8 +1,9 @@
 name: "Publish Documentation"
+
 on:
   push:
     branches:
-      - "master"
+      - [main]
 
 jobs:
   build:
@@ -45,7 +46,7 @@ jobs:
     strategy:
       matrix:
         node-version: [20.x]
-        
+
     steps:
       - name: Deploy documentation to GitHub Pages
         id: deployment
