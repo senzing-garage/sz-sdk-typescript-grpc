@@ -27,16 +27,16 @@ jobs:
 
       - name: Build
         id: build-package
-        run: 	npm run build
+        run: npm run build
 
       - name: Create Archive
         id: create-archive
-        run: 	npm run package:test
+        run: npm run package:test
 
       - name: Install Built Test Package
         id: install-test-package
-        run: 	npm install dist/@senzing/senzing-sz-sdk-typescript-grpc-test.tgz
+        run: npm install dist/@senzing/senzing-sz-sdk-typescript-grpc-test.tgz
 
       - name: Run Unit Tests
         id: unit-tests
-        run: 	npm run test
+        run: npm run test
