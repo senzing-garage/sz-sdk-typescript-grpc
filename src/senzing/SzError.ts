@@ -4,4 +4,7 @@
 export * from './SzErrorClasses'
 import { SzErrorCodes } from './SzErrorCodes'
 
+/**
+ * @ignore
+ */
 export const ENGINE_EXCEPTION_MAP = SzErrorCodes;

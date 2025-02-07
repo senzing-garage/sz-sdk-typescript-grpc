@@ -1,0 +1,112 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="."><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@senzing/sz-sdk-typescript-grpc - v0.0.1</title><meta name="description" content="Documentation for @senzing/sz-sdk-typescript-grpc"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script><script async src="assets/hierarchy.js" id="tsd-hierarchy-script"></script><link rel="stylesheet" href="assets/typedoc-github-style.css"/></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><div class="table-cell" id="tsd-search"><div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div><div class="field"><div id="tsd-toolbar-links"></div></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">@senzing/sz-sdk-typescript-grpc - v0.0.1</a></div><div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h1>@senzing/sz-sdk-typescript-grpc - v0.0.1</h1></div><div class="tsd-panel tsd-typography"><a id="sz-sdk-typescript-grpc" class="tsd-anchor"></a><h1 class="tsd-anchor-link">sz-sdk-typescript-grpc<a href="#sz-sdk-typescript-grpc" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1><p>If you are beginning your journey with [Senzing],
+please start with [Senzing Quick Start guides].</p>
+<p>You are in the [Senzing Garage] where projects are &quot;tinkered&quot; on.
+Although this GitHub repository may help you understand an approach to using Senzing,
+it's not considered to be &quot;production ready&quot; and is not considered to be part of the Senzing product.
+Heck, it may not even be appropriate for your application of Senzing!</p>
+<a id="warning-warning-sz-sdk-typescript-grpc-is-still-in-development-warning-_" class="tsd-anchor"></a><h2 class="tsd-anchor-link">:warning: WARNING: sz-sdk-typescript-grpc is still in development :warning: _<a href="#warning-warning-sz-sdk-typescript-grpc-is-still-in-development-warning-_" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>At the moment, this is &quot;work-in-progress&quot; with Semantic Versions of <code>0.n.x</code>.
+Although it can be reviewed and commented on,
+the recommendation is not to use it yet.</p>
+<a id="synopsis" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Synopsis<a href="#synopsis" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>The Senzing <code>sz-sdk-typescript-grpc</code> package provides a TypeScript Software Development Kit adhering to the abstract classes of [sz-sdk-typescript]
+that communicates with a [Senzing gRPC server].</p>
+<a id="overview" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Overview<a href="#overview" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>The Senzing <code>sz-sdk-typescript-grpc</code> packages enable TypeScript or NodeJS to call Senzing library functions
+across a network to a [Senzing gRPC server].</p>
+<p>The <code>sz-sdk-typescript-grpc</code> package implements the following [sz-sdk-typescript] interfaces:</p>
+<ol>
+<li>[SzConfig]</li>
+<li>[SzConfigMgr]</li>
+<li>[SzDiagnostic]</li>
+<li>[SzEngine]</li>
+<li>[SzProduct]</li>
+</ol>
+<a id="use" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Use<a href="#use" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>The following example shows how to start a Senzing gRPC server Docker container
+and access it using the <code>senzing_grpc</code> Python package.</p>
+<ol>
+<li>
+<p>Run a Senzing gRPC service using Docker.
+Example:</p>
+<pre><code class="console"><span class="hl-0">docker run \</span><br/><span class="hl-0">  --env SENZING_TOOLS_COMMAND=serve-grpc \</span><br/><span class="hl-0">  --env SENZING_TOOLS_DATABASE_URL=sqlite3://na:na@nowhere/tmp/sqlite/G2C.db \</span><br/><span class="hl-0">  --env SENZING_TOOLS_ENABLE_ALL=true \</span><br/><span class="hl-0">  --name senzing-tools-serve-grpc \</span><br/><span class="hl-0">  --publish 8261:8261 \</span><br/><span class="hl-0">  --pull always \</span><br/><span class="hl-0">  --rm \</span><br/><span class="hl-0">  senzing/senzing-tools</span>
+</code><button type="button">Copy</button></pre>
+
+<p><strong>Note:</strong> In this example, <code>SENZING_TOOLS_DATABASE_URL</code> specifies a file <em>inside</em> the container.
+Thus the database is temporal and will be deleted when the container is killed.</p>
+</li>
+<li>
+<p>In a separate window create a new project directory and initialize it with npm:</p>
+<pre><code class="console"><span class="hl-0">mkdir my-new-senzing-ts-project &amp;&amp;</span><br/><span class="hl-0">cd my-new-senzing-ts-project &amp;&amp; </span><br/><span class="hl-0">npx tsc --init</span>
+</code><button type="button">Copy</button></pre>
+
+</li>
+<li>
+<p>Add the <code>sz-sdk-typescript-grpc</code> package to your project:</p>
+<pre><code class="console"><span class="hl-0">npm install --save @senzing/sz-sdk-typescript-grpc</span>
+</code><button type="button">Copy</button></pre>
+
+</li>
+<li>
+<p>Create a new TS file:</p>
+<ol>
+<li>Option #1: Download the helloworld example from Github:</li>
+</ol>
+<pre><code class="console">
+</code><button type="button">Copy</button></pre>
+
+</li>
+</ol>
+<p>curl -X GET <br>
+--output ./helloworld.ts <br>
+<a href="https://raw.githubusercontent.com/senzing-garage/sz-sdk-typescript-grpc/refs/heads/main/examples/helloworld/helloworld.ts">https://raw.githubusercontent.com/senzing-garage/sz-sdk-typescript-grpc/refs/heads/main/examples/helloworld/helloworld.ts</a>
+```</p>
+<pre><code>2. Option #2: create a file from scratch:
+
+```console
+touch helloworld.ts
+```
+
+and paste the following in to the file:
+
+```typescript
+import { SzGrpcEnvironment } from '@senzing/sz-sdk-typescript-grpc';
+const szEnvironment  = new SzGrpcEnvironment({connectionString: `0.0.0.0:8261`});
+
+szEnvironment.product.getVersion().
+    then((result)=&gt;{
+        console.log(&quot;RESPONSE:\n\r&quot;, result);
+    }).
+    catch((err)=&gt;{
+        console.error(err);
+    });
+```
+</code></pre>
+<ol>
+<li>
+<p>Run the ts file you created on the last step:</p>
+<pre><code class="console"><span class="hl-0">    npx tsx helloworld.ts</span>
+</code><button type="button">Copy</button></pre>
+
+</li>
+</ol>
+<a id="development" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Development<a href="#development" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ol>
+<li>
+<p>Clone the repository:</p>
+<pre><code class="console"><span class="hl-0">git clone https://github.com/senzing-garage/sz-sdk-typescript-grpc.git &amp;&amp;</span><br/><span class="hl-0">cd sz-sdk-typescript-grpc</span>
+</code><button type="button">Copy</button></pre>
+
+</li>
+<li>
+<p>Install dependencies</p>
+<pre><code class="console"><span class="hl-0">npm install</span>
+</code><button type="button">Copy</button></pre>
+
+</li>
+<li>
+<p>Make distributable npm package:</p>
+<pre><code class="console"><span class="hl-0">make clean &amp;&amp; make</span>
+</code><button type="button">Copy</button></pre>
+
+</li>
+<li>
+<p>The previous step will have created a new file in the <code>dist/@senzing</code> directory. The file will be in the format <code>dist/@senzing/senzing-sz-sdk-typescript-grpc-X.X.X.tgz</code>. This file can be imported for use in local projects withought pulling the public version from npm.</p>
+</li>
+</ol>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#sz-sdk-typescript-grpc"><span>sz-<wbr/>sdk-<wbr/>typescript-<wbr/>grpc</span></a><ul><li><a href="#warning-warning-sz-sdk-typescript-grpc-is-still-in-development-warning-_"><span>:warning: WARNING: sz-<wbr/>sdk-<wbr/>typescript-<wbr/>grpc is still in development :warning: _</span></a></li><li><a href="#synopsis"><span>Synopsis</span></a></li><li><a href="#overview"><span>Overview</span></a></li><li><a href="#use"><span>Use</span></a></li><li><a href="#development"><span>Development</span></a></li></ul></div></details></div><div class="site-menu"><nav id="tsd-sidebar-links" class="tsd-navigation"><a href="http://docs.senzing.com">Senzing Documentation</a><a href="https://senzing.com/docs/4_beta/">v4 Beta</a></nav><nav class="tsd-navigation"><a href="modules.html">@senzing/sz-sdk-typescript-grpc - v0.0.1</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer></footer><div class="overlay"></div></body></html>
