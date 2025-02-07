@@ -27,6 +27,7 @@ export const DEFAULT_CHANNEL_OPTIONS = {
 /** default time in seconds to wait for connection/reconnection to service(s) */
 export const DEFAULT_CONNECTION_READY_TIMEOUT = 1;
 
+/** @group SzGrpcEnvironment */
 export interface SzGrpcEnvironmentOptions extends SzEnvironmentOptions { 
     /** the grpc connection string. `${HOST}:${PORT}` */
     connectionString?: string, 
@@ -56,6 +57,7 @@ export interface SzGrpcEnvironmentOptions extends SzEnvironmentOptions {
  * SzGrpcEnvironment
  * Creates a new Senzing Environment instance for use with creating and calling the gRpc modules 
  * and methods.
+ * @group SzGrpcEnvironment
  */
 export class SzGrpcEnvironment extends SzEnvironment {
 
@@ -63,83 +65,83 @@ export class SzGrpcEnvironment extends SzEnvironment {
     /** 
      * instance of {@link SzGrpcConfig}.
      * autocreated when user calls {@link getConfig} on first attempt.
-     * @internal
+     * @ignore
     */
     protected _config: SzGrpcConfig | undefined;
     /** 
      * instance of {@link SzGrpcConfigManager}.
      * autocreated when user calls {@link getConfigManager} on first attempt.
-     * @internal
+     * @ignore
     */
     protected _configManager: SzGrpcConfigManager | undefined;
     /** 
      * instance of {@link SzGrpcDiagnostic}.
      * autocreated when user calls {@link getDiagnostic} on first attempt.
-     * @internal
+     * @ignore
     */
     protected _diagnostic: SzGrpcDiagnostic | undefined;
     /** 
      * instance of {@link SzGrpcEngine}
      * autocreated when user calls {@link getEngine} on first attempt.
-     * @internal
+     * @ignore
     */
     protected _engine: SzGrpcEngine | undefined;
     /** 
      * instance of {@link SzGrpcProduct}.
      * autocreated when user calls {@link getProduct} on first attempt.
-     * @internal
+     * @ignore
     */
     protected _product: SzGrpcProduct | undefined;
     
     // ------------------------------ grpc specific properties -----------------------------
     /** the grpc connection string. `${HOST}:${PORT}` 
-     * @internal */
+     * @ignore */
     private _connectionString: string             = DEFAULT_CONNECTION_STRING;
     /** 
      * channel credentials to use for authentication. defaults to "grpc.credentials.createInsecure()"
      * @see https://grpc.io/docs/guides/auth/
-     * @internal */
+     * @ignore */
     private _credentials: grpc.ChannelCredentials = DEFAULT_CREDENTIALS;
     /** 
      * @see https://github.com/grpc/grpc/blob/618a3f561d4a93f263cca23abad086ed8f4d5e86/include/grpc/impl/codegen/grpc_types.h#L142 
-     * @internal
+     * @ignore
     */
     private _grpcOptions: grpc.ChannelOptions     = DEFAULT_CHANNEL_OPTIONS;
     /** 
      * instance of the gRPC client used for connecting to services in {@link SzGrpcConfig}.
      * autocreated when user calls {@link getConfig} on first attempt.
-     * @internal
+     * @ignore
     */
     private _configClient: SzConfigClient | undefined;
     /** 
      * instance of the gRPC client used for connecting to services in {@link SzGrpcConfigManager}.
      * autocreated when user calls {@link getConfigManager} on first attempt.
-     * @internal
+     * @ignore
     */
     private _configManagerClient: SzConfigManagerClient | undefined; 
     /** 
      * instance of the gRPC client used for connecting to services in {@link SzGrpcDiagnostic}.
      * autocreated when user calls {@link getDiagnostic} on first attempt.
-     * @internal
+     * @ignore
     */
     private _diagnosticClient: SzDiagnosticClient | undefined; 
     /** 
      * instance of the gRPC client used for connecting to services in {@link SzGrpcEngine}.
      * autocreated when user calls {@link getEngine} on first attempt.
-     * @internal
+     * @ignore
     */
     private _engineClient: SzEngineClient | undefined; 
     /** 
      * instance of the gRPC client used for connecting to services in {@link SzGrpcProduct}.
      * autocreated when user calls {@link getProduct} on first attempt.
-     * @internal
+     * @ignore
     */
     private _productClient: SzProductClient | undefined;
 
     // ----------------------------- lazy getters (read only) ------------------------------
     // --------------------------- will lazy load on first access --------------------------
     /** 
-     * Gets the currently active configuration ID for the {@link SzEnvironment}.
+     * Gets the currently active configuration ID for the {@link SzGrpcEnvironment}.
      * 
      * @return {Promise<number>} The currently active configuration ID.
     */
@@ -295,7 +297,7 @@ export class SzGrpcEnvironment extends SzEnvironment {
      * Used by {@link SzGrpcEnvironment}. Not intended to be called directly by end-users.
      * 
      * @param configId 
-     * @internal
+     * @ignore
     */
     public reinitialize(configId: number) {
 
