@@ -44,7 +44,11 @@ export interface SzGrpcEnvironmentOptions extends SzEnvironmentOptions {
     */
     client?: any,
     /** the amount to wait in seconds before giving up on establishing a connection to the grpc server */
-    grpcConnectionReadyTimeOut?: number
+    grpcConnectionReadyTimeOut?: number,
+    /** used for CI testing 
+     * @ignore
+    */
+    isTestEnvironment?: boolean
 }
 
 // ----- concrete options with options only accepting the correct type of client

@@ -1,0 +1,42 @@
+name: Run tests
+
+on: push
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: build and test npm package
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build
+        id: build-package
+        run: npm run build
+
+      - name: Create Archive
+        id: create-archive
+        run: npm run package:test
+
+      - name: Install Built Test Package
+        id: install-test-package
+        run: npm install dist/@senzing/senzing-sz-sdk-typescript-grpc-test.tgz
+
+      - name: Run Unit Tests
+        id: unit-tests
+        run: npm run test
