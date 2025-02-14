@@ -6,6 +6,7 @@
   "type":"module",
   "scripts": {
     "szconfig/addDataSource.ts": "tsx szconfig/addDataSource.ts",
+    "szconfig/addDataSources.ts": "tsx szconfig/addDataSources.ts",
     "szconfig/constructor.ts": "tsx szconfig/constructor.ts",
     "szconfig/createAndClose.ts": "tsx szconfig/createAndClose.ts",
     "szconfig/createExportImportClose.ts": "tsx szconfig/createExportImportClose.ts",

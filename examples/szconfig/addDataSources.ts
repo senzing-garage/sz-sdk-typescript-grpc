@@ -1,18 +1,17 @@
 import { SzGrpcEnvironment } from '@senzing/sz-sdk-typescript-grpc';
 
 const szEnvironment         = new SzGrpcEnvironment({connectionString: `0.0.0.0:8261`});
-const DATA_SOURCE_CODE      = 'CUSTOMERS'; 
+const DATASOURCES_TO_ADD    = ['CUSTOMERS', 'REFERENCE', 'WATCHLIST'];
 
 // create new config and get handle
 szEnvironment.getConfig().createConfig().then((configHandle) => {
-    szEnvironment.getConfig().addDataSource(configHandle as number, DATA_SOURCE_CODE).
-    then((result)=>{
-        console.log(`ADDED to #${configHandle}:\n\r`, result);
+    // now add datasources
+    szEnvironment.getConfig().addDataSources(configHandle as number, DATASOURCES_TO_ADD).then((results) => {
+        console.log(`Added Data Sources: \n\r`, results);
     }).
-    catch((err)=>{
+    catch((err) => {
         console.error(err);
     });
-    
 }).catch((err) => {
     console.error(err);
 })

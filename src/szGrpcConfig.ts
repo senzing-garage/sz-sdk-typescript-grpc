@@ -95,6 +95,83 @@ export class SzGrpcConfig extends SzGrpcBase implements SzConfig {
         });
     }
     /**
+     * Adds multiple data sources to an existing in-memory configuration.
+     * @param {number} configHandle 
+     * @param {string[]} dataSourceCodes 
+     * @returns {Promise<string[]>} JSON documents for each datasource listing the newly created data source
+     */
+    addDataSources(configHandle: number, dataSourceCodes: string[]) {
+        /** 
+         * Attempting to create multiple datasources asynchonously ends up causing a connection closed error.
+         * JavaScript/TypeScript does not have a good paradigm for synchronously requesting promises one after the other. 
+         * (technically we could use generators but google's protoc generated files do not support ESM which would be required for 
+         * using "async" and "await" so that leaves us with recursive function calls). Asking the end user to come up 
+         * with that logic on their own might be a bit daunting so I'm providing this convenience method that 
+         * handles it for them.
+         */
+        /** private class used for managing sequential requests */
+        let addDataSourcesSequentially = (dataSources: string[], configHandle: number, callback?: Function) => {
+            let _dataSources    = dataSources;
+            let _configHandle   = configHandle;
+            let _callback: Function | undefined;
+            let _onComplete: Promise<string[]>;
+            let _responses: string[] = [];
+
+            // define subs
+            let next = () => {
+                let dsName = _dataSources.shift();
+                if(!dsName || dsName == undefined) {
+                    // we're done
+                    onComplete();
+                    return;
+                }
+                //return new Promise((resolve, reject) => {
+                    this.addDataSource(_configHandle as number, dsName as string)
+                    .then((resp) => {
+                        // add response to results
+                        _responses.push(resp);
+                        // call "getNextRequest" again
+                        next();
+                    })
+                //})
+            }
+        
+            let onComplete = () => {
+                // when we're done call this method
+                if(_callback) {
+                    _callback.call(this, _responses);
+                }
+            }
+
+            // initialization logic
+            if(callback) {
+                _callback = callback;
+            }
+            // set up onComplete promise now that we know the number of requests
+            _onComplete = new Promise<string[]>((resolve, reject) => {
+                if(_responses.length >= _dataSources.length) {
+                    resolve(_responses);
+                }
+            });
+            // if there's a callback attach it to the _onComplete promise chain
+            if(callback) {
+                _onComplete.then(callback as any)
+            }
+            // kick off the first request. (recursive method chain)
+            if(_dataSources && _dataSources.length > 0) {
+                next();
+            }
+        }
+        return new Promise<string[]>((resolve, reject) => {
+            let addDataSources = addDataSourcesSequentially(dataSourceCodes, configHandle as number, (results: string[], error?: Error | undefined) => {
+                if(error) {
+                    reject(error);
+                }
+                resolve(results);
+            })
+        });
+    }
+    /**
      * Cleans up the Senzing SzConfig object pointed to by the config_handle.
      * @param configHandle An identifier of an in-memory configuration. Usually created by the {@link SzGrpcConfig#createConfig} or {@link SzGrpcConfig#importConfig} methods.
      * @returns {Promise<undefined>} for async flow control.
