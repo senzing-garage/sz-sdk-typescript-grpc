@@ -21,10 +21,17 @@ the recommendation is not to use it yet.
 The Senzing `sz-sdk-typescript-grpc` package provides a TypeScript Software Development Kit adhering to the abstract classes of [sz-sdk-typescript]
 that communicates with a [Senzing gRPC server].
 
+[![Npm Badge]][Npm version]
+[![License Badge]][License]
+
 ## Overview
 
 The Senzing `sz-sdk-typescript-grpc` packages enable TypeScript or NodeJS to call Senzing library functions
 across a network to a [Senzing gRPC server].
+
+## Documentation
+
+The Class and method documentation can be found at [Documentation].
 
 ## Use
 
@@ -132,3 +139,14 @@ You may want to use NPM Link to force node to pull the code from your dist packa
 1. Go to the `dist/@senzing/sz-sdk-typescript-grpc` folder and type `npm link`.
 
 2. Go back to the root folder, `cd ../../`, and type `npm link @senzing/sz-sdk-typescript-grpc` to link `@senzing/sz-sdk-typescript-grpc` -> `dist/@senzing/sz-sdk-typescript-grpc`.
+
+[Documentation]: https://garage.senzing.com/sz-sdk-typescript-grpc
+[Npm Badge]: https://badge.fury.io/js/@senzing%2Fsz-sdk-typescript-grpc.svg
+[Npm version]: https://www.npmjs.com/package/@senzing/sz-sdk-typescript-grpc
+[Examples]: examples/README.md
+[License Badge]: https://img.shields.io/badge/License-Apache2-brightgreen.svg
+[License]: https://github.com/senzing-garage/sz-sdk-typescript-grpc/blob/main/LICENSE
+[Senzing Garage]: https://github.com/senzing-garage
+[Senzing gRPC server]: https://github.com/senzing-garage/serve-grpc
+[Senzing Quick Start guides]: https://docs.senzing.com/quickstart/
+[Senzing]: https://senzing.com/
