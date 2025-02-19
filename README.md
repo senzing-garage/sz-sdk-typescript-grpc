@@ -21,15 +21,22 @@ the recommendation is not to use it yet.
 The Senzing `sz-sdk-typescript-grpc` package provides a TypeScript Software Development Kit adhering to the abstract classes of [sz-sdk-typescript]
 that communicates with a [Senzing gRPC server].
 
+[![Npm Badge]][Npm version]
+[![License Badge]][License]
+
 ## Overview
 
 The Senzing `sz-sdk-typescript-grpc` packages enable TypeScript or NodeJS to call Senzing library functions
 across a network to a [Senzing gRPC server].
 
+## Documentation
+
+The Class and method documentation can be found at [Documentation].
+
 ## Use
 
 The following example shows how to start a Senzing gRPC server Docker container
-and access it using the `senzing_grpc` Python package.
+and access it using the `@senzing/sz-sdk-typescript-grpc` package.
 
 1. Run a Senzing gRPC service using Docker.
    Example:
@@ -57,7 +64,7 @@ and access it using the `senzing_grpc` Python package.
     npx tsc --init
     ```
 
-1. Add the `sz-sdk-typescript-grpc` package to your project:
+1. Add the `@senzing/sz-sdk-typescript-grpc` package to your project:
 
     ```console
     npm install --save @senzing/sz-sdk-typescript-grpc
@@ -68,7 +75,7 @@ and access it using the `senzing_grpc` Python package.
     1. Option #1: Download the helloworld example from Github:
 
     ```console
-curl -X GET \
+    curl -X GET \
     --output ./helloworld.ts \
     https://raw.githubusercontent.com/senzing-garage/sz-sdk-typescript-grpc/refs/heads/main/examples/helloworld/helloworld.ts
     ```
@@ -123,3 +130,23 @@ curl -X GET \
     ```
 
 4. The previous step will have created a new file in the `dist/@senzing` directory. The file will be in the format `dist/@senzing/senzing-sz-sdk-typescript-grpc-X.X.X.tgz`. This file can be imported for use in local projects withought pulling the public version from npm.
+
+
+### Link your dist package to Dev Env
+
+You may want to use NPM Link to force node to pull the code from your dist package when it encounters references to `@senzing/sz-sdk-typescript-grpc`.
+
+1. Go to the `dist/@senzing/sz-sdk-typescript-grpc` folder and type `npm link`.
+
+2. Go back to the root folder, `cd ../../`, and type `npm link @senzing/sz-sdk-typescript-grpc` to link `@senzing/sz-sdk-typescript-grpc` -> `dist/@senzing/sz-sdk-typescript-grpc`.
+
+[Documentation]: https://garage.senzing.com/sz-sdk-typescript-grpc
+[Npm Badge]: https://badge.fury.io/js/@senzing%2Fsz-sdk-typescript-grpc.svg
+[Npm version]: https://www.npmjs.com/package/@senzing/sz-sdk-typescript-grpc
+[Examples]: examples/README.md
+[License Badge]: https://img.shields.io/badge/License-Apache2-brightgreen.svg
+[License]: https://github.com/senzing-garage/sz-sdk-typescript-grpc/blob/main/LICENSE
+[Senzing Garage]: https://github.com/senzing-garage
+[Senzing gRPC server]: https://github.com/senzing-garage/serve-grpc
+[Senzing Quick Start guides]: https://docs.senzing.com/quickstart/
+[Senzing]: https://senzing.com/
