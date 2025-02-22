@@ -61,6 +61,7 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
                     return;
                 }
                 const request = new AddConfigRequest();
+                request.setConfigDefinition(configDefinition);
                 this.client.addConfig(request, (err, res: AddConfigResponse) => {
                     if(err) {
                         let _err = newException(err.details);
@@ -91,7 +92,7 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
                     return;
                 }
                 const request = new GetConfigRequest();
-                request.setConfigid(configId);
+                request.setConfigId(configId);
                 this.client.getConfig(request, (err, res: GetConfigResponse) => {
                     if(err) {
                         let _err = newException(err.details);
@@ -186,7 +187,7 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
                     return;
                 }
                 const request = new SetDefaultConfigIdRequest();
-                request.setConfigid(configId);
+                request.setConfigId(configId);
                 this.client.setDefaultConfigId(request, (err, res: SetDefaultConfigIdResponse) => {
                     if(err) {
                         let _err = newException(err.details);
@@ -240,8 +241,8 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
                     return;
                 }
                 const request = new ReplaceDefaultConfigIdRequest();
-                request.setCurrentdefaultconfigid(currentDefaultConfigId);
-                request.setNewdefaultconfigid(newDefaultConfigId);
+                request.setCurrentDefaultConfigId(currentDefaultConfigId);
+                request.setNewDefaultConfigId(newDefaultConfigId);
                 this.client.replaceDefaultConfigId(request, (err, res: ReplaceDefaultConfigIdResponse) => {
                     if(err) {
                         let _err = newException(err.details);

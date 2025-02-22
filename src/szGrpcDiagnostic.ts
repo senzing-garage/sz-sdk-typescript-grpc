@@ -79,7 +79,7 @@ export class SzGrpcDiagnostic extends SzGrpcBase implements SzDiagnostic {
                     return;
                 }
                 const request = new CheckDatastorePerformanceRequest();
-                request.setSecondstorun(secondsToRun);
+                request.setSecondsToRun(secondsToRun);
                 this.client.checkDatastorePerformance(request, (err, res: CheckDatastorePerformanceResponse) => {
                     if(err) {
                         let _err = newException(err.details);
@@ -142,7 +142,7 @@ export class SzGrpcDiagnostic extends SzGrpcBase implements SzDiagnostic {
                     return;
                 }
                 const request = new GetFeatureRequest();
-                request.setFeatureid(featureId);
+                request.setFeatureId(featureId);
                 this.client.getFeature(request, (err, res: GetFeatureResponse) => {
                     if(err) {
                         let _err = newException(err.details);
@@ -202,7 +202,7 @@ export class SzGrpcDiagnostic extends SzGrpcBase implements SzDiagnostic {
                     return;
                 }
                 const request = new ReinitializeRequest();
-                request.setConfigid(configId);
+                request.setConfigId(configId);
                 this.client.reinitialize(request, (err, res: ReinitializeResponse) => {
                     if(err) {
                         let _err = newException(err.details);

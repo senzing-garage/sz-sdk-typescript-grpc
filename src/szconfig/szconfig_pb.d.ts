@@ -7,10 +7,10 @@
 import * as jspb from "google-protobuf";
 
 export class AddDataSourceRequest extends jspb.Message { 
-    getConfighandle(): number;
-    setConfighandle(value: number): AddDataSourceRequest;
-    getDatasourcecode(): string;
-    setDatasourcecode(value: string): AddDataSourceRequest;
+    getConfigHandle(): number;
+    setConfigHandle(value: number): AddDataSourceRequest;
+    getDataSourceCode(): string;
+    setDataSourceCode(value: string): AddDataSourceRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): AddDataSourceRequest.AsObject;
@@ -24,8 +24,8 @@ export class AddDataSourceRequest extends jspb.Message {
 
 export namespace AddDataSourceRequest {
     export type AsObject = {
-        confighandle: number,
-        datasourcecode: string,
+        configHandle: number,
+        dataSourceCode: string,
     }
 }
 
@@ -50,8 +50,8 @@ export namespace AddDataSourceResponse {
 }
 
 export class CloseConfigRequest extends jspb.Message { 
-    getConfighandle(): number;
-    setConfighandle(value: number): CloseConfigRequest;
+    getConfigHandle(): number;
+    setConfigHandle(value: number): CloseConfigRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): CloseConfigRequest.AsObject;
@@ -65,7 +65,7 @@ export class CloseConfigRequest extends jspb.Message {
 
 export namespace CloseConfigRequest {
     export type AsObject = {
-        confighandle: number,
+        configHandle: number,
     }
 }
 
@@ -124,10 +124,10 @@ export namespace CreateConfigResponse {
 }
 
 export class DeleteDataSourceRequest extends jspb.Message { 
-    getConfighandle(): number;
-    setConfighandle(value: number): DeleteDataSourceRequest;
-    getDatasourcecode(): string;
-    setDatasourcecode(value: string): DeleteDataSourceRequest;
+    getConfigHandle(): number;
+    setConfigHandle(value: number): DeleteDataSourceRequest;
+    getDataSourceCode(): string;
+    setDataSourceCode(value: string): DeleteDataSourceRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): DeleteDataSourceRequest.AsObject;
@@ -141,8 +141,8 @@ export class DeleteDataSourceRequest extends jspb.Message {
 
 export namespace DeleteDataSourceRequest {
     export type AsObject = {
-        confighandle: number,
-        datasourcecode: string,
+        configHandle: number,
+        dataSourceCode: string,
     }
 }
 
@@ -164,8 +164,8 @@ export namespace DeleteDataSourceResponse {
 }
 
 export class ExportConfigRequest extends jspb.Message { 
-    getConfighandle(): number;
-    setConfighandle(value: number): ExportConfigRequest;
+    getConfigHandle(): number;
+    setConfigHandle(value: number): ExportConfigRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): ExportConfigRequest.AsObject;
@@ -179,7 +179,7 @@ export class ExportConfigRequest extends jspb.Message {
 
 export namespace ExportConfigRequest {
     export type AsObject = {
-        confighandle: number,
+        configHandle: number,
     }
 }
 
@@ -204,8 +204,8 @@ export namespace ExportConfigResponse {
 }
 
 export class GetDataSourcesRequest extends jspb.Message { 
-    getConfighandle(): number;
-    setConfighandle(value: number): GetDataSourcesRequest;
+    getConfigHandle(): number;
+    setConfigHandle(value: number): GetDataSourcesRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetDataSourcesRequest.AsObject;
@@ -219,7 +219,7 @@ export class GetDataSourcesRequest extends jspb.Message {
 
 export namespace GetDataSourcesRequest {
     export type AsObject = {
-        confighandle: number,
+        configHandle: number,
     }
 }
 
@@ -244,8 +244,8 @@ export namespace GetDataSourcesResponse {
 }
 
 export class ImportConfigRequest extends jspb.Message { 
-    getConfigdefinition(): string;
-    setConfigdefinition(value: string): ImportConfigRequest;
+    getConfigDefinition(): string;
+    setConfigDefinition(value: string): ImportConfigRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): ImportConfigRequest.AsObject;
@@ -259,7 +259,7 @@ export class ImportConfigRequest extends jspb.Message {
 
 export namespace ImportConfigRequest {
     export type AsObject = {
-        configdefinition: string,
+        configDefinition: string,
     }
 }
 

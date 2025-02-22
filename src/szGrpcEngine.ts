@@ -104,10 +104,11 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     reject( err )
                     return;
                 }
+                console.log('adding record: \n\r', recordPayload);
                 const request = new AddRecordRequest();
-                request.setDatasourcecode(dataSourceCode);
-                request.setRecordid(recordId as string);
-                request.setRecorddefinition(recordPayload);
+                request.setDataSourceCode(dataSourceCode);
+                request.setRecordId(recordId as string);
+                request.setRecordDefinition(recordPayload);
                 request.setFlags(bigIntToNumber(engineFlags));
 
                 this.client.addRecord(request, (err, res: AddRecordResponse) => {
@@ -140,7 +141,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     return;
                 }
                 const request = new CloseExportRequest();
-                request.setExporthandle(exportHandle);
+                request.setExportHandle(exportHandle);
                 this.client.closeExport(request, (err, res: CloseExportResponse) => {
                     if(err) {
                         let _err = newException(err.details);
@@ -200,8 +201,8 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     return;
                 }
                 const request = new DeleteRecordRequest();
-                request.setDatasourcecode(dataSourceCode);
-                request.setRecordid(recordId);
+                request.setDataSourceCode(dataSourceCode);
+                request.setRecordId(recordId);
                 request.setFlags(bigIntToNumber(flags));
                 this.client.deleteRecord(request, (err, res: DeleteRecordResponse)=>{
                     if(err) {
@@ -334,7 +335,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     return;
                 }
                 const request = new FindInterestingEntitiesByEntityIdRequest();
-                request.setEntityid(entityId);
+                request.setEntityId(entityId);
                 request.setFlags(bigIntToNumber(flags));
                 this.client.findInterestingEntitiesByEntityId(request, (err, res: FindInterestingEntitiesByEntityIdResponse)=>{
                     if(err) {
@@ -368,8 +369,8 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     return;
                 }
                 const request = new FindInterestingEntitiesByRecordIdRequest();
-                request.setDatasourcecode(dataSourceCode);
-                request.setRecordid(recordId);
+                request.setDataSourceCode(dataSourceCode);
+                request.setRecordId(recordId);
                 request.setFlags(bigIntToNumber(flags));
                 this.client.findInterestingEntitiesByRecordId(request, (err, res: FindInterestingEntitiesByRecordIdResponse)=>{
                     if(err) {
@@ -409,10 +410,10 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                         return;
                     }
                     const request = new FindNetworkByEntityIdRequest();
-                    request.setEntityids(findNetworkEntityIds as string);
-                    if(maxDegrees) { request.setMaxdegrees(maxDegrees); }
-                    if(buildOutDegrees) { request.setBuildoutdegrees(buildOutDegrees as number); }
-                    if(buildOutMaxEntities) { request.setBuildoutmaxentities(buildOutMaxEntities as number); }
+                    request.setEntityIds(findNetworkEntityIds as string);
+                    if(maxDegrees) { request.setMaxDegrees(maxDegrees); }
+                    if(buildOutDegrees) { request.setBuildOutDegrees(buildOutDegrees as number); }
+                    if(buildOutMaxEntities) { request.setBuildOutMaxEntities(buildOutMaxEntities as number); }
                     request.setFlags(bigIntToNumber(flags));
                     this.client.findNetworkByEntityId(request, (err, res: FindNetworkByEntityIdResponse)=>{
                         if(err) {
@@ -453,10 +454,10 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                         return;
                     }
                     const request = new FindNetworkByRecordIdRequest();
-                    request.setRecordkeys(findNetworkRecordIds);
-                    if(maxDegrees) { request.setMaxdegrees(maxDegrees); }
-                    if(buildOutDegrees) { request.setBuildoutdegrees(buildOutDegrees as number); }
-                    if(buildOutMaxEntities) { request.setBuildoutmaxentities(buildOutMaxEntities as number); }
+                    request.setRecordKeys(findNetworkRecordIds);
+                    if(maxDegrees) { request.setMaxDegrees(maxDegrees); }
+                    if(buildOutDegrees) { request.setBuildOutDegrees(buildOutDegrees as number); }
+                    if(buildOutMaxEntities) { request.setBuildOutMaxEntities(buildOutMaxEntities as number); }
                     request.setFlags(bigIntToNumber(flags));
                     this.client.findNetworkByRecordId(request, (err, res: FindNetworkByRecordIdResponse)=>{
                         if(err) {
@@ -502,14 +503,14 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     return;
                 }
                 const request = new FindPathByEntityIdRequest();
-                request.setStartentityid(startEntityId);
-                request.setEndentityid(endEntityId);
-                request.setMaxdegrees(maxDegrees);
+                request.setStartEntityId(startEntityId);
+                request.setEndEntityId(endEntityId);
+                request.setMaxDegrees(maxDegrees);
                 if(avoidEntityIds) { 
-                    request.setAvoidentityids(entityIdsToAvoidAsJson(avoidEntityIds)); 
+                    request.setAvoidEntityIds(entityIdsToAvoidAsJson(avoidEntityIds)); 
                 }
                 if(requiredDataSources) { 
-                    request.setRequireddatasources(requiredDataSourcesAsJson(requiredDataSources)); 
+                    request.setRequiredDataSources(requiredDataSourcesAsJson(requiredDataSources)); 
                 }
                 request.setFlags(bigIntToNumber(flags));
                 this.client.findPathByEntityId(request, (err, res: FindPathByEntityIdResponse)=>{
@@ -558,16 +559,16 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     return;
                 }
                 const request = new FindPathByRecordIdRequest();
-                request.setStartdatasourcecode(startDataSourceCode);
-                request.setStartrecordid(startRecordId);
-                request.setEnddatasourcecode(endDataSourceCode);
-                request.setEndrecordid(endRecordId);
-                request.setMaxdegrees(maxDegrees);
+                request.setStartDataSourceCode(startDataSourceCode);
+                request.setStartRecordId(startRecordId);
+                request.setEndDataSourceCode(endDataSourceCode);
+                request.setEndRecordId(endRecordId);
+                request.setMaxDegrees(maxDegrees);
                 if(avoidRecordKeys) { 
-                    request.setAvoidrecordkeys(recordKeysToAvoidAsJson(avoidRecordKeys)); 
+                    request.setAvoidRecordKeys(recordKeysToAvoidAsJson(avoidRecordKeys)); 
                 }
                 if(requiredDataSources) { 
-                    request.setRequireddatasources(requiredDataSourcesAsJson(requiredDataSources)); 
+                    request.setRequiredDataSources(requiredDataSourcesAsJson(requiredDataSources)); 
                 }
                 request.setFlags(bigIntToNumber(flags));
                 this.client.findPathByRecordId(request, (err, res: FindPathByRecordIdResponse)=>{
@@ -630,7 +631,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     return;
                 }
                 const request = new GetEntityByEntityIdRequest();
-                request.setEntityid(entityId);
+                request.setEntityId(entityId);
                 request.setFlags(bigIntToNumber(flags));
                 this.client.getEntityByEntityId(request, (err, res: GetEntityByEntityIdResponse)=>{
                     if(err) {
@@ -664,8 +665,8 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     return;
                 }
                 const request = new GetEntityByRecordIdRequest();
-                request.setDatasourcecode(dataSourceCode);
-                request.setRecordid(recordId);
+                request.setDataSourceCode(dataSourceCode);
+                request.setRecordId(recordId);
                 request.setFlags(bigIntToNumber(flags));
                 this.client.getEntityByRecordId(request, (err, res: GetEntityByRecordIdResponse)=>{
                     if(err) {
@@ -699,8 +700,8 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     return;
                 }
                 const request = new GetRecordRequest();
-                request.setDatasourcecode(dataSourceCode);
-                request.setRecordid(recordId);
+                request.setDataSourceCode(dataSourceCode);
+                request.setRecordId(recordId);
                 request.setFlags(bigIntToNumber(flags));
                 this.client.getRecord(request, (err, res: GetRecordResponse)=>{
                     if(err) {
@@ -791,7 +792,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     return;
                 }
                 const request = new GetVirtualEntityByRecordIdRequest();
-                request.setRecordkeys(JSON.stringify( recordIdsAsJsonString(recordKeys) ));
+                request.setRecordKeys(JSON.stringify( recordIdsAsJsonString(recordKeys) ));
                 request.setFlags(bigIntToNumber(flags));
                 this.client.getVirtualEntityByRecordId(request, (err, res: GetVirtualEntityByRecordIdResponse)=>{
                     if(err) {
@@ -826,7 +827,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     return;
                 }
                 const request = new HowEntityByEntityIdRequest();
-                request.setEntityid(entityId);
+                request.setEntityId(entityId);
                 request.setFlags(bigIntToNumber(flags));
                 this.client.howEntityByEntityId(request, (err, res: HowEntityByEntityIdResponse)=>{
                     if(err) {
@@ -859,7 +860,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     return;
                 }
                 const request = new PreprocessRecordRequest();
-                request.setRecorddefinition(recordDefinition);
+                request.setRecordDefinition(recordDefinition);
                 request.setFlags(bigIntToNumber(flags));
                 this.client.preprocessRecord(request, (err, res: PreprocessRecordResponse)=>{
                     if(err) {
@@ -920,7 +921,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     return;
                 }
                 const request = new ProcessRedoRecordRequest();
-                request.setRedorecord(redoRecord);
+                request.setRedoRecord(redoRecord);
                 request.setFlags(bigIntToNumber(flags));
                 this.client.processRedoRecord(request, (err, res: ProcessRedoRecordResponse)=>{
                     if(err) {
@@ -953,7 +954,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     return;
                 }
                 const request = new ReevaluateEntityRequest();
-                request.setEntityid(entityId);
+                request.setEntityId(entityId);
                 request.setFlags(bigIntToNumber(flags));
                 this.client.reevaluateEntity(request, (err, res: ReevaluateEntityResponse)=>{
                     if(err) {
@@ -987,8 +988,8 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     return;
                 }
                 const request = new ReevaluateRecordRequest();
-                request.setDatasourcecode(dataSourceCode);
-                request.setRecordid(recordId);
+                request.setDataSourceCode(dataSourceCode);
+                request.setRecordId(recordId);
                 request.setFlags(bigIntToNumber(flags));
                 this.client.reevaluateRecord(request, (err, res: ReevaluateRecordResponse)=>{
                     if(err) {
@@ -1016,7 +1017,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     return;
                 }
                 const request = new ReinitializeRequest();
-                request.setConfigid(configId);
+                request.setConfigId(configId);
                 this.client.reinitialize(request, (err, res: ReinitializeResponse)=>{
                     if(err) {
                         let _err = newException(err.details);
@@ -1049,7 +1050,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 }
                 const request = new SearchByAttributesRequest();
                 request.setAttributes(asString(attributes));
-                request.setSearchprofile(searchProfile);
+                request.setSearchProfile(searchProfile);
                 this.client.searchByAttributes(request, (err, res: SearchByAttributesResponse)=>{
                     if(err) {
                         let _err = newException(err.details);
@@ -1081,8 +1082,8 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     return;
                 }
                 const request = new WhyEntitiesRequest();
-                request.setEntityid1(entityId1);
-                request.setEntityid2(entityId2);
+                request.setEntityId1(entityId1);
+                request.setEntityId2(entityId2);
                 request.setFlags(bigIntToNumber(flags));
                 this.client.whyEntities(request, (err, res: WhyEntitiesResponse)=>{
                     if(err) {
@@ -1116,8 +1117,8 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     return;
                 }
                 const request = new WhyRecordInEntityRequest();
-                request.setDatasourcecode(dataSourceCode);
-                request.setRecordid(recordId);
+                request.setDataSourceCode(dataSourceCode);
+                request.setRecordId(recordId);
                 request.setFlags(bigIntToNumber(flags));
                 this.client.whyRecordInEntity(request, (err, res: WhyRecordInEntityResponse)=>{
                     if(err) {
@@ -1157,10 +1158,10 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     return;
                 }
                 const request = new WhyRecordsRequest();
-                request.setDatasourcecode1(dataSourceCode1);
-                request.setDatasourcecode2(dataSourceCode2);
-                request.setRecordid1(recordId1);
-                request.setRecordid2(recordId2);
+                request.setDataSourceCode1(dataSourceCode1);
+                request.setDataSourceCode2(dataSourceCode2);
+                request.setRecordId1(recordId1);
+                request.setRecordId2(recordId2);
                 request.setFlags(bigIntToNumber(flags));
                 this.client.whyRecords(request, (err, res: WhyRecordsResponse)=>{
                     if(err) {

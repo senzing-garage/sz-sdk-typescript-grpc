@@ -7,8 +7,8 @@
 import * as jspb from "google-protobuf";
 
 export class CheckDatastorePerformanceRequest extends jspb.Message { 
-    getSecondstorun(): number;
-    setSecondstorun(value: number): CheckDatastorePerformanceRequest;
+    getSecondsToRun(): number;
+    setSecondsToRun(value: number): CheckDatastorePerformanceRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): CheckDatastorePerformanceRequest.AsObject;
@@ -22,7 +22,7 @@ export class CheckDatastorePerformanceRequest extends jspb.Message {
 
 export namespace CheckDatastorePerformanceRequest {
     export type AsObject = {
-        secondstorun: number,
+        secondsToRun: number,
     }
 }
 
@@ -84,8 +84,8 @@ export namespace GetDatastoreInfoResponse {
 }
 
 export class GetFeatureRequest extends jspb.Message { 
-    getFeatureid(): number;
-    setFeatureid(value: number): GetFeatureRequest;
+    getFeatureId(): number;
+    setFeatureId(value: number): GetFeatureRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetFeatureRequest.AsObject;
@@ -99,7 +99,7 @@ export class GetFeatureRequest extends jspb.Message {
 
 export namespace GetFeatureRequest {
     export type AsObject = {
-        featureid: number,
+        featureId: number,
     }
 }
 
@@ -158,8 +158,8 @@ export namespace PurgeRepositoryResponse {
 }
 
 export class ReinitializeRequest extends jspb.Message { 
-    getConfigid(): number;
-    setConfigid(value: number): ReinitializeRequest;
+    getConfigId(): number;
+    setConfigId(value: number): ReinitializeRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): ReinitializeRequest.AsObject;
@@ -173,7 +173,7 @@ export class ReinitializeRequest extends jspb.Message {
 
 export namespace ReinitializeRequest {
     export type AsObject = {
-        configid: number,
+        configId: number,
     }
 }
 

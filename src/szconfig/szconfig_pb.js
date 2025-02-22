@@ -361,8 +361,8 @@ proto.szconfig.AddDataSourceRequest.prototype.toObject = function(opt_includeIns
  */
 proto.szconfig.AddDataSourceRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    confighandle: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    datasourcecode: jspb.Message.getFieldWithDefault(msg, 2, "")
+    configHandle: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    dataSourceCode: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -401,11 +401,11 @@ proto.szconfig.AddDataSourceRequest.deserializeBinaryFromReader = function(msg, 
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setConfighandle(value);
+      msg.setConfigHandle(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setDatasourcecode(value);
+      msg.setDataSourceCode(value);
       break;
     default:
       reader.skipField();
@@ -436,14 +436,14 @@ proto.szconfig.AddDataSourceRequest.prototype.serializeBinary = function() {
  */
 proto.szconfig.AddDataSourceRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getConfighandle();
+  f = message.getConfigHandle();
   if (f !== 0) {
     writer.writeInt64(
       1,
       f
     );
   }
-  f = message.getDatasourcecode();
+  f = message.getDataSourceCode();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -454,10 +454,10 @@ proto.szconfig.AddDataSourceRequest.serializeBinaryToWriter = function(message, 
 
 
 /**
- * optional int64 configHandle = 1;
+ * optional int64 config_handle = 1;
  * @return {number}
  */
-proto.szconfig.AddDataSourceRequest.prototype.getConfighandle = function() {
+proto.szconfig.AddDataSourceRequest.prototype.getConfigHandle = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -466,16 +466,16 @@ proto.szconfig.AddDataSourceRequest.prototype.getConfighandle = function() {
  * @param {number} value
  * @return {!proto.szconfig.AddDataSourceRequest} returns this
  */
-proto.szconfig.AddDataSourceRequest.prototype.setConfighandle = function(value) {
+proto.szconfig.AddDataSourceRequest.prototype.setConfigHandle = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
 /**
- * optional string dataSourceCode = 2;
+ * optional string data_source_code = 2;
  * @return {string}
  */
-proto.szconfig.AddDataSourceRequest.prototype.getDatasourcecode = function() {
+proto.szconfig.AddDataSourceRequest.prototype.getDataSourceCode = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -484,7 +484,7 @@ proto.szconfig.AddDataSourceRequest.prototype.getDatasourcecode = function() {
  * @param {string} value
  * @return {!proto.szconfig.AddDataSourceRequest} returns this
  */
-proto.szconfig.AddDataSourceRequest.prototype.setDatasourcecode = function(value) {
+proto.szconfig.AddDataSourceRequest.prototype.setDataSourceCode = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -651,7 +651,7 @@ proto.szconfig.CloseConfigRequest.prototype.toObject = function(opt_includeInsta
  */
 proto.szconfig.CloseConfigRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    confighandle: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    configHandle: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -690,7 +690,7 @@ proto.szconfig.CloseConfigRequest.deserializeBinaryFromReader = function(msg, re
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setConfighandle(value);
+      msg.setConfigHandle(value);
       break;
     default:
       reader.skipField();
@@ -721,7 +721,7 @@ proto.szconfig.CloseConfigRequest.prototype.serializeBinary = function() {
  */
 proto.szconfig.CloseConfigRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getConfighandle();
+  f = message.getConfigHandle();
   if (f !== 0) {
     writer.writeInt64(
       1,
@@ -732,10 +732,10 @@ proto.szconfig.CloseConfigRequest.serializeBinaryToWriter = function(message, wr
 
 
 /**
- * optional int64 configHandle = 1;
+ * optional int64 config_handle = 1;
  * @return {number}
  */
-proto.szconfig.CloseConfigRequest.prototype.getConfighandle = function() {
+proto.szconfig.CloseConfigRequest.prototype.getConfigHandle = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -744,7 +744,7 @@ proto.szconfig.CloseConfigRequest.prototype.getConfighandle = function() {
  * @param {number} value
  * @return {!proto.szconfig.CloseConfigRequest} returns this
  */
-proto.szconfig.CloseConfigRequest.prototype.setConfighandle = function(value) {
+proto.szconfig.CloseConfigRequest.prototype.setConfigHandle = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
@@ -1113,8 +1113,8 @@ proto.szconfig.DeleteDataSourceRequest.prototype.toObject = function(opt_include
  */
 proto.szconfig.DeleteDataSourceRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    confighandle: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    datasourcecode: jspb.Message.getFieldWithDefault(msg, 2, "")
+    configHandle: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    dataSourceCode: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -1153,11 +1153,11 @@ proto.szconfig.DeleteDataSourceRequest.deserializeBinaryFromReader = function(ms
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setConfighandle(value);
+      msg.setConfigHandle(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setDatasourcecode(value);
+      msg.setDataSourceCode(value);
       break;
     default:
       reader.skipField();
@@ -1188,14 +1188,14 @@ proto.szconfig.DeleteDataSourceRequest.prototype.serializeBinary = function() {
  */
 proto.szconfig.DeleteDataSourceRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getConfighandle();
+  f = message.getConfigHandle();
   if (f !== 0) {
     writer.writeInt64(
       1,
       f
     );
   }
-  f = message.getDatasourcecode();
+  f = message.getDataSourceCode();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -1206,10 +1206,10 @@ proto.szconfig.DeleteDataSourceRequest.serializeBinaryToWriter = function(messag
 
 
 /**
- * optional int64 configHandle = 1;
+ * optional int64 config_handle = 1;
  * @return {number}
  */
-proto.szconfig.DeleteDataSourceRequest.prototype.getConfighandle = function() {
+proto.szconfig.DeleteDataSourceRequest.prototype.getConfigHandle = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -1218,16 +1218,16 @@ proto.szconfig.DeleteDataSourceRequest.prototype.getConfighandle = function() {
  * @param {number} value
  * @return {!proto.szconfig.DeleteDataSourceRequest} returns this
  */
-proto.szconfig.DeleteDataSourceRequest.prototype.setConfighandle = function(value) {
+proto.szconfig.DeleteDataSourceRequest.prototype.setConfigHandle = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
 /**
- * optional string dataSourceCode = 2;
+ * optional string data_source_code = 2;
  * @return {string}
  */
-proto.szconfig.DeleteDataSourceRequest.prototype.getDatasourcecode = function() {
+proto.szconfig.DeleteDataSourceRequest.prototype.getDataSourceCode = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -1236,7 +1236,7 @@ proto.szconfig.DeleteDataSourceRequest.prototype.getDatasourcecode = function() 
  * @param {string} value
  * @return {!proto.szconfig.DeleteDataSourceRequest} returns this
  */
-proto.szconfig.DeleteDataSourceRequest.prototype.setDatasourcecode = function(value) {
+proto.szconfig.DeleteDataSourceRequest.prototype.setDataSourceCode = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -1374,7 +1374,7 @@ proto.szconfig.ExportConfigRequest.prototype.toObject = function(opt_includeInst
  */
 proto.szconfig.ExportConfigRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    confighandle: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    configHandle: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -1413,7 +1413,7 @@ proto.szconfig.ExportConfigRequest.deserializeBinaryFromReader = function(msg, r
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setConfighandle(value);
+      msg.setConfigHandle(value);
       break;
     default:
       reader.skipField();
@@ -1444,7 +1444,7 @@ proto.szconfig.ExportConfigRequest.prototype.serializeBinary = function() {
  */
 proto.szconfig.ExportConfigRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getConfighandle();
+  f = message.getConfigHandle();
   if (f !== 0) {
     writer.writeInt64(
       1,
@@ -1455,10 +1455,10 @@ proto.szconfig.ExportConfigRequest.serializeBinaryToWriter = function(message, w
 
 
 /**
- * optional int64 configHandle = 1;
+ * optional int64 config_handle = 1;
  * @return {number}
  */
-proto.szconfig.ExportConfigRequest.prototype.getConfighandle = function() {
+proto.szconfig.ExportConfigRequest.prototype.getConfigHandle = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -1467,7 +1467,7 @@ proto.szconfig.ExportConfigRequest.prototype.getConfighandle = function() {
  * @param {number} value
  * @return {!proto.szconfig.ExportConfigRequest} returns this
  */
-proto.szconfig.ExportConfigRequest.prototype.setConfighandle = function(value) {
+proto.szconfig.ExportConfigRequest.prototype.setConfigHandle = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
@@ -1634,7 +1634,7 @@ proto.szconfig.GetDataSourcesRequest.prototype.toObject = function(opt_includeIn
  */
 proto.szconfig.GetDataSourcesRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    confighandle: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    configHandle: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -1673,7 +1673,7 @@ proto.szconfig.GetDataSourcesRequest.deserializeBinaryFromReader = function(msg,
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setConfighandle(value);
+      msg.setConfigHandle(value);
       break;
     default:
       reader.skipField();
@@ -1704,7 +1704,7 @@ proto.szconfig.GetDataSourcesRequest.prototype.serializeBinary = function() {
  */
 proto.szconfig.GetDataSourcesRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getConfighandle();
+  f = message.getConfigHandle();
   if (f !== 0) {
     writer.writeInt64(
       1,
@@ -1715,10 +1715,10 @@ proto.szconfig.GetDataSourcesRequest.serializeBinaryToWriter = function(message,
 
 
 /**
- * optional int64 configHandle = 1;
+ * optional int64 config_handle = 1;
  * @return {number}
  */
-proto.szconfig.GetDataSourcesRequest.prototype.getConfighandle = function() {
+proto.szconfig.GetDataSourcesRequest.prototype.getConfigHandle = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -1727,7 +1727,7 @@ proto.szconfig.GetDataSourcesRequest.prototype.getConfighandle = function() {
  * @param {number} value
  * @return {!proto.szconfig.GetDataSourcesRequest} returns this
  */
-proto.szconfig.GetDataSourcesRequest.prototype.setConfighandle = function(value) {
+proto.szconfig.GetDataSourcesRequest.prototype.setConfigHandle = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
@@ -1894,7 +1894,7 @@ proto.szconfig.ImportConfigRequest.prototype.toObject = function(opt_includeInst
  */
 proto.szconfig.ImportConfigRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    configdefinition: jspb.Message.getFieldWithDefault(msg, 1, "")
+    configDefinition: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -1933,7 +1933,7 @@ proto.szconfig.ImportConfigRequest.deserializeBinaryFromReader = function(msg, r
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setConfigdefinition(value);
+      msg.setConfigDefinition(value);
       break;
     default:
       reader.skipField();
@@ -1964,7 +1964,7 @@ proto.szconfig.ImportConfigRequest.prototype.serializeBinary = function() {
  */
 proto.szconfig.ImportConfigRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getConfigdefinition();
+  f = message.getConfigDefinition();
   if (f.length > 0) {
     writer.writeString(
       1,
@@ -1975,10 +1975,10 @@ proto.szconfig.ImportConfigRequest.serializeBinaryToWriter = function(message, w
 
 
 /**
- * optional string configDefinition = 1;
+ * optional string config_definition = 1;
  * @return {string}
  */
-proto.szconfig.ImportConfigRequest.prototype.getConfigdefinition = function() {
+proto.szconfig.ImportConfigRequest.prototype.getConfigDefinition = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -1987,7 +1987,7 @@ proto.szconfig.ImportConfigRequest.prototype.getConfigdefinition = function() {
  * @param {string} value
  * @return {!proto.szconfig.ImportConfigRequest} returns this
  */
-proto.szconfig.ImportConfigRequest.prototype.setConfigdefinition = function(value) {
+proto.szconfig.ImportConfigRequest.prototype.setConfigDefinition = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 

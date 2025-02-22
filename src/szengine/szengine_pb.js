@@ -1505,9 +1505,9 @@ proto.szengine.AddRecordRequest.prototype.toObject = function(opt_includeInstanc
  */
 proto.szengine.AddRecordRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    datasourcecode: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    recordid: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    recorddefinition: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    dataSourceCode: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    recordId: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    recordDefinition: jspb.Message.getFieldWithDefault(msg, 3, ""),
     flags: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
@@ -1547,15 +1547,15 @@ proto.szengine.AddRecordRequest.deserializeBinaryFromReader = function(msg, read
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setDatasourcecode(value);
+      msg.setDataSourceCode(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRecordid(value);
+      msg.setRecordId(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRecorddefinition(value);
+      msg.setRecordDefinition(value);
       break;
     case 4:
       var value = /** @type {number} */ (reader.readInt64());
@@ -1590,21 +1590,21 @@ proto.szengine.AddRecordRequest.prototype.serializeBinary = function() {
  */
 proto.szengine.AddRecordRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getDatasourcecode();
+  f = message.getDataSourceCode();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getRecordid();
+  f = message.getRecordId();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getRecorddefinition();
+  f = message.getRecordDefinition();
   if (f.length > 0) {
     writer.writeString(
       3,
@@ -1622,10 +1622,10 @@ proto.szengine.AddRecordRequest.serializeBinaryToWriter = function(message, writ
 
 
 /**
- * optional string dataSourceCode = 1;
+ * optional string data_source_code = 1;
  * @return {string}
  */
-proto.szengine.AddRecordRequest.prototype.getDatasourcecode = function() {
+proto.szengine.AddRecordRequest.prototype.getDataSourceCode = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -1634,16 +1634,16 @@ proto.szengine.AddRecordRequest.prototype.getDatasourcecode = function() {
  * @param {string} value
  * @return {!proto.szengine.AddRecordRequest} returns this
  */
-proto.szengine.AddRecordRequest.prototype.setDatasourcecode = function(value) {
+proto.szengine.AddRecordRequest.prototype.setDataSourceCode = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string recordId = 2;
+ * optional string record_id = 2;
  * @return {string}
  */
-proto.szengine.AddRecordRequest.prototype.getRecordid = function() {
+proto.szengine.AddRecordRequest.prototype.getRecordId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -1652,16 +1652,16 @@ proto.szengine.AddRecordRequest.prototype.getRecordid = function() {
  * @param {string} value
  * @return {!proto.szengine.AddRecordRequest} returns this
  */
-proto.szengine.AddRecordRequest.prototype.setRecordid = function(value) {
+proto.szengine.AddRecordRequest.prototype.setRecordId = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional string recordDefinition = 3;
+ * optional string record_definition = 3;
  * @return {string}
  */
-proto.szengine.AddRecordRequest.prototype.getRecorddefinition = function() {
+proto.szengine.AddRecordRequest.prototype.getRecordDefinition = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -1670,7 +1670,7 @@ proto.szengine.AddRecordRequest.prototype.getRecorddefinition = function() {
  * @param {string} value
  * @return {!proto.szengine.AddRecordRequest} returns this
  */
-proto.szengine.AddRecordRequest.prototype.setRecorddefinition = function(value) {
+proto.szengine.AddRecordRequest.prototype.setRecordDefinition = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
@@ -1855,7 +1855,7 @@ proto.szengine.CloseExportRequest.prototype.toObject = function(opt_includeInsta
  */
 proto.szengine.CloseExportRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    exporthandle: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    exportHandle: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -1894,7 +1894,7 @@ proto.szengine.CloseExportRequest.deserializeBinaryFromReader = function(msg, re
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setExporthandle(value);
+      msg.setExportHandle(value);
       break;
     default:
       reader.skipField();
@@ -1925,7 +1925,7 @@ proto.szengine.CloseExportRequest.prototype.serializeBinary = function() {
  */
 proto.szengine.CloseExportRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getExporthandle();
+  f = message.getExportHandle();
   if (f !== 0) {
     writer.writeInt64(
       1,
@@ -1936,10 +1936,10 @@ proto.szengine.CloseExportRequest.serializeBinaryToWriter = function(message, wr
 
 
 /**
- * optional int64 exportHandle = 1;
+ * optional int64 export_handle = 1;
  * @return {number}
  */
-proto.szengine.CloseExportRequest.prototype.getExporthandle = function() {
+proto.szengine.CloseExportRequest.prototype.getExportHandle = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -1948,7 +1948,7 @@ proto.szengine.CloseExportRequest.prototype.getExporthandle = function() {
  * @param {number} value
  * @return {!proto.szengine.CloseExportRequest} returns this
  */
-proto.szengine.CloseExportRequest.prototype.setExporthandle = function(value) {
+proto.szengine.CloseExportRequest.prototype.setExportHandle = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
@@ -2317,8 +2317,8 @@ proto.szengine.DeleteRecordRequest.prototype.toObject = function(opt_includeInst
  */
 proto.szengine.DeleteRecordRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    datasourcecode: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    recordid: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    dataSourceCode: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    recordId: jspb.Message.getFieldWithDefault(msg, 2, ""),
     flags: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
@@ -2358,11 +2358,11 @@ proto.szengine.DeleteRecordRequest.deserializeBinaryFromReader = function(msg, r
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setDatasourcecode(value);
+      msg.setDataSourceCode(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRecordid(value);
+      msg.setRecordId(value);
       break;
     case 3:
       var value = /** @type {number} */ (reader.readInt64());
@@ -2397,14 +2397,14 @@ proto.szengine.DeleteRecordRequest.prototype.serializeBinary = function() {
  */
 proto.szengine.DeleteRecordRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getDatasourcecode();
+  f = message.getDataSourceCode();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getRecordid();
+  f = message.getRecordId();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -2422,10 +2422,10 @@ proto.szengine.DeleteRecordRequest.serializeBinaryToWriter = function(message, w
 
 
 /**
- * optional string dataSourceCode = 1;
+ * optional string data_source_code = 1;
  * @return {string}
  */
-proto.szengine.DeleteRecordRequest.prototype.getDatasourcecode = function() {
+proto.szengine.DeleteRecordRequest.prototype.getDataSourceCode = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -2434,16 +2434,16 @@ proto.szengine.DeleteRecordRequest.prototype.getDatasourcecode = function() {
  * @param {string} value
  * @return {!proto.szengine.DeleteRecordRequest} returns this
  */
-proto.szengine.DeleteRecordRequest.prototype.setDatasourcecode = function(value) {
+proto.szengine.DeleteRecordRequest.prototype.setDataSourceCode = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string recordId = 2;
+ * optional string record_id = 2;
  * @return {string}
  */
-proto.szengine.DeleteRecordRequest.prototype.getRecordid = function() {
+proto.szengine.DeleteRecordRequest.prototype.getRecordId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -2452,7 +2452,7 @@ proto.szengine.DeleteRecordRequest.prototype.getRecordid = function() {
  * @param {string} value
  * @return {!proto.szengine.DeleteRecordRequest} returns this
  */
-proto.szengine.DeleteRecordRequest.prototype.setRecordid = function(value) {
+proto.szengine.DeleteRecordRequest.prototype.setRecordId = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -2637,7 +2637,7 @@ proto.szengine.ExportCsvEntityReportRequest.prototype.toObject = function(opt_in
  */
 proto.szengine.ExportCsvEntityReportRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    csvcolumnlist: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    csvColumnList: jspb.Message.getFieldWithDefault(msg, 1, ""),
     flags: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
@@ -2677,7 +2677,7 @@ proto.szengine.ExportCsvEntityReportRequest.deserializeBinaryFromReader = functi
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setCsvcolumnlist(value);
+      msg.setCsvColumnList(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt64());
@@ -2712,7 +2712,7 @@ proto.szengine.ExportCsvEntityReportRequest.prototype.serializeBinary = function
  */
 proto.szengine.ExportCsvEntityReportRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getCsvcolumnlist();
+  f = message.getCsvColumnList();
   if (f.length > 0) {
     writer.writeString(
       1,
@@ -2730,10 +2730,10 @@ proto.szengine.ExportCsvEntityReportRequest.serializeBinaryToWriter = function(m
 
 
 /**
- * optional string csvColumnList = 1;
+ * optional string csv_column_list = 1;
  * @return {string}
  */
-proto.szengine.ExportCsvEntityReportRequest.prototype.getCsvcolumnlist = function() {
+proto.szengine.ExportCsvEntityReportRequest.prototype.getCsvColumnList = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -2742,7 +2742,7 @@ proto.szengine.ExportCsvEntityReportRequest.prototype.getCsvcolumnlist = functio
  * @param {string} value
  * @return {!proto.szengine.ExportCsvEntityReportRequest} returns this
  */
-proto.szengine.ExportCsvEntityReportRequest.prototype.setCsvcolumnlist = function(value) {
+proto.szengine.ExportCsvEntityReportRequest.prototype.setCsvColumnList = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -3187,7 +3187,7 @@ proto.szengine.FetchNextRequest.prototype.toObject = function(opt_includeInstanc
  */
 proto.szengine.FetchNextRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    exporthandle: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    exportHandle: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -3226,7 +3226,7 @@ proto.szengine.FetchNextRequest.deserializeBinaryFromReader = function(msg, read
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setExporthandle(value);
+      msg.setExportHandle(value);
       break;
     default:
       reader.skipField();
@@ -3257,7 +3257,7 @@ proto.szengine.FetchNextRequest.prototype.serializeBinary = function() {
  */
 proto.szengine.FetchNextRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getExporthandle();
+  f = message.getExportHandle();
   if (f !== 0) {
     writer.writeInt64(
       1,
@@ -3268,10 +3268,10 @@ proto.szengine.FetchNextRequest.serializeBinaryToWriter = function(message, writ
 
 
 /**
- * optional int64 exportHandle = 1;
+ * optional int64 export_handle = 1;
  * @return {number}
  */
-proto.szengine.FetchNextRequest.prototype.getExporthandle = function() {
+proto.szengine.FetchNextRequest.prototype.getExportHandle = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -3280,7 +3280,7 @@ proto.szengine.FetchNextRequest.prototype.getExporthandle = function() {
  * @param {number} value
  * @return {!proto.szengine.FetchNextRequest} returns this
  */
-proto.szengine.FetchNextRequest.prototype.setExporthandle = function(value) {
+proto.szengine.FetchNextRequest.prototype.setExportHandle = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
@@ -3447,7 +3447,7 @@ proto.szengine.FindInterestingEntitiesByEntityIdRequest.prototype.toObject = fun
  */
 proto.szengine.FindInterestingEntitiesByEntityIdRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    entityid: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    entityId: jspb.Message.getFieldWithDefault(msg, 1, 0),
     flags: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
@@ -3487,7 +3487,7 @@ proto.szengine.FindInterestingEntitiesByEntityIdRequest.deserializeBinaryFromRea
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setEntityid(value);
+      msg.setEntityId(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt64());
@@ -3522,7 +3522,7 @@ proto.szengine.FindInterestingEntitiesByEntityIdRequest.prototype.serializeBinar
  */
 proto.szengine.FindInterestingEntitiesByEntityIdRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getEntityid();
+  f = message.getEntityId();
   if (f !== 0) {
     writer.writeInt64(
       1,
@@ -3540,10 +3540,10 @@ proto.szengine.FindInterestingEntitiesByEntityIdRequest.serializeBinaryToWriter 
 
 
 /**
- * optional int64 entityId = 1;
+ * optional int64 entity_id = 1;
  * @return {number}
  */
-proto.szengine.FindInterestingEntitiesByEntityIdRequest.prototype.getEntityid = function() {
+proto.szengine.FindInterestingEntitiesByEntityIdRequest.prototype.getEntityId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -3552,7 +3552,7 @@ proto.szengine.FindInterestingEntitiesByEntityIdRequest.prototype.getEntityid = 
  * @param {number} value
  * @return {!proto.szengine.FindInterestingEntitiesByEntityIdRequest} returns this
  */
-proto.szengine.FindInterestingEntitiesByEntityIdRequest.prototype.setEntityid = function(value) {
+proto.szengine.FindInterestingEntitiesByEntityIdRequest.prototype.setEntityId = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
@@ -3737,8 +3737,8 @@ proto.szengine.FindInterestingEntitiesByRecordIdRequest.prototype.toObject = fun
  */
 proto.szengine.FindInterestingEntitiesByRecordIdRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    datasourcecode: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    recordid: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    dataSourceCode: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    recordId: jspb.Message.getFieldWithDefault(msg, 2, ""),
     flags: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
@@ -3778,11 +3778,11 @@ proto.szengine.FindInterestingEntitiesByRecordIdRequest.deserializeBinaryFromRea
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setDatasourcecode(value);
+      msg.setDataSourceCode(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRecordid(value);
+      msg.setRecordId(value);
       break;
     case 3:
       var value = /** @type {number} */ (reader.readInt64());
@@ -3817,14 +3817,14 @@ proto.szengine.FindInterestingEntitiesByRecordIdRequest.prototype.serializeBinar
  */
 proto.szengine.FindInterestingEntitiesByRecordIdRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getDatasourcecode();
+  f = message.getDataSourceCode();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getRecordid();
+  f = message.getRecordId();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -3842,10 +3842,10 @@ proto.szengine.FindInterestingEntitiesByRecordIdRequest.serializeBinaryToWriter 
 
 
 /**
- * optional string dataSourceCode = 1;
+ * optional string data_source_code = 1;
  * @return {string}
  */
-proto.szengine.FindInterestingEntitiesByRecordIdRequest.prototype.getDatasourcecode = function() {
+proto.szengine.FindInterestingEntitiesByRecordIdRequest.prototype.getDataSourceCode = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -3854,16 +3854,16 @@ proto.szengine.FindInterestingEntitiesByRecordIdRequest.prototype.getDatasourcec
  * @param {string} value
  * @return {!proto.szengine.FindInterestingEntitiesByRecordIdRequest} returns this
  */
-proto.szengine.FindInterestingEntitiesByRecordIdRequest.prototype.setDatasourcecode = function(value) {
+proto.szengine.FindInterestingEntitiesByRecordIdRequest.prototype.setDataSourceCode = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string recordId = 2;
+ * optional string record_id = 2;
  * @return {string}
  */
-proto.szengine.FindInterestingEntitiesByRecordIdRequest.prototype.getRecordid = function() {
+proto.szengine.FindInterestingEntitiesByRecordIdRequest.prototype.getRecordId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -3872,7 +3872,7 @@ proto.szengine.FindInterestingEntitiesByRecordIdRequest.prototype.getRecordid = 
  * @param {string} value
  * @return {!proto.szengine.FindInterestingEntitiesByRecordIdRequest} returns this
  */
-proto.szengine.FindInterestingEntitiesByRecordIdRequest.prototype.setRecordid = function(value) {
+proto.szengine.FindInterestingEntitiesByRecordIdRequest.prototype.setRecordId = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -4057,10 +4057,10 @@ proto.szengine.FindNetworkByEntityIdRequest.prototype.toObject = function(opt_in
  */
 proto.szengine.FindNetworkByEntityIdRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    entityids: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    maxdegrees: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    buildoutdegrees: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    buildoutmaxentities: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    entityIds: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    maxDegrees: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    buildOutDegrees: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    buildOutMaxEntities: jspb.Message.getFieldWithDefault(msg, 4, 0),
     flags: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
@@ -4100,19 +4100,19 @@ proto.szengine.FindNetworkByEntityIdRequest.deserializeBinaryFromReader = functi
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setEntityids(value);
+      msg.setEntityIds(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setMaxdegrees(value);
+      msg.setMaxDegrees(value);
       break;
     case 3:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setBuildoutdegrees(value);
+      msg.setBuildOutDegrees(value);
       break;
     case 4:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setBuildoutmaxentities(value);
+      msg.setBuildOutMaxEntities(value);
       break;
     case 5:
       var value = /** @type {number} */ (reader.readInt64());
@@ -4147,28 +4147,28 @@ proto.szengine.FindNetworkByEntityIdRequest.prototype.serializeBinary = function
  */
 proto.szengine.FindNetworkByEntityIdRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getEntityids();
+  f = message.getEntityIds();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getMaxdegrees();
+  f = message.getMaxDegrees();
   if (f !== 0) {
     writer.writeInt64(
       2,
       f
     );
   }
-  f = message.getBuildoutdegrees();
+  f = message.getBuildOutDegrees();
   if (f !== 0) {
     writer.writeInt64(
       3,
       f
     );
   }
-  f = message.getBuildoutmaxentities();
+  f = message.getBuildOutMaxEntities();
   if (f !== 0) {
     writer.writeInt64(
       4,
@@ -4186,10 +4186,10 @@ proto.szengine.FindNetworkByEntityIdRequest.serializeBinaryToWriter = function(m
 
 
 /**
- * optional string entityIds = 1;
+ * optional string entity_ids = 1;
  * @return {string}
  */
-proto.szengine.FindNetworkByEntityIdRequest.prototype.getEntityids = function() {
+proto.szengine.FindNetworkByEntityIdRequest.prototype.getEntityIds = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -4198,16 +4198,16 @@ proto.szengine.FindNetworkByEntityIdRequest.prototype.getEntityids = function() 
  * @param {string} value
  * @return {!proto.szengine.FindNetworkByEntityIdRequest} returns this
  */
-proto.szengine.FindNetworkByEntityIdRequest.prototype.setEntityids = function(value) {
+proto.szengine.FindNetworkByEntityIdRequest.prototype.setEntityIds = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional int64 maxDegrees = 2;
+ * optional int64 max_degrees = 2;
  * @return {number}
  */
-proto.szengine.FindNetworkByEntityIdRequest.prototype.getMaxdegrees = function() {
+proto.szengine.FindNetworkByEntityIdRequest.prototype.getMaxDegrees = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
@@ -4216,16 +4216,16 @@ proto.szengine.FindNetworkByEntityIdRequest.prototype.getMaxdegrees = function()
  * @param {number} value
  * @return {!proto.szengine.FindNetworkByEntityIdRequest} returns this
  */
-proto.szengine.FindNetworkByEntityIdRequest.prototype.setMaxdegrees = function(value) {
+proto.szengine.FindNetworkByEntityIdRequest.prototype.setMaxDegrees = function(value) {
   return jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
 /**
- * optional int64 buildOutDegrees = 3;
+ * optional int64 build_out_degrees = 3;
  * @return {number}
  */
-proto.szengine.FindNetworkByEntityIdRequest.prototype.getBuildoutdegrees = function() {
+proto.szengine.FindNetworkByEntityIdRequest.prototype.getBuildOutDegrees = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
@@ -4234,16 +4234,16 @@ proto.szengine.FindNetworkByEntityIdRequest.prototype.getBuildoutdegrees = funct
  * @param {number} value
  * @return {!proto.szengine.FindNetworkByEntityIdRequest} returns this
  */
-proto.szengine.FindNetworkByEntityIdRequest.prototype.setBuildoutdegrees = function(value) {
+proto.szengine.FindNetworkByEntityIdRequest.prototype.setBuildOutDegrees = function(value) {
   return jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
 /**
- * optional int64 buildOutMaxEntities = 4;
+ * optional int64 build_out_max_entities = 4;
  * @return {number}
  */
-proto.szengine.FindNetworkByEntityIdRequest.prototype.getBuildoutmaxentities = function() {
+proto.szengine.FindNetworkByEntityIdRequest.prototype.getBuildOutMaxEntities = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
@@ -4252,7 +4252,7 @@ proto.szengine.FindNetworkByEntityIdRequest.prototype.getBuildoutmaxentities = f
  * @param {number} value
  * @return {!proto.szengine.FindNetworkByEntityIdRequest} returns this
  */
-proto.szengine.FindNetworkByEntityIdRequest.prototype.setBuildoutmaxentities = function(value) {
+proto.szengine.FindNetworkByEntityIdRequest.prototype.setBuildOutMaxEntities = function(value) {
   return jspb.Message.setProto3IntField(this, 4, value);
 };
 
@@ -4437,10 +4437,10 @@ proto.szengine.FindNetworkByRecordIdRequest.prototype.toObject = function(opt_in
  */
 proto.szengine.FindNetworkByRecordIdRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    recordkeys: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    maxdegrees: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    buildoutdegrees: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    buildoutmaxentities: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    recordKeys: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    maxDegrees: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    buildOutDegrees: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    buildOutMaxEntities: jspb.Message.getFieldWithDefault(msg, 4, 0),
     flags: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
@@ -4480,19 +4480,19 @@ proto.szengine.FindNetworkByRecordIdRequest.deserializeBinaryFromReader = functi
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRecordkeys(value);
+      msg.setRecordKeys(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setMaxdegrees(value);
+      msg.setMaxDegrees(value);
       break;
     case 3:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setBuildoutdegrees(value);
+      msg.setBuildOutDegrees(value);
       break;
     case 4:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setBuildoutmaxentities(value);
+      msg.setBuildOutMaxEntities(value);
       break;
     case 5:
       var value = /** @type {number} */ (reader.readInt64());
@@ -4527,28 +4527,28 @@ proto.szengine.FindNetworkByRecordIdRequest.prototype.serializeBinary = function
  */
 proto.szengine.FindNetworkByRecordIdRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getRecordkeys();
+  f = message.getRecordKeys();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getMaxdegrees();
+  f = message.getMaxDegrees();
   if (f !== 0) {
     writer.writeInt64(
       2,
       f
     );
   }
-  f = message.getBuildoutdegrees();
+  f = message.getBuildOutDegrees();
   if (f !== 0) {
     writer.writeInt64(
       3,
       f
     );
   }
-  f = message.getBuildoutmaxentities();
+  f = message.getBuildOutMaxEntities();
   if (f !== 0) {
     writer.writeInt64(
       4,
@@ -4566,10 +4566,10 @@ proto.szengine.FindNetworkByRecordIdRequest.serializeBinaryToWriter = function(m
 
 
 /**
- * optional string recordKeys = 1;
+ * optional string record_keys = 1;
  * @return {string}
  */
-proto.szengine.FindNetworkByRecordIdRequest.prototype.getRecordkeys = function() {
+proto.szengine.FindNetworkByRecordIdRequest.prototype.getRecordKeys = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -4578,16 +4578,16 @@ proto.szengine.FindNetworkByRecordIdRequest.prototype.getRecordkeys = function()
  * @param {string} value
  * @return {!proto.szengine.FindNetworkByRecordIdRequest} returns this
  */
-proto.szengine.FindNetworkByRecordIdRequest.prototype.setRecordkeys = function(value) {
+proto.szengine.FindNetworkByRecordIdRequest.prototype.setRecordKeys = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional int64 maxDegrees = 2;
+ * optional int64 max_degrees = 2;
  * @return {number}
  */
-proto.szengine.FindNetworkByRecordIdRequest.prototype.getMaxdegrees = function() {
+proto.szengine.FindNetworkByRecordIdRequest.prototype.getMaxDegrees = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
@@ -4596,16 +4596,16 @@ proto.szengine.FindNetworkByRecordIdRequest.prototype.getMaxdegrees = function()
  * @param {number} value
  * @return {!proto.szengine.FindNetworkByRecordIdRequest} returns this
  */
-proto.szengine.FindNetworkByRecordIdRequest.prototype.setMaxdegrees = function(value) {
+proto.szengine.FindNetworkByRecordIdRequest.prototype.setMaxDegrees = function(value) {
   return jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
 /**
- * optional int64 buildOutDegrees = 3;
+ * optional int64 build_out_degrees = 3;
  * @return {number}
  */
-proto.szengine.FindNetworkByRecordIdRequest.prototype.getBuildoutdegrees = function() {
+proto.szengine.FindNetworkByRecordIdRequest.prototype.getBuildOutDegrees = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
@@ -4614,16 +4614,16 @@ proto.szengine.FindNetworkByRecordIdRequest.prototype.getBuildoutdegrees = funct
  * @param {number} value
  * @return {!proto.szengine.FindNetworkByRecordIdRequest} returns this
  */
-proto.szengine.FindNetworkByRecordIdRequest.prototype.setBuildoutdegrees = function(value) {
+proto.szengine.FindNetworkByRecordIdRequest.prototype.setBuildOutDegrees = function(value) {
   return jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
 /**
- * optional int64 buildOutMaxEntities = 4;
+ * optional int64 build_out_max_entities = 4;
  * @return {number}
  */
-proto.szengine.FindNetworkByRecordIdRequest.prototype.getBuildoutmaxentities = function() {
+proto.szengine.FindNetworkByRecordIdRequest.prototype.getBuildOutMaxEntities = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
@@ -4632,7 +4632,7 @@ proto.szengine.FindNetworkByRecordIdRequest.prototype.getBuildoutmaxentities = f
  * @param {number} value
  * @return {!proto.szengine.FindNetworkByRecordIdRequest} returns this
  */
-proto.szengine.FindNetworkByRecordIdRequest.prototype.setBuildoutmaxentities = function(value) {
+proto.szengine.FindNetworkByRecordIdRequest.prototype.setBuildOutMaxEntities = function(value) {
   return jspb.Message.setProto3IntField(this, 4, value);
 };
 
@@ -4817,11 +4817,11 @@ proto.szengine.FindPathByEntityIdRequest.prototype.toObject = function(opt_inclu
  */
 proto.szengine.FindPathByEntityIdRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    startentityid: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    endentityid: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    maxdegrees: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    avoidentityids: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    requireddatasources: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    startEntityId: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    endEntityId: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    maxDegrees: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    avoidEntityIds: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    requiredDataSources: jspb.Message.getFieldWithDefault(msg, 5, ""),
     flags: jspb.Message.getFieldWithDefault(msg, 6, 0)
   };
 
@@ -4861,23 +4861,23 @@ proto.szengine.FindPathByEntityIdRequest.deserializeBinaryFromReader = function(
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setStartentityid(value);
+      msg.setStartEntityId(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setEndentityid(value);
+      msg.setEndEntityId(value);
       break;
     case 3:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setMaxdegrees(value);
+      msg.setMaxDegrees(value);
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
-      msg.setAvoidentityids(value);
+      msg.setAvoidEntityIds(value);
       break;
     case 5:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRequireddatasources(value);
+      msg.setRequiredDataSources(value);
       break;
     case 6:
       var value = /** @type {number} */ (reader.readInt64());
@@ -4912,35 +4912,35 @@ proto.szengine.FindPathByEntityIdRequest.prototype.serializeBinary = function() 
  */
 proto.szengine.FindPathByEntityIdRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getStartentityid();
+  f = message.getStartEntityId();
   if (f !== 0) {
     writer.writeInt64(
       1,
       f
     );
   }
-  f = message.getEndentityid();
+  f = message.getEndEntityId();
   if (f !== 0) {
     writer.writeInt64(
       2,
       f
     );
   }
-  f = message.getMaxdegrees();
+  f = message.getMaxDegrees();
   if (f !== 0) {
     writer.writeInt64(
       3,
       f
     );
   }
-  f = message.getAvoidentityids();
+  f = message.getAvoidEntityIds();
   if (f.length > 0) {
     writer.writeString(
       4,
       f
     );
   }
-  f = message.getRequireddatasources();
+  f = message.getRequiredDataSources();
   if (f.length > 0) {
     writer.writeString(
       5,
@@ -4958,10 +4958,10 @@ proto.szengine.FindPathByEntityIdRequest.serializeBinaryToWriter = function(mess
 
 
 /**
- * optional int64 startEntityId = 1;
+ * optional int64 start_entity_id = 1;
  * @return {number}
  */
-proto.szengine.FindPathByEntityIdRequest.prototype.getStartentityid = function() {
+proto.szengine.FindPathByEntityIdRequest.prototype.getStartEntityId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -4970,16 +4970,16 @@ proto.szengine.FindPathByEntityIdRequest.prototype.getStartentityid = function()
  * @param {number} value
  * @return {!proto.szengine.FindPathByEntityIdRequest} returns this
  */
-proto.szengine.FindPathByEntityIdRequest.prototype.setStartentityid = function(value) {
+proto.szengine.FindPathByEntityIdRequest.prototype.setStartEntityId = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
 /**
- * optional int64 endEntityId = 2;
+ * optional int64 end_entity_id = 2;
  * @return {number}
  */
-proto.szengine.FindPathByEntityIdRequest.prototype.getEndentityid = function() {
+proto.szengine.FindPathByEntityIdRequest.prototype.getEndEntityId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
@@ -4988,16 +4988,16 @@ proto.szengine.FindPathByEntityIdRequest.prototype.getEndentityid = function() {
  * @param {number} value
  * @return {!proto.szengine.FindPathByEntityIdRequest} returns this
  */
-proto.szengine.FindPathByEntityIdRequest.prototype.setEndentityid = function(value) {
+proto.szengine.FindPathByEntityIdRequest.prototype.setEndEntityId = function(value) {
   return jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
 /**
- * optional int64 maxDegrees = 3;
+ * optional int64 max_degrees = 3;
  * @return {number}
  */
-proto.szengine.FindPathByEntityIdRequest.prototype.getMaxdegrees = function() {
+proto.szengine.FindPathByEntityIdRequest.prototype.getMaxDegrees = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
@@ -5006,16 +5006,16 @@ proto.szengine.FindPathByEntityIdRequest.prototype.getMaxdegrees = function() {
  * @param {number} value
  * @return {!proto.szengine.FindPathByEntityIdRequest} returns this
  */
-proto.szengine.FindPathByEntityIdRequest.prototype.setMaxdegrees = function(value) {
+proto.szengine.FindPathByEntityIdRequest.prototype.setMaxDegrees = function(value) {
   return jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
 /**
- * optional string avoidEntityIds = 4;
+ * optional string avoid_entity_ids = 4;
  * @return {string}
  */
-proto.szengine.FindPathByEntityIdRequest.prototype.getAvoidentityids = function() {
+proto.szengine.FindPathByEntityIdRequest.prototype.getAvoidEntityIds = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
@@ -5024,16 +5024,16 @@ proto.szengine.FindPathByEntityIdRequest.prototype.getAvoidentityids = function(
  * @param {string} value
  * @return {!proto.szengine.FindPathByEntityIdRequest} returns this
  */
-proto.szengine.FindPathByEntityIdRequest.prototype.setAvoidentityids = function(value) {
+proto.szengine.FindPathByEntityIdRequest.prototype.setAvoidEntityIds = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
 /**
- * optional string requiredDataSources = 5;
+ * optional string required_data_sources = 5;
  * @return {string}
  */
-proto.szengine.FindPathByEntityIdRequest.prototype.getRequireddatasources = function() {
+proto.szengine.FindPathByEntityIdRequest.prototype.getRequiredDataSources = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
@@ -5042,7 +5042,7 @@ proto.szengine.FindPathByEntityIdRequest.prototype.getRequireddatasources = func
  * @param {string} value
  * @return {!proto.szengine.FindPathByEntityIdRequest} returns this
  */
-proto.szengine.FindPathByEntityIdRequest.prototype.setRequireddatasources = function(value) {
+proto.szengine.FindPathByEntityIdRequest.prototype.setRequiredDataSources = function(value) {
   return jspb.Message.setProto3StringField(this, 5, value);
 };
 
@@ -5227,13 +5227,13 @@ proto.szengine.FindPathByRecordIdRequest.prototype.toObject = function(opt_inclu
  */
 proto.szengine.FindPathByRecordIdRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    startdatasourcecode: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    startrecordid: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    enddatasourcecode: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    endrecordid: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    maxdegrees: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    avoidrecordkeys: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    requireddatasources: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    startDataSourceCode: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    startRecordId: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    endDataSourceCode: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    endRecordId: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    maxDegrees: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    avoidRecordKeys: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    requiredDataSources: jspb.Message.getFieldWithDefault(msg, 7, ""),
     flags: jspb.Message.getFieldWithDefault(msg, 8, 0)
   };
 
@@ -5273,31 +5273,31 @@ proto.szengine.FindPathByRecordIdRequest.deserializeBinaryFromReader = function(
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setStartdatasourcecode(value);
+      msg.setStartDataSourceCode(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setStartrecordid(value);
+      msg.setStartRecordId(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setEnddatasourcecode(value);
+      msg.setEndDataSourceCode(value);
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
-      msg.setEndrecordid(value);
+      msg.setEndRecordId(value);
       break;
     case 5:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setMaxdegrees(value);
+      msg.setMaxDegrees(value);
       break;
     case 6:
       var value = /** @type {string} */ (reader.readString());
-      msg.setAvoidrecordkeys(value);
+      msg.setAvoidRecordKeys(value);
       break;
     case 7:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRequireddatasources(value);
+      msg.setRequiredDataSources(value);
       break;
     case 8:
       var value = /** @type {number} */ (reader.readInt64());
@@ -5332,49 +5332,49 @@ proto.szengine.FindPathByRecordIdRequest.prototype.serializeBinary = function() 
  */
 proto.szengine.FindPathByRecordIdRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getStartdatasourcecode();
+  f = message.getStartDataSourceCode();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getStartrecordid();
+  f = message.getStartRecordId();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getEnddatasourcecode();
+  f = message.getEndDataSourceCode();
   if (f.length > 0) {
     writer.writeString(
       3,
       f
     );
   }
-  f = message.getEndrecordid();
+  f = message.getEndRecordId();
   if (f.length > 0) {
     writer.writeString(
       4,
       f
     );
   }
-  f = message.getMaxdegrees();
+  f = message.getMaxDegrees();
   if (f !== 0) {
     writer.writeInt64(
       5,
       f
     );
   }
-  f = message.getAvoidrecordkeys();
+  f = message.getAvoidRecordKeys();
   if (f.length > 0) {
     writer.writeString(
       6,
       f
     );
   }
-  f = message.getRequireddatasources();
+  f = message.getRequiredDataSources();
   if (f.length > 0) {
     writer.writeString(
       7,
@@ -5392,10 +5392,10 @@ proto.szengine.FindPathByRecordIdRequest.serializeBinaryToWriter = function(mess
 
 
 /**
- * optional string startDataSourceCode = 1;
+ * optional string start_data_source_code = 1;
  * @return {string}
  */
-proto.szengine.FindPathByRecordIdRequest.prototype.getStartdatasourcecode = function() {
+proto.szengine.FindPathByRecordIdRequest.prototype.getStartDataSourceCode = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -5404,16 +5404,16 @@ proto.szengine.FindPathByRecordIdRequest.prototype.getStartdatasourcecode = func
  * @param {string} value
  * @return {!proto.szengine.FindPathByRecordIdRequest} returns this
  */
-proto.szengine.FindPathByRecordIdRequest.prototype.setStartdatasourcecode = function(value) {
+proto.szengine.FindPathByRecordIdRequest.prototype.setStartDataSourceCode = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string startRecordId = 2;
+ * optional string start_record_id = 2;
  * @return {string}
  */
-proto.szengine.FindPathByRecordIdRequest.prototype.getStartrecordid = function() {
+proto.szengine.FindPathByRecordIdRequest.prototype.getStartRecordId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -5422,16 +5422,16 @@ proto.szengine.FindPathByRecordIdRequest.prototype.getStartrecordid = function()
  * @param {string} value
  * @return {!proto.szengine.FindPathByRecordIdRequest} returns this
  */
-proto.szengine.FindPathByRecordIdRequest.prototype.setStartrecordid = function(value) {
+proto.szengine.FindPathByRecordIdRequest.prototype.setStartRecordId = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional string endDataSourceCode = 3;
+ * optional string end_data_source_code = 3;
  * @return {string}
  */
-proto.szengine.FindPathByRecordIdRequest.prototype.getEnddatasourcecode = function() {
+proto.szengine.FindPathByRecordIdRequest.prototype.getEndDataSourceCode = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -5440,16 +5440,16 @@ proto.szengine.FindPathByRecordIdRequest.prototype.getEnddatasourcecode = functi
  * @param {string} value
  * @return {!proto.szengine.FindPathByRecordIdRequest} returns this
  */
-proto.szengine.FindPathByRecordIdRequest.prototype.setEnddatasourcecode = function(value) {
+proto.szengine.FindPathByRecordIdRequest.prototype.setEndDataSourceCode = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * optional string endRecordId = 4;
+ * optional string end_record_id = 4;
  * @return {string}
  */
-proto.szengine.FindPathByRecordIdRequest.prototype.getEndrecordid = function() {
+proto.szengine.FindPathByRecordIdRequest.prototype.getEndRecordId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
@@ -5458,16 +5458,16 @@ proto.szengine.FindPathByRecordIdRequest.prototype.getEndrecordid = function() {
  * @param {string} value
  * @return {!proto.szengine.FindPathByRecordIdRequest} returns this
  */
-proto.szengine.FindPathByRecordIdRequest.prototype.setEndrecordid = function(value) {
+proto.szengine.FindPathByRecordIdRequest.prototype.setEndRecordId = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
 /**
- * optional int64 maxDegrees = 5;
+ * optional int64 max_degrees = 5;
  * @return {number}
  */
-proto.szengine.FindPathByRecordIdRequest.prototype.getMaxdegrees = function() {
+proto.szengine.FindPathByRecordIdRequest.prototype.getMaxDegrees = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
@@ -5476,16 +5476,16 @@ proto.szengine.FindPathByRecordIdRequest.prototype.getMaxdegrees = function() {
  * @param {number} value
  * @return {!proto.szengine.FindPathByRecordIdRequest} returns this
  */
-proto.szengine.FindPathByRecordIdRequest.prototype.setMaxdegrees = function(value) {
+proto.szengine.FindPathByRecordIdRequest.prototype.setMaxDegrees = function(value) {
   return jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
 /**
- * optional string avoidRecordKeys = 6;
+ * optional string avoid_record_keys = 6;
  * @return {string}
  */
-proto.szengine.FindPathByRecordIdRequest.prototype.getAvoidrecordkeys = function() {
+proto.szengine.FindPathByRecordIdRequest.prototype.getAvoidRecordKeys = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
@@ -5494,16 +5494,16 @@ proto.szengine.FindPathByRecordIdRequest.prototype.getAvoidrecordkeys = function
  * @param {string} value
  * @return {!proto.szengine.FindPathByRecordIdRequest} returns this
  */
-proto.szengine.FindPathByRecordIdRequest.prototype.setAvoidrecordkeys = function(value) {
+proto.szengine.FindPathByRecordIdRequest.prototype.setAvoidRecordKeys = function(value) {
   return jspb.Message.setProto3StringField(this, 6, value);
 };
 
 
 /**
- * optional string requiredDataSources = 7;
+ * optional string required_data_sources = 7;
  * @return {string}
  */
-proto.szengine.FindPathByRecordIdRequest.prototype.getRequireddatasources = function() {
+proto.szengine.FindPathByRecordIdRequest.prototype.getRequiredDataSources = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
 };
 
@@ -5512,7 +5512,7 @@ proto.szengine.FindPathByRecordIdRequest.prototype.getRequireddatasources = func
  * @param {string} value
  * @return {!proto.szengine.FindPathByRecordIdRequest} returns this
  */
-proto.szengine.FindPathByRecordIdRequest.prototype.setRequireddatasources = function(value) {
+proto.szengine.FindPathByRecordIdRequest.prototype.setRequiredDataSources = function(value) {
   return jspb.Message.setProto3StringField(this, 7, value);
 };
 
@@ -5928,7 +5928,7 @@ proto.szengine.GetEntityByEntityIdRequest.prototype.toObject = function(opt_incl
  */
 proto.szengine.GetEntityByEntityIdRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    entityid: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    entityId: jspb.Message.getFieldWithDefault(msg, 1, 0),
     flags: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
@@ -5968,7 +5968,7 @@ proto.szengine.GetEntityByEntityIdRequest.deserializeBinaryFromReader = function
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setEntityid(value);
+      msg.setEntityId(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt64());
@@ -6003,7 +6003,7 @@ proto.szengine.GetEntityByEntityIdRequest.prototype.serializeBinary = function()
  */
 proto.szengine.GetEntityByEntityIdRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getEntityid();
+  f = message.getEntityId();
   if (f !== 0) {
     writer.writeInt64(
       1,
@@ -6021,10 +6021,10 @@ proto.szengine.GetEntityByEntityIdRequest.serializeBinaryToWriter = function(mes
 
 
 /**
- * optional int64 entityId = 1;
+ * optional int64 entity_id = 1;
  * @return {number}
  */
-proto.szengine.GetEntityByEntityIdRequest.prototype.getEntityid = function() {
+proto.szengine.GetEntityByEntityIdRequest.prototype.getEntityId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -6033,7 +6033,7 @@ proto.szengine.GetEntityByEntityIdRequest.prototype.getEntityid = function() {
  * @param {number} value
  * @return {!proto.szengine.GetEntityByEntityIdRequest} returns this
  */
-proto.szengine.GetEntityByEntityIdRequest.prototype.setEntityid = function(value) {
+proto.szengine.GetEntityByEntityIdRequest.prototype.setEntityId = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
@@ -6218,8 +6218,8 @@ proto.szengine.GetEntityByRecordIdRequest.prototype.toObject = function(opt_incl
  */
 proto.szengine.GetEntityByRecordIdRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    datasourcecode: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    recordid: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    dataSourceCode: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    recordId: jspb.Message.getFieldWithDefault(msg, 2, ""),
     flags: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
@@ -6259,11 +6259,11 @@ proto.szengine.GetEntityByRecordIdRequest.deserializeBinaryFromReader = function
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setDatasourcecode(value);
+      msg.setDataSourceCode(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRecordid(value);
+      msg.setRecordId(value);
       break;
     case 3:
       var value = /** @type {number} */ (reader.readInt64());
@@ -6298,14 +6298,14 @@ proto.szengine.GetEntityByRecordIdRequest.prototype.serializeBinary = function()
  */
 proto.szengine.GetEntityByRecordIdRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getDatasourcecode();
+  f = message.getDataSourceCode();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getRecordid();
+  f = message.getRecordId();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -6323,10 +6323,10 @@ proto.szengine.GetEntityByRecordIdRequest.serializeBinaryToWriter = function(mes
 
 
 /**
- * optional string dataSourceCode = 1;
+ * optional string data_source_code = 1;
  * @return {string}
  */
-proto.szengine.GetEntityByRecordIdRequest.prototype.getDatasourcecode = function() {
+proto.szengine.GetEntityByRecordIdRequest.prototype.getDataSourceCode = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -6335,16 +6335,16 @@ proto.szengine.GetEntityByRecordIdRequest.prototype.getDatasourcecode = function
  * @param {string} value
  * @return {!proto.szengine.GetEntityByRecordIdRequest} returns this
  */
-proto.szengine.GetEntityByRecordIdRequest.prototype.setDatasourcecode = function(value) {
+proto.szengine.GetEntityByRecordIdRequest.prototype.setDataSourceCode = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string recordId = 2;
+ * optional string record_id = 2;
  * @return {string}
  */
-proto.szengine.GetEntityByRecordIdRequest.prototype.getRecordid = function() {
+proto.szengine.GetEntityByRecordIdRequest.prototype.getRecordId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -6353,7 +6353,7 @@ proto.szengine.GetEntityByRecordIdRequest.prototype.getRecordid = function() {
  * @param {string} value
  * @return {!proto.szengine.GetEntityByRecordIdRequest} returns this
  */
-proto.szengine.GetEntityByRecordIdRequest.prototype.setRecordid = function(value) {
+proto.szengine.GetEntityByRecordIdRequest.prototype.setRecordId = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -6538,8 +6538,8 @@ proto.szengine.GetRecordRequest.prototype.toObject = function(opt_includeInstanc
  */
 proto.szengine.GetRecordRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    datasourcecode: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    recordid: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    dataSourceCode: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    recordId: jspb.Message.getFieldWithDefault(msg, 2, ""),
     flags: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
@@ -6579,11 +6579,11 @@ proto.szengine.GetRecordRequest.deserializeBinaryFromReader = function(msg, read
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setDatasourcecode(value);
+      msg.setDataSourceCode(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRecordid(value);
+      msg.setRecordId(value);
       break;
     case 3:
       var value = /** @type {number} */ (reader.readInt64());
@@ -6618,14 +6618,14 @@ proto.szengine.GetRecordRequest.prototype.serializeBinary = function() {
  */
 proto.szengine.GetRecordRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getDatasourcecode();
+  f = message.getDataSourceCode();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getRecordid();
+  f = message.getRecordId();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -6643,10 +6643,10 @@ proto.szengine.GetRecordRequest.serializeBinaryToWriter = function(message, writ
 
 
 /**
- * optional string dataSourceCode = 1;
+ * optional string data_source_code = 1;
  * @return {string}
  */
-proto.szengine.GetRecordRequest.prototype.getDatasourcecode = function() {
+proto.szengine.GetRecordRequest.prototype.getDataSourceCode = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -6655,16 +6655,16 @@ proto.szengine.GetRecordRequest.prototype.getDatasourcecode = function() {
  * @param {string} value
  * @return {!proto.szengine.GetRecordRequest} returns this
  */
-proto.szengine.GetRecordRequest.prototype.setDatasourcecode = function(value) {
+proto.szengine.GetRecordRequest.prototype.setDataSourceCode = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string recordId = 2;
+ * optional string record_id = 2;
  * @return {string}
  */
-proto.szengine.GetRecordRequest.prototype.getRecordid = function() {
+proto.szengine.GetRecordRequest.prototype.getRecordId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -6673,7 +6673,7 @@ proto.szengine.GetRecordRequest.prototype.getRecordid = function() {
  * @param {string} value
  * @return {!proto.szengine.GetRecordRequest} returns this
  */
-proto.szengine.GetRecordRequest.prototype.setRecordid = function(value) {
+proto.szengine.GetRecordRequest.prototype.setRecordId = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -7320,7 +7320,7 @@ proto.szengine.GetVirtualEntityByRecordIdRequest.prototype.toObject = function(o
  */
 proto.szengine.GetVirtualEntityByRecordIdRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    recordkeys: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    recordKeys: jspb.Message.getFieldWithDefault(msg, 1, ""),
     flags: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
@@ -7360,7 +7360,7 @@ proto.szengine.GetVirtualEntityByRecordIdRequest.deserializeBinaryFromReader = f
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRecordkeys(value);
+      msg.setRecordKeys(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt64());
@@ -7395,7 +7395,7 @@ proto.szengine.GetVirtualEntityByRecordIdRequest.prototype.serializeBinary = fun
  */
 proto.szengine.GetVirtualEntityByRecordIdRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getRecordkeys();
+  f = message.getRecordKeys();
   if (f.length > 0) {
     writer.writeString(
       1,
@@ -7413,10 +7413,10 @@ proto.szengine.GetVirtualEntityByRecordIdRequest.serializeBinaryToWriter = funct
 
 
 /**
- * optional string recordKeys = 1;
+ * optional string record_keys = 1;
  * @return {string}
  */
-proto.szengine.GetVirtualEntityByRecordIdRequest.prototype.getRecordkeys = function() {
+proto.szengine.GetVirtualEntityByRecordIdRequest.prototype.getRecordKeys = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -7425,7 +7425,7 @@ proto.szengine.GetVirtualEntityByRecordIdRequest.prototype.getRecordkeys = funct
  * @param {string} value
  * @return {!proto.szengine.GetVirtualEntityByRecordIdRequest} returns this
  */
-proto.szengine.GetVirtualEntityByRecordIdRequest.prototype.setRecordkeys = function(value) {
+proto.szengine.GetVirtualEntityByRecordIdRequest.prototype.setRecordKeys = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -7610,7 +7610,7 @@ proto.szengine.HowEntityByEntityIdRequest.prototype.toObject = function(opt_incl
  */
 proto.szengine.HowEntityByEntityIdRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    entityid: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    entityId: jspb.Message.getFieldWithDefault(msg, 1, 0),
     flags: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
@@ -7650,7 +7650,7 @@ proto.szengine.HowEntityByEntityIdRequest.deserializeBinaryFromReader = function
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setEntityid(value);
+      msg.setEntityId(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt64());
@@ -7685,7 +7685,7 @@ proto.szengine.HowEntityByEntityIdRequest.prototype.serializeBinary = function()
  */
 proto.szengine.HowEntityByEntityIdRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getEntityid();
+  f = message.getEntityId();
   if (f !== 0) {
     writer.writeInt64(
       1,
@@ -7703,10 +7703,10 @@ proto.szengine.HowEntityByEntityIdRequest.serializeBinaryToWriter = function(mes
 
 
 /**
- * optional int64 entityId = 1;
+ * optional int64 entity_id = 1;
  * @return {number}
  */
-proto.szengine.HowEntityByEntityIdRequest.prototype.getEntityid = function() {
+proto.szengine.HowEntityByEntityIdRequest.prototype.getEntityId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -7715,7 +7715,7 @@ proto.szengine.HowEntityByEntityIdRequest.prototype.getEntityid = function() {
  * @param {number} value
  * @return {!proto.szengine.HowEntityByEntityIdRequest} returns this
  */
-proto.szengine.HowEntityByEntityIdRequest.prototype.setEntityid = function(value) {
+proto.szengine.HowEntityByEntityIdRequest.prototype.setEntityId = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
@@ -7900,7 +7900,7 @@ proto.szengine.PreprocessRecordRequest.prototype.toObject = function(opt_include
  */
 proto.szengine.PreprocessRecordRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    recorddefinition: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    recordDefinition: jspb.Message.getFieldWithDefault(msg, 1, ""),
     flags: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
@@ -7940,7 +7940,7 @@ proto.szengine.PreprocessRecordRequest.deserializeBinaryFromReader = function(ms
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRecorddefinition(value);
+      msg.setRecordDefinition(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt64());
@@ -7975,7 +7975,7 @@ proto.szengine.PreprocessRecordRequest.prototype.serializeBinary = function() {
  */
 proto.szengine.PreprocessRecordRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getRecorddefinition();
+  f = message.getRecordDefinition();
   if (f.length > 0) {
     writer.writeString(
       1,
@@ -7993,10 +7993,10 @@ proto.szengine.PreprocessRecordRequest.serializeBinaryToWriter = function(messag
 
 
 /**
- * optional string recordDefinition = 1;
+ * optional string record_definition = 1;
  * @return {string}
  */
-proto.szengine.PreprocessRecordRequest.prototype.getRecorddefinition = function() {
+proto.szengine.PreprocessRecordRequest.prototype.getRecordDefinition = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -8005,7 +8005,7 @@ proto.szengine.PreprocessRecordRequest.prototype.getRecorddefinition = function(
  * @param {string} value
  * @return {!proto.szengine.PreprocessRecordRequest} returns this
  */
-proto.szengine.PreprocessRecordRequest.prototype.setRecorddefinition = function(value) {
+proto.szengine.PreprocessRecordRequest.prototype.setRecordDefinition = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -8392,7 +8392,7 @@ proto.szengine.ProcessRedoRecordRequest.prototype.toObject = function(opt_includ
  */
 proto.szengine.ProcessRedoRecordRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    redorecord: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    redoRecord: jspb.Message.getFieldWithDefault(msg, 1, ""),
     flags: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
@@ -8432,7 +8432,7 @@ proto.szengine.ProcessRedoRecordRequest.deserializeBinaryFromReader = function(m
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRedorecord(value);
+      msg.setRedoRecord(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt64());
@@ -8467,7 +8467,7 @@ proto.szengine.ProcessRedoRecordRequest.prototype.serializeBinary = function() {
  */
 proto.szengine.ProcessRedoRecordRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getRedorecord();
+  f = message.getRedoRecord();
   if (f.length > 0) {
     writer.writeString(
       1,
@@ -8485,10 +8485,10 @@ proto.szengine.ProcessRedoRecordRequest.serializeBinaryToWriter = function(messa
 
 
 /**
- * optional string redoRecord = 1;
+ * optional string redo_record = 1;
  * @return {string}
  */
-proto.szengine.ProcessRedoRecordRequest.prototype.getRedorecord = function() {
+proto.szengine.ProcessRedoRecordRequest.prototype.getRedoRecord = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -8497,7 +8497,7 @@ proto.szengine.ProcessRedoRecordRequest.prototype.getRedorecord = function() {
  * @param {string} value
  * @return {!proto.szengine.ProcessRedoRecordRequest} returns this
  */
-proto.szengine.ProcessRedoRecordRequest.prototype.setRedorecord = function(value) {
+proto.szengine.ProcessRedoRecordRequest.prototype.setRedoRecord = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -8682,7 +8682,7 @@ proto.szengine.ReevaluateEntityRequest.prototype.toObject = function(opt_include
  */
 proto.szengine.ReevaluateEntityRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    entityid: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    entityId: jspb.Message.getFieldWithDefault(msg, 1, 0),
     flags: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
@@ -8722,7 +8722,7 @@ proto.szengine.ReevaluateEntityRequest.deserializeBinaryFromReader = function(ms
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setEntityid(value);
+      msg.setEntityId(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt64());
@@ -8757,7 +8757,7 @@ proto.szengine.ReevaluateEntityRequest.prototype.serializeBinary = function() {
  */
 proto.szengine.ReevaluateEntityRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getEntityid();
+  f = message.getEntityId();
   if (f !== 0) {
     writer.writeInt64(
       1,
@@ -8775,10 +8775,10 @@ proto.szengine.ReevaluateEntityRequest.serializeBinaryToWriter = function(messag
 
 
 /**
- * optional int64 entityId = 1;
+ * optional int64 entity_id = 1;
  * @return {number}
  */
-proto.szengine.ReevaluateEntityRequest.prototype.getEntityid = function() {
+proto.szengine.ReevaluateEntityRequest.prototype.getEntityId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -8787,7 +8787,7 @@ proto.szengine.ReevaluateEntityRequest.prototype.getEntityid = function() {
  * @param {number} value
  * @return {!proto.szengine.ReevaluateEntityRequest} returns this
  */
-proto.szengine.ReevaluateEntityRequest.prototype.setEntityid = function(value) {
+proto.szengine.ReevaluateEntityRequest.prototype.setEntityId = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
@@ -8972,8 +8972,8 @@ proto.szengine.ReevaluateRecordRequest.prototype.toObject = function(opt_include
  */
 proto.szengine.ReevaluateRecordRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    datasourcecode: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    recordid: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    dataSourceCode: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    recordId: jspb.Message.getFieldWithDefault(msg, 2, ""),
     flags: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
@@ -9013,11 +9013,11 @@ proto.szengine.ReevaluateRecordRequest.deserializeBinaryFromReader = function(ms
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setDatasourcecode(value);
+      msg.setDataSourceCode(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRecordid(value);
+      msg.setRecordId(value);
       break;
     case 3:
       var value = /** @type {number} */ (reader.readInt64());
@@ -9052,14 +9052,14 @@ proto.szengine.ReevaluateRecordRequest.prototype.serializeBinary = function() {
  */
 proto.szengine.ReevaluateRecordRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getDatasourcecode();
+  f = message.getDataSourceCode();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getRecordid();
+  f = message.getRecordId();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -9077,10 +9077,10 @@ proto.szengine.ReevaluateRecordRequest.serializeBinaryToWriter = function(messag
 
 
 /**
- * optional string dataSourceCode = 1;
+ * optional string data_source_code = 1;
  * @return {string}
  */
-proto.szengine.ReevaluateRecordRequest.prototype.getDatasourcecode = function() {
+proto.szengine.ReevaluateRecordRequest.prototype.getDataSourceCode = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -9089,16 +9089,16 @@ proto.szengine.ReevaluateRecordRequest.prototype.getDatasourcecode = function() 
  * @param {string} value
  * @return {!proto.szengine.ReevaluateRecordRequest} returns this
  */
-proto.szengine.ReevaluateRecordRequest.prototype.setDatasourcecode = function(value) {
+proto.szengine.ReevaluateRecordRequest.prototype.setDataSourceCode = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string recordId = 2;
+ * optional string record_id = 2;
  * @return {string}
  */
-proto.szengine.ReevaluateRecordRequest.prototype.getRecordid = function() {
+proto.szengine.ReevaluateRecordRequest.prototype.getRecordId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -9107,7 +9107,7 @@ proto.szengine.ReevaluateRecordRequest.prototype.getRecordid = function() {
  * @param {string} value
  * @return {!proto.szengine.ReevaluateRecordRequest} returns this
  */
-proto.szengine.ReevaluateRecordRequest.prototype.setRecordid = function(value) {
+proto.szengine.ReevaluateRecordRequest.prototype.setRecordId = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -9292,7 +9292,7 @@ proto.szengine.ReinitializeRequest.prototype.toObject = function(opt_includeInst
  */
 proto.szengine.ReinitializeRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    configid: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    configId: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -9331,7 +9331,7 @@ proto.szengine.ReinitializeRequest.deserializeBinaryFromReader = function(msg, r
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setConfigid(value);
+      msg.setConfigId(value);
       break;
     default:
       reader.skipField();
@@ -9362,7 +9362,7 @@ proto.szengine.ReinitializeRequest.prototype.serializeBinary = function() {
  */
 proto.szengine.ReinitializeRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getConfigid();
+  f = message.getConfigId();
   if (f !== 0) {
     writer.writeInt64(
       1,
@@ -9373,10 +9373,10 @@ proto.szengine.ReinitializeRequest.serializeBinaryToWriter = function(message, w
 
 
 /**
- * optional int64 configId = 1;
+ * optional int64 config_id = 1;
  * @return {number}
  */
-proto.szengine.ReinitializeRequest.prototype.getConfigid = function() {
+proto.szengine.ReinitializeRequest.prototype.getConfigId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -9385,7 +9385,7 @@ proto.szengine.ReinitializeRequest.prototype.getConfigid = function() {
  * @param {number} value
  * @return {!proto.szengine.ReinitializeRequest} returns this
  */
-proto.szengine.ReinitializeRequest.prototype.setConfigid = function(value) {
+proto.szengine.ReinitializeRequest.prototype.setConfigId = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
@@ -9524,7 +9524,7 @@ proto.szengine.SearchByAttributesRequest.prototype.toObject = function(opt_inclu
 proto.szengine.SearchByAttributesRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     attributes: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    searchprofile: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    searchProfile: jspb.Message.getFieldWithDefault(msg, 2, ""),
     flags: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
@@ -9568,7 +9568,7 @@ proto.szengine.SearchByAttributesRequest.deserializeBinaryFromReader = function(
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setSearchprofile(value);
+      msg.setSearchProfile(value);
       break;
     case 3:
       var value = /** @type {number} */ (reader.readInt64());
@@ -9610,7 +9610,7 @@ proto.szengine.SearchByAttributesRequest.serializeBinaryToWriter = function(mess
       f
     );
   }
-  f = message.getSearchprofile();
+  f = message.getSearchProfile();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -9646,10 +9646,10 @@ proto.szengine.SearchByAttributesRequest.prototype.setAttributes = function(valu
 
 
 /**
- * optional string searchProfile = 2;
+ * optional string search_profile = 2;
  * @return {string}
  */
-proto.szengine.SearchByAttributesRequest.prototype.getSearchprofile = function() {
+proto.szengine.SearchByAttributesRequest.prototype.getSearchProfile = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -9658,7 +9658,7 @@ proto.szengine.SearchByAttributesRequest.prototype.getSearchprofile = function()
  * @param {string} value
  * @return {!proto.szengine.SearchByAttributesRequest} returns this
  */
-proto.szengine.SearchByAttributesRequest.prototype.setSearchprofile = function(value) {
+proto.szengine.SearchByAttributesRequest.prototype.setSearchProfile = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -9843,7 +9843,7 @@ proto.szengine.StreamExportCsvEntityReportRequest.prototype.toObject = function(
  */
 proto.szengine.StreamExportCsvEntityReportRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    csvcolumnlist: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    csvColumnList: jspb.Message.getFieldWithDefault(msg, 1, ""),
     flags: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
@@ -9883,7 +9883,7 @@ proto.szengine.StreamExportCsvEntityReportRequest.deserializeBinaryFromReader = 
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setCsvcolumnlist(value);
+      msg.setCsvColumnList(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt64());
@@ -9918,7 +9918,7 @@ proto.szengine.StreamExportCsvEntityReportRequest.prototype.serializeBinary = fu
  */
 proto.szengine.StreamExportCsvEntityReportRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getCsvcolumnlist();
+  f = message.getCsvColumnList();
   if (f.length > 0) {
     writer.writeString(
       1,
@@ -9936,10 +9936,10 @@ proto.szengine.StreamExportCsvEntityReportRequest.serializeBinaryToWriter = func
 
 
 /**
- * optional string csvColumnList = 1;
+ * optional string csv_column_list = 1;
  * @return {string}
  */
-proto.szengine.StreamExportCsvEntityReportRequest.prototype.getCsvcolumnlist = function() {
+proto.szengine.StreamExportCsvEntityReportRequest.prototype.getCsvColumnList = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -9948,7 +9948,7 @@ proto.szengine.StreamExportCsvEntityReportRequest.prototype.getCsvcolumnlist = f
  * @param {string} value
  * @return {!proto.szengine.StreamExportCsvEntityReportRequest} returns this
  */
-proto.szengine.StreamExportCsvEntityReportRequest.prototype.setCsvcolumnlist = function(value) {
+proto.szengine.StreamExportCsvEntityReportRequest.prototype.setCsvColumnList = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -10393,8 +10393,8 @@ proto.szengine.WhyEntitiesRequest.prototype.toObject = function(opt_includeInsta
  */
 proto.szengine.WhyEntitiesRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    entityid1: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    entityid2: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    entityId1: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    entityId2: jspb.Message.getFieldWithDefault(msg, 2, 0),
     flags: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
@@ -10434,11 +10434,11 @@ proto.szengine.WhyEntitiesRequest.deserializeBinaryFromReader = function(msg, re
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setEntityid1(value);
+      msg.setEntityId1(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setEntityid2(value);
+      msg.setEntityId2(value);
       break;
     case 3:
       var value = /** @type {number} */ (reader.readInt64());
@@ -10473,14 +10473,14 @@ proto.szengine.WhyEntitiesRequest.prototype.serializeBinary = function() {
  */
 proto.szengine.WhyEntitiesRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getEntityid1();
+  f = message.getEntityId1();
   if (f !== 0) {
     writer.writeInt64(
       1,
       f
     );
   }
-  f = message.getEntityid2();
+  f = message.getEntityId2();
   if (f !== 0) {
     writer.writeInt64(
       2,
@@ -10498,10 +10498,10 @@ proto.szengine.WhyEntitiesRequest.serializeBinaryToWriter = function(message, wr
 
 
 /**
- * optional int64 entityId1 = 1;
+ * optional int64 entity_id_1 = 1;
  * @return {number}
  */
-proto.szengine.WhyEntitiesRequest.prototype.getEntityid1 = function() {
+proto.szengine.WhyEntitiesRequest.prototype.getEntityId1 = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -10510,16 +10510,16 @@ proto.szengine.WhyEntitiesRequest.prototype.getEntityid1 = function() {
  * @param {number} value
  * @return {!proto.szengine.WhyEntitiesRequest} returns this
  */
-proto.szengine.WhyEntitiesRequest.prototype.setEntityid1 = function(value) {
+proto.szengine.WhyEntitiesRequest.prototype.setEntityId1 = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
 /**
- * optional int64 entityId2 = 2;
+ * optional int64 entity_id_2 = 2;
  * @return {number}
  */
-proto.szengine.WhyEntitiesRequest.prototype.getEntityid2 = function() {
+proto.szengine.WhyEntitiesRequest.prototype.getEntityId2 = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
@@ -10528,7 +10528,7 @@ proto.szengine.WhyEntitiesRequest.prototype.getEntityid2 = function() {
  * @param {number} value
  * @return {!proto.szengine.WhyEntitiesRequest} returns this
  */
-proto.szengine.WhyEntitiesRequest.prototype.setEntityid2 = function(value) {
+proto.szengine.WhyEntitiesRequest.prototype.setEntityId2 = function(value) {
   return jspb.Message.setProto3IntField(this, 2, value);
 };
 
@@ -10713,8 +10713,8 @@ proto.szengine.WhyRecordInEntityRequest.prototype.toObject = function(opt_includ
  */
 proto.szengine.WhyRecordInEntityRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    datasourcecode: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    recordid: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    dataSourceCode: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    recordId: jspb.Message.getFieldWithDefault(msg, 2, ""),
     flags: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
@@ -10754,11 +10754,11 @@ proto.szengine.WhyRecordInEntityRequest.deserializeBinaryFromReader = function(m
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setDatasourcecode(value);
+      msg.setDataSourceCode(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRecordid(value);
+      msg.setRecordId(value);
       break;
     case 3:
       var value = /** @type {number} */ (reader.readInt64());
@@ -10793,14 +10793,14 @@ proto.szengine.WhyRecordInEntityRequest.prototype.serializeBinary = function() {
  */
 proto.szengine.WhyRecordInEntityRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getDatasourcecode();
+  f = message.getDataSourceCode();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getRecordid();
+  f = message.getRecordId();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -10818,10 +10818,10 @@ proto.szengine.WhyRecordInEntityRequest.serializeBinaryToWriter = function(messa
 
 
 /**
- * optional string dataSourceCode = 1;
+ * optional string data_source_code = 1;
  * @return {string}
  */
-proto.szengine.WhyRecordInEntityRequest.prototype.getDatasourcecode = function() {
+proto.szengine.WhyRecordInEntityRequest.prototype.getDataSourceCode = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -10830,16 +10830,16 @@ proto.szengine.WhyRecordInEntityRequest.prototype.getDatasourcecode = function()
  * @param {string} value
  * @return {!proto.szengine.WhyRecordInEntityRequest} returns this
  */
-proto.szengine.WhyRecordInEntityRequest.prototype.setDatasourcecode = function(value) {
+proto.szengine.WhyRecordInEntityRequest.prototype.setDataSourceCode = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string recordId = 2;
+ * optional string record_id = 2;
  * @return {string}
  */
-proto.szengine.WhyRecordInEntityRequest.prototype.getRecordid = function() {
+proto.szengine.WhyRecordInEntityRequest.prototype.getRecordId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -10848,7 +10848,7 @@ proto.szengine.WhyRecordInEntityRequest.prototype.getRecordid = function() {
  * @param {string} value
  * @return {!proto.szengine.WhyRecordInEntityRequest} returns this
  */
-proto.szengine.WhyRecordInEntityRequest.prototype.setRecordid = function(value) {
+proto.szengine.WhyRecordInEntityRequest.prototype.setRecordId = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -11033,10 +11033,10 @@ proto.szengine.WhyRecordsRequest.prototype.toObject = function(opt_includeInstan
  */
 proto.szengine.WhyRecordsRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    datasourcecode1: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    recordid1: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    datasourcecode2: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    recordid2: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    dataSourceCode1: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    recordId1: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    dataSourceCode2: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    recordId2: jspb.Message.getFieldWithDefault(msg, 4, ""),
     flags: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
@@ -11076,19 +11076,19 @@ proto.szengine.WhyRecordsRequest.deserializeBinaryFromReader = function(msg, rea
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setDatasourcecode1(value);
+      msg.setDataSourceCode1(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRecordid1(value);
+      msg.setRecordId1(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setDatasourcecode2(value);
+      msg.setDataSourceCode2(value);
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRecordid2(value);
+      msg.setRecordId2(value);
       break;
     case 5:
       var value = /** @type {number} */ (reader.readInt64());
@@ -11123,28 +11123,28 @@ proto.szengine.WhyRecordsRequest.prototype.serializeBinary = function() {
  */
 proto.szengine.WhyRecordsRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getDatasourcecode1();
+  f = message.getDataSourceCode1();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getRecordid1();
+  f = message.getRecordId1();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getDatasourcecode2();
+  f = message.getDataSourceCode2();
   if (f.length > 0) {
     writer.writeString(
       3,
       f
     );
   }
-  f = message.getRecordid2();
+  f = message.getRecordId2();
   if (f.length > 0) {
     writer.writeString(
       4,
@@ -11162,10 +11162,10 @@ proto.szengine.WhyRecordsRequest.serializeBinaryToWriter = function(message, wri
 
 
 /**
- * optional string dataSourceCode1 = 1;
+ * optional string data_source_code_1 = 1;
  * @return {string}
  */
-proto.szengine.WhyRecordsRequest.prototype.getDatasourcecode1 = function() {
+proto.szengine.WhyRecordsRequest.prototype.getDataSourceCode1 = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -11174,16 +11174,16 @@ proto.szengine.WhyRecordsRequest.prototype.getDatasourcecode1 = function() {
  * @param {string} value
  * @return {!proto.szengine.WhyRecordsRequest} returns this
  */
-proto.szengine.WhyRecordsRequest.prototype.setDatasourcecode1 = function(value) {
+proto.szengine.WhyRecordsRequest.prototype.setDataSourceCode1 = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string recordId1 = 2;
+ * optional string record_id_1 = 2;
  * @return {string}
  */
-proto.szengine.WhyRecordsRequest.prototype.getRecordid1 = function() {
+proto.szengine.WhyRecordsRequest.prototype.getRecordId1 = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -11192,16 +11192,16 @@ proto.szengine.WhyRecordsRequest.prototype.getRecordid1 = function() {
  * @param {string} value
  * @return {!proto.szengine.WhyRecordsRequest} returns this
  */
-proto.szengine.WhyRecordsRequest.prototype.setRecordid1 = function(value) {
+proto.szengine.WhyRecordsRequest.prototype.setRecordId1 = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional string dataSourceCode2 = 3;
+ * optional string data_source_code_2 = 3;
  * @return {string}
  */
-proto.szengine.WhyRecordsRequest.prototype.getDatasourcecode2 = function() {
+proto.szengine.WhyRecordsRequest.prototype.getDataSourceCode2 = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -11210,16 +11210,16 @@ proto.szengine.WhyRecordsRequest.prototype.getDatasourcecode2 = function() {
  * @param {string} value
  * @return {!proto.szengine.WhyRecordsRequest} returns this
  */
-proto.szengine.WhyRecordsRequest.prototype.setDatasourcecode2 = function(value) {
+proto.szengine.WhyRecordsRequest.prototype.setDataSourceCode2 = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * optional string recordId2 = 4;
+ * optional string record_id_2 = 4;
  * @return {string}
  */
-proto.szengine.WhyRecordsRequest.prototype.getRecordid2 = function() {
+proto.szengine.WhyRecordsRequest.prototype.getRecordId2 = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
@@ -11228,7 +11228,7 @@ proto.szengine.WhyRecordsRequest.prototype.getRecordid2 = function() {
  * @param {string} value
  * @return {!proto.szengine.WhyRecordsRequest} returns this
  */
-proto.szengine.WhyRecordsRequest.prototype.setRecordid2 = function(value) {
+proto.szengine.WhyRecordsRequest.prototype.setRecordId2 = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
 };
 

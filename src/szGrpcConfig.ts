@@ -80,8 +80,8 @@ export class SzGrpcConfig extends SzGrpcBase implements SzConfig {
                     return;
                 }
                 const request = new AddDataSourceRequest();
-                request.setConfighandle(configHandle);
-                request.setDatasourcecode(dataSourceCode);
+                request.setConfigHandle(configHandle);
+                request.setDataSourceCode(dataSourceCode);
     
                 this.client.addDataSource(request, (err, res: AddDataSourceResponse) => {
                     if(err) {
@@ -188,7 +188,7 @@ export class SzGrpcConfig extends SzGrpcBase implements SzConfig {
                     return;
                 }
                 const request = new CloseConfigRequest();
-                request.setConfighandle(configHandle);
+                request.setConfigHandle(configHandle);
                 this.client.closeConfig(request, (err, res: CloseConfigResponse) => {
                     if(err) {
                         reject( newException(err.details) )
@@ -250,8 +250,8 @@ export class SzGrpcConfig extends SzGrpcBase implements SzConfig {
                     return;
                 }
                 const request = new DeleteDataSourceRequest();
-                request.setConfighandle(configHandle);
-                request.setDatasourcecode(dataSourceCode);
+                request.setConfigHandle(configHandle);
+                request.setDataSourceCode(dataSourceCode);
 
                 this.client.deleteDataSource(request, (err, res: DeleteDataSourceResponse) => {
                     if(err) {
@@ -281,7 +281,7 @@ export class SzGrpcConfig extends SzGrpcBase implements SzConfig {
                     return;
                 }
                 const request = new ExportConfigRequest();
-                request.setConfighandle(configHandle);
+                request.setConfigHandle(configHandle);
                 this.client.exportConfig(request, (err, res: ExportConfigResponse) => {
                     if(err) {
                         reject( newException(err.details) )
@@ -311,7 +311,7 @@ export class SzGrpcConfig extends SzGrpcBase implements SzConfig {
                 }
 
                 const request = new GetDataSourcesRequest();
-                request.setConfighandle(configHandle);
+                request.setConfigHandle(configHandle);
                 this.client.getDataSources(request, (err, res: GetDataSourcesResponse) => {
                     if(err) {
                         reject( newException(err.details) )
@@ -344,7 +344,7 @@ export class SzGrpcConfig extends SzGrpcBase implements SzConfig {
                     return;
                 }
                 const request = new ImportConfigRequest();
-                request.setConfigdefinition(configDefinition);
+                request.setConfigDefinition(configDefinition);
                 this.client.importConfig(request, (err, res: ImportConfigResponse) => {
                     if(err) {
                         reject( newException(err.details) )

@@ -273,7 +273,7 @@ proto.szdiagnostic.CheckDatastorePerformanceRequest.prototype.toObject = functio
  */
 proto.szdiagnostic.CheckDatastorePerformanceRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    secondstorun: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    secondsToRun: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -312,7 +312,7 @@ proto.szdiagnostic.CheckDatastorePerformanceRequest.deserializeBinaryFromReader 
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt32());
-      msg.setSecondstorun(value);
+      msg.setSecondsToRun(value);
       break;
     default:
       reader.skipField();
@@ -343,7 +343,7 @@ proto.szdiagnostic.CheckDatastorePerformanceRequest.prototype.serializeBinary = 
  */
 proto.szdiagnostic.CheckDatastorePerformanceRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getSecondstorun();
+  f = message.getSecondsToRun();
   if (f !== 0) {
     writer.writeInt32(
       1,
@@ -354,10 +354,10 @@ proto.szdiagnostic.CheckDatastorePerformanceRequest.serializeBinaryToWriter = fu
 
 
 /**
- * optional int32 secondsToRun = 1;
+ * optional int32 seconds_to_run = 1;
  * @return {number}
  */
-proto.szdiagnostic.CheckDatastorePerformanceRequest.prototype.getSecondstorun = function() {
+proto.szdiagnostic.CheckDatastorePerformanceRequest.prototype.getSecondsToRun = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -366,7 +366,7 @@ proto.szdiagnostic.CheckDatastorePerformanceRequest.prototype.getSecondstorun = 
  * @param {number} value
  * @return {!proto.szdiagnostic.CheckDatastorePerformanceRequest} returns this
  */
-proto.szdiagnostic.CheckDatastorePerformanceRequest.prototype.setSecondstorun = function(value) {
+proto.szdiagnostic.CheckDatastorePerformanceRequest.prototype.setSecondsToRun = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
@@ -764,7 +764,7 @@ proto.szdiagnostic.GetFeatureRequest.prototype.toObject = function(opt_includeIn
  */
 proto.szdiagnostic.GetFeatureRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    featureid: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    featureId: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -803,7 +803,7 @@ proto.szdiagnostic.GetFeatureRequest.deserializeBinaryFromReader = function(msg,
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setFeatureid(value);
+      msg.setFeatureId(value);
       break;
     default:
       reader.skipField();
@@ -834,7 +834,7 @@ proto.szdiagnostic.GetFeatureRequest.prototype.serializeBinary = function() {
  */
 proto.szdiagnostic.GetFeatureRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getFeatureid();
+  f = message.getFeatureId();
   if (f !== 0) {
     writer.writeInt64(
       1,
@@ -845,10 +845,10 @@ proto.szdiagnostic.GetFeatureRequest.serializeBinaryToWriter = function(message,
 
 
 /**
- * optional int64 featureId = 1;
+ * optional int64 feature_id = 1;
  * @return {number}
  */
-proto.szdiagnostic.GetFeatureRequest.prototype.getFeatureid = function() {
+proto.szdiagnostic.GetFeatureRequest.prototype.getFeatureId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -857,7 +857,7 @@ proto.szdiagnostic.GetFeatureRequest.prototype.getFeatureid = function() {
  * @param {number} value
  * @return {!proto.szdiagnostic.GetFeatureRequest} returns this
  */
-proto.szdiagnostic.GetFeatureRequest.prototype.setFeatureid = function(value) {
+proto.szdiagnostic.GetFeatureRequest.prototype.setFeatureId = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
@@ -1226,7 +1226,7 @@ proto.szdiagnostic.ReinitializeRequest.prototype.toObject = function(opt_include
  */
 proto.szdiagnostic.ReinitializeRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    configid: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    configId: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -1265,7 +1265,7 @@ proto.szdiagnostic.ReinitializeRequest.deserializeBinaryFromReader = function(ms
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setConfigid(value);
+      msg.setConfigId(value);
       break;
     default:
       reader.skipField();
@@ -1296,7 +1296,7 @@ proto.szdiagnostic.ReinitializeRequest.prototype.serializeBinary = function() {
  */
 proto.szdiagnostic.ReinitializeRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getConfigid();
+  f = message.getConfigId();
   if (f !== 0) {
     writer.writeInt64(
       1,
@@ -1307,10 +1307,10 @@ proto.szdiagnostic.ReinitializeRequest.serializeBinaryToWriter = function(messag
 
 
 /**
- * optional int64 configId = 1;
+ * optional int64 config_id = 1;
  * @return {number}
  */
-proto.szdiagnostic.ReinitializeRequest.prototype.getConfigid = function() {
+proto.szdiagnostic.ReinitializeRequest.prototype.getConfigId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -1319,7 +1319,7 @@ proto.szdiagnostic.ReinitializeRequest.prototype.getConfigid = function() {
  * @param {number} value
  * @return {!proto.szdiagnostic.ReinitializeRequest} returns this
  */
-proto.szdiagnostic.ReinitializeRequest.prototype.setConfigid = function(value) {
+proto.szdiagnostic.ReinitializeRequest.prototype.setConfigId = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 

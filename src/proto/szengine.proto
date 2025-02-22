@@ -2,7 +2,7 @@ syntax = "proto3";
 package szengine;
 
 option go_package = "github.com/senzing-garage/sz-sdk-go-grpc/szengine";
-option java_package = "com.senzing.sz.engine.grpc.SzEngine";
+option java_package = "com.senzing.sdk.grpc";
 option java_outer_classname = "SzEngineProto";
 
 service SzEngine {
@@ -42,9 +42,9 @@ service SzEngine {
 }
 
 message AddRecordRequest {
-  string dataSourceCode = 1;
-  string recordId = 2;
-  string recordDefinition = 3;
+  string data_source_code = 1;
+  string record_id = 2;
+  string record_definition = 3;
   int64 flags = 4;
 }
 
@@ -53,7 +53,7 @@ message AddRecordResponse {
 }
 
 message CloseExportRequest {
-  int64 exportHandle = 1;
+  int64 export_handle = 1;
 }
 
 message CloseExportResponse {}
@@ -65,8 +65,8 @@ message CountRedoRecordsResponse {
 }
 
 message DeleteRecordRequest {
-  string dataSourceCode = 1;
-  string recordId = 2;
+  string data_source_code = 1;
+  string record_id = 2;
   int64 flags = 3;
 }
 
@@ -75,7 +75,7 @@ message DeleteRecordResponse {
 }
 
 message ExportCsvEntityReportRequest {
-  string csvColumnList = 1;
+  string csv_column_list = 1;
   int64 flags = 2;
 }
 
@@ -92,7 +92,7 @@ message ExportJsonEntityReportResponse {
 }
 
 message FetchNextRequest {
-  int64 exportHandle = 1;
+  int64 export_handle = 1;
 }
 
 message FetchNextResponse {
@@ -100,7 +100,7 @@ message FetchNextResponse {
 }
 
 message FindInterestingEntitiesByEntityIdRequest {
-  int64 entityId = 1;
+  int64 entity_id = 1;
   int64 flags = 2;
 }
 
@@ -109,8 +109,8 @@ message FindInterestingEntitiesByEntityIdResponse {
 }
 
 message FindInterestingEntitiesByRecordIdRequest {
-  string dataSourceCode = 1;
-  string recordId = 2;
+  string data_source_code = 1;
+  string record_id = 2;
   int64 flags = 3;
 }
 
@@ -119,10 +119,10 @@ message FindInterestingEntitiesByRecordIdResponse {
 }
 
 message FindNetworkByEntityIdRequest {
-  string entityIds = 1;
-  int64 maxDegrees = 2;
-  int64 buildOutDegrees = 3;
-  int64 buildOutMaxEntities = 4;
+  string entity_ids = 1;
+  int64 max_degrees = 2;
+  int64 build_out_degrees = 3;
+  int64 build_out_max_entities = 4;
   int64 flags = 5;
 }
 
@@ -131,10 +131,10 @@ message FindNetworkByEntityIdResponse {
 }
 
 message FindNetworkByRecordIdRequest {
-  string recordKeys = 1;
-  int64 maxDegrees = 2;
-  int64 buildOutDegrees = 3;
-  int64 buildOutMaxEntities = 4;
+  string record_keys = 1;
+  int64 max_degrees = 2;
+  int64 build_out_degrees = 3;
+  int64 build_out_max_entities = 4;
   int64 flags = 5;
 }
 
@@ -143,11 +143,11 @@ message FindNetworkByRecordIdResponse {
 }
 
 message FindPathByEntityIdRequest {
-  int64 startEntityId = 1;
-  int64 endEntityId = 2;
-  int64 maxDegrees = 3;
-  string avoidEntityIds = 4;
-  string requiredDataSources = 5;
+  int64 start_entity_id = 1;
+  int64 end_entity_id = 2;
+  int64 max_degrees = 3;
+  string avoid_entity_ids = 4;
+  string required_data_sources = 5;
   int64 flags = 6;
 }
 
@@ -156,13 +156,13 @@ message FindPathByEntityIdResponse {
 }
 
 message FindPathByRecordIdRequest {
-  string startDataSourceCode = 1;
-  string startRecordId = 2;
-  string endDataSourceCode = 3;
-  string endRecordId = 4;
-  int64 maxDegrees = 5;
-  string avoidRecordKeys = 6;
-  string requiredDataSources = 7;
+  string start_data_source_code = 1;
+  string start_record_id = 2;
+  string end_data_source_code = 3;
+  string end_record_id = 4;
+  int64 max_degrees = 5;
+  string avoid_record_keys = 6;
+  string required_data_sources = 7;
   int64 flags = 8;
 }
 
@@ -177,7 +177,7 @@ message GetActiveConfigIdResponse {
 }
 
 message GetEntityByEntityIdRequest {
-  int64 entityId = 1;
+  int64 entity_id = 1;
   int64 flags = 2;
 }
 
@@ -186,8 +186,8 @@ message GetEntityByEntityIdResponse {
 }
 
 message GetEntityByRecordIdRequest {
-  string dataSourceCode = 1;
-  string recordId = 2;
+  string data_source_code = 1;
+  string record_id = 2;
   int64 flags = 3;
 }
 
@@ -196,8 +196,8 @@ message GetEntityByRecordIdResponse {
 }
 
 message GetRecordRequest {
-  string dataSourceCode = 1;
-  string recordId = 2;
+  string data_source_code = 1;
+  string record_id = 2;
   int64 flags = 3;
 }
 
@@ -218,7 +218,7 @@ message GetStatsResponse {
 }
 
 message GetVirtualEntityByRecordIdRequest {
-  string recordKeys = 1;
+  string record_keys = 1;
   int64 flags = 2;
 }
 
@@ -227,7 +227,7 @@ message GetVirtualEntityByRecordIdResponse {
 }
 
 message HowEntityByEntityIdRequest {
-  int64 entityId = 1;
+  int64 entity_id = 1;
   int64 flags = 2;
 }
 
@@ -237,7 +237,7 @@ message HowEntityByEntityIdResponse {
 
 
 message PreprocessRecordRequest {
-  string recordDefinition = 1;
+  string record_definition = 1;
   int64 flags = 2;
 }
 
@@ -250,7 +250,7 @@ message PrimeEngineRequest {}
 message PrimeEngineResponse {}
 
 message ProcessRedoRecordRequest {
-  string redoRecord = 1;
+  string redo_record = 1;
   int64 flags = 2;
 }
 
@@ -259,7 +259,7 @@ message ProcessRedoRecordResponse {
 }
 
 message ReevaluateEntityRequest {
-  int64 entityId = 1;
+  int64 entity_id = 1;
   int64 flags = 2;
 }
 
@@ -268,8 +268,8 @@ message ReevaluateEntityResponse {
 }
 
 message ReevaluateRecordRequest {
-  string dataSourceCode = 1;
-  string recordId = 2;
+  string data_source_code = 1;
+  string record_id = 2;
   int64 flags = 3;
 }
 
@@ -278,14 +278,14 @@ message ReevaluateRecordResponse {
 }
 
 message ReinitializeRequest {
-  int64 configId = 1;
+  int64 config_id = 1;
 }
 
 message ReinitializeResponse {}
 
 message SearchByAttributesRequest {
   string attributes = 1;
-  string searchProfile = 2;
+  string search_profile = 2;
   int64 flags = 3;
 }
 
@@ -294,7 +294,7 @@ message SearchByAttributesResponse {
 }
 
 message StreamExportCsvEntityReportRequest {
-  string csvColumnList = 1;
+  string csv_column_list = 1;
   int64 flags = 2;
 }
 
@@ -311,8 +311,8 @@ message StreamExportJsonEntityReportResponse {
 }
 
 message WhyEntitiesRequest {
-  int64 entityId1 = 1;
-  int64 entityId2 = 2;
+  int64 entity_id_1 = 1;
+  int64 entity_id_2 = 2;
   int64 flags = 3;
 }
 
@@ -321,8 +321,8 @@ message WhyEntitiesResponse {
 }
 
 message WhyRecordInEntityRequest {
-  string dataSourceCode = 1;
-  string recordId = 2;
+  string data_source_code = 1;
+  string record_id = 2;
   int64 flags = 3;
 }
 
@@ -331,10 +331,10 @@ message WhyRecordInEntityResponse {
 }
 
 message WhyRecordsRequest {
-  string dataSourceCode1 = 1;
-  string recordId1 = 2;
-  string dataSourceCode2 = 3;
-  string recordId2 = 4;
+  string data_source_code_1 = 1;
+  string record_id_1 = 2;
+  string data_source_code_2 = 3;
+  string record_id_2 = 4;
   int64 flags = 5;
 }
 

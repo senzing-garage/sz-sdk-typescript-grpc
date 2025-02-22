@@ -75,7 +75,7 @@ export function bigIntToNumber(value: BigInt | number): number {
  */
 export function asString(value: string | Map<any, any> | {[key: string] : any}): string {
     let retVal = value as string;
-    if(typeof (value as Map<any, any>).entries) {
+    if((value as Map<any, any>).entries) {
         // is map
         retVal = JSON.stringify(
             Object.fromEntries( (value as Map<any, any>) )

@@ -2,7 +2,7 @@ syntax = "proto3";
 package szdiagnostic;
 
 option go_package = "github.com/senzing-garage/sz-sdk-go-grpc/szdiagnostic";
-option java_package = "com.senzing.sz.engine.grpc.SzDiagnostic";
+option java_package = "com.senzing.sdk.grpc";
 option java_outer_classname = "SzDiagnosticProto";
 
 service SzDiagnostic {
@@ -14,7 +14,7 @@ service SzDiagnostic {
 }
 
 message CheckDatastorePerformanceRequest {
-  int32 secondsToRun = 1;
+  int32 seconds_to_run = 1;
 }
 
 message CheckDatastorePerformanceResponse {
@@ -29,7 +29,7 @@ message GetDatastoreInfoResponse {
 }
 
 message GetFeatureRequest {
-  int64 featureId = 1;
+  int64 feature_id = 1;
 }
 
 message GetFeatureResponse {
@@ -41,7 +41,7 @@ message PurgeRepositoryRequest {}
 message PurgeRepositoryResponse {}
 
 message ReinitializeRequest {
-  int64 configId = 1;
+  int64 config_id = 1;
 }
 
 message ReinitializeResponse {}
