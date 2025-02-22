@@ -4,7 +4,9 @@ const szEnvironment         = new SzGrpcEnvironment({connectionString: `0.0.0.0:
 
 szEnvironment.config.createConfig().then((configHandle) => {
     szEnvironment.config.exportConfig(configHandle as number).then((configDefinition) => {
-        szEnvironment.configManager.addConfig(JSON.stringify(configDefinition));
+        szEnvironment.configManager.addConfig(configDefinition as string).then((configId: number) => {
+            console.log(`new config #:\n\r`, configId);
+        });
     }).catch((err) => {
         throw err;
     })

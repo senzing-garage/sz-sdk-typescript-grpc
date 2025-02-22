@@ -2,7 +2,7 @@ syntax = "proto3";
 package szconfig;
 
 option go_package = "github.com/senzing-garage/sz-sdk-go-grpc/szconfig";
-option java_package = "com.senzing.sz.engine.grpc.SzConfig";
+option java_package = "com.senzing.sdk.grpc";
 option java_outer_classname = "SzConfigProto";
 
 service SzConfig {
@@ -16,8 +16,8 @@ service SzConfig {
 }
 
 message AddDataSourceRequest {
-  int64 configHandle = 1;
-  string dataSourceCode = 2;
+  int64 config_handle = 1;
+  string data_source_code = 2;
 }
 
 message AddDataSourceResponse {
@@ -25,7 +25,7 @@ message AddDataSourceResponse {
 }
 
 message CloseConfigRequest {
-  int64 configHandle = 1;
+  int64 config_handle = 1;
 }
 
 message CloseConfigResponse {}
@@ -37,14 +37,14 @@ message CreateConfigResponse {
 }
 
 message DeleteDataSourceRequest {
-  int64 configHandle = 1;
-  string dataSourceCode = 2;
+  int64 config_handle = 1;
+  string data_source_code = 2;
 }
 
 message DeleteDataSourceResponse {}
 
 message ExportConfigRequest {
-  int64 configHandle = 1;
+  int64 config_handle = 1;
 }
 
 message ExportConfigResponse {
@@ -52,7 +52,7 @@ message ExportConfigResponse {
 }
 
 message GetDataSourcesRequest {
-  int64 configHandle = 1;
+  int64 config_handle = 1;
 }
 
 message GetDataSourcesResponse {
@@ -60,7 +60,7 @@ message GetDataSourcesResponse {
 }
 
 message ImportConfigRequest {
-  string configDefinition = 1;
+  string config_definition = 1;
 }
 
 message ImportConfigResponse {
