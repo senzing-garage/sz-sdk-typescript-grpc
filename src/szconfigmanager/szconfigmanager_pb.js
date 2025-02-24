@@ -317,8 +317,8 @@ proto.szconfigmanager.AddConfigRequest.prototype.toObject = function(opt_include
  */
 proto.szconfigmanager.AddConfigRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    configdefinition: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    configcomment: jspb.Message.getFieldWithDefault(msg, 2, "")
+    configDefinition: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    configComment: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -357,11 +357,11 @@ proto.szconfigmanager.AddConfigRequest.deserializeBinaryFromReader = function(ms
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setConfigdefinition(value);
+      msg.setConfigDefinition(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setConfigcomment(value);
+      msg.setConfigComment(value);
       break;
     default:
       reader.skipField();
@@ -392,14 +392,14 @@ proto.szconfigmanager.AddConfigRequest.prototype.serializeBinary = function() {
  */
 proto.szconfigmanager.AddConfigRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getConfigdefinition();
+  f = message.getConfigDefinition();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getConfigcomment();
+  f = message.getConfigComment();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -410,10 +410,10 @@ proto.szconfigmanager.AddConfigRequest.serializeBinaryToWriter = function(messag
 
 
 /**
- * optional string configDefinition = 1;
+ * optional string config_definition = 1;
  * @return {string}
  */
-proto.szconfigmanager.AddConfigRequest.prototype.getConfigdefinition = function() {
+proto.szconfigmanager.AddConfigRequest.prototype.getConfigDefinition = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -422,16 +422,16 @@ proto.szconfigmanager.AddConfigRequest.prototype.getConfigdefinition = function(
  * @param {string} value
  * @return {!proto.szconfigmanager.AddConfigRequest} returns this
  */
-proto.szconfigmanager.AddConfigRequest.prototype.setConfigdefinition = function(value) {
+proto.szconfigmanager.AddConfigRequest.prototype.setConfigDefinition = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string configComment = 2;
+ * optional string config_comment = 2;
  * @return {string}
  */
-proto.szconfigmanager.AddConfigRequest.prototype.getConfigcomment = function() {
+proto.szconfigmanager.AddConfigRequest.prototype.getConfigComment = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -440,7 +440,7 @@ proto.szconfigmanager.AddConfigRequest.prototype.getConfigcomment = function() {
  * @param {string} value
  * @return {!proto.szconfigmanager.AddConfigRequest} returns this
  */
-proto.szconfigmanager.AddConfigRequest.prototype.setConfigcomment = function(value) {
+proto.szconfigmanager.AddConfigRequest.prototype.setConfigComment = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -607,7 +607,7 @@ proto.szconfigmanager.GetConfigRequest.prototype.toObject = function(opt_include
  */
 proto.szconfigmanager.GetConfigRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    configid: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    configId: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -646,7 +646,7 @@ proto.szconfigmanager.GetConfigRequest.deserializeBinaryFromReader = function(ms
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setConfigid(value);
+      msg.setConfigId(value);
       break;
     default:
       reader.skipField();
@@ -677,7 +677,7 @@ proto.szconfigmanager.GetConfigRequest.prototype.serializeBinary = function() {
  */
 proto.szconfigmanager.GetConfigRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getConfigid();
+  f = message.getConfigId();
   if (f !== 0) {
     writer.writeInt64(
       1,
@@ -688,10 +688,10 @@ proto.szconfigmanager.GetConfigRequest.serializeBinaryToWriter = function(messag
 
 
 /**
- * optional int64 configId = 1;
+ * optional int64 config_id = 1;
  * @return {number}
  */
-proto.szconfigmanager.GetConfigRequest.prototype.getConfigid = function() {
+proto.szconfigmanager.GetConfigRequest.prototype.getConfigId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -700,7 +700,7 @@ proto.szconfigmanager.GetConfigRequest.prototype.getConfigid = function() {
  * @param {number} value
  * @return {!proto.szconfigmanager.GetConfigRequest} returns this
  */
-proto.szconfigmanager.GetConfigRequest.prototype.setConfigid = function(value) {
+proto.szconfigmanager.GetConfigRequest.prototype.setConfigId = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
@@ -1329,8 +1329,8 @@ proto.szconfigmanager.ReplaceDefaultConfigIdRequest.prototype.toObject = functio
  */
 proto.szconfigmanager.ReplaceDefaultConfigIdRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    currentdefaultconfigid: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    newdefaultconfigid: jspb.Message.getFieldWithDefault(msg, 2, 0)
+    currentDefaultConfigId: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    newDefaultConfigId: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -1369,11 +1369,11 @@ proto.szconfigmanager.ReplaceDefaultConfigIdRequest.deserializeBinaryFromReader 
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setCurrentdefaultconfigid(value);
+      msg.setCurrentDefaultConfigId(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setNewdefaultconfigid(value);
+      msg.setNewDefaultConfigId(value);
       break;
     default:
       reader.skipField();
@@ -1404,14 +1404,14 @@ proto.szconfigmanager.ReplaceDefaultConfigIdRequest.prototype.serializeBinary = 
  */
 proto.szconfigmanager.ReplaceDefaultConfigIdRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getCurrentdefaultconfigid();
+  f = message.getCurrentDefaultConfigId();
   if (f !== 0) {
     writer.writeInt64(
       1,
       f
     );
   }
-  f = message.getNewdefaultconfigid();
+  f = message.getNewDefaultConfigId();
   if (f !== 0) {
     writer.writeInt64(
       2,
@@ -1422,10 +1422,10 @@ proto.szconfigmanager.ReplaceDefaultConfigIdRequest.serializeBinaryToWriter = fu
 
 
 /**
- * optional int64 currentDefaultConfigId = 1;
+ * optional int64 current_default_config_id = 1;
  * @return {number}
  */
-proto.szconfigmanager.ReplaceDefaultConfigIdRequest.prototype.getCurrentdefaultconfigid = function() {
+proto.szconfigmanager.ReplaceDefaultConfigIdRequest.prototype.getCurrentDefaultConfigId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -1434,16 +1434,16 @@ proto.szconfigmanager.ReplaceDefaultConfigIdRequest.prototype.getCurrentdefaultc
  * @param {number} value
  * @return {!proto.szconfigmanager.ReplaceDefaultConfigIdRequest} returns this
  */
-proto.szconfigmanager.ReplaceDefaultConfigIdRequest.prototype.setCurrentdefaultconfigid = function(value) {
+proto.szconfigmanager.ReplaceDefaultConfigIdRequest.prototype.setCurrentDefaultConfigId = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
 /**
- * optional int64 newDefaultConfigId = 2;
+ * optional int64 new_default_config_id = 2;
  * @return {number}
  */
-proto.szconfigmanager.ReplaceDefaultConfigIdRequest.prototype.getNewdefaultconfigid = function() {
+proto.szconfigmanager.ReplaceDefaultConfigIdRequest.prototype.getNewDefaultConfigId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
@@ -1452,7 +1452,7 @@ proto.szconfigmanager.ReplaceDefaultConfigIdRequest.prototype.getNewdefaultconfi
  * @param {number} value
  * @return {!proto.szconfigmanager.ReplaceDefaultConfigIdRequest} returns this
  */
-proto.szconfigmanager.ReplaceDefaultConfigIdRequest.prototype.setNewdefaultconfigid = function(value) {
+proto.szconfigmanager.ReplaceDefaultConfigIdRequest.prototype.setNewDefaultConfigId = function(value) {
   return jspb.Message.setProto3IntField(this, 2, value);
 };
 
@@ -1590,7 +1590,7 @@ proto.szconfigmanager.SetDefaultConfigIdRequest.prototype.toObject = function(op
  */
 proto.szconfigmanager.SetDefaultConfigIdRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    configid: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    configId: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -1629,7 +1629,7 @@ proto.szconfigmanager.SetDefaultConfigIdRequest.deserializeBinaryFromReader = fu
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setConfigid(value);
+      msg.setConfigId(value);
       break;
     default:
       reader.skipField();
@@ -1660,7 +1660,7 @@ proto.szconfigmanager.SetDefaultConfigIdRequest.prototype.serializeBinary = func
  */
 proto.szconfigmanager.SetDefaultConfigIdRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getConfigid();
+  f = message.getConfigId();
   if (f !== 0) {
     writer.writeInt64(
       1,
@@ -1671,10 +1671,10 @@ proto.szconfigmanager.SetDefaultConfigIdRequest.serializeBinaryToWriter = functi
 
 
 /**
- * optional int64 configId = 1;
+ * optional int64 config_id = 1;
  * @return {number}
  */
-proto.szconfigmanager.SetDefaultConfigIdRequest.prototype.getConfigid = function() {
+proto.szconfigmanager.SetDefaultConfigIdRequest.prototype.getConfigId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -1683,7 +1683,7 @@ proto.szconfigmanager.SetDefaultConfigIdRequest.prototype.getConfigid = function
  * @param {number} value
  * @return {!proto.szconfigmanager.SetDefaultConfigIdRequest} returns this
  */
-proto.szconfigmanager.SetDefaultConfigIdRequest.prototype.setConfigid = function(value) {
+proto.szconfigmanager.SetDefaultConfigIdRequest.prototype.setConfigId = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 

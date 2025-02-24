@@ -7,10 +7,10 @@
 import * as jspb from "google-protobuf";
 
 export class AddConfigRequest extends jspb.Message { 
-    getConfigdefinition(): string;
-    setConfigdefinition(value: string): AddConfigRequest;
-    getConfigcomment(): string;
-    setConfigcomment(value: string): AddConfigRequest;
+    getConfigDefinition(): string;
+    setConfigDefinition(value: string): AddConfigRequest;
+    getConfigComment(): string;
+    setConfigComment(value: string): AddConfigRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): AddConfigRequest.AsObject;
@@ -24,8 +24,8 @@ export class AddConfigRequest extends jspb.Message {
 
 export namespace AddConfigRequest {
     export type AsObject = {
-        configdefinition: string,
-        configcomment: string,
+        configDefinition: string,
+        configComment: string,
     }
 }
 
@@ -50,8 +50,8 @@ export namespace AddConfigResponse {
 }
 
 export class GetConfigRequest extends jspb.Message { 
-    getConfigid(): number;
-    setConfigid(value: number): GetConfigRequest;
+    getConfigId(): number;
+    setConfigId(value: number): GetConfigRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetConfigRequest.AsObject;
@@ -65,7 +65,7 @@ export class GetConfigRequest extends jspb.Message {
 
 export namespace GetConfigRequest {
     export type AsObject = {
-        configid: number,
+        configId: number,
     }
 }
 
@@ -164,10 +164,10 @@ export namespace GetDefaultConfigIdResponse {
 }
 
 export class ReplaceDefaultConfigIdRequest extends jspb.Message { 
-    getCurrentdefaultconfigid(): number;
-    setCurrentdefaultconfigid(value: number): ReplaceDefaultConfigIdRequest;
-    getNewdefaultconfigid(): number;
-    setNewdefaultconfigid(value: number): ReplaceDefaultConfigIdRequest;
+    getCurrentDefaultConfigId(): number;
+    setCurrentDefaultConfigId(value: number): ReplaceDefaultConfigIdRequest;
+    getNewDefaultConfigId(): number;
+    setNewDefaultConfigId(value: number): ReplaceDefaultConfigIdRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): ReplaceDefaultConfigIdRequest.AsObject;
@@ -181,8 +181,8 @@ export class ReplaceDefaultConfigIdRequest extends jspb.Message {
 
 export namespace ReplaceDefaultConfigIdRequest {
     export type AsObject = {
-        currentdefaultconfigid: number,
-        newdefaultconfigid: number,
+        currentDefaultConfigId: number,
+        newDefaultConfigId: number,
     }
 }
 
@@ -204,8 +204,8 @@ export namespace ReplaceDefaultConfigIdResponse {
 }
 
 export class SetDefaultConfigIdRequest extends jspb.Message { 
-    getConfigid(): number;
-    setConfigid(value: number): SetDefaultConfigIdRequest;
+    getConfigId(): number;
+    setConfigId(value: number): SetDefaultConfigIdRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): SetDefaultConfigIdRequest.AsObject;
@@ -219,7 +219,7 @@ export class SetDefaultConfigIdRequest extends jspb.Message {
 
 export namespace SetDefaultConfigIdRequest {
     export type AsObject = {
-        configid: number,
+        configId: number,
     }
 }
 

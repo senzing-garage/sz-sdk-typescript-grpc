@@ -1,6 +1,6 @@
 {
   "name": "sz-sdk-typescript-grpc",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "build": "npm run tsc && node --disable-warning=ExperimentalWarning build.js",
     "build:documentation:json": "typedoc --json docs/sz-sdk-typescript-grpc.json",
