@@ -41,6 +41,7 @@ interface ISzEngineService extends grpc.ServiceDefinition<grpc.UntypedServiceImp
     whyEntities: ISzEngineService_IWhyEntities;
     whyRecordInEntity: ISzEngineService_IWhyRecordInEntity;
     whyRecords: ISzEngineService_IWhyRecords;
+    whySearch: ISzEngineService_IWhySearch;
 }
 
 interface ISzEngineService_IAddRecord extends grpc.MethodDefinition<szengine_pb.AddRecordRequest, szengine_pb.AddRecordResponse> {
@@ -340,6 +341,15 @@ interface ISzEngineService_IWhyRecords extends grpc.MethodDefinition<szengine_pb
     responseSerialize: grpc.serialize<szengine_pb.WhyRecordsResponse>;
     responseDeserialize: grpc.deserialize<szengine_pb.WhyRecordsResponse>;
 }
+interface ISzEngineService_IWhySearch extends grpc.MethodDefinition<szengine_pb.WhySearchRequest, szengine_pb.WhySearchResponse> {
+    path: "/szengine.SzEngine/WhySearch";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<szengine_pb.WhySearchRequest>;
+    requestDeserialize: grpc.deserialize<szengine_pb.WhySearchRequest>;
+    responseSerialize: grpc.serialize<szengine_pb.WhySearchResponse>;
+    responseDeserialize: grpc.deserialize<szengine_pb.WhySearchResponse>;
+}
 
 export const SzEngineService: ISzEngineService;
 
@@ -377,6 +387,7 @@ export interface ISzEngineServer {
     whyEntities: grpc.handleUnaryCall<szengine_pb.WhyEntitiesRequest, szengine_pb.WhyEntitiesResponse>;
     whyRecordInEntity: grpc.handleUnaryCall<szengine_pb.WhyRecordInEntityRequest, szengine_pb.WhyRecordInEntityResponse>;
     whyRecords: grpc.handleUnaryCall<szengine_pb.WhyRecordsRequest, szengine_pb.WhyRecordsResponse>;
+    whySearch: grpc.handleUnaryCall<szengine_pb.WhySearchRequest, szengine_pb.WhySearchResponse>;
 }
 
 export interface ISzEngineClient {
@@ -477,6 +488,9 @@ export interface ISzEngineClient {
     whyRecords(request: szengine_pb.WhyRecordsRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.WhyRecordsResponse) => void): grpc.ClientUnaryCall;
     whyRecords(request: szengine_pb.WhyRecordsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.WhyRecordsResponse) => void): grpc.ClientUnaryCall;
     whyRecords(request: szengine_pb.WhyRecordsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.WhyRecordsResponse) => void): grpc.ClientUnaryCall;
+    whySearch(request: szengine_pb.WhySearchRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.WhySearchResponse) => void): grpc.ClientUnaryCall;
+    whySearch(request: szengine_pb.WhySearchRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.WhySearchResponse) => void): grpc.ClientUnaryCall;
+    whySearch(request: szengine_pb.WhySearchRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.WhySearchResponse) => void): grpc.ClientUnaryCall;
 }
 
 export class SzEngineClient extends grpc.Client implements ISzEngineClient {
@@ -578,4 +592,7 @@ export class SzEngineClient extends grpc.Client implements ISzEngineClient {
     public whyRecords(request: szengine_pb.WhyRecordsRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.WhyRecordsResponse) => void): grpc.ClientUnaryCall;
     public whyRecords(request: szengine_pb.WhyRecordsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.WhyRecordsResponse) => void): grpc.ClientUnaryCall;
     public whyRecords(request: szengine_pb.WhyRecordsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.WhyRecordsResponse) => void): grpc.ClientUnaryCall;
+    public whySearch(request: szengine_pb.WhySearchRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.WhySearchResponse) => void): grpc.ClientUnaryCall;
+    public whySearch(request: szengine_pb.WhySearchRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.WhySearchResponse) => void): grpc.ClientUnaryCall;
+    public whySearch(request: szengine_pb.WhySearchRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.WhySearchResponse) => void): grpc.ClientUnaryCall;
 }

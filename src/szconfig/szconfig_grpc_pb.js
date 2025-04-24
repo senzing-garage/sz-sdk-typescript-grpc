@@ -26,50 +26,6 @@ function deserialize_szconfig_AddDataSourceResponse(buffer_arg) {
   return szconfig_pb.AddDataSourceResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_szconfig_CloseConfigRequest(arg) {
-  if (!(arg instanceof szconfig_pb.CloseConfigRequest)) {
-    throw new Error('Expected argument of type szconfig.CloseConfigRequest');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_szconfig_CloseConfigRequest(buffer_arg) {
-  return szconfig_pb.CloseConfigRequest.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_szconfig_CloseConfigResponse(arg) {
-  if (!(arg instanceof szconfig_pb.CloseConfigResponse)) {
-    throw new Error('Expected argument of type szconfig.CloseConfigResponse');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_szconfig_CloseConfigResponse(buffer_arg) {
-  return szconfig_pb.CloseConfigResponse.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_szconfig_CreateConfigRequest(arg) {
-  if (!(arg instanceof szconfig_pb.CreateConfigRequest)) {
-    throw new Error('Expected argument of type szconfig.CreateConfigRequest');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_szconfig_CreateConfigRequest(buffer_arg) {
-  return szconfig_pb.CreateConfigRequest.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_szconfig_CreateConfigResponse(arg) {
-  if (!(arg instanceof szconfig_pb.CreateConfigResponse)) {
-    throw new Error('Expected argument of type szconfig.CreateConfigResponse');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_szconfig_CreateConfigResponse(buffer_arg) {
-  return szconfig_pb.CreateConfigResponse.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
 function serialize_szconfig_DeleteDataSourceRequest(arg) {
   if (!(arg instanceof szconfig_pb.DeleteDataSourceRequest)) {
     throw new Error('Expected argument of type szconfig.DeleteDataSourceRequest');
@@ -90,28 +46,6 @@ function serialize_szconfig_DeleteDataSourceResponse(arg) {
 
 function deserialize_szconfig_DeleteDataSourceResponse(buffer_arg) {
   return szconfig_pb.DeleteDataSourceResponse.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_szconfig_ExportConfigRequest(arg) {
-  if (!(arg instanceof szconfig_pb.ExportConfigRequest)) {
-    throw new Error('Expected argument of type szconfig.ExportConfigRequest');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_szconfig_ExportConfigRequest(buffer_arg) {
-  return szconfig_pb.ExportConfigRequest.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_szconfig_ExportConfigResponse(arg) {
-  if (!(arg instanceof szconfig_pb.ExportConfigResponse)) {
-    throw new Error('Expected argument of type szconfig.ExportConfigResponse');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_szconfig_ExportConfigResponse(buffer_arg) {
-  return szconfig_pb.ExportConfigResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_szconfig_GetDataSourcesRequest(arg) {
@@ -136,26 +70,26 @@ function deserialize_szconfig_GetDataSourcesResponse(buffer_arg) {
   return szconfig_pb.GetDataSourcesResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_szconfig_ImportConfigRequest(arg) {
-  if (!(arg instanceof szconfig_pb.ImportConfigRequest)) {
-    throw new Error('Expected argument of type szconfig.ImportConfigRequest');
+function serialize_szconfig_VerifyConfigRequest(arg) {
+  if (!(arg instanceof szconfig_pb.VerifyConfigRequest)) {
+    throw new Error('Expected argument of type szconfig.VerifyConfigRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_szconfig_ImportConfigRequest(buffer_arg) {
-  return szconfig_pb.ImportConfigRequest.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_szconfig_VerifyConfigRequest(buffer_arg) {
+  return szconfig_pb.VerifyConfigRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_szconfig_ImportConfigResponse(arg) {
-  if (!(arg instanceof szconfig_pb.ImportConfigResponse)) {
-    throw new Error('Expected argument of type szconfig.ImportConfigResponse');
+function serialize_szconfig_VerifyConfigResponse(arg) {
+  if (!(arg instanceof szconfig_pb.VerifyConfigResponse)) {
+    throw new Error('Expected argument of type szconfig.VerifyConfigResponse');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_szconfig_ImportConfigResponse(buffer_arg) {
-  return szconfig_pb.ImportConfigResponse.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_szconfig_VerifyConfigResponse(buffer_arg) {
+  return szconfig_pb.VerifyConfigResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 
@@ -171,28 +105,6 @@ var SzConfigService = exports.SzConfigService = {
     responseSerialize: serialize_szconfig_AddDataSourceResponse,
     responseDeserialize: deserialize_szconfig_AddDataSourceResponse,
   },
-  closeConfig: {
-    path: '/szconfig.SzConfig/CloseConfig',
-    requestStream: false,
-    responseStream: false,
-    requestType: szconfig_pb.CloseConfigRequest,
-    responseType: szconfig_pb.CloseConfigResponse,
-    requestSerialize: serialize_szconfig_CloseConfigRequest,
-    requestDeserialize: deserialize_szconfig_CloseConfigRequest,
-    responseSerialize: serialize_szconfig_CloseConfigResponse,
-    responseDeserialize: deserialize_szconfig_CloseConfigResponse,
-  },
-  createConfig: {
-    path: '/szconfig.SzConfig/CreateConfig',
-    requestStream: false,
-    responseStream: false,
-    requestType: szconfig_pb.CreateConfigRequest,
-    responseType: szconfig_pb.CreateConfigResponse,
-    requestSerialize: serialize_szconfig_CreateConfigRequest,
-    requestDeserialize: deserialize_szconfig_CreateConfigRequest,
-    responseSerialize: serialize_szconfig_CreateConfigResponse,
-    responseDeserialize: deserialize_szconfig_CreateConfigResponse,
-  },
   deleteDataSource: {
     path: '/szconfig.SzConfig/DeleteDataSource',
     requestStream: false,
@@ -203,17 +115,6 @@ var SzConfigService = exports.SzConfigService = {
     requestDeserialize: deserialize_szconfig_DeleteDataSourceRequest,
     responseSerialize: serialize_szconfig_DeleteDataSourceResponse,
     responseDeserialize: deserialize_szconfig_DeleteDataSourceResponse,
-  },
-  exportConfig: {
-    path: '/szconfig.SzConfig/ExportConfig',
-    requestStream: false,
-    responseStream: false,
-    requestType: szconfig_pb.ExportConfigRequest,
-    responseType: szconfig_pb.ExportConfigResponse,
-    requestSerialize: serialize_szconfig_ExportConfigRequest,
-    requestDeserialize: deserialize_szconfig_ExportConfigRequest,
-    responseSerialize: serialize_szconfig_ExportConfigResponse,
-    responseDeserialize: deserialize_szconfig_ExportConfigResponse,
   },
   getDataSources: {
     path: '/szconfig.SzConfig/GetDataSources',
@@ -226,16 +127,16 @@ var SzConfigService = exports.SzConfigService = {
     responseSerialize: serialize_szconfig_GetDataSourcesResponse,
     responseDeserialize: deserialize_szconfig_GetDataSourcesResponse,
   },
-  importConfig: {
-    path: '/szconfig.SzConfig/ImportConfig',
+  verifyConfig: {
+    path: '/szconfig.SzConfig/VerifyConfig',
     requestStream: false,
     responseStream: false,
-    requestType: szconfig_pb.ImportConfigRequest,
-    responseType: szconfig_pb.ImportConfigResponse,
-    requestSerialize: serialize_szconfig_ImportConfigRequest,
-    requestDeserialize: deserialize_szconfig_ImportConfigRequest,
-    responseSerialize: serialize_szconfig_ImportConfigResponse,
-    responseDeserialize: deserialize_szconfig_ImportConfigResponse,
+    requestType: szconfig_pb.VerifyConfigRequest,
+    responseType: szconfig_pb.VerifyConfigResponse,
+    requestSerialize: serialize_szconfig_VerifyConfigRequest,
+    requestDeserialize: deserialize_szconfig_VerifyConfigRequest,
+    responseSerialize: serialize_szconfig_VerifyConfigResponse,
+    responseDeserialize: deserialize_szconfig_VerifyConfigResponse,
   },
 };
 

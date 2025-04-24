@@ -4,28 +4,6 @@
 var grpc = require('@grpc/grpc-js');
 var szconfigmanager_pb = require('./szconfigmanager_pb.js');
 
-function serialize_szconfigmanager_AddConfigRequest(arg) {
-  if (!(arg instanceof szconfigmanager_pb.AddConfigRequest)) {
-    throw new Error('Expected argument of type szconfigmanager.AddConfigRequest');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_szconfigmanager_AddConfigRequest(buffer_arg) {
-  return szconfigmanager_pb.AddConfigRequest.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_szconfigmanager_AddConfigResponse(arg) {
-  if (!(arg instanceof szconfigmanager_pb.AddConfigResponse)) {
-    throw new Error('Expected argument of type szconfigmanager.AddConfigResponse');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_szconfigmanager_AddConfigResponse(buffer_arg) {
-  return szconfigmanager_pb.AddConfigResponse.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
 function serialize_szconfigmanager_GetConfigRequest(arg) {
   if (!(arg instanceof szconfigmanager_pb.GetConfigRequest)) {
     throw new Error('Expected argument of type szconfigmanager.GetConfigRequest');
@@ -92,6 +70,50 @@ function deserialize_szconfigmanager_GetDefaultConfigIdResponse(buffer_arg) {
   return szconfigmanager_pb.GetDefaultConfigIdResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_szconfigmanager_GetTemplateConfigRequest(arg) {
+  if (!(arg instanceof szconfigmanager_pb.GetTemplateConfigRequest)) {
+    throw new Error('Expected argument of type szconfigmanager.GetTemplateConfigRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_szconfigmanager_GetTemplateConfigRequest(buffer_arg) {
+  return szconfigmanager_pb.GetTemplateConfigRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_szconfigmanager_GetTemplateConfigResponse(arg) {
+  if (!(arg instanceof szconfigmanager_pb.GetTemplateConfigResponse)) {
+    throw new Error('Expected argument of type szconfigmanager.GetTemplateConfigResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_szconfigmanager_GetTemplateConfigResponse(buffer_arg) {
+  return szconfigmanager_pb.GetTemplateConfigResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_szconfigmanager_RegisterConfigRequest(arg) {
+  if (!(arg instanceof szconfigmanager_pb.RegisterConfigRequest)) {
+    throw new Error('Expected argument of type szconfigmanager.RegisterConfigRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_szconfigmanager_RegisterConfigRequest(buffer_arg) {
+  return szconfigmanager_pb.RegisterConfigRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_szconfigmanager_RegisterConfigResponse(arg) {
+  if (!(arg instanceof szconfigmanager_pb.RegisterConfigResponse)) {
+    throw new Error('Expected argument of type szconfigmanager.RegisterConfigResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_szconfigmanager_RegisterConfigResponse(buffer_arg) {
+  return szconfigmanager_pb.RegisterConfigResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_szconfigmanager_ReplaceDefaultConfigIdRequest(arg) {
   if (!(arg instanceof szconfigmanager_pb.ReplaceDefaultConfigIdRequest)) {
     throw new Error('Expected argument of type szconfigmanager.ReplaceDefaultConfigIdRequest');
@@ -136,19 +158,30 @@ function deserialize_szconfigmanager_SetDefaultConfigIdResponse(buffer_arg) {
   return szconfigmanager_pb.SetDefaultConfigIdResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_szconfigmanager_SetDefaultConfigRequest(arg) {
+  if (!(arg instanceof szconfigmanager_pb.SetDefaultConfigRequest)) {
+    throw new Error('Expected argument of type szconfigmanager.SetDefaultConfigRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_szconfigmanager_SetDefaultConfigRequest(buffer_arg) {
+  return szconfigmanager_pb.SetDefaultConfigRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_szconfigmanager_SetDefaultConfigResponse(arg) {
+  if (!(arg instanceof szconfigmanager_pb.SetDefaultConfigResponse)) {
+    throw new Error('Expected argument of type szconfigmanager.SetDefaultConfigResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_szconfigmanager_SetDefaultConfigResponse(buffer_arg) {
+  return szconfigmanager_pb.SetDefaultConfigResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 
 var SzConfigManagerService = exports.SzConfigManagerService = {
-  addConfig: {
-    path: '/szconfigmanager.SzConfigManager/AddConfig',
-    requestStream: false,
-    responseStream: false,
-    requestType: szconfigmanager_pb.AddConfigRequest,
-    responseType: szconfigmanager_pb.AddConfigResponse,
-    requestSerialize: serialize_szconfigmanager_AddConfigRequest,
-    requestDeserialize: deserialize_szconfigmanager_AddConfigRequest,
-    responseSerialize: serialize_szconfigmanager_AddConfigResponse,
-    responseDeserialize: deserialize_szconfigmanager_AddConfigResponse,
-  },
   getConfig: {
     path: '/szconfigmanager.SzConfigManager/GetConfig',
     requestStream: false,
@@ -182,6 +215,28 @@ var SzConfigManagerService = exports.SzConfigManagerService = {
     responseSerialize: serialize_szconfigmanager_GetDefaultConfigIdResponse,
     responseDeserialize: deserialize_szconfigmanager_GetDefaultConfigIdResponse,
   },
+  getTemplateConfig: {
+    path: '/szconfigmanager.SzConfigManager/GetTemplateConfig',
+    requestStream: false,
+    responseStream: false,
+    requestType: szconfigmanager_pb.GetTemplateConfigRequest,
+    responseType: szconfigmanager_pb.GetTemplateConfigResponse,
+    requestSerialize: serialize_szconfigmanager_GetTemplateConfigRequest,
+    requestDeserialize: deserialize_szconfigmanager_GetTemplateConfigRequest,
+    responseSerialize: serialize_szconfigmanager_GetTemplateConfigResponse,
+    responseDeserialize: deserialize_szconfigmanager_GetTemplateConfigResponse,
+  },
+  registerConfig: {
+    path: '/szconfigmanager.SzConfigManager/RegisterConfig',
+    requestStream: false,
+    responseStream: false,
+    requestType: szconfigmanager_pb.RegisterConfigRequest,
+    responseType: szconfigmanager_pb.RegisterConfigResponse,
+    requestSerialize: serialize_szconfigmanager_RegisterConfigRequest,
+    requestDeserialize: deserialize_szconfigmanager_RegisterConfigRequest,
+    responseSerialize: serialize_szconfigmanager_RegisterConfigResponse,
+    responseDeserialize: deserialize_szconfigmanager_RegisterConfigResponse,
+  },
   replaceDefaultConfigId: {
     path: '/szconfigmanager.SzConfigManager/ReplaceDefaultConfigId',
     requestStream: false,
@@ -192,6 +247,17 @@ var SzConfigManagerService = exports.SzConfigManagerService = {
     requestDeserialize: deserialize_szconfigmanager_ReplaceDefaultConfigIdRequest,
     responseSerialize: serialize_szconfigmanager_ReplaceDefaultConfigIdResponse,
     responseDeserialize: deserialize_szconfigmanager_ReplaceDefaultConfigIdResponse,
+  },
+  setDefaultConfig: {
+    path: '/szconfigmanager.SzConfigManager/SetDefaultConfig',
+    requestStream: false,
+    responseStream: false,
+    requestType: szconfigmanager_pb.SetDefaultConfigRequest,
+    responseType: szconfigmanager_pb.SetDefaultConfigResponse,
+    requestSerialize: serialize_szconfigmanager_SetDefaultConfigRequest,
+    requestDeserialize: deserialize_szconfigmanager_SetDefaultConfigRequest,
+    responseSerialize: serialize_szconfigmanager_SetDefaultConfigResponse,
+    responseDeserialize: deserialize_szconfigmanager_SetDefaultConfigResponse,
   },
   setDefaultConfigId: {
     path: '/szconfigmanager.SzConfigManager/SetDefaultConfigId',

@@ -1,11 +1,12 @@
 import * as grpc from '@grpc/grpc-js';
-import { AddConfigRequest, AddConfigResponse, GetConfigRequest, GetConfigResponse, GetConfigsRequest, GetDefaultConfigIdRequest, GetDefaultConfigIdResponse, ReplaceDefaultConfigIdRequest, ReplaceDefaultConfigIdResponse, SetDefaultConfigIdRequest, SetDefaultConfigIdResponse} from './szconfigmanager/szconfigmanager_pb';
+import { GetConfigRequest, GetConfigResponse, GetConfigsRequest, GetConfigsResponse, GetDefaultConfigIdRequest, GetDefaultConfigIdResponse, GetTemplateConfigRequest, GetTemplateConfigResponse, RegisterConfigRequest, RegisterConfigResponse, ReplaceDefaultConfigIdRequest, ReplaceDefaultConfigIdResponse, SetDefaultConfigIdRequest, SetDefaultConfigIdResponse, SetDefaultConfigRequest, SetDefaultConfigResponse} from './szconfigmanager/szconfigmanager_pb';
 import { SzConfigManagerClient } from './szconfigmanager/szconfigmanager_grpc_pb';
 import { SzConfigManager } from './abstracts/szConfigManager';
 import { newException } from './szHelpers';
 import { SzError, SzNoGrpcConnectionError } from './senzing/SzError';
 import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzGrpcEnvironmentOptions } from './szGrpcEnvironment';
 import { SzGrpcBase } from './abstracts/szGrpcBase';
+import { SzGrpcConfig, SzGrpcConfigOptions } from './szGrpcConfig';
 
 // strong typed version of the default abstract options specific to this implementation 
 // prevents accidentally passing the wrong type of client to constructor
@@ -24,6 +25,7 @@ export interface SzGrpcConfigManagerOptions extends SzGrpcEnvironmentOptions {
  */
 export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
     private _client;
+    private _parameters: SzGrpcConfigManagerOptions; 
     /** See {@link https://github.com/senzing-garage/knowledge-base/blob/main/lists/senzing-component-ids.md} */
     public productId = "5051";
 
@@ -43,44 +45,52 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
     public get client(): SzConfigManagerClient {
         return this._client;
     }
+    /**
+     * @internal
+     */
+    private get grpcParameters(): SzGrpcEnvironmentOptions {
+        let res = this._parameters as any;
+        return res;
+    }
 
     /**
-     * Adds a Senzing configuration JSON document to the Senzing database.
-     * @param configDefinition The Senzing configuration JSON document.
-     * @returns {Promise<number>} A configuration identifier.
+     * Creates a new {@link SzGrpcConfig} instance using the default
+     * configuration template and returns the {@link SzGrpcConfig}
+     * representing that configuration.
      */
-    addConfig(configDefinition: string): Promise<number> {
-        return new Promise<number>((resolve, reject) => {
-            if(!this.client){
-                reject(new SzNoGrpcConnectionError());
-                return
+    createConfig(): Promise<SzGrpcConfig>;
+    /**
+     * Gets the configuration definition that is registered with the
+     * specified config ID and returns a new {@link SzGrpcConfig} instance
+     * representing that configuration.
+     */
+    createConfig(configId?: number): Promise<SzGrpcConfig>;
+    /**
+     * Creates a new {@link SzGrpcConfig} instance using the specified
+     * configuration definition and returns the {@link SzGrpcConfig}
+     * representing that configuration.
+     * @param configDefinition 
+     */
+    createConfig(configDefinition?: string): Promise<SzGrpcConfig>;
+    /** @internal */
+    createConfig(definitionOrConfigId?: string | number): Promise<SzGrpcConfig> {
+        if(definitionOrConfigId) {
+            if(typeof definitionOrConfigId == 'number') {
+                // get new SzConfig from configId
+                return this.createConfigFromConfigId(definitionOrConfigId as number);
+            } else {
+                // get new SzConfig from configDefinition
+                return this.createConfigFromDefinition(definitionOrConfigId as string);
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
-                if(err) {
-                    reject( err )
-                    return;
-                }
-                const request = new AddConfigRequest();
-                request.setConfigDefinition(configDefinition);
-                this.client.addConfig(request, (err, res: AddConfigResponse) => {
-                    if(err) {
-                        let _err = newException(err.details);
-                        reject(_err);
-                        throw _err;
-                        return
-                    }
-                    //console.log("RESPONSE:\n\r", result);
-                    resolve( res.getResult() );
-                });
-            });
-        });
+        }
+        // when no args get from template
+        return this.createConfigFromTemplate();
     }
     /**
-     * Retrieves a specific Senzing configuration JSON document from the Senzing database.
-     * @param configId The configuration identifier of the desired Senzing Engine configuration JSON document to retrieve.
-     * @returns {Promise<string>} JSON document containing the Senzing configuration.
+     * Get the Configuration Document for the default configuration template.
+     * @returns {Promise<string>} the configuration document
      */
-    getConfig(configId: number): Promise<string> {
+    getTemplateConfig(): Promise<string> {
         return new Promise<string>((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
@@ -91,9 +101,8 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
                     reject( err )
                     return;
                 }
-                const request = new GetConfigRequest();
-                request.setConfigId(configId);
-                this.client.getConfig(request, (err, res: GetConfigResponse) => {
+                const request = new GetTemplateConfigRequest();
+                this.client.getTemplateConfig(request, (err, res: GetTemplateConfigResponse) => {
                     if(err) {
                         let _err = newException(err.details);
                         reject(_err);
@@ -107,8 +116,48 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
         });
     }
     /**
-     * Retrieves a list of Senzing configurations from the Senzing database.
-     * @returns {Promise<string>} JSON document containing Senzing configurations.
+     * Registers the configuration described by the specified
+     * configuration definition in the repository with the specified
+     * comment. If a comment has not been provided an autogenerated one will be used.
+     * @param configDefinition The configuration definition to register.
+     * @param comment The comments for the configuration.
+     * @returns {Promise<void>} The identifier for referencing the config in the entity repository.
+     * 
+     * @throws SzException If a failure occurs.
+     */
+    registerConfig(configDefinition: string, comment?: string) {
+        return new Promise((resolve, reject) => {
+            if(!this.client){
+                reject(new SzNoGrpcConnectionError());
+                return
+            }
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+                if(err) {
+                    reject( err )
+                    return;
+                }
+                const request = new RegisterConfigRequest();
+                request.setConfigDefinition(configDefinition);
+                if(comment) request.setConfigComment(comment);
+                this.client.registerConfig(request, (err, res: RegisterConfigResponse) => {
+                    if(err) {
+                        let _err = newException(err.details);
+                        reject(_err);
+                        throw _err;
+                        return
+                    }
+                    //console.log("RESPONSE:\n\r", result);
+                    resolve(void 0);
+                });
+            });
+        });
+    }
+    /**
+     * Gets the list of saved configuration ID's with their comments and
+     * timestamps and return the JSON describing them.
+     * 
+     * @returns {Promise<string>} JSON document describing the configurations registered
+     * in the entity repository with their identifiers, timestamps and comments.
      */
     getConfigs(): Promise<string> {
         return new Promise<string>((resolve, reject) => {
@@ -122,7 +171,7 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
                     return;
                 }
                 const request = new GetConfigsRequest();
-                this.client.getConfigs(request, (err, res: GetConfigResponse) => {
+                this.client.getConfigs(request, (err, res: GetConfigsResponse) => {
                     if(err) {
                         let _err = newException(err.details);
                         reject(_err);
@@ -137,7 +186,9 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
         });
     }
     /**
-     * Retrieves from the Senzing database the configuration identifier of the default Senzing configuration.
+     * Gets the configuration ID of the default configuration for the repository
+     * and returns it.  If the entity repository is in the initial state and the
+     * default configuration ID has not yet been set, then zero (0) is returned.
      * @returns {Promise<number>} identifier which identifies the current configuration in use.
      */
     getDefaultConfigId(): Promise<number> {
@@ -167,9 +218,57 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
             return -1;
         });
     }
+
     /**
-     * Replaces and sets a new configuration identifier in the Senzing database. 
-     * To serialize modifying of the configuration identifier, 
+     * Registers the specified config definition with an autogenerated comment 
+     * and then sets the default configuration ID for the repository to the
+     * configuration ID that is the result of that registration, returning
+     * the config ID under which the configuration was registered.
+     * @param configDefinition The configuration definition to register as the default.
+     * @returns {Promise<number>}The configuration ID under which the configuration was registered.
+     * @returns {Promise<SzException>} If a failure occurs.
+     */
+    setDefaultConfig(configDefinition: string): Promise<number>
+    /**
+     * Registers the specified config definition with the specified comment
+     * and then sets the default configuration ID for the repository to the
+     * configuration ID that is the result of that registration, returning
+     * the config ID under which the configuration was registered.
+     * @param configDefinition The configuration definition to register as the default.
+     * @param configComment The comments for the configuration.
+     * @returns {Promise<number>}The configuration ID under which the configuration was registered.
+     * @returns {Promise<SzException>} If a failure occurs.
+     */
+    setDefaultConfig(configDefinition: string, comment?: string): Promise<number | SzError> | undefined {
+        return new Promise<number>((resolve, reject) => {
+            if(!this.client){
+                reject(new SzNoGrpcConnectionError());
+                return
+            }
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+                if(err) {
+                    reject( err )
+                    return;
+                }
+                const request = new SetDefaultConfigRequest();
+                request.setConfigDefinition(configDefinition);
+                if(comment) request.setConfigComment(comment);
+
+                this.client.setDefaultConfig(request, (err, res: SetDefaultConfigResponse) => {
+                    if(err) {
+                        let _err = newException(err.details);
+                        reject(_err);
+                        throw _err;
+                        return;
+                    }
+                    resolve(res.getResult())
+                });
+            });
+        });
+    }
+    /**
+     * Sets the default configuration for the repository to the specified
+     * configuration ID.
      * 
      * @see replaceDefaultConfigId
      * @param configId The configuration identifier of the Senzing Engine configuration to use as the default.
@@ -203,6 +302,7 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
     constructor(parameters: SzGrpcConfigManagerOptions) {
         const { connectionString, credentials, client, grpcOptions, grpcConnectionReadyTimeOut } = parameters;
         super(parameters);
+        this._parameters = parameters;
         if(client) {
             // if client was passed in use/reuse that
             this._client            = client;
@@ -250,6 +350,94 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
                         throw _err;
                         return
                     }
+                });
+            });
+        });
+    }
+
+    // ------------------------------- non public methods -------------------------------
+    /** @internal */
+    private createConfigFromDefinition(configDefinition: string) {
+        return new Promise<SzGrpcConfig>((resolve, reject) => {
+            if(!this.client){
+                reject(new SzNoGrpcConnectionError());
+                return
+            }
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+                if(err) {
+                    reject( err )
+                    return;
+                }
+                const res = new SzGrpcConfig(this.grpcParameters as SzGrpcConfigOptions);
+                res.definition = configDefinition;
+                res.verifyConfig();
+                resolve(res);
+            });
+        });
+    }
+    /** @internal */
+    private createConfigFromConfigId(configId: number) {
+        return new Promise<SzGrpcConfig>((resolve, reject) => {
+            if(!this.client){
+                reject(new SzNoGrpcConnectionError());
+                return
+            }
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+                if(err) {
+                    reject( err )
+                    return;
+                }
+                //const res = new SzGrpcConfig(this.grpcParameters as SzGrpcConfigOptions);
+                //res.configDefinition = configDefinition;
+                //res.verifyConfig();
+                //resolve(res);
+                const request = new GetConfigRequest();
+                request.setConfigId(configId);
+                this.client.getConfig(request, (err, res: GetConfigResponse) => {
+                    if(err) {
+                        let _err = newException(err.details);
+                        reject(_err);
+                        throw _err;
+                        return;
+                    }
+                    let configDefinition = res.getResult();
+                    const conf = new SzGrpcConfig(this.grpcParameters as SzGrpcConfigOptions);
+                    conf.definition = configDefinition;
+                    //console.log("RESPONSE:\n\r", result);
+                    resolve(conf);
+                });
+            });
+        });
+    }
+    /** @interal */
+    private createConfigFromTemplate() {
+        return new Promise<SzGrpcConfig>((resolve, reject) => {
+            if(!this.client){
+                reject(new SzNoGrpcConnectionError());
+                return
+            }
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+                if(err) {
+                    reject( err )
+                    return;
+                }
+                //const res = new SzGrpcConfig(this.grpcParameters as SzGrpcConfigOptions);
+                //res.configDefinition = configDefinition;
+                //res.verifyConfig();
+                //resolve(res);
+                const request = new GetTemplateConfigRequest();
+                this.client.getTemplateConfig(request, (err, res: GetTemplateConfigResponse) => {
+                    if(err) {
+                        let _err = newException(err.details);
+                        reject(_err);
+                        throw _err;
+                        return;
+                    }
+                    let configDefinition = res.getResult();
+                    const conf = new SzGrpcConfig(this.grpcParameters as SzGrpcConfigOptions);
+                    conf.definition = configDefinition;
+                    //console.log("RESPONSE:\n\r", result);
+                    resolve(conf);
                 });
             });
         });

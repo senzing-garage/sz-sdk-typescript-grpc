@@ -148,22 +148,6 @@ export class SzGrpcEnvironment extends SzEnvironment {
     public getActiveConfigId() {
         return this.engine.getActiveConfigId();
     }
-
-    /** 
-     * instance of {@link SzGrpcConfig}.
-     * autocreates the class instance on first call if not already created.
-     * @return {SzGrpcConfig}
-    */
-    public getConfig() {
-        if(!this._config || !this._configClient) {
-            // create new grpc client
-            if(!this._configClient) this._configClient = new SzConfigClient(this.connectionString, this.credentials, this._grpcOptions);
-
-            // create new config manager with ref to client
-            if(!this._config) this._config = new SzGrpcConfig({ client: this._configClient, grpcOptions: this._grpcOptions });
-        }
-        return this._config;
-    }
     /** 
      * instance of {@link SzGrpcConfigManager}.
      * autocreates the class instance on first call if not already created.
@@ -243,13 +227,6 @@ export class SzGrpcEnvironment extends SzEnvironment {
     }
     public get grpcOptions() {
         return this._grpcOptions;
-    }
-    /** 
-     * getter alias of {@link getConfig}.  Syntax sugar for using {@link getConfig} as if it were a property ie `MySenzingEnvironment.config.createConfig()`.
-     * @return {SzGrpcConfig}
-    */
-    public get config() {
-        return this.getConfig();
     }
     /** 
      * getter alias of {@link getConfigManager}.  Syntax sugar for using {@link getConfigManager} as if it were a property ie `MySenzingEnvironment.configManager.getDefaultConfigId()`.

@@ -6,49 +6,6 @@
 
 import * as jspb from "google-protobuf";
 
-export class AddConfigRequest extends jspb.Message { 
-    getConfigDefinition(): string;
-    setConfigDefinition(value: string): AddConfigRequest;
-    getConfigComment(): string;
-    setConfigComment(value: string): AddConfigRequest;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): AddConfigRequest.AsObject;
-    static toObject(includeInstance: boolean, msg: AddConfigRequest): AddConfigRequest.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: AddConfigRequest, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): AddConfigRequest;
-    static deserializeBinaryFromReader(message: AddConfigRequest, reader: jspb.BinaryReader): AddConfigRequest;
-}
-
-export namespace AddConfigRequest {
-    export type AsObject = {
-        configDefinition: string,
-        configComment: string,
-    }
-}
-
-export class AddConfigResponse extends jspb.Message { 
-    getResult(): number;
-    setResult(value: number): AddConfigResponse;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): AddConfigResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: AddConfigResponse): AddConfigResponse.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: AddConfigResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): AddConfigResponse;
-    static deserializeBinaryFromReader(message: AddConfigResponse, reader: jspb.BinaryReader): AddConfigResponse;
-}
-
-export namespace AddConfigResponse {
-    export type AsObject = {
-        result: number,
-    }
-}
-
 export class GetConfigRequest extends jspb.Message { 
     getConfigId(): number;
     setConfigId(value: number): GetConfigRequest;
@@ -163,6 +120,86 @@ export namespace GetDefaultConfigIdResponse {
     }
 }
 
+export class GetTemplateConfigRequest extends jspb.Message { 
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetTemplateConfigRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetTemplateConfigRequest): GetTemplateConfigRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetTemplateConfigRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetTemplateConfigRequest;
+    static deserializeBinaryFromReader(message: GetTemplateConfigRequest, reader: jspb.BinaryReader): GetTemplateConfigRequest;
+}
+
+export namespace GetTemplateConfigRequest {
+    export type AsObject = {
+    }
+}
+
+export class GetTemplateConfigResponse extends jspb.Message { 
+    getResult(): string;
+    setResult(value: string): GetTemplateConfigResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetTemplateConfigResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetTemplateConfigResponse): GetTemplateConfigResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetTemplateConfigResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetTemplateConfigResponse;
+    static deserializeBinaryFromReader(message: GetTemplateConfigResponse, reader: jspb.BinaryReader): GetTemplateConfigResponse;
+}
+
+export namespace GetTemplateConfigResponse {
+    export type AsObject = {
+        result: string,
+    }
+}
+
+export class RegisterConfigRequest extends jspb.Message { 
+    getConfigDefinition(): string;
+    setConfigDefinition(value: string): RegisterConfigRequest;
+    getConfigComment(): string;
+    setConfigComment(value: string): RegisterConfigRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): RegisterConfigRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: RegisterConfigRequest): RegisterConfigRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: RegisterConfigRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): RegisterConfigRequest;
+    static deserializeBinaryFromReader(message: RegisterConfigRequest, reader: jspb.BinaryReader): RegisterConfigRequest;
+}
+
+export namespace RegisterConfigRequest {
+    export type AsObject = {
+        configDefinition: string,
+        configComment: string,
+    }
+}
+
+export class RegisterConfigResponse extends jspb.Message { 
+    getResult(): number;
+    setResult(value: number): RegisterConfigResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): RegisterConfigResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: RegisterConfigResponse): RegisterConfigResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: RegisterConfigResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): RegisterConfigResponse;
+    static deserializeBinaryFromReader(message: RegisterConfigResponse, reader: jspb.BinaryReader): RegisterConfigResponse;
+}
+
+export namespace RegisterConfigResponse {
+    export type AsObject = {
+        result: number,
+    }
+}
+
 export class ReplaceDefaultConfigIdRequest extends jspb.Message { 
     getCurrentDefaultConfigId(): number;
     setCurrentDefaultConfigId(value: number): ReplaceDefaultConfigIdRequest;
@@ -200,6 +237,49 @@ export class ReplaceDefaultConfigIdResponse extends jspb.Message {
 
 export namespace ReplaceDefaultConfigIdResponse {
     export type AsObject = {
+    }
+}
+
+export class SetDefaultConfigRequest extends jspb.Message { 
+    getConfigDefinition(): string;
+    setConfigDefinition(value: string): SetDefaultConfigRequest;
+    getConfigComment(): string;
+    setConfigComment(value: string): SetDefaultConfigRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): SetDefaultConfigRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: SetDefaultConfigRequest): SetDefaultConfigRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: SetDefaultConfigRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): SetDefaultConfigRequest;
+    static deserializeBinaryFromReader(message: SetDefaultConfigRequest, reader: jspb.BinaryReader): SetDefaultConfigRequest;
+}
+
+export namespace SetDefaultConfigRequest {
+    export type AsObject = {
+        configDefinition: string,
+        configComment: string,
+    }
+}
+
+export class SetDefaultConfigResponse extends jspb.Message { 
+    getResult(): number;
+    setResult(value: number): SetDefaultConfigResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): SetDefaultConfigResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: SetDefaultConfigResponse): SetDefaultConfigResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: SetDefaultConfigResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): SetDefaultConfigResponse;
+    static deserializeBinaryFromReader(message: SetDefaultConfigResponse, reader: jspb.BinaryReader): SetDefaultConfigResponse;
+}
+
+export namespace SetDefaultConfigResponse {
+    export type AsObject = {
+        result: number,
     }
 }
 

@@ -39,6 +39,7 @@ service SzEngine {
   rpc WhyEntities(WhyEntitiesRequest) returns (WhyEntitiesResponse) {}
   rpc WhyRecordInEntity(WhyRecordInEntityRequest) returns (WhyRecordInEntityResponse) {}
   rpc WhyRecords(WhyRecordsRequest) returns (WhyRecordsResponse) {}
+  rpc WhySearch(WhySearchRequest) returns (WhySearchResponse) {}
 }
 
 message AddRecordRequest {
@@ -341,3 +342,15 @@ message WhyRecordsRequest {
 message WhyRecordsResponse {
   string result = 1;
 }
+
+message WhySearchRequest {
+  string attributes = 1;
+  int64 entity_id = 2;
+  string search_profile = 3;
+  int64 flags = 4;
+}
+
+message WhySearchResponse {
+  string result = 1;
+}
+
