@@ -44,6 +44,8 @@ and this project adheres to [Semantic Versioning].
         - `deleteDataSource`
         - `getDataSources`
 
+Examples updated to reflect additions and changes
+
 ## [4.0.0-beta.1.0] - 2025-02-19
 
 ### Added to 4.0.0-beta.1
