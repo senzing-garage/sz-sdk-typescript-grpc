@@ -187,39 +187,6 @@ export class SzGrpcConfig extends SzGrpcBase implements SzConfig {
     }
 
     /**
-     * Creates an in-memory Senzing configuration from the g2config.json template configuration 
-     * file located in the PIPELINE.RESOURCEPATH path. A handle is returned to identify 
-     * the in-memory configuration. The handle is used by the {@link SzGrpcConfig#addDataSource}, 
-     * {@link SzGrpcConfig#getDataSources}, {@link SzGrpcConfig#deleteDataSource}, 
-     * and {@link SzGrpcConfig#exportConfig} methods. 
-     * The handle is terminated by the {@link SzGrpcConfig#closeConfig} method.
-     * @returns {Promise<number>} pointer to an in-memory Senzing configuration
-     */
-    /*
-    createConfig(): Promise<number | SzError> {
-        return new Promise<number | SzError>((resolve, reject) => {
-            if(!this.client){
-                reject(new SzNoGrpcConnectionError());
-                return
-            }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
-                if(err) {
-                    reject( err )
-                    return;
-                }
-                const request = new CreateConfigRequest();
-                this.client.createConfig(request, (err, res: CreateConfigResponse) => {
-                    if(err) {
-                        reject( newException(err.details) );
-                        return;
-                    }
-                    //console.log("RESPONSE:\n\r", result);
-                    resolve(res.getResult() as number);
-                });
-            });
-        });
-    }*/
-    /**
      * Removes a data source from an existing in-memory configuration.
      * or {@link SzGrpcConfig#importConfig} methods.
      * @param dataSourceCode Name of data source code to delete.
@@ -253,35 +220,6 @@ export class SzGrpcConfig extends SzGrpcBase implements SzConfig {
         });
     }
     /**
-     * Creates a JSON string representation of the Senzing SzConfig object.
-     * @returns {Promise<string>} containing a JSON Document representation of the Senzing SzConfig object.
-     */
-    /*
-    exportConfig(configHandle: number) {
-        return new Promise((resolve, reject) => {
-            if(!this.client){
-                reject(new SzNoGrpcConnectionError());
-                return
-            }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
-                if(err) {
-                    reject( err )
-                    return;
-                }
-                const request = new ExportConfigRequest();
-                request.setConfigHandle(configHandle);
-                this.client.exportConfig(request, (err, res: ExportConfigResponse) => {
-                    if(err) {
-                        reject( newException(err.details) )
-                        return;
-                    }
-                    //console.log("RESPONSE:\n\r", result);
-                    resolve(res.getResult());
-                });
-            });
-        });
-    }*/
-    /**
      * Returns a JSON document of data sources contained in an in-memory configuration.
      * @returns {Promise<string[]>} containing a JSON document listing all of the data sources.
      */
@@ -310,38 +248,6 @@ export class SzGrpcConfig extends SzGrpcBase implements SzConfig {
             });
         });
     }
-    /**
-     * Initializes an in-memory Senzing SzConfig object from a 
-     * JSON string. A handle is returned to identify the in-memory configuration. 
-     * The handle is used by the {@link SzGrpcConfig#addDataSource}, {@link SzGrpcConfig#getDataSources}, 
-     * {@link SzGrpcConfig#deleteDataSource}, and {@link SzGrpcConfig#exportConfig} methods. 
-     * The handle is terminated by the {@link SzGrpcConfig#closeConfig} method.
-     * @param configDefinition 
-     * @returns {Promise<number>}
-     */
-    /*importConfig(configDefinition: string) {
-        return new Promise((resolve, reject) => {
-            if(!this.client){
-                reject(new SzNoGrpcConnectionError());
-                return
-            }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
-                if(err) {
-                    reject( err )
-                    return;
-                }
-                const request = new ImportConfigRequest();
-                request.setConfigDefinition(configDefinition);
-                this.client.importConfig(request, (err, res: ImportConfigResponse) => {
-                    if(err) {
-                        reject( newException(err.details) )
-                        return;
-                    }
-                    resolve(res.getResult() as number);
-                });
-            });
-        });
-    }*/
     /**
      * @param configDefinition 
      * @returns {Promise<boolean>}
