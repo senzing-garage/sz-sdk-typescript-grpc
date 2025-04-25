@@ -7,8 +7,6 @@ and this project adheres to [Semantic Versioning].
 
 ## [4.0.0-beta.2.0] - 2025-04-25
 
-### Added
-
 ### Removed
 
 - `SzGrpcConfig`: config now represents a senzing config and is no longer directly accessible through an environment. Creation and initialization of `SzGrpcConfig` should now be done through methods in `SzGrpcConfigManager` and by manipulating a working instance of a `SzGrpcConfig`
