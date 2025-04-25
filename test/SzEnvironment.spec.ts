@@ -6,9 +6,6 @@ describe('SzEnvironment Tests', () => {
     it("Can create SzEnvironment", () => {
         expect(szEnvironment).toBeInstanceOf(SzGrpcEnvironment);
     });
-    it("Has getConfig method", () => {
-        expect(typeof szEnvironment.getConfig).toBe('function');
-    });
     it("Has getConfigManager method", () => {
         expect(typeof szEnvironment.getConfigManager).toBe('function');
     });
