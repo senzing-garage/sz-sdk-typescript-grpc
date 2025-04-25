@@ -4,20 +4,17 @@ describe('SzConfig Tests', () => {
     const szEnvironment  = new SzGrpcEnvironment({isTestEnvironment: true});
     let szConfig: SzGrpcConfig;
 
-    async function GetConfig() {
+    beforeAll(() => {
         return new Promise<SzGrpcConfig>((resolve, reject) => {
             szEnvironment.getConfigManager().createConfig().then((conf: SzGrpcConfig) => {
                 szConfig = conf;
                 resolve(conf);
             }).catch((err) => {
+                reject(err);
                 throw err;
             })
         });
-    }
-
-    beforeAll(async () => {
-        await GetConfig();
-    });
+    }, 10000);
 
     it("Can create SzConfig", () => {
         expect(szConfig).toHaveProperty('productId');
