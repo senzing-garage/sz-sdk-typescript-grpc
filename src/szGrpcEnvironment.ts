@@ -60,6 +60,10 @@ export interface SzGrpcEnvironmentOptions extends SzEnvironmentOptions {
  * @group SzGrpcEnvironment
  */
 export class SzGrpcEnvironment extends SzEnvironment {
+    /**
+     * used for telling classes not to use live clients 
+     * @ignore */
+    private isTestEnvironment: boolean = false;
 
     // ---------------- private properties used in public read-only getters ----------------
     /** 
@@ -163,7 +167,7 @@ export class SzGrpcEnvironment extends SzEnvironment {
             if(!this._configManagerClient) this._configManagerClient = new SzConfigManagerClient(this.connectionString, this.credentials, this._grpcOptions );
 
             // create new config manager with ref to client
-            if(!this._configManager) this._configManager = new SzGrpcConfigManager({ client: this._configManagerClient, configClient: this._configClient, grpcOptions: this._grpcOptions });
+            if(!this._configManager) this._configManager = new SzGrpcConfigManager({ client: this._configManagerClient, configClient: this._configClient, grpcOptions: this._grpcOptions, isTestEnvironment: this.isTestEnvironment });
         }
         return this._configManager;
     }
@@ -268,10 +272,11 @@ export class SzGrpcEnvironment extends SzEnvironment {
 
         // store grpc specific connection params for lazy client init
         // in getters
-        const { connectionString, credentials, grpcOptions } = parameters;
+        const { connectionString, credentials, grpcOptions, isTestEnvironment } = parameters;
         if(connectionString)    this._connectionString   = connectionString;
         if(credentials)         this._credentials        = credentials ;
         if(grpcOptions)         this._grpcOptions        = grpcOptions ;
+        if(isTestEnvironment !== undefined) this.isTestEnvironment  = isTestEnvironment;
     }
     /**
      * Reinitializes the {@link SzGrpcEngine} with the specified configuration ID.
