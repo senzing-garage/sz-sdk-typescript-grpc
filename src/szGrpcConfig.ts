@@ -112,11 +112,10 @@ export class SzGrpcConfig extends SzGrpcBase implements SzConfig {
     }
     /**
      * Adds multiple data sources to an existing in-memory configuration.
-     * @param {number} configHandle 
      * @param {string[]} dataSourceCodes 
      * @returns {Promise<string[]>} JSON documents for each datasource listing the newly created data source
      */
-    addDataSources(configHandle: number, dataSourceCodes: string[]) {
+    addDataSources(dataSourceCodes: string[]) {
         /** 
          * Attempting to create multiple datasources asynchonously ends up causing a connection closed error.
          * JavaScript/TypeScript does not have a good paradigm for synchronously requesting promises one after the other. 
@@ -128,7 +127,6 @@ export class SzGrpcConfig extends SzGrpcBase implements SzConfig {
         /** private class used for managing sequential requests */
         let addDataSourcesSequentially = (dataSources: string[], callback?: Function) => {
             let _dataSources    = dataSources;
-            let _configHandle   = configHandle;
             let _callback: Function | undefined;
             let _onComplete: Promise<string[]>;
             let _responses: string[] = [];

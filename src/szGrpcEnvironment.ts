@@ -154,12 +154,16 @@ export class SzGrpcEnvironment extends SzEnvironment {
      * @return {SzGrpcConfigManager}
     */
     public getConfigManager() {
+        if(!this._configClient) {
+            // create new config grpc client
+            if(!this._configClient) this._configClient = new SzConfigClient(this.connectionString, this.credentials, this._grpcOptions );
+        }
         if(!this._configManager || !this._configManagerClient) {
-            // create new grpc client
+            // create new configManager grpc client
             if(!this._configManagerClient) this._configManagerClient = new SzConfigManagerClient(this.connectionString, this.credentials, this._grpcOptions );
 
             // create new config manager with ref to client
-            if(!this._configManager) this._configManager = new SzGrpcConfigManager({ client: this._configManagerClient, grpcOptions: this._grpcOptions });
+            if(!this._configManager) this._configManager = new SzGrpcConfigManager({ client: this._configManagerClient, configClient: this._configClient, grpcOptions: this._grpcOptions });
         }
         return this._configManager;
     }

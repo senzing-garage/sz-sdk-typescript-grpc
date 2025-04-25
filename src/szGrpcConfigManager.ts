@@ -1,5 +1,6 @@
 import * as grpc from '@grpc/grpc-js';
 import { GetConfigRequest, GetConfigResponse, GetConfigsRequest, GetConfigsResponse, GetDefaultConfigIdRequest, GetDefaultConfigIdResponse, GetTemplateConfigRequest, GetTemplateConfigResponse, RegisterConfigRequest, RegisterConfigResponse, ReplaceDefaultConfigIdRequest, ReplaceDefaultConfigIdResponse, SetDefaultConfigIdRequest, SetDefaultConfigIdResponse, SetDefaultConfigRequest, SetDefaultConfigResponse} from './szconfigmanager/szconfigmanager_pb';
+import { SzConfigClient } from './szconfig/szconfig_grpc_pb';
 import { SzConfigManagerClient } from './szconfigmanager/szconfigmanager_grpc_pb';
 import { SzConfigManager } from './abstracts/szConfigManager';
 import { newException } from './szHelpers';
@@ -12,7 +13,8 @@ import { SzGrpcConfig, SzGrpcConfigOptions } from './szGrpcConfig';
 // prevents accidentally passing the wrong type of client to constructor
 /** options to initialize SzConfigManager class */
 export interface SzGrpcConfigManagerOptions extends SzGrpcEnvironmentOptions { 
-    client?: SzConfigManagerClient
+    client?: SzConfigManagerClient,
+    configClient?: SzConfigClient
 }
 
 /**
@@ -25,6 +27,7 @@ export interface SzGrpcConfigManagerOptions extends SzGrpcEnvironmentOptions {
  */
 export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
     private _client;
+    private _configClient: SzConfigClient | undefined;
     private _parameters: SzGrpcConfigManagerOptions; 
     /** See {@link https://github.com/senzing-garage/knowledge-base/blob/main/lists/senzing-component-ids.md} */
     public productId = "5051";
@@ -58,22 +61,22 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
      * configuration template and returns the {@link SzGrpcConfig}
      * representing that configuration.
      */
-    createConfig(): Promise<SzGrpcConfig>;
+    public createConfig(): Promise<SzGrpcConfig>;
     /**
      * Gets the configuration definition that is registered with the
      * specified config ID and returns a new {@link SzGrpcConfig} instance
      * representing that configuration.
      */
-    createConfig(configId?: number): Promise<SzGrpcConfig>;
+    public createConfig(configId: number): Promise<SzGrpcConfig>;
     /**
      * Creates a new {@link SzGrpcConfig} instance using the specified
      * configuration definition and returns the {@link SzGrpcConfig}
      * representing that configuration.
      * @param configDefinition 
      */
-    createConfig(configDefinition?: string): Promise<SzGrpcConfig>;
+    public createConfig(configDefinition: string): Promise<SzGrpcConfig>;
     /** @internal */
-    createConfig(definitionOrConfigId?: string | number): Promise<SzGrpcConfig> {
+    public createConfig(definitionOrConfigId?: string | number): Promise<SzGrpcConfig> {
         if(definitionOrConfigId) {
             if(typeof definitionOrConfigId == 'number') {
                 // get new SzConfig from configId
@@ -90,7 +93,7 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
      * Get the Configuration Document for the default configuration template.
      * @returns {Promise<string>} the configuration document
      */
-    getTemplateConfig(): Promise<string> {
+    public getTemplateConfig(): Promise<string> {
         return new Promise<string>((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
@@ -126,7 +129,7 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
      * @throws SzException If a failure occurs.
      */
     registerConfig(configDefinition: string, comment?: string) {
-        return new Promise((resolve, reject) => {
+        return new Promise<number>((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
                 return
@@ -147,7 +150,7 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
                         return
                     }
                     //console.log("RESPONSE:\n\r", result);
-                    resolve(void 0);
+                    resolve(res.getResult());
                 });
             });
         });
@@ -228,7 +231,7 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
      * @returns {Promise<number>}The configuration ID under which the configuration was registered.
      * @returns {Promise<SzException>} If a failure occurs.
      */
-    setDefaultConfig(configDefinition: string): Promise<number>
+    setDefaultConfig(configDefinition: string): Promise<number>;
     /**
      * Registers the specified config definition with the specified comment
      * and then sets the default configuration ID for the repository to the
@@ -239,6 +242,8 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
      * @returns {Promise<number>}The configuration ID under which the configuration was registered.
      * @returns {Promise<SzException>} If a failure occurs.
      */
+    setDefaultConfig(configDefinition: string, comment: string): Promise<number>;
+    /** @internal */
     setDefaultConfig(configDefinition: string, comment?: string): Promise<number | SzError> | undefined {
         return new Promise<number>((resolve, reject) => {
             if(!this.client){
@@ -274,8 +279,8 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
      * @param configId The configuration identifier of the Senzing Engine configuration to use as the default.
      * @returns {Promise<undefined>} for async flow control
      */
-    setDefaultConfigId(configId: number): Promise<undefined | SzError> | undefined {
-        return new Promise<undefined>((resolve, reject) => {
+    setDefaultConfigId(configId: number): Promise<number | SzError> | undefined {
+        return new Promise<number>((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
                 return
@@ -294,15 +299,19 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
                         throw _err;
                         return;
                     }
+                    resolve( configId );
                 });
             });
         });
     }
 
     constructor(parameters: SzGrpcConfigManagerOptions) {
-        const { connectionString, credentials, client, grpcOptions, grpcConnectionReadyTimeOut } = parameters;
+        const { connectionString, credentials, client, configClient, grpcOptions, grpcConnectionReadyTimeOut } = parameters;
         super(parameters);
         this._parameters = parameters;
+        if(configClient) {
+            this._configClient = configClient;
+        }
         if(client) {
             // if client was passed in use/reuse that
             this._client            = client;
@@ -357,6 +366,13 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
 
     // ------------------------------- non public methods -------------------------------
     /** @internal */
+    get szConfigGrpcOptions(): SzGrpcConfigOptions {
+        let _options: SzGrpcConfigOptions = this.grpcParameters as SzGrpcConfigOptions;
+        delete _options.client;
+        if(this._configClient) _options.client = this._configClient;
+        return _options;
+    }
+    /** @internal */
     private createConfigFromDefinition(configDefinition: string) {
         return new Promise<SzGrpcConfig>((resolve, reject) => {
             if(!this.client){
@@ -368,7 +384,7 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
                     reject( err )
                     return;
                 }
-                const res = new SzGrpcConfig(this.grpcParameters as SzGrpcConfigOptions);
+                const res = new SzGrpcConfig(this.szConfigGrpcOptions);
                 res.definition = configDefinition;
                 res.verifyConfig();
                 resolve(res);
@@ -387,10 +403,6 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
                     reject( err )
                     return;
                 }
-                //const res = new SzGrpcConfig(this.grpcParameters as SzGrpcConfigOptions);
-                //res.configDefinition = configDefinition;
-                //res.verifyConfig();
-                //resolve(res);
                 const request = new GetConfigRequest();
                 request.setConfigId(configId);
                 this.client.getConfig(request, (err, res: GetConfigResponse) => {
@@ -401,9 +413,8 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
                         return;
                     }
                     let configDefinition = res.getResult();
-                    const conf = new SzGrpcConfig(this.grpcParameters as SzGrpcConfigOptions);
+                    const conf = new SzGrpcConfig(this.szConfigGrpcOptions);
                     conf.definition = configDefinition;
-                    //console.log("RESPONSE:\n\r", result);
                     resolve(conf);
                 });
             });
@@ -434,7 +445,7 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
                         return;
                     }
                     let configDefinition = res.getResult();
-                    const conf = new SzGrpcConfig(this.grpcParameters as SzGrpcConfigOptions);
+                    const conf = new SzGrpcConfig(this.szConfigGrpcOptions);
                     conf.definition = configDefinition;
                     //console.log("RESPONSE:\n\r", result);
                     resolve(conf);
