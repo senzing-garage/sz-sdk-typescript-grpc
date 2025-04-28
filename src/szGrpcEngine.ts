@@ -1,5 +1,5 @@
 import * as grpc from '@grpc/grpc-js';
-import { AddRecordRequest, AddRecordResponse, CloseExportRequest, CloseExportResponse, CountRedoRecordsRequest, CountRedoRecordsResponse, DeleteRecordRequest, DeleteRecordResponse, ExportJsonEntityReportRequest, ExportJsonEntityReportResponse, FetchNextRequest, FetchNextResponse, FindInterestingEntitiesByEntityIdRequest, FindInterestingEntitiesByEntityIdResponse, FindInterestingEntitiesByRecordIdRequest, FindInterestingEntitiesByRecordIdResponse, FindNetworkByEntityIdRequest, FindNetworkByEntityIdResponse, FindNetworkByRecordIdRequest, FindNetworkByRecordIdResponse, FindPathByEntityIdRequest, FindPathByEntityIdResponse, FindPathByRecordIdRequest, FindPathByRecordIdResponse, GetActiveConfigIdRequest, GetActiveConfigIdResponse, GetEntityByEntityIdRequest, GetEntityByEntityIdResponse, GetEntityByRecordIdRequest, GetEntityByRecordIdResponse, GetRecordRequest, GetRecordResponse, GetRedoRecordRequest, GetRedoRecordResponse, GetStatsRequest, GetStatsResponse, GetVirtualEntityByRecordIdRequest, GetVirtualEntityByRecordIdResponse, HowEntityByEntityIdRequest, HowEntityByEntityIdResponse, PreprocessRecordRequest, PreprocessRecordResponse, PrimeEngineRequest, PrimeEngineResponse, ProcessRedoRecordRequest, ProcessRedoRecordResponse, ReevaluateEntityRequest, ReevaluateEntityResponse, ReevaluateRecordRequest, ReevaluateRecordResponse, ReinitializeRequest, ReinitializeResponse, SearchByAttributesRequest, SearchByAttributesResponse, StreamExportJsonEntityReportRequest, StreamExportJsonEntityReportResponse, WhyEntitiesRequest, WhyEntitiesResponse, WhyRecordInEntityRequest, WhyRecordInEntityResponse, WhyRecordsRequest, WhyRecordsResponse } from './szengine/szengine_pb';
+import { AddRecordRequest, AddRecordResponse, CloseExportRequest, CloseExportResponse, CountRedoRecordsRequest, CountRedoRecordsResponse, DeleteRecordRequest, DeleteRecordResponse, ExportJsonEntityReportRequest, ExportJsonEntityReportResponse, FetchNextRequest, FetchNextResponse, FindInterestingEntitiesByEntityIdRequest, FindInterestingEntitiesByEntityIdResponse, FindInterestingEntitiesByRecordIdRequest, FindInterestingEntitiesByRecordIdResponse, FindNetworkByEntityIdRequest, FindNetworkByEntityIdResponse, FindNetworkByRecordIdRequest, FindNetworkByRecordIdResponse, FindPathByEntityIdRequest, FindPathByEntityIdResponse, FindPathByRecordIdRequest, FindPathByRecordIdResponse, GetActiveConfigIdRequest, GetActiveConfigIdResponse, GetEntityByEntityIdRequest, GetEntityByEntityIdResponse, GetEntityByRecordIdRequest, GetEntityByRecordIdResponse, GetRecordRequest, GetRecordResponse, GetRedoRecordRequest, GetRedoRecordResponse, GetStatsRequest, GetStatsResponse, GetVirtualEntityByRecordIdRequest, GetVirtualEntityByRecordIdResponse, HowEntityByEntityIdRequest, HowEntityByEntityIdResponse, PreprocessRecordRequest, PreprocessRecordResponse, PrimeEngineRequest, PrimeEngineResponse, ProcessRedoRecordRequest, ProcessRedoRecordResponse, ReevaluateEntityRequest, ReevaluateEntityResponse, ReevaluateRecordRequest, ReevaluateRecordResponse, ReinitializeRequest, ReinitializeResponse, SearchByAttributesRequest, SearchByAttributesResponse, StreamExportJsonEntityReportRequest, StreamExportJsonEntityReportResponse, WhyEntitiesRequest, WhyEntitiesResponse, WhyRecordInEntityRequest, WhyRecordInEntityResponse, WhyRecordsRequest, WhyRecordsResponse, WhySearchRequest, WhySearchResponse } from './szengine/szengine_pb';
 import { SzEngineClient } from './szengine/szengine_grpc_pb';
 import { SzEngine } from './abstracts/szEngine';
 import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzGrpcEnvironmentOptions } from './szGrpcEnvironment';
@@ -1164,6 +1164,77 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 request.setRecordId2(recordId2);
                 request.setFlags(bigIntToNumber(flags));
                 this.client.whyRecords(request, (err, res: WhyRecordsResponse)=>{
+                    if(err) {
+                        let _err = newException(err.details);
+                        reject(_err);
+                        throw _err;
+                        return;
+                    }
+                    let result = res.getResult();
+                    resolve(result);
+                });
+            });
+        });
+    }
+    /**
+     * Compares the specified search attribute criteria against the entity
+     * identified by the specified entity ID to determine why that entity was
+     * or was not included in the results of a {@linkplain 
+     * #searchByAttributes(String, String, Set) "search by attributes"} operation.
+     * <p>
+     * The specified search attributes are treated as a hypothetical single-record
+     * entity and the result of this operation is the {@linkplain 
+     * #whyEntities(long, long, Set) "why analysis"} of the entity identified
+     * by the specified entity ID against that hypothetical entity.  The details 
+     * included in the response are determined by the specified flags.
+     * <p>
+     * If the specified search profile is <code>null</code> then the default
+     * generic thresholds from the default search profile will be used for the
+     * search candidate determination.  If your search requires different behavior
+     * using alternate generic thresholds, please contact
+     * <a href="mailto:support@senzing.com">support@senzing.com</a> for details
+     * on configuring a custom search profile.
+     * <p>
+     * 
+     * @param attributes The search attributes defining the hypothetical record
+     *                   to match and/or relate to in order to obtain the
+     *                   search results.
+     * @param entityId The entity ID identifying the entity to analyze against the
+     *                 search attribute criteria.
+     * @param searchProfile The optional search profile identifier, or 
+     *                      <code>null</code> if the default search profile
+     *                      should be used for the search.
+     * @param flags The optional {@link Set} of {@link SzFlag} instances belonging
+     *              to the {@link SzFlagUsageGroup#SZ_WHY_SEARCH_FLAGS} group t
+     *              control how the operation is performed and the content of the
+     *              response, or <code>null</code> to default to {@link
+     *              SzFlag#SZ_NO_FLAGS} or {@link SzFlag#SZ_WHY_SEARCH_DEFAULT_FLAGS}
+    *              for the default recommended flags.
+     * @returns The resulting JSON {@link String} describing the result of the
+     *         why analysis against the search criteria.
+     */
+    whySearch(
+        attributes: string,
+        entityId: number,
+        searchProfile: string = "",
+        flags: BigInt | number = SzEngineFlags.SZ_ENTITY_DEFAULT_FLAGS
+    ) {
+        return new Promise((resolve, reject) => {
+            if(!this.client){
+                reject(new SzNoGrpcConnectionError());
+                return
+            }
+            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+                if(err) {
+                    reject( err )
+                    return;
+                }
+                const request = new WhySearchRequest();
+                request.setAttributes(attributes);
+                request.setEntityId(entityId);
+                request.setSearchProfile(searchProfile);
+                request.setFlags(bigIntToNumber(flags));
+                this.client.whySearch(request, (err, res: WhySearchResponse)=>{
                     if(err) {
                         let _err = newException(err.details);
                         reject(_err);

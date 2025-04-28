@@ -5,11 +5,11 @@ const DATASOURCES_TO_ADD    = ['CUSTOMERS']; // works
 //const DATASOURCES_TO_ADD    = ['CUSTOMERS', 'REFERENCE', 'WATCHLIST']; // doesn't work
 
 // create new config and get handle
-szEnvironment.getConfig().createConfig().then((configHandle) => {
+szEnvironment.getConfigManager().createConfig().then((config) => {
     // now get datasources from config
     let promises: Array<Promise<string>> = [];
     DATASOURCES_TO_ADD.forEach((DATA_SOURCE_CODE) => {
-        promises.push( szEnvironment.config.addDataSource(configHandle as number, DATA_SOURCE_CODE) );
+        promises.push( config.addDataSource(DATA_SOURCE_CODE) );
     });
     Promise.all(promises).then((results) => {
         console.log('Added DataSources: ', results);
