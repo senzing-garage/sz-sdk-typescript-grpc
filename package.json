@@ -36,6 +36,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
-    "grpc": "^1.24.11"
+    "grpc": "^1.24.11",
+    "grpc-web": "^1.5.0"
   }
 }
