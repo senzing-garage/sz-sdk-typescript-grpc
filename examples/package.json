@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "helloworld/helloworld.ts": "tsx web/helloworld.ts",
-    "web/helloworld.ts": "tsx helloworld/helloworld.ts",
+    "helloworld/helloworld.ts": "tsx helloworld/helloworld.ts",
+    "web/helloworld.ts": "tsx web/helloworld.ts",
     "szconfig/addDataSource.ts": "tsx szconfig/addDataSource.ts",
     "szconfig/addDataSources.ts": "tsx szconfig/addDataSources.ts",
     "szconfig/createConfigFromConfigId.ts": "tsx szconfig/createConfigFromConfigId.ts",
