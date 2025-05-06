@@ -8,7 +8,7 @@
         "es2020", "esnext"
       ],
       "allowJs": false,
-      "outDir": "dist/@senzing/sz-sdk-typescript-grpc",
+      "outDir": "dist/@senzing/sz-sdk-typescript-grpc-web",
       "rootDir": "./",
       "strict": true,
       "noImplicitAny": true,
@@ -19,8 +19,20 @@
       "declaration": true,
       "noEmitOnError": true
     },
+    "files": [
+      "src/szGrpcWebEnvironment.ts",
+      "src/szGrpcWebProduct.ts",
+      "src/szHelpers.ts",
+      "src/package.web.json",
+      "src/index.web.ts",
+    ],
     "include": [
-      "src/**/*.ts"
+      "src/types/**/*.ts",
+      "src/abstracts/**/*.ts",
+      "src/senzing/**/*.ts",
+      "src/**/*_web_*.ts",
+      "src/**/*_web_*.js",
+      "src/szGrpcWeb**.ts",
     ],
     "exclude": [
       "dist",
@@ -30,16 +42,12 @@
       "examples/*",
       "examples/**",
       "examples/**/*",
-      "src/web/*",
-      "src/**/*_web_*.ts",
-      "src/index.web.ts",
-      "src/abstracts/szGrpcWebBase.ts",
-      "src/szGrpcWeb*.ts",
+      "src/abstracts/szGrpcBase.ts",
+      "src/szGrpc**.ts",
+      "src/szGrpcEnvironment.ts",
       "src/**/*d.ts",
       "package-lock.json",
       "package.json",
-      "package.web.json",
-      "build/build.js",
-      "build/build.web.js"
+      "build/build.js"
     ]
 }

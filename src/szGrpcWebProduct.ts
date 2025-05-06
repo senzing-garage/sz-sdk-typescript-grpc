@@ -1,15 +1,15 @@
 import * as grpc from '@grpc/grpc-js';
 import { GetVersionRequest, GetVersionResponse, GetLicenseRequest, GetLicenseResponse } from './szproduct/szproduct_web_pb';
-import { SzProductClient as  SzProductWebClient} from './szproduct/szproduct_web_client';
+import { SzProductClient as  SzProductWebClient} from './szproduct/szproduct_web_client'
 import { SzProduct } from './abstracts/szProduct';
 import { SzError, SzNoGrpcConnectionError } from './senzing/SzError';
-import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzGrpcEnvironmentOptions } from './szGrpcEnvironment';
-import { SzGrpcBase } from './abstracts/szGrpcBase';
+import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzGrpcWebEnvironmentOptions } from './szGrpcWebEnvironment';
+import { SzGrpcWebBase } from './abstracts/szGrpcWebBase';
 
 /** 
  * options to initialize the {@link:SzGrpcProduct} class with 
  */
-export interface SzGrpcWebProductOptions extends SzGrpcEnvironmentOptions { 
+export interface SzGrpcWebProductOptions extends SzGrpcWebEnvironmentOptions { 
     client?: SzProductWebClient
 }
 
@@ -20,7 +20,7 @@ export interface SzGrpcWebProductOptions extends SzGrpcEnvironmentOptions {
  * @hideconstructor
  * @class
  */
-export class SzGrpcWebProduct extends SzGrpcBase implements SzProduct {
+export class SzGrpcWebProduct extends SzGrpcWebBase implements SzProduct {
     /** @ignore */
     private _client: SzProductWebClient;
 
