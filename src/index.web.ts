@@ -1,2 +1,2 @@
-export { SzGrpcWebEnvironment } from "./szGrpcWebEnvironment";
-export { SzGrpcWebProduct } from "./szGrpcWebProduct";
+export { SzGrpcWebEnvironment, SzGrpcWebEnvironmentOptions } from "./szGrpcWebEnvironment";
+export { SzGrpcWebProduct, SzGrpcWebProductOptions } from "./szGrpcWebProduct";

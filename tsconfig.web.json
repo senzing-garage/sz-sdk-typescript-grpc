@@ -7,7 +7,7 @@
         "es6",
         "es2020", "esnext"
       ],
-      "allowJs": false,
+      "allowJs": true,
       "outDir": "dist/@senzing/sz-sdk-typescript-grpc-web",
       "rootDir": "./",
       "strict": true,
@@ -24,15 +24,14 @@
       "src/szGrpcWebProduct.ts",
       "src/szHelpers.ts",
       "src/package.web.json",
-      "src/index.web.ts",
+      "src/index.web.ts"
     ],
     "include": [
       "src/types/**/*.ts",
       "src/abstracts/**/*.ts",
       "src/senzing/**/*.ts",
       "src/**/*_web_*.ts",
-      "src/**/*_web_*.js",
-      "src/szGrpcWeb**.ts",
+      "src/szGrpcWeb**.ts"
     ],
     "exclude": [
       "dist",

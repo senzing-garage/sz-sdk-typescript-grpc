@@ -40,7 +40,7 @@ export class SzGrpcProduct extends SzGrpcBase implements SzProduct {
     public get client(): SzProductClient {
         return this._client;
     }
-
+    
     constructor(parameters: SzGrpcProductOptions) {
         const { connectionString, credentials, client, grpcOptions, grpcConnectionReadyTimeOut } = parameters;
         super(parameters);
@@ -72,13 +72,13 @@ export class SzGrpcProduct extends SzGrpcBase implements SzProduct {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
                 }
                 const request = new GetLicenseRequest();
-                this.client.getLicense(request, (err, res: GetLicenseResponse) => {
+                this.client.getLicense(request, this._metadata, (err, res: GetLicenseResponse) => {
                     if(err) {
                         reject(err)
                         return;
@@ -100,13 +100,13 @@ export class SzGrpcProduct extends SzGrpcBase implements SzProduct {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
                 }
                 const request = new GetVersionRequest();
-                this.client.getVersion(request, (err, res: GetVersionResponse) => {
+                this.client.getVersion(request, this._metadata, (err, res: GetVersionResponse) => {
                     if(err) {
                         reject(err)
                         return;

@@ -40,12 +40,17 @@ if(fs.existsSync(path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web/pac
     );
 }
 
-// copy js/ts files in "/src" to package dir
-/*
-fs.cpSync(path.join('.','src','web'), path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web'.split('/')), { recursive: true, filter: (filename) => {
-    return !_filesToExclude.includes(filename);
+// copy js/ts that include "_web_pb" in their names
+const foldersToScan = [
+    'src',
+    'src/szproduct'
+]
+fs.cpSync(path.join('.','src'), path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web'.split('/')), { recursive: true, filter: (source, dest) => {
+    console.log(`${source.indexOf(`_web_pb`) > -1}|"${source}" contains "_web_pb"`);
+    let isFolder = foldersToScan.includes(source);
+    return isFolder || !_filesToExclude.includes(source) && source && source.indexOf(`_web_pb`) > -1;
 } }, (err) => {
     if (err) {
         console.error(err);
     }
-});*/
+});

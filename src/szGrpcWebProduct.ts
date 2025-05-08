@@ -70,16 +70,21 @@ export class SzGrpcWebProduct extends SzGrpcWebBase implements SzProduct {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-
-            const request = new GetLicenseRequest();
-            this.client.getLicense(request, {}, (err, res: GetLicenseResponse) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
-                    reject(err)
+                    reject( err )
                     return;
                 }
-                let result = JSON.parse(res.getResult());
-                //console.log("RESPONSE:\n\r", result);
-                resolve(result);
+                const request = new GetLicenseRequest();
+                this.client.getLicense(request, this._metadata, (err, res: GetLicenseResponse) => {
+                    if(err) {
+                        reject(err)
+                        return;
+                    }
+                    let result = JSON.parse(res.getResult());
+                    //console.log("RESPONSE:\n\r", result);
+                    resolve(result);
+                });
             });
         });
     }
@@ -93,16 +98,21 @@ export class SzGrpcWebProduct extends SzGrpcWebBase implements SzProduct {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            
-            const request = new GetVersionRequest();
-            this.client.getVersion(request, {}, (err, res: GetVersionResponse) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
-                    reject(err)
+                    reject( err )
                     return;
                 }
-                let result = JSON.parse(res.getResult());
-                //console.log("RESPONSE:\n\r", result);
-                resolve(result);
+                const request = new GetVersionRequest();
+                this.client.getVersion(request, this._metadata, (err, res: GetVersionResponse) => {
+                    if(err) {
+                        reject(err)
+                        return;
+                    }
+                    let result = JSON.parse(res.getResult());
+                    //console.log("RESPONSE:\n\r", result);
+                    resolve(result);
+                });
             });
         });
     }
