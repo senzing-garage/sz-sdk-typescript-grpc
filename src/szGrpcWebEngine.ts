@@ -1,26 +1,26 @@
 import * as grpc from '@grpc/grpc-js';
-import { AddRecordRequest, AddRecordResponse, CloseExportRequest, CloseExportResponse, CountRedoRecordsRequest, CountRedoRecordsResponse, DeleteRecordRequest, DeleteRecordResponse, ExportJsonEntityReportRequest, ExportJsonEntityReportResponse, FetchNextRequest, FetchNextResponse, FindInterestingEntitiesByEntityIdRequest, FindInterestingEntitiesByEntityIdResponse, FindInterestingEntitiesByRecordIdRequest, FindInterestingEntitiesByRecordIdResponse, FindNetworkByEntityIdRequest, FindNetworkByEntityIdResponse, FindNetworkByRecordIdRequest, FindNetworkByRecordIdResponse, FindPathByEntityIdRequest, FindPathByEntityIdResponse, FindPathByRecordIdRequest, FindPathByRecordIdResponse, GetActiveConfigIdRequest, GetActiveConfigIdResponse, GetEntityByEntityIdRequest, GetEntityByEntityIdResponse, GetEntityByRecordIdRequest, GetEntityByRecordIdResponse, GetRecordRequest, GetRecordResponse, GetRedoRecordRequest, GetRedoRecordResponse, GetStatsRequest, GetStatsResponse, GetVirtualEntityByRecordIdRequest, GetVirtualEntityByRecordIdResponse, HowEntityByEntityIdRequest, HowEntityByEntityIdResponse, PreprocessRecordRequest, PreprocessRecordResponse, PrimeEngineRequest, PrimeEngineResponse, ProcessRedoRecordRequest, ProcessRedoRecordResponse, ReevaluateEntityRequest, ReevaluateEntityResponse, ReevaluateRecordRequest, ReevaluateRecordResponse, ReinitializeRequest, ReinitializeResponse, SearchByAttributesRequest, SearchByAttributesResponse, StreamExportJsonEntityReportRequest, StreamExportJsonEntityReportResponse, WhyEntitiesRequest, WhyEntitiesResponse, WhyRecordInEntityRequest, WhyRecordInEntityResponse, WhyRecordsRequest, WhyRecordsResponse, WhySearchRequest, WhySearchResponse } from './szengine/szengine_pb';
-import { SzEngineClient } from './szengine/szengine_grpc_pb';
+import { AddRecordRequest, AddRecordResponse, CloseExportRequest, CloseExportResponse, CountRedoRecordsRequest, CountRedoRecordsResponse, DeleteRecordRequest, DeleteRecordResponse, ExportJsonEntityReportRequest, ExportJsonEntityReportResponse, FetchNextRequest, FetchNextResponse, FindInterestingEntitiesByEntityIdRequest, FindInterestingEntitiesByEntityIdResponse, FindInterestingEntitiesByRecordIdRequest, FindInterestingEntitiesByRecordIdResponse, FindNetworkByEntityIdRequest, FindNetworkByEntityIdResponse, FindNetworkByRecordIdRequest, FindNetworkByRecordIdResponse, FindPathByEntityIdRequest, FindPathByEntityIdResponse, FindPathByRecordIdRequest, FindPathByRecordIdResponse, GetActiveConfigIdRequest, GetActiveConfigIdResponse, GetEntityByEntityIdRequest, GetEntityByEntityIdResponse, GetEntityByRecordIdRequest, GetEntityByRecordIdResponse, GetRecordRequest, GetRecordResponse, GetRedoRecordRequest, GetRedoRecordResponse, GetStatsRequest, GetStatsResponse, GetVirtualEntityByRecordIdRequest, GetVirtualEntityByRecordIdResponse, HowEntityByEntityIdRequest, HowEntityByEntityIdResponse, PreprocessRecordRequest, PreprocessRecordResponse, PrimeEngineRequest, PrimeEngineResponse, ProcessRedoRecordRequest, ProcessRedoRecordResponse, ReevaluateEntityRequest, ReevaluateEntityResponse, ReevaluateRecordRequest, ReevaluateRecordResponse, ReinitializeRequest, ReinitializeResponse, SearchByAttributesRequest, SearchByAttributesResponse, StreamExportJsonEntityReportRequest, StreamExportJsonEntityReportResponse, WhyEntitiesRequest, WhyEntitiesResponse, WhyRecordInEntityRequest, WhyRecordInEntityResponse, WhyRecordsRequest, WhyRecordsResponse, WhySearchRequest, WhySearchResponse } from './szengine/szengine_web_pb';
+import { SzEngineClient } from './szengine/szengine_web_client';
 import { SzEngine } from './abstracts/szEngine';
-import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzGrpcEnvironmentOptions } from './szGrpcEnvironment';
+import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzGrpcWebEnvironmentOptions } from './szGrpcWebEnvironment';
 import { asString, bigIntToNumber, entityIdsAsJsonString, entityIdsToAvoidAsJson, newException, recordIdsAsJsonString, recordKeysToAvoidAsJson, requiredDataSourcesAsJson } from './szHelpers';
 import { SzError, SzNoGrpcConnectionError, SzNotYetImplementedError } from './senzing/SzError';
 import { SzEngineFlags } from './senzing';
-import { SzGrpcBase } from './abstracts/szGrpcBase';
+import { SzGrpcWebBase } from './abstracts/szGrpcWebBase';
 
 /** Options for initializing {@link:module:SzGrpcEngine} */
-export interface SzGrpcEngineOptions extends SzGrpcEnvironmentOptions { 
+export interface SzGrpcWebEngineOptions extends SzGrpcWebEnvironmentOptions { 
     client?: SzEngineClient
 }
 
 /**
- * SzGrpcEngine
- * Access the Senzing Engine module via gRPC
+ * szGrpcWebEngine
+ * Access the Senzing Engine module via gRPC over http 1.1
  * 
  * @group SzGrpcClasses
  * @hideconstructor
  */
-export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
+export class SzGrpcWebEngine extends SzGrpcWebBase implements SzEngine {
     /** @ignore */
     private _client: SzEngineClient;
     
@@ -44,7 +44,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
         return this._client;
     }
 
-    constructor(parameters: SzGrpcEngineOptions) {
+    constructor(parameters: SzGrpcWebEngineOptions) {
         const { connectionString, credentials, client, grpcOptions, grpcConnectionReadyTimeOut } = parameters;
         super(parameters);
 

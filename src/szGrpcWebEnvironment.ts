@@ -1,13 +1,13 @@
 import * as grpc from '@grpc/grpc-js';
 //import { SzEnvironment, SzEnvironmentOptions } from '../abstracts/szEnviroment';
-//import { SzGrpcConfig } from './szGrpcConfig';
-//import { SzConfigClient } from './szconfig/szconfig_grpc_pb';
-//import { SzGrpcConfigManager } from './szGrpcConfigManager';
-//import { SzConfigManagerClient } from './szconfigmanager/szconfigmanager_grpc_pb';
-//import { SzGrpcDiagnostic } from './szGrpcDiagnostic';
-//import { SzDiagnosticClient } from './szdiagnostic/szdiagnostic_grpc_pb';
-//import { SzGrpcEngine } from './szGrpcEngine';
-//import { SzEngineClient } from './szengine/szengine_grpc_pb';
+import { SzGrpcWebConfig } from './szGrpcWebConfig';
+import { SzConfigClient } from './szconfig/szconfig_web_client';
+import { SzGrpcWebConfigManager } from './szGrpcWebConfigManager';
+import { SzConfigManagerClient } from './szconfigmanager/szconfigmanager_web_client';
+import { SzGrpcWebDiagnostic } from './szGrpcWebDiagnostic';
+import { SzDiagnosticClient } from './szdiagnostic/szdiagnostic_web_client';
+import { SzGrpcWebEngine } from './szGrpcWebEngine';
+import { SzEngineClient } from './szengine/szengine_web_client';
 import { SzGrpcWebProduct } from './szGrpcWebProduct';
 import { SzProductClient } from './szproduct/szproduct_web_client';
 
@@ -72,25 +72,25 @@ export class SzGrpcWebEnvironment {
      * autocreated when user calls {@link getConfig} on first attempt.
      * @ignore
     */
-    //protected _config: SzGrpcConfig | undefined;
+    protected _config: SzGrpcWebConfig | undefined;
     /** 
      * instance of {@link SzGrpcConfigManager}.
      * autocreated when user calls {@link getConfigManager} on first attempt.
      * @ignore
     */
-    //protected _configManager: SzGrpcConfigManager | undefined;
+    protected _configManager: SzGrpcWebConfigManager | undefined;
     /** 
      * instance of {@link SzGrpcDiagnostic}.
      * autocreated when user calls {@link getDiagnostic} on first attempt.
      * @ignore
     */
-    //protected _diagnostic: SzGrpcDiagnostic | undefined;
+    protected _diagnostic: SzGrpcWebDiagnostic | undefined;
     /** 
      * instance of {@link SzGrpcEngine}
      * autocreated when user calls {@link getEngine} on first attempt.
      * @ignore
     */
-    //protected _engine: SzGrpcEngine | undefined;
+    protected _engine: SzGrpcWebEngine | undefined;
     /** 
      * instance of {@link SzGrpcProduct}.
      * autocreated when user calls {@link getProduct} on first attempt.
@@ -117,25 +117,25 @@ export class SzGrpcWebEnvironment {
      * autocreated when user calls {@link getConfig} on first attempt.
      * @ignore
     */
-    //private _configClient: SzConfigClient | undefined;
+    private _configClient: SzConfigClient | undefined;
     /** 
      * instance of the gRPC client used for connecting to services in {@link SzGrpcConfigManager}.
      * autocreated when user calls {@link getConfigManager} on first attempt.
      * @ignore
     */
-    //private _configManagerClient: SzConfigManagerClient | undefined; 
+    private _configManagerClient: SzConfigManagerClient | undefined; 
     /** 
      * instance of the gRPC client used for connecting to services in {@link SzGrpcDiagnostic}.
      * autocreated when user calls {@link getDiagnostic} on first attempt.
      * @ignore
     */
-    //private _diagnosticClient: SzDiagnosticClient | undefined; 
+    private _diagnosticClient: SzDiagnosticClient | undefined; 
     /** 
      * instance of the gRPC client used for connecting to services in {@link SzGrpcEngine}.
      * autocreated when user calls {@link getEngine} on first attempt.
      * @ignore
     */
-    //private _engineClient: SzEngineClient | undefined; 
+    private _engineClient: SzEngineClient | undefined; 
     /** 
      * instance of the gRPC client used for connecting to services in {@link SzGrpcProduct}.
      * autocreated when user calls {@link getProduct} on first attempt.
@@ -158,7 +158,7 @@ export class SzGrpcWebEnvironment {
      * autocreates the class instance on first call if not already created.
      * @return {SzGrpcConfigManager}
     */
-    /*public getConfigManager() {
+    public getConfigManager() {
         if(!this._configClient) {
             // create new config grpc client
             if(!this._configClient) this._configClient = new SzConfigClient(this.connectionString, this.credentials, this._grpcOptions );
@@ -168,40 +168,40 @@ export class SzGrpcWebEnvironment {
             if(!this._configManagerClient) this._configManagerClient = new SzConfigManagerClient(this.connectionString, this.credentials, this._grpcOptions );
 
             // create new config manager with ref to client
-            if(!this._configManager) this._configManager = new SzGrpcConfigManager({ client: this._configManagerClient, configClient: this._configClient, grpcOptions: this._grpcOptions, isTestEnvironment: this.isTestEnvironment });
+            if(!this._configManager) this._configManager = new SzGrpcWebConfigManager({ client: this._configManagerClient, configClient: this._configClient, grpcOptions: this._grpcOptions, isTestEnvironment: this.isTestEnvironment });
         }
         return this._configManager;
-    }*/
+    }
     /** 
      * instance of {@link SzGrpcDiagnostic}.
      * autocreates the class instance on first call if not already created.
      * @return {SzGrpcDiagnostic}
     */
-    /*public getDiagnostic() {
+    public getDiagnostic() {
         if(!this._diagnostic || !this._diagnosticClient) {
             // create new grpc client
             if(!this._diagnosticClient) this._diagnosticClient = new SzDiagnosticClient(this.connectionString, this.credentials, this._grpcOptions);
 
             // create new diagnostic with ref to client
-            if(!this._diagnostic) this._diagnostic = new SzGrpcDiagnostic({ client: this._diagnosticClient, grpcOptions: this._grpcOptions });
+            if(!this._diagnostic) this._diagnostic = new SzGrpcWebDiagnostic({ client: this._diagnosticClient, grpcOptions: this._grpcOptions });
         }
         return this._diagnostic;
-    }*/
+    }
     /** 
      * instance of {@link SzGrpcEngine}.
      * autocreates the class instance on first call if not already created.
      * @return {SzGrpcDiagnostic}
     */
-    /*public getEngine() {
+    public getEngine() {
         if(!this._engine || !this._engineClient) {
             // create new grpc client
             if(!this._engineClient) this._engineClient = new SzEngineClient(this.connectionString, this.credentials, this._grpcOptions);
 
             // create new engine with ref to client
-            if(!this._engine) this._engine = new SzGrpcEngine({ client: this._engineClient, grpcOptions: this._grpcOptions });
+            if(!this._engine) this._engine = new SzGrpcWebEngine({ client: this._engineClient, grpcOptions: this._grpcOptions });
         }
         return this._engine;
-    }*/
+    }
     /** 
      * instance of {@link SzGrpcDiagnostic}.
      * autocreates the class instance on first call if not already created.
@@ -241,23 +241,23 @@ export class SzGrpcWebEnvironment {
      * getter alias of {@link getConfigManager}.  Syntax sugar for using {@link getConfigManager} as if it were a property ie `MySenzingEnvironment.configManager.getDefaultConfigId()`.
      * @return {SzGrpcConfigManager}
     */
-    /*public get configManager() {
+    public get configManager() {
         return this.getConfigManager();
-    }*/
+    }
     /** 
      * getter alias of {@link getDiagnostic}.  Syntax sugar for using {@link getDiagnostic} as if it were a property ie `MySenzingEnvironment.diagnostic.getDatastoreInfo()`.
      * @return {SzGrpcDiagnostic}
     */
-    /*public get diagnostic() {
+    public get diagnostic() {
         return this.getDiagnostic();
-    }*/
+    }
     /** 
      * getter alias of {@link getEngine}.  Syntax sugar for using {@link getEngine} as if it were a property ie `MySenzingEnvironment.engine.getActiveConfigId()`.
      * @return {SzGrpcEngine}
     */
-    /*public get engine() {
+    public get engine() {
         return this.getEngine();
-    }*/
+    }
     /** 
      * getter alias of {@link getProduct}.  Syntax sugar for using {@link getProduct} as if it were a property ie `MySenzingEnvironment.product.getVersion()`.
      * @return {SzGrpcProduct}
@@ -288,13 +288,13 @@ export class SzGrpcWebEnvironment {
     */
     public reinitialize(configId: number) {
 
-        /*if(this._diagnostic && this._diagnosticClient) {
-            this._diagnosticClient?.close
+        if(this._diagnostic && this._diagnosticClient) {
+            //this._diagnosticClient?.close
             this._diagnostic.reinitialize(configId);
         }
         if(this._engine) {
             this._engine.reinitialize(configId);
-        }*/
+        }
 
         /*
         if(!this._engine) {

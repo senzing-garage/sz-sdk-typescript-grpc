@@ -1,14 +1,14 @@
 import * as grpc from '@grpc/grpc-js';
-import { CheckDatastorePerformanceRequest, CheckDatastorePerformanceResponse, GetDatastoreInfoRequest, GetDatastoreInfoResponse, GetFeatureRequest, GetFeatureResponse, PurgeRepositoryRequest, PurgeRepositoryResponse, ReinitializeRequest, ReinitializeResponse } from './szdiagnostic/szdiagnostic_pb';
-import { SzDiagnosticClient } from './szdiagnostic/szdiagnostic_grpc_pb';
+import { CheckDatastorePerformanceRequest, CheckDatastorePerformanceResponse, GetDatastoreInfoRequest, GetDatastoreInfoResponse, GetFeatureRequest, GetFeatureResponse, PurgeRepositoryRequest, PurgeRepositoryResponse, ReinitializeRequest, ReinitializeResponse } from './szdiagnostic/szdiagnostic_web_pb';
+import { SzDiagnosticClient } from './szdiagnostic/szdiagnostic_web_client';
 import { SzDiagnostic } from './abstracts/szDiagnostic';
 import { newException } from './szHelpers';
 import { SzError, SzNoGrpcConnectionError } from './senzing/SzError';
 import { CHECK_DATASTORE_PERFORMANCE_RESPONSE } from './types/szDiagnostic';
-import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzGrpcEnvironmentOptions } from './szGrpcEnvironment';
-import { SzGrpcBase } from './abstracts/szGrpcBase';
+import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzGrpcWebEnvironmentOptions } from './szGrpcWebEnvironment';
+import { SzGrpcWebBase } from './abstracts/szGrpcWebBase';
 
-export interface SzGrpcDiagnosticOptions extends SzGrpcEnvironmentOptions { 
+export interface SzGrpcWebDiagnosticOptions extends SzGrpcWebEnvironmentOptions { 
     client?: SzDiagnosticClient
 }
 
@@ -20,7 +20,7 @@ export interface SzGrpcDiagnosticOptions extends SzGrpcEnvironmentOptions {
  * @hideconstructor
  * @class
  */
-export class SzGrpcDiagnostic extends SzGrpcBase implements SzDiagnostic {
+export class SzGrpcWebDiagnostic extends SzGrpcWebBase implements SzDiagnostic {
     /** @ignore */
     private _client: SzDiagnosticClient;
     /** See {@link https://github.com/senzing-garage/knowledge-base/blob/main/lists/senzing-component-ids.md} */
@@ -43,7 +43,7 @@ export class SzGrpcDiagnostic extends SzGrpcBase implements SzDiagnostic {
         return this._client;
     }
 
-    constructor(parameters: SzGrpcDiagnosticOptions) {
+    constructor(parameters: SzGrpcWebDiagnosticOptions) {
         const { connectionString, credentials, client, grpcOptions, grpcConnectionReadyTimeOut } = parameters;
         super(parameters);
 

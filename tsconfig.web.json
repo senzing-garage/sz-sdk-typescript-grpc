@@ -20,7 +20,12 @@
       "noEmitOnError": true
     },
     "files": [
+      "src/szGrpcWebConfig.ts",
+      "src/szGrpcWebConfigManager.ts",
+      "src/szGrpcWebDiagnostic.ts",
+      "src/szGrpcWebEngine.ts",
       "src/szGrpcWebEnvironment.ts",
+      "src/szGrpcWebEngine.ts",
       "src/szGrpcWebProduct.ts",
       "src/szHelpers.ts",
       "src/package.web.json",
