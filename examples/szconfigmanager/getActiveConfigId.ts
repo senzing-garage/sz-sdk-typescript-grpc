@@ -8,8 +8,10 @@ Promise.all([
 ]).then((results) => {
     let activeConfigId  = results[0];
     let defaultConfigId = results[1];
+    console.log(`active config id: ${activeConfigId}`);
+    console.log(`defaultConfigId config id: ${defaultConfigId}`);
     if (activeConfigId != defaultConfigId) {
         // reinitialize the environment with the default config ID                    
-        szEnvironment.reinitialize(defaultConfigId); // @highlight regex="env.*"
+        //szEnvironment.reinitialize(defaultConfigId); // @highlight regex="env.*"
     }
 })
