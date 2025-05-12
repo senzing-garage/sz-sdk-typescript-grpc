@@ -12,8 +12,12 @@ const _filesToExclude = [
     path.join('src','index.ts'),
     path.join('src','index.web.ts'),
     path.join('src','package.web.json'),
-    path.join('src','szGrpcWebProduct.ts'),
+    path.join('src','szGrpcWebConfig.ts'),
+    path.join('src','szGrpcWebConfigManager.ts'),
+    path.join('src','szGrpcWebDiagnostic.ts'),
+    path.join('src','szGrpcWebEngine.ts'),
     path.join('src','szGrpcWebEnvironment.ts'),
+    path.join('src','szGrpcWebProduct.ts'),
     path.join('src','abstracts','szGrpcWebBase.ts'),
 ];
 
