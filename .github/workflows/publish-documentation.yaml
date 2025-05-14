@@ -8,12 +8,14 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build:
     outputs:
       status: ${{ job.status }}
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -48,6 +50,9 @@ jobs:
     needs: build
     outputs:
       status: ${{ job.status }}
+    permissions:
+      pages: write
+      id-token: write
     runs-on: ubuntu-latest
 
     strategy:
