@@ -104,7 +104,6 @@ export class SzGrpcWebEngine extends SzGrpcWebBase implements SzEngine {
                     reject( err )
                     return;
                 }
-                console.log('adding record: \n\r', recordPayload);
                 const request = new AddRecordRequest();
                 request.setDataSourceCode(dataSourceCode);
                 request.setRecordId(recordId as string);

@@ -28,6 +28,7 @@ export function getSenzingErrorCode(error: string): number {
     try {
         retVal = parseInt(ltrim(error.split("|")[0].trim(), "SENZ")); // not sure why you would want to "strip(S || E || N || Z)" and not just trim left of instance ??
     } catch {
+        // bearer:disable javascript_lang_logger
         console.error(`ERROR: Could not parse error text '${error}'`);
     }
     return retVal;

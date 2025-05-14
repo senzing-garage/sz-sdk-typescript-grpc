@@ -1,0 +1,13 @@
+rule:
+  skip-rule: []
+
+scan:
+  skip-path: [
+    "dist", 
+    "docs", 
+    "build.js", 
+    "build.web.js", 
+    "build.js", 
+    "post-pack.js", 
+    "post-package-test.js"
+  ]

@@ -91,6 +91,11 @@ clean:
 # Utility targets
 # -----------------------------------------------------------------------------
 
+.PHONY: bearer
+bearer:
+	@bearer scan --config-file .github/linters/bearer.yml .
+
+
 .PHONY: help
 help:
 	$(info Build $(PROGRAM_NAME) version $(BUILD_VERSION)-$(BUILD_ITERATION))
