@@ -1,4 +1,5 @@
 import * as grpc from 'grpc';
+import * as grpcweb from 'grpc-web';
 import * as grpcjs from '@grpc/grpc-js';
 import { ENGINE_EXCEPTION_MAP, SzError } from './senzing/SzError';
 
@@ -38,9 +39,16 @@ export function getSenzingErrorCode(error: string): number {
  * BEFORE it gets to the helper sig to avoid type collision issues.
  * @returns 
  */
-export function newException(errorDetails: string | undefined): SzError {
+export function newException(error: grpc.ServiceError | grpcweb.RpcError): SzError {
     //let retVal          = initialError;
     //let details         = initialError.details;
+    let errorDetails        = undefined;
+    if(error && (error as grpc.ServiceError).details) {
+        errorDetails        = (error as grpc.ServiceError).details
+    } else if(error && (error as grpcweb.RpcError).message) {
+        errorDetails        = (error as grpcweb.RpcError).message
+    }
+
     if(errorDetails === undefined) {
         return new SzError(errorDetails);
     }

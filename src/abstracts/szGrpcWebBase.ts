@@ -1,15 +1,15 @@
-import * as grpc from '@grpc/grpc-js';
+import * as grpcWeb from 'grpc-web';
 import { SzError, SzNoGrpcConnectionError } from '../senzing/SzError';
-import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzGrpcEnvironmentOptions } from '../szGrpcEnvironment';
+import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzGrpcWebEnvironmentOptions } from '../szGrpcWebEnvironment';
 
-export abstract class SzGrpcBase {
+export abstract class SzGrpcWebBase {
     /** @ignore */
     abstract client: any;
 
     /** metadata passed to the request context 
      * @ignore
     */
-    protected _metadata: grpc.Metadata    = new grpc.Metadata({waitForReady: true});
+    protected _metadata: grpcWeb.Metadata    = {};
 
     private grpcOptions                 = DEFAULT_CHANNEL_OPTIONS; 
     public grpcConnectionReadyTimeOut   = DEFAULT_CONNECTION_READY_TIMEOUT;
@@ -21,13 +21,15 @@ export abstract class SzGrpcBase {
     }
 
     /** 
-     * Wait for the client to be ready. The callback will be called when the client has successfully connected to the server, and it will be called with an error if the attempt to connect to the server has unrecoverablly failed or if the deadline expires. This function will make the channel start connecting if it has not already done so. 
+     * This is essentially a polyfill for the "grpcClient.waitForReady" method that does not exist 
+     * in the `grpc-web` package. This allows the code inheriting this class to be identical in 
+     * both the `gRPC` and `gRPC-Web` flavors for each class.
      */
     public waitForReady(deadline: Date, cb: (error: Error | null) => void) {
-        return this.client?.waitForReady(deadline, cb);
+        cb(null);
     }
 
-    constructor(options: SzGrpcEnvironmentOptions) {
+    constructor(options: SzGrpcWebEnvironmentOptions) {
         const { connectionString, credentials, client, grpcOptions, grpcConnectionReadyTimeOut } = options;
         
         if(grpcConnectionReadyTimeOut) {

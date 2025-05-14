@@ -1,18 +1,17 @@
 import * as grpc from '@grpc/grpc-js';
-import { AddDataSourceRequest, AddDataSourceResponse, DeleteDataSourceRequest, DeleteDataSourceResponse, GetDataSourcesRequest, GetDataSourcesResponse, VerifyConfigRequest, VerifyConfigResponse } from './szconfig/szconfig_pb';
-import { SzConfigClient } from './szconfig/szconfig_grpc_pb';
+import { AddDataSourceRequest, AddDataSourceResponse, DeleteDataSourceRequest, DeleteDataSourceResponse, GetDataSourcesRequest, GetDataSourcesResponse, VerifyConfigRequest, VerifyConfigResponse } from './szconfig/szconfig_web_pb';
+import { SzConfigClient as SzConfigWebClient } from './szconfig/szconfig_web_client';
 import { SzConfig } from './abstracts/szConfig';
 import { newException } from './szHelpers';
 import { SzError, SzNoGrpcConnectionError } from './senzing/SzError';
-import { ADD_DATASOURCE_RESPONSE } from './types/szConfig';
-import { DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, SzGrpcEnvironmentOptions } from './szGrpcEnvironment';
-import { SzGrpcBase } from './abstracts/szGrpcBase';
+import { DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, SzGrpcWebEnvironmentOptions } from './szGrpcWebEnvironment';
+import { SzGrpcWebBase } from './abstracts/szGrpcWebBase';
 
 // strong typed version of the default abstract options specific to this implementation 
 // prevents accidentally passing the wrong type of client to constructor
 /** options to initialize SzConfig class */
-export interface SzGrpcConfigOptions extends SzGrpcEnvironmentOptions { 
-    client?: SzConfigClient,
+export interface SzGrpcWebConfigOptions extends SzGrpcWebEnvironmentOptions { 
+    client?: SzConfigWebClient,
     definition: string
 }
 
@@ -23,8 +22,8 @@ export interface SzGrpcConfigOptions extends SzGrpcEnvironmentOptions {
  * @hideconstructor
  * @class
  */
-export class SzGrpcConfig extends SzGrpcBase implements SzConfig {
-    private _client: SzConfigClient;
+export class SzGrpcWebConfig extends SzGrpcWebBase implements SzConfig {
+    private _client: SzConfigWebClient;
     /** See {@link https://github.com/senzing-garage/knowledge-base/blob/main/lists/senzing-component-ids.md} */
     public productId = "5050";
 
@@ -43,7 +42,7 @@ export class SzGrpcConfig extends SzGrpcBase implements SzConfig {
      * Not intended for end-user use. We need these in case we have to re-connect or destroy from {@link: SzGrpcEnvironment} but shouldn't be in the docs.
      * @ignore
      */
-    public set client(value: SzConfigClient) {
+    public set client(value: SzConfigWebClient) {
         this._client = value;
     }
     /** 
@@ -51,11 +50,11 @@ export class SzGrpcConfig extends SzGrpcBase implements SzConfig {
      * Not intended for end-user use. We need these in case we have to re-connect or destroy from {@link: SzGrpcEnvironment} but shouldn't be in the docs.
      * @ignore
      */
-    public get client(): SzConfigClient {
+    public get client(): SzConfigWebClient {
         return this._client;
     }
 
-    constructor(parameters: SzGrpcConfigOptions) {
+    constructor(parameters: SzGrpcWebConfigOptions) {
         const { connectionString, credentials, definition, client, grpcOptions, grpcConnectionReadyTimeOut } = parameters;
         super(parameters);
 
@@ -67,7 +66,7 @@ export class SzGrpcConfig extends SzGrpcBase implements SzConfig {
             this._client            = client;
         } else if(connectionString) {
             // otherwise create client from options passed in
-            this._client             = new SzConfigClient(
+            this._client             = new SzConfigWebClient(
                 connectionString ? connectionString : DEFAULT_CONNECTION_STRING, 
                 credentials ? credentials : DEFAULT_CREDENTIALS,
                 grpcOptions ? grpcOptions : DEFAULT_CHANNEL_OPTIONS
@@ -77,7 +76,7 @@ export class SzGrpcConfig extends SzGrpcBase implements SzConfig {
             throw new Error(`not enough parameters to initialize`);
         }
     }
-    /**
+        /**
      * Adds a data source to an existing in-memory configuration.
      * @param dataSourceCode Name of data source code to add.
      * @returns {Promise<string>} JSON document listing the newly created data source

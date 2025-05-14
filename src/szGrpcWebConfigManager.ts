@@ -1,18 +1,19 @@
 import * as grpc from '@grpc/grpc-js';
-import { GetConfigRequest, GetConfigResponse, GetConfigsRequest, GetConfigsResponse, GetDefaultConfigIdRequest, GetDefaultConfigIdResponse, GetTemplateConfigRequest, GetTemplateConfigResponse, RegisterConfigRequest, RegisterConfigResponse, ReplaceDefaultConfigIdRequest, ReplaceDefaultConfigIdResponse, SetDefaultConfigIdRequest, SetDefaultConfigIdResponse, SetDefaultConfigRequest, SetDefaultConfigResponse} from './szconfigmanager/szconfigmanager_pb';
-import { SzConfigClient } from './szconfig/szconfig_grpc_pb';
-import { SzConfigManagerClient } from './szconfigmanager/szconfigmanager_grpc_pb';
+import { GetConfigRequest, GetConfigResponse, GetConfigsRequest, GetConfigsResponse, GetDefaultConfigIdRequest, GetDefaultConfigIdResponse, GetTemplateConfigRequest, GetTemplateConfigResponse, RegisterConfigRequest, RegisterConfigResponse, ReplaceDefaultConfigIdRequest, ReplaceDefaultConfigIdResponse, SetDefaultConfigIdRequest, SetDefaultConfigIdResponse, SetDefaultConfigRequest, SetDefaultConfigResponse} from './szconfigmanager/szconfigmanager_web_pb';
+import { SzConfigClient } from './szconfig/szconfig_web_client';
+import { SzConfigManagerClient } from './szconfigmanager/szconfigmanager_web_client';
 import { SzConfigManager } from './abstracts/szConfigManager';
 import { newException } from './szHelpers';
 import { SzError, SzNoGrpcConnectionError } from './senzing/SzError';
-import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzGrpcEnvironmentOptions } from './szGrpcEnvironment';
-import { SzGrpcBase } from './abstracts/szGrpcBase';
-import { SzGrpcConfig as SzConfig, SzGrpcConfigOptions as SzConfigOptions } from './szGrpcConfig';
+import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzGrpcWebEnvironmentOptions } from './szGrpcWebEnvironment';
+import { SzGrpcWebBase } from './abstracts/szGrpcWebBase';
+// alias the concretes to allow copy+paste of code from "SzGrpcConfig"
+import { SzGrpcWebConfig as SzConfig, SzGrpcWebConfigOptions as SzConfigOptions } from './szGrpcWebConfig';
 
 // strong typed version of the default abstract options specific to this implementation 
 // prevents accidentally passing the wrong type of client to constructor
 /** options to initialize SzConfigManager class */
-export interface SzGrpcConfigManagerOptions extends SzGrpcEnvironmentOptions { 
+export interface SzGrpcWebConfigManagerOptions extends SzGrpcWebEnvironmentOptions { 
     client?: SzConfigManagerClient,
     configClient?: SzConfigClient
 }
@@ -25,10 +26,10 @@ export interface SzGrpcConfigManagerOptions extends SzGrpcEnvironmentOptions {
  * @hideconstructor
  * @class
  */
-export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
+export class SzGrpcWebConfigManager extends SzGrpcWebBase implements SzConfigManager {
     private _client;
     private _configClient: SzConfigClient | undefined;
-    private _parameters: SzGrpcConfigManagerOptions; 
+    private _parameters: SzGrpcWebConfigManagerOptions; 
     /** See {@link https://github.com/senzing-garage/knowledge-base/blob/main/lists/senzing-component-ids.md} */
     public productId = "5051";
 
@@ -56,12 +57,12 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
     /**
      * @internal
      */
-    private get grpcParameters(): SzGrpcEnvironmentOptions {
+    private get grpcParameters(): SzGrpcWebEnvironmentOptions {
         let res = this._parameters as any;
         return res;
     }
 
-    constructor(parameters: SzGrpcConfigManagerOptions) {
+    constructor(parameters: SzGrpcWebConfigManagerOptions) {
         const { connectionString, credentials, client, configClient, grpcOptions, isTestEnvironment, grpcConnectionReadyTimeOut } = parameters;
         super(parameters);
         this._parameters = parameters;
@@ -86,7 +87,6 @@ export class SzGrpcConfigManager extends SzGrpcBase implements SzConfigManager {
             throw new Error(`not enough parameters to initialize`);
         }
     }
-
     /**
      * Creates a new {@link SzGrpcConfig} instance using the default
      * configuration template and returns the {@link SzGrpcConfig}

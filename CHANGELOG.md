@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], [markdownlint],
 and this project adheres to [Semantic Versioning].
 
+## [4.0.0-beta.2.1] - 2025-05-13
+
+### Added
+
+- New build target `make build-web` for [grpc-web](https://github.com/grpc/grpc-web) which generates the `@senzing/sz-sdk-typescript-grpc-web` package that can be used in web based projects to communicate with Senzing installations using a [Senzing gRPC server](https://github.com/senzing-garage/serve-grpc).
+- `SzGrpcWebConfig` which is the same as the `SzGrpConfig` class, but uses the grpc-web client.
+- `SzGrpcWebConfigManager` which is the same as the `SzGrpcWebConfigManager` class, but uses the grpc-web client.
+- `SzGrpcWebDiagnostic` which is the same as the `SzGrpcWebDiagnostic` class, but uses the grpc-web client.
+- `SzGrpcWebEngine` which is the same as the `SzGrpcWebEngine` class, but uses the grpc-web client.
+- `SzGrpcWebProduct` which is the same as the `SzGrpcWebProduct` class, but uses the grpc-web client.
+- `SzGrpcWebEnvironment` which is the same as `SzGrpcEnvironment`  class, but uses the grpc-web client and concrete `SzGrpcWeb**` classes mentioned above instead of the vanilla grpc classes that `@senzing/sz-sdk-typescript-grpc` uses.
+- `SzGrpcBase` now has a `waitForReady` method that returns the value of `client.waitForReady`. (this is so concrete code doesn't directly reference `this.client.waitForReady`)
+- `SzGrpcWebBase` the same as `SzGrpcBase` just with a dummy `waitForReady` method that just immediately returns since the grpc-web client(s) do not have a `waitForReady` method. Also the type of it's `_metadata` property is different.
+
+### Modified
+
+- `SzGrpcBase`
+    - now has the `_metadata` property in it instead of the concrete.
+    - `client` is now an abstract.
+
 ## [4.0.0-beta.2.0] - 2025-04-28
 
 ### Removed
