@@ -6,21 +6,14 @@ option java_package = "com.senzing.sdk.grpc";
 option java_outer_classname = "SzConfigManagerProto";
 
 service SzConfigManager {
-  rpc AddConfig (AddConfigRequest) returns (AddConfigResponse) {}
   rpc GetConfig (GetConfigRequest) returns (GetConfigResponse) {}
   rpc GetConfigs (GetConfigsRequest) returns (GetConfigsResponse) {}
   rpc GetDefaultConfigId (GetDefaultConfigIdRequest) returns (GetDefaultConfigIdResponse) {}
+  rpc GetTemplateConfig (GetTemplateConfigRequest) returns (GetTemplateConfigResponse) {}
+  rpc RegisterConfig (RegisterConfigRequest) returns (RegisterConfigResponse) {}
   rpc ReplaceDefaultConfigId (ReplaceDefaultConfigIdRequest) returns (ReplaceDefaultConfigIdResponse) {}
+  rpc SetDefaultConfig (SetDefaultConfigRequest) returns (SetDefaultConfigResponse) {}
   rpc SetDefaultConfigId (SetDefaultConfigIdRequest) returns (SetDefaultConfigIdResponse) {}
-}
-
-message AddConfigRequest {
-  string config_definition = 1;
-  string config_comment = 2;
-}
-
-message AddConfigResponse {
-  int64 result = 1;
 }
 
 message GetConfigRequest {
@@ -43,12 +36,36 @@ message GetDefaultConfigIdResponse {
   int64 result = 1;
 }
 
+message GetTemplateConfigRequest {}
+
+message GetTemplateConfigResponse {
+  string result = 1;
+}
+
+message RegisterConfigRequest {
+  string config_definition = 1;
+  string config_comment = 2;
+}
+
+message RegisterConfigResponse {
+  int64 result = 1;
+}
+
 message ReplaceDefaultConfigIdRequest {
   int64 current_default_config_id = 1;
   int64 new_default_config_id = 2;
 }
 
 message ReplaceDefaultConfigIdResponse {}
+
+message SetDefaultConfigRequest {
+  string config_definition = 1;
+  string config_comment = 2;
+}
+
+message SetDefaultConfigResponse {
+  int64 result = 1;
+}
 
 message SetDefaultConfigIdRequest {
   int64 config_id = 1;

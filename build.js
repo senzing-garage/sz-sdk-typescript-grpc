@@ -9,11 +9,19 @@ const glob  = require('glob');
 const replaceInFile = require('replace-in-file').replaceInFile;
 
 const _filesToExclude = [
-    path.join('src','index.ts')
+    path.join('src','index.ts'),
+    path.join('src','index.web.ts'),
+    path.join('src','package.web.json'),
+    path.join('src','szGrpcWebConfig.ts'),
+    path.join('src','szGrpcWebConfigManager.ts'),
+    path.join('src','szGrpcWebDiagnostic.ts'),
+    path.join('src','szGrpcWebEngine.ts'),
+    path.join('src','szGrpcWebEnvironment.ts'),
+    path.join('src','szGrpcWebProduct.ts'),
+    path.join('src','abstracts','szGrpcWebBase.ts'),
 ];
 
 // move tsbuild info file if exists
-
 if(fs.existsSync(path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc/tsconfig.tsbuildinfo'.split('/')))) {
     fs.renameSync(
         path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc/tsconfig.tsbuildinfo'.split('/')), 
@@ -28,7 +36,7 @@ fs.rmSync(path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc/src'.split('/'
 
 // copy js/ts files in "/src" to package dir
 fs.cpSync(path.join('.','src'), path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc'.split('/')), { recursive: true, filter: (filename) => {
-    return !_filesToExclude.includes(filename);
+    return (!_filesToExclude.includes(filename) && (filename && !filename.includes(`_web_`)));
 } }, (err) => {
     if (err) {
         console.error(err);

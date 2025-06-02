@@ -25,3 +25,4 @@ function movePackage(sourcePattern, destination) {
 }
 
 movePackage(path.join('dist','@senzing','sz-sdk-typescript-grpc','*.tgz'), path.join('dist','@senzing'));
+movePackage(path.join('dist','@senzing','sz-sdk-typescript-grpc-web','*.tgz'), path.join('dist','@senzing'));

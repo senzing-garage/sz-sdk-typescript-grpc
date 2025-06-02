@@ -31,9 +31,15 @@
       "examples/**",
       "examples/**/*",
       "src/web/*",
+      "src/**/*_web_*.ts",
+      "src/index.web.ts",
+      "src/abstracts/szGrpcWebBase.ts",
+      "src/szGrpcWeb*.ts",
       "src/**/*d.ts",
       "package-lock.json",
       "package.json",
-      "build/build.js"
+      "package.web.json",
+      "build/build.js",
+      "build/build.web.js"
     ]
 }

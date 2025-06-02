@@ -8,10 +8,14 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build:
+    outputs:
+      status: ${{ job.status }}
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -43,9 +47,13 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
-    runs-on: ubuntu-latest
     needs: build
+    outputs:
+      status: ${{ job.status }}
+    permissions:
+      pages: write
+      id-token: write
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
@@ -55,3 +63,12 @@ jobs:
       - name: Deploy documentation to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  slack-notification:
+    needs: [build, publish]
+    if: ${{ always() && contains(fromJSON('["failure", "cancelled"]'), needs.build.outputs.status) && contains(fromJSON('["failure", "cancelled"]'), needs.publish.outputs.status) }}
+    secrets:
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+    uses: senzing-factory/build-resources/.github/workflows/build-failure-slack-notification.yaml@v2
+    with:
+      job-status: ${{ needs.build.outputs.status && needs.publish.outputs.status }}

@@ -3,10 +3,10 @@ import { SzGrpcEnvironment } from '@senzing/sz-sdk-typescript-grpc';
 const szEnvironment         = new SzGrpcEnvironment({connectionString: `0.0.0.0:8261`});
 
 // create new config and get handle
-szEnvironment.config.createConfig().then((configHandle) => {
+szEnvironment.configManager.createConfig().then((config) => {
 
     // now get datasources from config
-    szEnvironment.config.getDataSources(configHandle as number).
+    config.getDataSources().
     then((result)=>{
         console.log("DATA SOURCES:\n\r", result);
     }).

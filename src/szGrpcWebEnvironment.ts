@@ -1,23 +1,22 @@
 import * as grpc from '@grpc/grpc-js';
-import { SzEnvironment, SzEnvironmentOptions } from '../abstracts/szEnviroment';
-import { SzGrpcConfig } from '../szGrpcConfig';
-import { SzConfigClient } from '../szconfig/szconfig_grpc_pb';
-import { SzGrpcConfigManager } from '../szGrpcConfigManager';
-import { SzConfigManagerClient } from '../szconfigmanager/szconfigmanager_grpc_pb';
-import { SzGrpcDiagnostic } from '../szGrpcDiagnostic';
-import { SzDiagnosticClient } from '../szdiagnostic/szdiagnostic_grpc_pb';
-import { SzGrpcEngine } from '../szGrpcEngine';
-import { SzEngineClient } from '../szengine/szengine_grpc_pb';
+//import { SzEnvironment, SzEnvironmentOptions } from '../abstracts/szEnviroment';
+import { SzGrpcWebConfig } from './szGrpcWebConfig';
+import { SzConfigClient } from './szconfig/szconfig_web_client';
+import { SzGrpcWebConfigManager } from './szGrpcWebConfigManager';
+import { SzConfigManagerClient } from './szconfigmanager/szconfigmanager_web_client';
+import { SzGrpcWebDiagnostic } from './szGrpcWebDiagnostic';
+import { SzDiagnosticClient } from './szdiagnostic/szdiagnostic_web_client';
+import { SzGrpcWebEngine } from './szGrpcWebEngine';
+import { SzEngineClient } from './szengine/szengine_web_client';
 import { SzGrpcWebProduct } from './szGrpcWebProduct';
-//import { SzProductClient } from '../szproduct/szproduct_grpc_pb';
-import { SzProductClient } from '../szproduct/SzproductServiceClientPb';
-
+import { SzProductClient } from './szproduct/szproduct_web_client';
 
 // -------------- sane defaults for initializing when arguments not provided --------------
 /** default connection string to initialize with if none provided */
 export const DEFAULT_CONNECTION_STRING: string = `0.0.0.0:8261`;
 /** default channel credentials to initialize with if none provided */
-export const DEFAULT_CREDENTIALS = grpc.credentials.createInsecure();
+//export const DEFAULT_CREDENTIALS = grpc.credentials.createInsecure();
+export const DEFAULT_CREDENTIALS = {}
 /** defualt channel options if none provided 
 * @see https://github.com/grpc/grpc/blob/618a3f561d4a93f263cca23abad086ed8f4d5e86/include/grpc/impl/codegen/grpc_types.h#L142 
 */
@@ -30,14 +29,14 @@ export const DEFAULT_CHANNEL_OPTIONS = {
 export const DEFAULT_CONNECTION_READY_TIMEOUT = 1;
 
 /** @group SzGrpcEnvironment */
-export interface SzGrpcWebEnvironmentOptions extends SzEnvironmentOptions { 
+export interface SzGrpcWebEnvironmentOptions { 
     /** the grpc connection string. `${HOST}:${PORT}` */
     connectionString?: string, 
     /** 
      * channel credentials to use for authentication. defaults to "grpc.credentials.createInsecure()"
      * @see https://grpc.io/docs/guides/auth/
      */
-    credentials?: grpc.ChannelCredentials,
+    credentials?: { [index: string]: string; },
     /** @see https://github.com/grpc/grpc/blob/618a3f561d4a93f263cca23abad086ed8f4d5e86/include/grpc/impl/codegen/grpc_types.h#L142 */
     grpcOptions?: grpc.ChannelOptions,
     /** 
@@ -61,7 +60,11 @@ export interface SzGrpcWebEnvironmentOptions extends SzEnvironmentOptions {
  * and methods.
  * @group SzGrpcEnvironment
  */
-export class SzGrpcWebEnvironment extends SzEnvironment {
+export class SzGrpcWebEnvironment {
+    /**
+     * used for telling classes not to use live clients 
+     * @ignore */
+    private isTestEnvironment: boolean = false;
 
     // ---------------- private properties used in public read-only getters ----------------
     /** 
@@ -69,25 +72,25 @@ export class SzGrpcWebEnvironment extends SzEnvironment {
      * autocreated when user calls {@link getConfig} on first attempt.
      * @ignore
     */
-    protected _config: SzGrpcConfig | undefined;
+    protected _config: SzGrpcWebConfig | undefined;
     /** 
      * instance of {@link SzGrpcConfigManager}.
      * autocreated when user calls {@link getConfigManager} on first attempt.
      * @ignore
     */
-    protected _configManager: SzGrpcConfigManager | undefined;
+    protected _configManager: SzGrpcWebConfigManager | undefined;
     /** 
      * instance of {@link SzGrpcDiagnostic}.
      * autocreated when user calls {@link getDiagnostic} on first attempt.
      * @ignore
     */
-    protected _diagnostic: SzGrpcDiagnostic | undefined;
+    protected _diagnostic: SzGrpcWebDiagnostic | undefined;
     /** 
      * instance of {@link SzGrpcEngine}
      * autocreated when user calls {@link getEngine} on first attempt.
      * @ignore
     */
-    protected _engine: SzGrpcEngine | undefined;
+    protected _engine: SzGrpcWebEngine | undefined;
     /** 
      * instance of {@link SzGrpcProduct}.
      * autocreated when user calls {@link getProduct} on first attempt.
@@ -103,7 +106,7 @@ export class SzGrpcWebEnvironment extends SzEnvironment {
      * channel credentials to use for authentication. defaults to "grpc.credentials.createInsecure()"
      * @see https://grpc.io/docs/guides/auth/
      * @ignore */
-    private _credentials: grpc.ChannelCredentials = DEFAULT_CREDENTIALS;
+    private _credentials: { [index: string]: string; } = DEFAULT_CREDENTIALS;
     /** 
      * @see https://github.com/grpc/grpc/blob/618a3f561d4a93f263cca23abad086ed8f4d5e86/include/grpc/impl/codegen/grpc_types.h#L142 
      * @ignore
@@ -147,37 +150,25 @@ export class SzGrpcWebEnvironment extends SzEnvironment {
      * 
      * @return {Promise<number>} The currently active configuration ID.
     */
-    public getActiveConfigId() {
+    /*public getActiveConfigId() {
         return this.engine.getActiveConfigId();
-    }
-
-    /** 
-     * instance of {@link SzGrpcConfig}.
-     * autocreates the class instance on first call if not already created.
-     * @return {SzGrpcConfig}
-    */
-    public getConfig() {
-        if(!this._config || !this._configClient) {
-            // create new grpc client
-            if(!this._configClient) this._configClient = new SzConfigClient(this.connectionString, this.credentials, this._grpcOptions);
-
-            // create new config manager with ref to client
-            if(!this._config) this._config = new SzGrpcConfig({ client: this._configClient, grpcOptions: this._grpcOptions });
-        }
-        return this._config;
-    }
+    }*/
     /** 
      * instance of {@link SzGrpcConfigManager}.
      * autocreates the class instance on first call if not already created.
      * @return {SzGrpcConfigManager}
     */
     public getConfigManager() {
+        if(!this._configClient) {
+            // create new config grpc client
+            if(!this._configClient) this._configClient = new SzConfigClient(this.connectionString, this.credentials, this._grpcOptions );
+        }
         if(!this._configManager || !this._configManagerClient) {
-            // create new grpc client
+            // create new configManager grpc client
             if(!this._configManagerClient) this._configManagerClient = new SzConfigManagerClient(this.connectionString, this.credentials, this._grpcOptions );
 
             // create new config manager with ref to client
-            if(!this._configManager) this._configManager = new SzGrpcConfigManager({ client: this._configManagerClient, grpcOptions: this._grpcOptions });
+            if(!this._configManager) this._configManager = new SzGrpcWebConfigManager({ client: this._configManagerClient, configClient: this._configClient, grpcOptions: this._grpcOptions, isTestEnvironment: this.isTestEnvironment });
         }
         return this._configManager;
     }
@@ -192,7 +183,7 @@ export class SzGrpcWebEnvironment extends SzEnvironment {
             if(!this._diagnosticClient) this._diagnosticClient = new SzDiagnosticClient(this.connectionString, this.credentials, this._grpcOptions);
 
             // create new diagnostic with ref to client
-            if(!this._diagnostic) this._diagnostic = new SzGrpcDiagnostic({ client: this._diagnosticClient, grpcOptions: this._grpcOptions });
+            if(!this._diagnostic) this._diagnostic = new SzGrpcWebDiagnostic({ client: this._diagnosticClient, grpcOptions: this._grpcOptions });
         }
         return this._diagnostic;
     }
@@ -207,7 +198,7 @@ export class SzGrpcWebEnvironment extends SzEnvironment {
             if(!this._engineClient) this._engineClient = new SzEngineClient(this.connectionString, this.credentials, this._grpcOptions);
 
             // create new engine with ref to client
-            if(!this._engine) this._engine = new SzGrpcEngine({ client: this._engineClient, grpcOptions: this._grpcOptions });
+            if(!this._engine) this._engine = new SzGrpcWebEngine({ client: this._engineClient, grpcOptions: this._grpcOptions });
         }
         return this._engine;
     }
@@ -219,7 +210,7 @@ export class SzGrpcWebEnvironment extends SzEnvironment {
     public getProduct() {
         if(!this._product || !this._productClient) {
             // create new grpc client
-            if(!this._productClient) this._productClient = new SzProductClient(this.connectionString, null, this._grpcOptions);
+            if(!this._productClient) this._productClient = new SzProductClient(this.connectionString, this.credentials, this._grpcOptions);
 
             // create new product with ref to client
             if(!this._product) this._product = new SzGrpcWebProduct({ client: this._productClient, grpcOptions: this._grpcOptions });
@@ -245,13 +236,6 @@ export class SzGrpcWebEnvironment extends SzEnvironment {
     }
     public get grpcOptions() {
         return this._grpcOptions;
-    }
-    /** 
-     * getter alias of {@link getConfig}.  Syntax sugar for using {@link getConfig} as if it were a property ie `MySenzingEnvironment.config.createConfig()`.
-     * @return {SzGrpcConfig}
-    */
-    public get config() {
-        return this.getConfig();
     }
     /** 
      * getter alias of {@link getConfigManager}.  Syntax sugar for using {@link getConfigManager} as if it were a property ie `MySenzingEnvironment.configManager.getDefaultConfigId()`.
@@ -285,14 +269,15 @@ export class SzGrpcWebEnvironment extends SzEnvironment {
 
 
     constructor(parameters: SzGrpcWebEnvironmentOptions) {
-        super(parameters);
+        //super(parameters);
 
         // store grpc specific connection params for lazy client init
         // in getters
-        const { connectionString, credentials, grpcOptions } = parameters;
+        const { connectionString, credentials, grpcOptions, isTestEnvironment } = parameters;
         if(connectionString)    this._connectionString   = connectionString;
         if(credentials)         this._credentials        = credentials ;
         if(grpcOptions)         this._grpcOptions        = grpcOptions ;
+        if(isTestEnvironment !== undefined) this.isTestEnvironment  = isTestEnvironment;
     }
     /**
      * Reinitializes the {@link SzGrpcEngine} with the specified configuration ID.
@@ -303,13 +288,14 @@ export class SzGrpcWebEnvironment extends SzEnvironment {
     */
     public reinitialize(configId: number) {
 
-        if(this._diagnostic) {
-            this._diagnosticClient?.close
+        if(this._diagnostic && this._diagnosticClient) {
+            //this._diagnosticClient?.close
             this._diagnostic.reinitialize(configId);
         }
         if(this._engine) {
             this._engine.reinitialize(configId);
         }
+
         /*
         if(!this._engine) {
             throw new Error(`no engine instance to reinitialize`);

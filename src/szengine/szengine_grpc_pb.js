@@ -730,6 +730,28 @@ function deserialize_szengine_WhyRecordsResponse(buffer_arg) {
   return szengine_pb.WhyRecordsResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_szengine_WhySearchRequest(arg) {
+  if (!(arg instanceof szengine_pb.WhySearchRequest)) {
+    throw new Error('Expected argument of type szengine.WhySearchRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_szengine_WhySearchRequest(buffer_arg) {
+  return szengine_pb.WhySearchRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_szengine_WhySearchResponse(arg) {
+  if (!(arg instanceof szengine_pb.WhySearchResponse)) {
+    throw new Error('Expected argument of type szengine.WhySearchResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_szengine_WhySearchResponse(buffer_arg) {
+  return szengine_pb.WhySearchResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 
 var SzEngineService = exports.SzEngineService = {
   addRecord: {
@@ -1094,6 +1116,17 @@ var SzEngineService = exports.SzEngineService = {
     requestDeserialize: deserialize_szengine_WhyRecordsRequest,
     responseSerialize: serialize_szengine_WhyRecordsResponse,
     responseDeserialize: deserialize_szengine_WhyRecordsResponse,
+  },
+  whySearch: {
+    path: '/szengine.SzEngine/WhySearch',
+    requestStream: false,
+    responseStream: false,
+    requestType: szengine_pb.WhySearchRequest,
+    responseType: szengine_pb.WhySearchResponse,
+    requestSerialize: serialize_szengine_WhySearchRequest,
+    requestDeserialize: deserialize_szengine_WhySearchRequest,
+    responseSerialize: serialize_szengine_WhySearchResponse,
+    responseDeserialize: deserialize_szengine_WhySearchResponse,
   },
 };
 

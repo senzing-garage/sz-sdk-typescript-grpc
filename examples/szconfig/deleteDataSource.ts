@@ -1,23 +1,21 @@
-import { SzGrpcEnvironment } from '@senzing/sz-sdk-typescript-grpc';
+import { SzGrpcConfig, SzGrpcEnvironment } from '@senzing/sz-sdk-typescript-grpc';
 
-const szEnvironment         = new SzGrpcEnvironment({connectionString: `0.0.0.0:8261`});
+const szEnvironment     = new SzGrpcEnvironment({connectionString: `0.0.0.0:8261`});
 const DATA_SOURCE_CODE  = "NAME_OF_DATASOURCE"
 
 // create new config and get handle
-szEnvironment.config.createConfig().then((configHandle) => {
+szEnvironment.configManager.createConfig().then((config: SzGrpcConfig) => {
     // now get datasources from config
-    szEnvironment.config.deleteDataSource(configHandle as number, DATA_SOURCE_CODE).
+    config.deleteDataSource(DATA_SOURCE_CODE).
     then(()=>{
         // just for debug lets list out datasources
-        szEnvironment.config.getDataSources(configHandle as number).
+        config.getDataSources().
         then((result)=>{
             console.log("DATA SOURCES:\n\r", result);
         }).
         catch((err)=>{
             console.error(err);
-        }).finally(() => {
-            szEnvironment.config.closeConfig(configHandle as number);
-        })
+        });
     }).
     catch((err)=>{
         console.error(err);

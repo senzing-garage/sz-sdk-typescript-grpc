@@ -11,7 +11,7 @@ PROGRAM_NAME := $(shell basename `git rev-parse --show-toplevel`)
 MAKEFILE_PATH := $(abspath $(firstword $(MAKEFILE_LIST)))
 MAKEFILE_DIRECTORY := $(shell dirname $(MAKEFILE_PATH))
 DIST_DIRECTORY := $(MAKEFILE_DIRECTORY)/dist
-NS_DIRECTORY := $(DIST_DIRECTORY)/@senzing
+NS_DIRECTORY := $(DIST_DIRECTORY)/\@senzing
 #TARGET_DIRECTORY := $(DIST_DIRECTORY)/@senzing/sz-sdk-typescript-grpc
 TARGET_DIRECTORY := $(NS_DIRECTORY)/sz-sdk-typescript-grpc
 BUILD_VERSION := $(shell git describe --always --tags --abbrev=0 --dirty  | sed 's/v//')
@@ -63,6 +63,11 @@ build:
 	@npm run build
 	@npm run package
 
+.PHONY: compile
+build-web:
+	@npm run build:web
+	@npm run package:web
+
 # -----------------------------------------------------------------------------
 # Documentation
 # -----------------------------------------------------------------------------
@@ -78,12 +83,18 @@ documentation:
 .PHONY: clean
 clean:
 	@rm -rf $(TARGET_DIRECTORY)/* || true
+	@rm -rf $(NS_DIRECTORY)/sz-sdk-typescript-grpc* || true
 	@rm -rf $(NS_DIRECTORY)/senzing-sz-sdk-typescript-grpc*.tgz || true
 	@rm -rf $(NS_DIRECTORY)/*.tsbuildinfo || true
 
 # -----------------------------------------------------------------------------
 # Utility targets
 # -----------------------------------------------------------------------------
+
+.PHONY: bearer
+bearer:
+	@bearer scan --config-file .github/linters/bearer.yml .
+
 
 .PHONY: help
 help:

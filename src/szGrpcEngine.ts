@@ -1,5 +1,5 @@
 import * as grpc from '@grpc/grpc-js';
-import { AddRecordRequest, AddRecordResponse, CloseExportRequest, CloseExportResponse, CountRedoRecordsRequest, CountRedoRecordsResponse, DeleteRecordRequest, DeleteRecordResponse, ExportJsonEntityReportRequest, ExportJsonEntityReportResponse, FetchNextRequest, FetchNextResponse, FindInterestingEntitiesByEntityIdRequest, FindInterestingEntitiesByEntityIdResponse, FindInterestingEntitiesByRecordIdRequest, FindInterestingEntitiesByRecordIdResponse, FindNetworkByEntityIdRequest, FindNetworkByEntityIdResponse, FindNetworkByRecordIdRequest, FindNetworkByRecordIdResponse, FindPathByEntityIdRequest, FindPathByEntityIdResponse, FindPathByRecordIdRequest, FindPathByRecordIdResponse, GetActiveConfigIdRequest, GetActiveConfigIdResponse, GetEntityByEntityIdRequest, GetEntityByEntityIdResponse, GetEntityByRecordIdRequest, GetEntityByRecordIdResponse, GetRecordRequest, GetRecordResponse, GetRedoRecordRequest, GetRedoRecordResponse, GetStatsRequest, GetStatsResponse, GetVirtualEntityByRecordIdRequest, GetVirtualEntityByRecordIdResponse, HowEntityByEntityIdRequest, HowEntityByEntityIdResponse, PreprocessRecordRequest, PreprocessRecordResponse, PrimeEngineRequest, PrimeEngineResponse, ProcessRedoRecordRequest, ProcessRedoRecordResponse, ReevaluateEntityRequest, ReevaluateEntityResponse, ReevaluateRecordRequest, ReevaluateRecordResponse, ReinitializeRequest, ReinitializeResponse, SearchByAttributesRequest, SearchByAttributesResponse, StreamExportJsonEntityReportRequest, StreamExportJsonEntityReportResponse, WhyEntitiesRequest, WhyEntitiesResponse, WhyRecordInEntityRequest, WhyRecordInEntityResponse, WhyRecordsRequest, WhyRecordsResponse } from './szengine/szengine_pb';
+import { AddRecordRequest, AddRecordResponse, CloseExportRequest, CloseExportResponse, CountRedoRecordsRequest, CountRedoRecordsResponse, DeleteRecordRequest, DeleteRecordResponse, ExportJsonEntityReportRequest, ExportJsonEntityReportResponse, FetchNextRequest, FetchNextResponse, FindInterestingEntitiesByEntityIdRequest, FindInterestingEntitiesByEntityIdResponse, FindInterestingEntitiesByRecordIdRequest, FindInterestingEntitiesByRecordIdResponse, FindNetworkByEntityIdRequest, FindNetworkByEntityIdResponse, FindNetworkByRecordIdRequest, FindNetworkByRecordIdResponse, FindPathByEntityIdRequest, FindPathByEntityIdResponse, FindPathByRecordIdRequest, FindPathByRecordIdResponse, GetActiveConfigIdRequest, GetActiveConfigIdResponse, GetEntityByEntityIdRequest, GetEntityByEntityIdResponse, GetEntityByRecordIdRequest, GetEntityByRecordIdResponse, GetRecordRequest, GetRecordResponse, GetRedoRecordRequest, GetRedoRecordResponse, GetStatsRequest, GetStatsResponse, GetVirtualEntityByRecordIdRequest, GetVirtualEntityByRecordIdResponse, HowEntityByEntityIdRequest, HowEntityByEntityIdResponse, PreprocessRecordRequest, PreprocessRecordResponse, PrimeEngineRequest, PrimeEngineResponse, ProcessRedoRecordRequest, ProcessRedoRecordResponse, ReevaluateEntityRequest, ReevaluateEntityResponse, ReevaluateRecordRequest, ReevaluateRecordResponse, ReinitializeRequest, ReinitializeResponse, SearchByAttributesRequest, SearchByAttributesResponse, StreamExportJsonEntityReportRequest, StreamExportJsonEntityReportResponse, WhyEntitiesRequest, WhyEntitiesResponse, WhyRecordInEntityRequest, WhyRecordInEntityResponse, WhyRecordsRequest, WhyRecordsResponse, WhySearchRequest, WhySearchResponse } from './szengine/szengine_pb';
 import { SzEngineClient } from './szengine/szengine_grpc_pb';
 import { SzEngine } from './abstracts/szEngine';
 import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzGrpcEnvironmentOptions } from './szGrpcEnvironment';
@@ -99,21 +99,20 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject('no connection present');
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
                 }
-                console.log('adding record: \n\r', recordPayload);
                 const request = new AddRecordRequest();
                 request.setDataSourceCode(dataSourceCode);
                 request.setRecordId(recordId as string);
                 request.setRecordDefinition(recordPayload);
                 request.setFlags(bigIntToNumber(engineFlags));
 
-                this.client.addRecord(request, (err, res: AddRecordResponse) => {
+                this.client.addRecord(request, this._metadata, (err, res: AddRecordResponse) => {
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -135,16 +134,16 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
                 }
                 const request = new CloseExportRequest();
                 request.setExportHandle(exportHandle);
-                this.client.closeExport(request, (err, res: CloseExportResponse) => {
+                this.client.closeExport(request, this._metadata, (err, res: CloseExportResponse) => {
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -164,15 +163,15 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
                 }
                 const request = new CountRedoRecordsRequest();
-                this.client.countRedoRecords(request, (err, res: CountRedoRecordsResponse) => {
+                this.client.countRedoRecords(request, this._metadata, (err, res: CountRedoRecordsResponse) => {
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -195,7 +194,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -204,9 +203,9 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 request.setDataSourceCode(dataSourceCode);
                 request.setRecordId(recordId);
                 request.setFlags(bigIntToNumber(flags));
-                this.client.deleteRecord(request, (err, res: DeleteRecordResponse)=>{
+                this.client.deleteRecord(request, this._metadata, (err, res: DeleteRecordResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -258,7 +257,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
     exportJsonEntityReportIterator(flags: BigInt | number = SzEngineFlags.SZ_EXPORT_DEFAULT_FLAGS) {
         return new Promise(async (resolve, reject) => {
             reject(new SzNotYetImplementedError());
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -304,9 +303,9 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 return
             }
             const request = new FetchNextRequest();
-            this.client.fetchNext(request, (err, res: FetchNextResponse)=>{
+            this.client.fetchNext(request, this._metadata, (err, res: FetchNextResponse)=>{
                 if(err) {
-                    let _err = newException(err.details);
+                    let _err = newException(err);
                     reject(_err);
                     throw _err;
                     return;
@@ -329,7 +328,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -337,9 +336,9 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 const request = new FindInterestingEntitiesByEntityIdRequest();
                 request.setEntityId(entityId);
                 request.setFlags(bigIntToNumber(flags));
-                this.client.findInterestingEntitiesByEntityId(request, (err, res: FindInterestingEntitiesByEntityIdResponse)=>{
+                this.client.findInterestingEntitiesByEntityId(request, this._metadata, (err, res: FindInterestingEntitiesByEntityIdResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -363,7 +362,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -372,9 +371,9 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 request.setDataSourceCode(dataSourceCode);
                 request.setRecordId(recordId);
                 request.setFlags(bigIntToNumber(flags));
-                this.client.findInterestingEntitiesByRecordId(request, (err, res: FindInterestingEntitiesByRecordIdResponse)=>{
+                this.client.findInterestingEntitiesByRecordId(request, this._metadata, (err, res: FindInterestingEntitiesByRecordIdResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -404,7 +403,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
             if(!findNetworkEntityIds) {
                 throw new Error("could not parse entity id's from parameter");
             } else {
-                this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+                this.waitForReady(this.getDeadlineFromNow(), (err) => {
                     if(err) {
                         reject( err )
                         return;
@@ -415,9 +414,9 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     if(buildOutDegrees) { request.setBuildOutDegrees(buildOutDegrees as number); }
                     if(buildOutMaxEntities) { request.setBuildOutMaxEntities(buildOutMaxEntities as number); }
                     request.setFlags(bigIntToNumber(flags));
-                    this.client.findNetworkByEntityId(request, (err, res: FindNetworkByEntityIdResponse)=>{
+                    this.client.findNetworkByEntityId(request, this._metadata, (err, res: FindNetworkByEntityIdResponse)=>{
                         if(err) {
-                            let _err = newException(err.details);
+                            let _err = newException(err);
                             reject(_err);
                             throw _err;
                             return;
@@ -448,7 +447,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
             if(!findNetworkRecordIds) {
                 throw new Error("could not parse record id's from parameter");
             } else {
-                this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+                this.waitForReady(this.getDeadlineFromNow(), (err) => {
                     if(err) {
                         reject( err )
                         return;
@@ -459,9 +458,9 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     if(buildOutDegrees) { request.setBuildOutDegrees(buildOutDegrees as number); }
                     if(buildOutMaxEntities) { request.setBuildOutMaxEntities(buildOutMaxEntities as number); }
                     request.setFlags(bigIntToNumber(flags));
-                    this.client.findNetworkByRecordId(request, (err, res: FindNetworkByRecordIdResponse)=>{
+                    this.client.findNetworkByRecordId(request, this._metadata, (err, res: FindNetworkByRecordIdResponse)=>{
                         if(err) {
-                            let _err = newException(err.details);
+                            let _err = newException(err);
                             reject(_err);
                             throw _err;
                             return;
@@ -497,7 +496,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -513,9 +512,9 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     request.setRequiredDataSources(requiredDataSourcesAsJson(requiredDataSources)); 
                 }
                 request.setFlags(bigIntToNumber(flags));
-                this.client.findPathByEntityId(request, (err, res: FindPathByEntityIdResponse)=>{
+                this.client.findPathByEntityId(request, this._metadata, (err, res: FindPathByEntityIdResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -553,7 +552,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -571,9 +570,9 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     request.setRequiredDataSources(requiredDataSourcesAsJson(requiredDataSources)); 
                 }
                 request.setFlags(bigIntToNumber(flags));
-                this.client.findPathByRecordId(request, (err, res: FindPathByRecordIdResponse)=>{
+                this.client.findPathByRecordId(request, this._metadata, (err, res: FindPathByRecordIdResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -594,15 +593,15 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
                 }
                 const request = new GetActiveConfigIdRequest();
-                this.client.getActiveConfigId(request, (err, res: GetActiveConfigIdResponse)=>{
+                this.client.getActiveConfigId(request, this._metadata, (err, res: GetActiveConfigIdResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -625,7 +624,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -633,9 +632,9 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 const request = new GetEntityByEntityIdRequest();
                 request.setEntityId(entityId);
                 request.setFlags(bigIntToNumber(flags));
-                this.client.getEntityByEntityId(request, (err, res: GetEntityByEntityIdResponse)=>{
+                this.client.getEntityByEntityId(request, this._metadata, (err, res: GetEntityByEntityIdResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -659,7 +658,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -668,9 +667,9 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 request.setDataSourceCode(dataSourceCode);
                 request.setRecordId(recordId);
                 request.setFlags(bigIntToNumber(flags));
-                this.client.getEntityByRecordId(request, (err, res: GetEntityByRecordIdResponse)=>{
+                this.client.getEntityByRecordId(request, this._metadata, (err, res: GetEntityByRecordIdResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -694,7 +693,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -703,9 +702,9 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 request.setDataSourceCode(dataSourceCode);
                 request.setRecordId(recordId);
                 request.setFlags(bigIntToNumber(flags));
-                this.client.getRecord(request, (err, res: GetRecordResponse)=>{
+                this.client.getRecord(request, this._metadata, (err, res: GetRecordResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -726,15 +725,15 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
                 }
                 const request = new GetRedoRecordRequest();
-                this.client.getRedoRecord(request, (err, res: GetRedoRecordResponse)=>{
+                this.client.getRedoRecord(request, this._metadata, (err, res: GetRedoRecordResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -755,15 +754,15 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
                 }
                 const request = new GetStatsRequest();
-                this.client.getStats(request, (err, res: GetStatsResponse)=>{
+                this.client.getStats(request, this._metadata, (err, res: GetStatsResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -786,7 +785,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -794,9 +793,9 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 const request = new GetVirtualEntityByRecordIdRequest();
                 request.setRecordKeys(JSON.stringify( recordIdsAsJsonString(recordKeys) ));
                 request.setFlags(bigIntToNumber(flags));
-                this.client.getVirtualEntityByRecordId(request, (err, res: GetVirtualEntityByRecordIdResponse)=>{
+                this.client.getVirtualEntityByRecordId(request, this._metadata, (err, res: GetVirtualEntityByRecordIdResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -821,7 +820,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -829,9 +828,9 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 const request = new HowEntityByEntityIdRequest();
                 request.setEntityId(entityId);
                 request.setFlags(bigIntToNumber(flags));
-                this.client.howEntityByEntityId(request, (err, res: HowEntityByEntityIdResponse)=>{
+                this.client.howEntityByEntityId(request, this._metadata, (err, res: HowEntityByEntityIdResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -854,7 +853,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -862,9 +861,9 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 const request = new PreprocessRecordRequest();
                 request.setRecordDefinition(recordDefinition);
                 request.setFlags(bigIntToNumber(flags));
-                this.client.preprocessRecord(request, (err, res: PreprocessRecordResponse)=>{
+                this.client.preprocessRecord(request, this._metadata, (err, res: PreprocessRecordResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -885,15 +884,15 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
                 }
                 const request = new PrimeEngineRequest();
-                this.client.primeEngine(request, (err, res: PrimeEngineResponse)=>{
+                this.client.primeEngine(request, this._metadata, (err, res: PrimeEngineResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -915,7 +914,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -923,9 +922,9 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 const request = new ProcessRedoRecordRequest();
                 request.setRedoRecord(redoRecord);
                 request.setFlags(bigIntToNumber(flags));
-                this.client.processRedoRecord(request, (err, res: ProcessRedoRecordResponse)=>{
+                this.client.processRedoRecord(request, this._metadata, (err, res: ProcessRedoRecordResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -948,7 +947,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -956,9 +955,9 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 const request = new ReevaluateEntityRequest();
                 request.setEntityId(entityId);
                 request.setFlags(bigIntToNumber(flags));
-                this.client.reevaluateEntity(request, (err, res: ReevaluateEntityResponse)=>{
+                this.client.reevaluateEntity(request, this._metadata, (err, res: ReevaluateEntityResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -982,7 +981,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -991,9 +990,9 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 request.setDataSourceCode(dataSourceCode);
                 request.setRecordId(recordId);
                 request.setFlags(bigIntToNumber(flags));
-                this.client.reevaluateRecord(request, (err, res: ReevaluateRecordResponse)=>{
+                this.client.reevaluateRecord(request, this._metadata, (err, res: ReevaluateRecordResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -1011,16 +1010,16 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
                 }
                 const request = new ReinitializeRequest();
                 request.setConfigId(configId);
-                this.client.reinitialize(request, (err, res: ReinitializeResponse)=>{
+                this.client.reinitialize(request, this._metadata, (err, res: ReinitializeResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -1043,7 +1042,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -1051,9 +1050,9 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 const request = new SearchByAttributesRequest();
                 request.setAttributes(asString(attributes));
                 request.setSearchProfile(searchProfile);
-                this.client.searchByAttributes(request, (err, res: SearchByAttributesResponse)=>{
+                this.client.searchByAttributes(request, this._metadata, (err, res: SearchByAttributesResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -1076,7 +1075,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -1085,9 +1084,9 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 request.setEntityId1(entityId1);
                 request.setEntityId2(entityId2);
                 request.setFlags(bigIntToNumber(flags));
-                this.client.whyEntities(request, (err, res: WhyEntitiesResponse)=>{
+                this.client.whyEntities(request, this._metadata, (err, res: WhyEntitiesResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -1111,7 +1110,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -1120,9 +1119,9 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 request.setDataSourceCode(dataSourceCode);
                 request.setRecordId(recordId);
                 request.setFlags(bigIntToNumber(flags));
-                this.client.whyRecordInEntity(request, (err, res: WhyRecordInEntityResponse)=>{
+                this.client.whyRecordInEntity(request, this._metadata, (err, res: WhyRecordInEntityResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -1152,7 +1151,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
@@ -1163,9 +1162,80 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 request.setRecordId1(recordId1);
                 request.setRecordId2(recordId2);
                 request.setFlags(bigIntToNumber(flags));
-                this.client.whyRecords(request, (err, res: WhyRecordsResponse)=>{
+                this.client.whyRecords(request, this._metadata, (err, res: WhyRecordsResponse)=>{
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
+                        reject(_err);
+                        throw _err;
+                        return;
+                    }
+                    let result = res.getResult();
+                    resolve(result);
+                });
+            });
+        });
+    }
+    /**
+     * Compares the specified search attribute criteria against the entity
+     * identified by the specified entity ID to determine why that entity was
+     * or was not included in the results of a {@linkplain 
+     * #searchByAttributes(String, String, Set) "search by attributes"} operation.
+     * <p>
+     * The specified search attributes are treated as a hypothetical single-record
+     * entity and the result of this operation is the {@linkplain 
+     * #whyEntities(long, long, Set) "why analysis"} of the entity identified
+     * by the specified entity ID against that hypothetical entity.  The details 
+     * included in the response are determined by the specified flags.
+     * <p>
+     * If the specified search profile is <code>null</code> then the default
+     * generic thresholds from the default search profile will be used for the
+     * search candidate determination.  If your search requires different behavior
+     * using alternate generic thresholds, please contact
+     * <a href="mailto:support@senzing.com">support@senzing.com</a> for details
+     * on configuring a custom search profile.
+     * <p>
+     * 
+     * @param attributes The search attributes defining the hypothetical record
+     *                   to match and/or relate to in order to obtain the
+     *                   search results.
+     * @param entityId The entity ID identifying the entity to analyze against the
+     *                 search attribute criteria.
+     * @param searchProfile The optional search profile identifier, or 
+     *                      <code>null</code> if the default search profile
+     *                      should be used for the search.
+     * @param flags The optional {@link Set} of {@link SzFlag} instances belonging
+     *              to the {@link SzFlagUsageGroup#SZ_WHY_SEARCH_FLAGS} group t
+     *              control how the operation is performed and the content of the
+     *              response, or <code>null</code> to default to {@link
+     *              SzFlag#SZ_NO_FLAGS} or {@link SzFlag#SZ_WHY_SEARCH_DEFAULT_FLAGS}
+    *              for the default recommended flags.
+     * @returns The resulting JSON {@link String} describing the result of the
+     *         why analysis against the search criteria.
+     */
+    whySearch(
+        attributes: string,
+        entityId: number,
+        searchProfile: string = "",
+        flags: BigInt | number = SzEngineFlags.SZ_ENTITY_DEFAULT_FLAGS
+    ) {
+        return new Promise((resolve, reject) => {
+            if(!this.client){
+                reject(new SzNoGrpcConnectionError());
+                return
+            }
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
+                if(err) {
+                    reject( err )
+                    return;
+                }
+                const request = new WhySearchRequest();
+                request.setAttributes(attributes);
+                request.setEntityId(entityId);
+                request.setSearchProfile(searchProfile);
+                request.setFlags(bigIntToNumber(flags));
+                this.client.whySearch(request, this._metadata, (err, res: WhySearchResponse)=>{
+                    if(err) {
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;

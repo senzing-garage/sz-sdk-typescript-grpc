@@ -17,7 +17,7 @@
 
 import * as grpcWeb from 'grpc-web';
 
-import * as szproduct_pb from './szproduct_pb'; // proto import: "szproduct.proto"
+import * as szproduct_pb from './szproduct_web_pb'; // proto import: "szproduct.proto"
 
 
 export class SzProductClient {

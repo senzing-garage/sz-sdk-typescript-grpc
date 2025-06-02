@@ -73,11 +73,14 @@ export class SzEngineFlags {
     static SZ_WITH_INFO = 1n << 62n;
 
     // Flags for searching for entities.
-
     static SZ_SEARCH_INCLUDE_RESOLVED = SzEngineFlags.SZ_EXPORT_INCLUDE_MULTI_RECORD_ENTITIES
     static SZ_SEARCH_INCLUDE_POSSIBLY_SAME = SzEngineFlags.SZ_EXPORT_INCLUDE_POSSIBLY_SAME
     static SZ_SEARCH_INCLUDE_POSSIBLY_RELATED = SzEngineFlags.SZ_EXPORT_INCLUDE_POSSIBLY_RELATED
     static SZ_SEARCH_INCLUDE_NAME_ONLY = SzEngineFlags.SZ_EXPORT_INCLUDE_NAME_ONLY
+    static SZ_SEARCH_INCLUDE_ALL_CANDIDATES = 1n << 32n;
+    static SZ_SEARCH_INCLUDE_REQUEST = 1n << 37n;
+    static SZ_SEARCH_INCLUDE_REQUEST_DETAILS = 1n << 38n;
+
     static SZ_SEARCH_INCLUDE_ALL_ENTITIES = (
         SzEngineFlags.SZ_SEARCH_INCLUDE_RESOLVED
         | SzEngineFlags.SZ_SEARCH_INCLUDE_POSSIBLY_SAME
@@ -182,4 +185,10 @@ export class SzEngineFlags {
 
     // The recommended default flag values for search-by-attributes.
     static SZ_SEARCH_BY_ATTRIBUTES_DEFAULT_FLAGS = SzEngineFlags.SZ_SEARCH_BY_ATTRIBUTES_ALL
+
+    static SZ_WHY_SEARCH_DEFAULT_FLAGS = (
+        SzEngineFlags.SZ_INCLUDE_FEATURE_SCORES
+        | SzEngineFlags.SZ_SEARCH_INCLUDE_REQUEST_DETAILS
+        | SzEngineFlags.SZ_SEARCH_INCLUDE_STATS
+    );
 }

@@ -73,16 +73,16 @@ export class SzGrpcDiagnostic extends SzGrpcBase implements SzDiagnostic {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
                 }
                 const request = new CheckDatastorePerformanceRequest();
                 request.setSecondsToRun(secondsToRun);
-                this.client.checkDatastorePerformance(request, (err, res: CheckDatastorePerformanceResponse) => {
+                this.client.checkDatastorePerformance(request, this._metadata, (err, res: CheckDatastorePerformanceResponse) => {
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -104,15 +104,15 @@ export class SzGrpcDiagnostic extends SzGrpcBase implements SzDiagnostic {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
                 }
                 const request = new GetDatastoreInfoRequest();
-                this.client.getDatastoreInfo(request, (err, res: GetDatastoreInfoResponse) => {
+                this.client.getDatastoreInfo(request, this._metadata, (err, res: GetDatastoreInfoResponse) => {
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -136,16 +136,16 @@ export class SzGrpcDiagnostic extends SzGrpcBase implements SzDiagnostic {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
                 }
                 const request = new GetFeatureRequest();
                 request.setFeatureId(featureId);
-                this.client.getFeature(request, (err, res: GetFeatureResponse) => {
+                this.client.getFeature(request, this._metadata, (err, res: GetFeatureResponse) => {
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -167,15 +167,15 @@ export class SzGrpcDiagnostic extends SzGrpcBase implements SzDiagnostic {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
                 }
                 const request = new PurgeRepositoryRequest();
-                this.client.purgeRepository(request, (err, res: PurgeRepositoryResponse) => {
+                this.client.purgeRepository(request, this._metadata, (err, res: PurgeRepositoryResponse) => {
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
@@ -196,16 +196,16 @@ export class SzGrpcDiagnostic extends SzGrpcBase implements SzDiagnostic {
                 reject(new SzNoGrpcConnectionError());
                 return
             }
-            this.client.waitForReady(this.getDeadlineFromNow(), (err) => {
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
                 if(err) {
                     reject( err )
                     return;
                 }
                 const request = new ReinitializeRequest();
                 request.setConfigId(configId);
-                this.client.reinitialize(request, (err, res: ReinitializeResponse) => {
+                this.client.reinitialize(request, this._metadata, (err, res: ReinitializeResponse) => {
                     if(err) {
-                        let _err = newException(err.details);
+                        let _err = newException(err);
                         reject(_err);
                         throw _err;
                         return;
