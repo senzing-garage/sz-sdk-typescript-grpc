@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], [markdownlint],
 and this project adheres to [Semantic Versioning].
 
+## [4.0.0-beta.2.2] - 2025-06-06
+
+### Modified
+
+- `SzGrpcWebEngine.searchByAttributes` was not passing flags in to requests.
+
 ## [4.0.0-beta.2.1] - 2025-05-13
 
 ### Added
