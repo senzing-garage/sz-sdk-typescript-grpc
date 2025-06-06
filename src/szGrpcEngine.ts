@@ -1049,6 +1049,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 }
                 const request = new SearchByAttributesRequest();
                 request.setAttributes(asString(attributes));
+                request.setFlags(bigIntToNumber(flags));
                 request.setSearchProfile(searchProfile);
                 this.client.searchByAttributes(request, this._metadata, (err, res: SearchByAttributesResponse)=>{
                     if(err) {
