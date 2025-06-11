@@ -160,7 +160,7 @@ let afterFileRenaming = () => {
 //        console.error(err);
 //    }
 //).catch((errors) => {
-//    console.log(`Errors Occcurred: \n\r`, errors);
+//    console.log(`Errors Occurred: \n\r`, errors);
 //}).finally(() => {
 //    //console.log('------------------- ended -------------------')
 //})

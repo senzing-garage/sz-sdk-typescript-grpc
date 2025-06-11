@@ -119,6 +119,11 @@ dist
 # TernJS port file
 .tern-port
 
+# Visual Studio code
+.vscode/*
+!.vscode/cspell.json
+*.code-workspace
+.history
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 

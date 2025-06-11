@@ -98,7 +98,7 @@ export function asString(value: string | Map<any, any> | {[key: string] : any}):
             retVal = (value as string);
             return retVal;
         } catch(err) {
-            throw new Error("not parseable json");
+            throw new Error("not parsable json");
         }
     } else if(typeof (value as {[key: string] : any}) === 'object') {
         // serialized object
@@ -108,7 +108,7 @@ export function asString(value: string | Map<any, any> | {[key: string] : any}):
     return retVal;
 }
 /**
- * takes a array of entityId's, single string value of entityId, or comma deliminated string of entityId's
+ * takes a array of entityId's, single string value of entityId, or comma delimited string of entityId's
  * and returns a json search compatible with the findNetwork method.
  * @param value 
  * @returns json fragment of entityId's to use for findNetwork request
@@ -118,7 +118,7 @@ export function entityIdsAsJsonString(value: string | Array<number | string>): s
     if(typeof value === "string") {
         // is string
         // check if they're already passing in '{"ENTITIES": [{"ENTITY_ID": number | string}]}'
-        // a single entityId, or a comma-deliminated list of entityId's
+        // a single entityId, or a comma-delimited list of entityId's
         let isJson = false;
         try {
             let asJSON = JSON.parse(value as string);

@@ -432,7 +432,7 @@ export class SzGrpcWebConfigManager extends SzGrpcWebBase implements SzConfigMan
             });
         });
     }
-    /** @interal */
+    /** @internal */
     private createConfigFromTemplate() {
         return new Promise<SzConfig>((resolve, reject) => {
             if(!this.client){

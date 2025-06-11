@@ -12357,7 +12357,7 @@
 				{
 					"type": "reference",
 					"target": {
-						"sourceFileName": "src/abstracts/szEnviroment.ts",
+						"sourceFileName": "src/abstracts/szEnvironment.ts",
 						"qualifiedName": "SzEnvironment"
 					},
 					"name": "SzEnvironment",
@@ -17453,7 +17453,7 @@
 						"summary": [
 							{
 								"kind": "text",
-								"text": "this will be an instance of any of the Senzing grpc client modules generated from the protoc \nThis will be overriden in the derived class with the specific client type that applies to that class"
+								"text": "this will be an instance of any of the Senzing grpc client modules generated from the protoc \nThis will be overridden in the derived class with the specific client type that applies to that class"
 							}
 						]
 					},
@@ -17642,7 +17642,7 @@
 				{
 					"type": "reference",
 					"target": {
-						"sourceFileName": "src/abstracts/szEnviroment.ts",
+						"sourceFileName": "src/abstracts/szEnvironment.ts",
 						"qualifiedName": "SzEnvironmentOptions"
 					},
 					"name": "SzEnvironmentOptions",
@@ -17846,7 +17846,7 @@
 		},
 		{
 			"kind": "text",
-			"text": ". This file can be imported for use in local projects withought pulling the public version from npm.\n\n\n### Link your dist package to Dev Env\n\nYou may want to use NPM Link to force node to pull the code from your dist package when it encounters references to "
+			"text": ". This file can be imported for use in local projects without pulling the public version from npm.\n\n\n### Link your dist package to Dev Env\n\nYou may want to use NPM Link to force node to pull the code from your dist package when it encounters references to "
 		},
 		{
 			"kind": "code",
