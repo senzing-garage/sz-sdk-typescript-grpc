@@ -116,7 +116,7 @@ export class SzGrpcWebConfig extends SzGrpcWebBase implements SzConfig {
      */
     addDataSources(dataSourceCodes: string[]) {
         /** 
-         * Attempting to create multiple datasources asynchonously ends up causing a connection closed error.
+         * Attempting to create multiple datasources asynchronously ends up causing a connection closed error.
          * JavaScript/TypeScript does not have a good paradigm for synchronously requesting promises one after the other. 
          * (technically we could use generators but google's protoc generated files do not support ESM which would be required for 
          * using "async" and "await" so that leaves us with recursive function calls). Asking the end user to come up 

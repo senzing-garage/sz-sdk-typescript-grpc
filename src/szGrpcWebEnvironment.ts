@@ -1,5 +1,5 @@
 import * as grpc from '@grpc/grpc-js';
-//import { SzEnvironment, SzEnvironmentOptions } from '../abstracts/szEnviroment';
+//import { SzEnvironment, SzEnvironmentOptions } from '../abstracts/szEnvironment';
 import { SzGrpcWebConfig } from './szGrpcWebConfig';
 import { SzConfigClient } from './szconfig/szconfig_web_client';
 import { SzGrpcWebConfigManager } from './szGrpcWebConfigManager';
@@ -17,7 +17,7 @@ export const DEFAULT_CONNECTION_STRING: string = `0.0.0.0:8261`;
 /** default channel credentials to initialize with if none provided */
 //export const DEFAULT_CREDENTIALS = grpc.credentials.createInsecure();
 export const DEFAULT_CREDENTIALS = {}
-/** defualt channel options if none provided 
+/** default channel options if none provided 
 * @see https://github.com/grpc/grpc/blob/618a3f561d4a93f263cca23abad086ed8f4d5e86/include/grpc/impl/codegen/grpc_types.h#L142 
 */
 export const DEFAULT_CHANNEL_OPTIONS = {
@@ -41,7 +41,7 @@ export interface SzGrpcWebEnvironmentOptions {
     grpcOptions?: grpc.ChannelOptions,
     /** 
      * this will be an instance of any of the Senzing grpc client modules generated from the protoc 
-     * This will be overriden in the derived class with the specific client type that applies to that class 
+     * This will be overridden in the derived class with the specific client type that applies to that class 
     */
     client?: any,
     /** the amount to wait in seconds before giving up on establishing a connection to the grpc server */
