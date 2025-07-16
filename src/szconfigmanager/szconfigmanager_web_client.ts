@@ -82,47 +82,47 @@ export class SzConfigManagerClient {
     this.methodDescriptorGetConfig);
   }
 
-  methodDescriptorGetConfigs = new grpcWeb.MethodDescriptor(
-    '/szconfigmanager.SzConfigManager/GetConfigs',
+  methodDescriptorGetConfigRegistry = new grpcWeb.MethodDescriptor(
+    '/szconfigmanager.SzConfigManager/GetConfigRegistry',
     grpcWeb.MethodType.UNARY,
-    szconfigmanager_pb.GetConfigsRequest,
-    szconfigmanager_pb.GetConfigsResponse,
-    (request: szconfigmanager_pb.GetConfigsRequest) => {
+    szconfigmanager_pb.GetConfigRegistryRequest,
+    szconfigmanager_pb.GetConfigRegistryResponse,
+    (request: szconfigmanager_pb.GetConfigRegistryRequest) => {
       return request.serializeBinary();
     },
-    szconfigmanager_pb.GetConfigsResponse.deserializeBinary
+    szconfigmanager_pb.GetConfigRegistryResponse.deserializeBinary
   );
 
-  getConfigs(
-    request: szconfigmanager_pb.GetConfigsRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szconfigmanager_pb.GetConfigsResponse>;
+  getConfigRegistry(
+    request: szconfigmanager_pb.GetConfigRegistryRequest,
+    metadata?: grpcWeb.Metadata | null): Promise<szconfigmanager_pb.GetConfigRegistryResponse>;
 
-  getConfigs(
-    request: szconfigmanager_pb.GetConfigsRequest,
+  getConfigRegistry(
+    request: szconfigmanager_pb.GetConfigRegistryRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.RpcError,
-               response: szconfigmanager_pb.GetConfigsResponse) => void): grpcWeb.ClientReadableStream<szconfigmanager_pb.GetConfigsResponse>;
+               response: szconfigmanager_pb.GetConfigRegistryResponse) => void): grpcWeb.ClientReadableStream<szconfigmanager_pb.GetConfigRegistryResponse>;
 
-  getConfigs(
-    request: szconfigmanager_pb.GetConfigsRequest,
+  getConfigRegistry(
+    request: szconfigmanager_pb.GetConfigRegistryRequest,
     metadata?: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.RpcError,
-               response: szconfigmanager_pb.GetConfigsResponse) => void) {
+               response: szconfigmanager_pb.GetConfigRegistryResponse) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
-          '/szconfigmanager.SzConfigManager/GetConfigs',
+          '/szconfigmanager.SzConfigManager/GetConfigRegistry',
         request,
         metadata || {},
-        this.methodDescriptorGetConfigs,
+        this.methodDescriptorGetConfigRegistry,
         callback);
     }
     return this.client_.unaryCall(
     this.hostname_ +
-      '/szconfigmanager.SzConfigManager/GetConfigs',
+      '/szconfigmanager.SzConfigManager/GetConfigRegistry',
     request,
     metadata || {},
-    this.methodDescriptorGetConfigs);
+    this.methodDescriptorGetConfigRegistry);
   }
 
   methodDescriptorGetDefaultConfigId = new grpcWeb.MethodDescriptor(

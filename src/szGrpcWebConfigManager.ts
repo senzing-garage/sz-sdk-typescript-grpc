@@ -1,5 +1,5 @@
 import * as grpc from '@grpc/grpc-js';
-import { GetConfigRequest, GetConfigResponse, GetConfigsRequest, GetConfigsResponse, GetDefaultConfigIdRequest, GetDefaultConfigIdResponse, GetTemplateConfigRequest, GetTemplateConfigResponse, RegisterConfigRequest, RegisterConfigResponse, ReplaceDefaultConfigIdRequest, ReplaceDefaultConfigIdResponse, SetDefaultConfigIdRequest, SetDefaultConfigIdResponse, SetDefaultConfigRequest, SetDefaultConfigResponse} from './szconfigmanager/szconfigmanager_web_pb';
+import { GetConfigRequest, GetConfigResponse, GetConfigRegistryRequest, GetConfigRegistryResponse, GetDefaultConfigIdRequest, GetDefaultConfigIdResponse, GetTemplateConfigRequest, GetTemplateConfigResponse, RegisterConfigRequest, RegisterConfigResponse, ReplaceDefaultConfigIdRequest, ReplaceDefaultConfigIdResponse, SetDefaultConfigIdRequest, SetDefaultConfigIdResponse, SetDefaultConfigRequest, SetDefaultConfigResponse} from './szconfigmanager/szconfigmanager_web_pb';
 import { SzConfigClient } from './szconfig/szconfig_web_client';
 import { SzConfigManagerClient } from './szconfigmanager/szconfigmanager_web_client';
 import { SzConfigManager } from './abstracts/szConfigManager';
@@ -196,7 +196,7 @@ export class SzGrpcWebConfigManager extends SzGrpcWebBase implements SzConfigMan
      * @returns {Promise<string>} JSON document describing the configurations registered
      * in the entity repository with their identifiers, timestamps and comments.
      */
-    getConfigs(): Promise<string> {
+    getConfigRegistry(): Promise<string> {
         return new Promise<string>((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
@@ -207,8 +207,8 @@ export class SzGrpcWebConfigManager extends SzGrpcWebBase implements SzConfigMan
                     reject( err )
                     return;
                 }
-                const request = new GetConfigsRequest();
-                this.client.getConfigs(request, this._metadata, (err, res: GetConfigsResponse) => {
+                const request = new GetConfigRegistryRequest();
+                this.client.getConfigRegistry(request, this._metadata, (err, res: GetConfigRegistryResponse) => {
                     if(err) {
                         let _err = newException(err);
                         reject(_err);

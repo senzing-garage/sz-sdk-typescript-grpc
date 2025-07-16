@@ -9,7 +9,7 @@ import * as szconfigmanager_pb from "./szconfigmanager_pb";
 
 interface ISzConfigManagerService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
     getConfig: ISzConfigManagerService_IGetConfig;
-    getConfigs: ISzConfigManagerService_IGetConfigs;
+    getConfigRegistry: ISzConfigManagerService_IGetConfigRegistry;
     getDefaultConfigId: ISzConfigManagerService_IGetDefaultConfigId;
     getTemplateConfig: ISzConfigManagerService_IGetTemplateConfig;
     registerConfig: ISzConfigManagerService_IRegisterConfig;
@@ -27,14 +27,14 @@ interface ISzConfigManagerService_IGetConfig extends grpc.MethodDefinition<szcon
     responseSerialize: grpc.serialize<szconfigmanager_pb.GetConfigResponse>;
     responseDeserialize: grpc.deserialize<szconfigmanager_pb.GetConfigResponse>;
 }
-interface ISzConfigManagerService_IGetConfigs extends grpc.MethodDefinition<szconfigmanager_pb.GetConfigsRequest, szconfigmanager_pb.GetConfigsResponse> {
-    path: "/szconfigmanager.SzConfigManager/GetConfigs";
+interface ISzConfigManagerService_IGetConfigRegistry extends grpc.MethodDefinition<szconfigmanager_pb.GetConfigRegistryRequest, szconfigmanager_pb.GetConfigRegistryResponse> {
+    path: "/szconfigmanager.SzConfigManager/GetConfigRegistry";
     requestStream: false;
     responseStream: false;
-    requestSerialize: grpc.serialize<szconfigmanager_pb.GetConfigsRequest>;
-    requestDeserialize: grpc.deserialize<szconfigmanager_pb.GetConfigsRequest>;
-    responseSerialize: grpc.serialize<szconfigmanager_pb.GetConfigsResponse>;
-    responseDeserialize: grpc.deserialize<szconfigmanager_pb.GetConfigsResponse>;
+    requestSerialize: grpc.serialize<szconfigmanager_pb.GetConfigRegistryRequest>;
+    requestDeserialize: grpc.deserialize<szconfigmanager_pb.GetConfigRegistryRequest>;
+    responseSerialize: grpc.serialize<szconfigmanager_pb.GetConfigRegistryResponse>;
+    responseDeserialize: grpc.deserialize<szconfigmanager_pb.GetConfigRegistryResponse>;
 }
 interface ISzConfigManagerService_IGetDefaultConfigId extends grpc.MethodDefinition<szconfigmanager_pb.GetDefaultConfigIdRequest, szconfigmanager_pb.GetDefaultConfigIdResponse> {
     path: "/szconfigmanager.SzConfigManager/GetDefaultConfigId";
@@ -95,7 +95,7 @@ export const SzConfigManagerService: ISzConfigManagerService;
 
 export interface ISzConfigManagerServer {
     getConfig: grpc.handleUnaryCall<szconfigmanager_pb.GetConfigRequest, szconfigmanager_pb.GetConfigResponse>;
-    getConfigs: grpc.handleUnaryCall<szconfigmanager_pb.GetConfigsRequest, szconfigmanager_pb.GetConfigsResponse>;
+    getConfigRegistry: grpc.handleUnaryCall<szconfigmanager_pb.GetConfigRegistryRequest, szconfigmanager_pb.GetConfigRegistryResponse>;
     getDefaultConfigId: grpc.handleUnaryCall<szconfigmanager_pb.GetDefaultConfigIdRequest, szconfigmanager_pb.GetDefaultConfigIdResponse>;
     getTemplateConfig: grpc.handleUnaryCall<szconfigmanager_pb.GetTemplateConfigRequest, szconfigmanager_pb.GetTemplateConfigResponse>;
     registerConfig: grpc.handleUnaryCall<szconfigmanager_pb.RegisterConfigRequest, szconfigmanager_pb.RegisterConfigResponse>;
@@ -108,9 +108,9 @@ export interface ISzConfigManagerClient {
     getConfig(request: szconfigmanager_pb.GetConfigRequest, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetConfigResponse) => void): grpc.ClientUnaryCall;
     getConfig(request: szconfigmanager_pb.GetConfigRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetConfigResponse) => void): grpc.ClientUnaryCall;
     getConfig(request: szconfigmanager_pb.GetConfigRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetConfigResponse) => void): grpc.ClientUnaryCall;
-    getConfigs(request: szconfigmanager_pb.GetConfigsRequest, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetConfigsResponse) => void): grpc.ClientUnaryCall;
-    getConfigs(request: szconfigmanager_pb.GetConfigsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetConfigsResponse) => void): grpc.ClientUnaryCall;
-    getConfigs(request: szconfigmanager_pb.GetConfigsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetConfigsResponse) => void): grpc.ClientUnaryCall;
+    getConfigRegistry(request: szconfigmanager_pb.GetConfigRegistryRequest, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetConfigRegistryResponse) => void): grpc.ClientUnaryCall;
+    getConfigRegistry(request: szconfigmanager_pb.GetConfigRegistryRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetConfigRegistryResponse) => void): grpc.ClientUnaryCall;
+    getConfigRegistry(request: szconfigmanager_pb.GetConfigRegistryRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetConfigRegistryResponse) => void): grpc.ClientUnaryCall;
     getDefaultConfigId(request: szconfigmanager_pb.GetDefaultConfigIdRequest, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetDefaultConfigIdResponse) => void): grpc.ClientUnaryCall;
     getDefaultConfigId(request: szconfigmanager_pb.GetDefaultConfigIdRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetDefaultConfigIdResponse) => void): grpc.ClientUnaryCall;
     getDefaultConfigId(request: szconfigmanager_pb.GetDefaultConfigIdRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetDefaultConfigIdResponse) => void): grpc.ClientUnaryCall;
@@ -136,9 +136,9 @@ export class SzConfigManagerClient extends grpc.Client implements ISzConfigManag
     public getConfig(request: szconfigmanager_pb.GetConfigRequest, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetConfigResponse) => void): grpc.ClientUnaryCall;
     public getConfig(request: szconfigmanager_pb.GetConfigRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetConfigResponse) => void): grpc.ClientUnaryCall;
     public getConfig(request: szconfigmanager_pb.GetConfigRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetConfigResponse) => void): grpc.ClientUnaryCall;
-    public getConfigs(request: szconfigmanager_pb.GetConfigsRequest, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetConfigsResponse) => void): grpc.ClientUnaryCall;
-    public getConfigs(request: szconfigmanager_pb.GetConfigsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetConfigsResponse) => void): grpc.ClientUnaryCall;
-    public getConfigs(request: szconfigmanager_pb.GetConfigsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetConfigsResponse) => void): grpc.ClientUnaryCall;
+    public getConfigRegistry(request: szconfigmanager_pb.GetConfigRegistryRequest, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetConfigRegistryResponse) => void): grpc.ClientUnaryCall;
+    public getConfigRegistry(request: szconfigmanager_pb.GetConfigRegistryRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetConfigRegistryResponse) => void): grpc.ClientUnaryCall;
+    public getConfigRegistry(request: szconfigmanager_pb.GetConfigRegistryRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetConfigRegistryResponse) => void): grpc.ClientUnaryCall;
     public getDefaultConfigId(request: szconfigmanager_pb.GetDefaultConfigIdRequest, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetDefaultConfigIdResponse) => void): grpc.ClientUnaryCall;
     public getDefaultConfigId(request: szconfigmanager_pb.GetDefaultConfigIdRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetDefaultConfigIdResponse) => void): grpc.ClientUnaryCall;
     public getDefaultConfigId(request: szconfigmanager_pb.GetDefaultConfigIdRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfigmanager_pb.GetDefaultConfigIdResponse) => void): grpc.ClientUnaryCall;

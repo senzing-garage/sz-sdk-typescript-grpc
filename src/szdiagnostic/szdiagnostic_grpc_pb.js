@@ -4,48 +4,26 @@
 var grpc = require('@grpc/grpc-js');
 var szdiagnostic_pb = require('./szdiagnostic_pb.js');
 
-function serialize_szdiagnostic_CheckDatastorePerformanceRequest(arg) {
-  if (!(arg instanceof szdiagnostic_pb.CheckDatastorePerformanceRequest)) {
-    throw new Error('Expected argument of type szdiagnostic.CheckDatastorePerformanceRequest');
+function serialize_szdiagnostic_CheckRepositoryPerformanceRequest(arg) {
+  if (!(arg instanceof szdiagnostic_pb.CheckRepositoryPerformanceRequest)) {
+    throw new Error('Expected argument of type szdiagnostic.CheckRepositoryPerformanceRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_szdiagnostic_CheckDatastorePerformanceRequest(buffer_arg) {
-  return szdiagnostic_pb.CheckDatastorePerformanceRequest.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_szdiagnostic_CheckRepositoryPerformanceRequest(buffer_arg) {
+  return szdiagnostic_pb.CheckRepositoryPerformanceRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_szdiagnostic_CheckDatastorePerformanceResponse(arg) {
-  if (!(arg instanceof szdiagnostic_pb.CheckDatastorePerformanceResponse)) {
-    throw new Error('Expected argument of type szdiagnostic.CheckDatastorePerformanceResponse');
+function serialize_szdiagnostic_CheckRepositoryPerformanceResponse(arg) {
+  if (!(arg instanceof szdiagnostic_pb.CheckRepositoryPerformanceResponse)) {
+    throw new Error('Expected argument of type szdiagnostic.CheckRepositoryPerformanceResponse');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_szdiagnostic_CheckDatastorePerformanceResponse(buffer_arg) {
-  return szdiagnostic_pb.CheckDatastorePerformanceResponse.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_szdiagnostic_GetDatastoreInfoRequest(arg) {
-  if (!(arg instanceof szdiagnostic_pb.GetDatastoreInfoRequest)) {
-    throw new Error('Expected argument of type szdiagnostic.GetDatastoreInfoRequest');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_szdiagnostic_GetDatastoreInfoRequest(buffer_arg) {
-  return szdiagnostic_pb.GetDatastoreInfoRequest.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_szdiagnostic_GetDatastoreInfoResponse(arg) {
-  if (!(arg instanceof szdiagnostic_pb.GetDatastoreInfoResponse)) {
-    throw new Error('Expected argument of type szdiagnostic.GetDatastoreInfoResponse');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_szdiagnostic_GetDatastoreInfoResponse(buffer_arg) {
-  return szdiagnostic_pb.GetDatastoreInfoResponse.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_szdiagnostic_CheckRepositoryPerformanceResponse(buffer_arg) {
+  return szdiagnostic_pb.CheckRepositoryPerformanceResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_szdiagnostic_GetFeatureRequest(arg) {
@@ -68,6 +46,28 @@ function serialize_szdiagnostic_GetFeatureResponse(arg) {
 
 function deserialize_szdiagnostic_GetFeatureResponse(buffer_arg) {
   return szdiagnostic_pb.GetFeatureResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_szdiagnostic_GetRepositoryInfoRequest(arg) {
+  if (!(arg instanceof szdiagnostic_pb.GetRepositoryInfoRequest)) {
+    throw new Error('Expected argument of type szdiagnostic.GetRepositoryInfoRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_szdiagnostic_GetRepositoryInfoRequest(buffer_arg) {
+  return szdiagnostic_pb.GetRepositoryInfoRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_szdiagnostic_GetRepositoryInfoResponse(arg) {
+  if (!(arg instanceof szdiagnostic_pb.GetRepositoryInfoResponse)) {
+    throw new Error('Expected argument of type szdiagnostic.GetRepositoryInfoResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_szdiagnostic_GetRepositoryInfoResponse(buffer_arg) {
+  return szdiagnostic_pb.GetRepositoryInfoResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_szdiagnostic_PurgeRepositoryRequest(arg) {
@@ -116,27 +116,16 @@ function deserialize_szdiagnostic_ReinitializeResponse(buffer_arg) {
 
 
 var SzDiagnosticService = exports.SzDiagnosticService = {
-  checkDatastorePerformance: {
-    path: '/szdiagnostic.SzDiagnostic/CheckDatastorePerformance',
+  checkRepositoryPerformance: {
+    path: '/szdiagnostic.SzDiagnostic/CheckRepositoryPerformance',
     requestStream: false,
     responseStream: false,
-    requestType: szdiagnostic_pb.CheckDatastorePerformanceRequest,
-    responseType: szdiagnostic_pb.CheckDatastorePerformanceResponse,
-    requestSerialize: serialize_szdiagnostic_CheckDatastorePerformanceRequest,
-    requestDeserialize: deserialize_szdiagnostic_CheckDatastorePerformanceRequest,
-    responseSerialize: serialize_szdiagnostic_CheckDatastorePerformanceResponse,
-    responseDeserialize: deserialize_szdiagnostic_CheckDatastorePerformanceResponse,
-  },
-  getDatastoreInfo: {
-    path: '/szdiagnostic.SzDiagnostic/GetDatastoreInfo',
-    requestStream: false,
-    responseStream: false,
-    requestType: szdiagnostic_pb.GetDatastoreInfoRequest,
-    responseType: szdiagnostic_pb.GetDatastoreInfoResponse,
-    requestSerialize: serialize_szdiagnostic_GetDatastoreInfoRequest,
-    requestDeserialize: deserialize_szdiagnostic_GetDatastoreInfoRequest,
-    responseSerialize: serialize_szdiagnostic_GetDatastoreInfoResponse,
-    responseDeserialize: deserialize_szdiagnostic_GetDatastoreInfoResponse,
+    requestType: szdiagnostic_pb.CheckRepositoryPerformanceRequest,
+    responseType: szdiagnostic_pb.CheckRepositoryPerformanceResponse,
+    requestSerialize: serialize_szdiagnostic_CheckRepositoryPerformanceRequest,
+    requestDeserialize: deserialize_szdiagnostic_CheckRepositoryPerformanceRequest,
+    responseSerialize: serialize_szdiagnostic_CheckRepositoryPerformanceResponse,
+    responseDeserialize: deserialize_szdiagnostic_CheckRepositoryPerformanceResponse,
   },
   getFeature: {
     path: '/szdiagnostic.SzDiagnostic/GetFeature',
@@ -148,6 +137,17 @@ var SzDiagnosticService = exports.SzDiagnosticService = {
     requestDeserialize: deserialize_szdiagnostic_GetFeatureRequest,
     responseSerialize: serialize_szdiagnostic_GetFeatureResponse,
     responseDeserialize: deserialize_szdiagnostic_GetFeatureResponse,
+  },
+  getRepositoryInfo: {
+    path: '/szdiagnostic.SzDiagnostic/GetRepositoryInfo',
+    requestStream: false,
+    responseStream: false,
+    requestType: szdiagnostic_pb.GetRepositoryInfoRequest,
+    responseType: szdiagnostic_pb.GetRepositoryInfoResponse,
+    requestSerialize: serialize_szdiagnostic_GetRepositoryInfoRequest,
+    requestDeserialize: deserialize_szdiagnostic_GetRepositoryInfoRequest,
+    responseSerialize: serialize_szdiagnostic_GetRepositoryInfoResponse,
+    responseDeserialize: deserialize_szdiagnostic_GetRepositoryInfoResponse,
   },
   purgeRepository: {
     path: '/szdiagnostic.SzDiagnostic/PurgeRepository',

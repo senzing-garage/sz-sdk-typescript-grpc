@@ -26,26 +26,26 @@ function deserialize_szengine_AddRecordResponse(buffer_arg) {
   return szengine_pb.AddRecordResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_szengine_CloseExportRequest(arg) {
-  if (!(arg instanceof szengine_pb.CloseExportRequest)) {
-    throw new Error('Expected argument of type szengine.CloseExportRequest');
+function serialize_szengine_CloseExportReportRequest(arg) {
+  if (!(arg instanceof szengine_pb.CloseExportReportRequest)) {
+    throw new Error('Expected argument of type szengine.CloseExportReportRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_szengine_CloseExportRequest(buffer_arg) {
-  return szengine_pb.CloseExportRequest.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_szengine_CloseExportReportRequest(buffer_arg) {
+  return szengine_pb.CloseExportReportRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_szengine_CloseExportResponse(arg) {
-  if (!(arg instanceof szengine_pb.CloseExportResponse)) {
-    throw new Error('Expected argument of type szengine.CloseExportResponse');
+function serialize_szengine_CloseExportReportResponse(arg) {
+  if (!(arg instanceof szengine_pb.CloseExportReportResponse)) {
+    throw new Error('Expected argument of type szengine.CloseExportReportResponse');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_szengine_CloseExportResponse(buffer_arg) {
-  return szengine_pb.CloseExportResponse.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_szengine_CloseExportReportResponse(buffer_arg) {
+  return szengine_pb.CloseExportReportResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_szengine_CountRedoRecordsRequest(arg) {
@@ -356,6 +356,28 @@ function deserialize_szengine_GetEntityByRecordIdResponse(buffer_arg) {
   return szengine_pb.GetEntityByRecordIdResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_szengine_GetRecordPreviewRequest(arg) {
+  if (!(arg instanceof szengine_pb.GetRecordPreviewRequest)) {
+    throw new Error('Expected argument of type szengine.GetRecordPreviewRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_szengine_GetRecordPreviewRequest(buffer_arg) {
+  return szengine_pb.GetRecordPreviewRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_szengine_GetRecordPreviewResponse(arg) {
+  if (!(arg instanceof szengine_pb.GetRecordPreviewResponse)) {
+    throw new Error('Expected argument of type szengine.GetRecordPreviewResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_szengine_GetRecordPreviewResponse(buffer_arg) {
+  return szengine_pb.GetRecordPreviewResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_szengine_GetRecordRequest(arg) {
   if (!(arg instanceof szengine_pb.GetRecordRequest)) {
     throw new Error('Expected argument of type szengine.GetRecordRequest');
@@ -464,28 +486,6 @@ function serialize_szengine_HowEntityByEntityIdResponse(arg) {
 
 function deserialize_szengine_HowEntityByEntityIdResponse(buffer_arg) {
   return szengine_pb.HowEntityByEntityIdResponse.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_szengine_PreprocessRecordRequest(arg) {
-  if (!(arg instanceof szengine_pb.PreprocessRecordRequest)) {
-    throw new Error('Expected argument of type szengine.PreprocessRecordRequest');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_szengine_PreprocessRecordRequest(buffer_arg) {
-  return szengine_pb.PreprocessRecordRequest.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_szengine_PreprocessRecordResponse(arg) {
-  if (!(arg instanceof szengine_pb.PreprocessRecordResponse)) {
-    throw new Error('Expected argument of type szengine.PreprocessRecordResponse');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_szengine_PreprocessRecordResponse(buffer_arg) {
-  return szengine_pb.PreprocessRecordResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_szengine_PrimeEngineRequest(arg) {
@@ -765,16 +765,16 @@ var SzEngineService = exports.SzEngineService = {
     responseSerialize: serialize_szengine_AddRecordResponse,
     responseDeserialize: deserialize_szengine_AddRecordResponse,
   },
-  closeExport: {
-    path: '/szengine.SzEngine/CloseExport',
+  closeExportReport: {
+    path: '/szengine.SzEngine/CloseExportReport',
     requestStream: false,
     responseStream: false,
-    requestType: szengine_pb.CloseExportRequest,
-    responseType: szengine_pb.CloseExportResponse,
-    requestSerialize: serialize_szengine_CloseExportRequest,
-    requestDeserialize: deserialize_szengine_CloseExportRequest,
-    responseSerialize: serialize_szengine_CloseExportResponse,
-    responseDeserialize: deserialize_szengine_CloseExportResponse,
+    requestType: szengine_pb.CloseExportReportRequest,
+    responseType: szengine_pb.CloseExportReportResponse,
+    requestSerialize: serialize_szengine_CloseExportReportRequest,
+    requestDeserialize: deserialize_szengine_CloseExportReportRequest,
+    responseSerialize: serialize_szengine_CloseExportReportResponse,
+    responseDeserialize: deserialize_szengine_CloseExportReportResponse,
   },
   countRedoRecords: {
     path: '/szengine.SzEngine/CountRedoRecords',
@@ -941,6 +941,17 @@ var SzEngineService = exports.SzEngineService = {
     responseSerialize: serialize_szengine_GetRecordResponse,
     responseDeserialize: deserialize_szengine_GetRecordResponse,
   },
+  getRecordPreview: {
+    path: '/szengine.SzEngine/GetRecordPreview',
+    requestStream: false,
+    responseStream: false,
+    requestType: szengine_pb.GetRecordPreviewRequest,
+    responseType: szengine_pb.GetRecordPreviewResponse,
+    requestSerialize: serialize_szengine_GetRecordPreviewRequest,
+    requestDeserialize: deserialize_szengine_GetRecordPreviewRequest,
+    responseSerialize: serialize_szengine_GetRecordPreviewResponse,
+    responseDeserialize: deserialize_szengine_GetRecordPreviewResponse,
+  },
   getRedoRecord: {
     path: '/szengine.SzEngine/GetRedoRecord',
     requestStream: false,
@@ -984,17 +995,6 @@ var SzEngineService = exports.SzEngineService = {
     requestDeserialize: deserialize_szengine_HowEntityByEntityIdRequest,
     responseSerialize: serialize_szengine_HowEntityByEntityIdResponse,
     responseDeserialize: deserialize_szengine_HowEntityByEntityIdResponse,
-  },
-  preprocessRecord: {
-    path: '/szengine.SzEngine/PreprocessRecord',
-    requestStream: false,
-    responseStream: false,
-    requestType: szengine_pb.PreprocessRecordRequest,
-    responseType: szengine_pb.PreprocessRecordResponse,
-    requestSerialize: serialize_szengine_PreprocessRecordRequest,
-    requestDeserialize: deserialize_szengine_PreprocessRecordRequest,
-    responseSerialize: serialize_szengine_PreprocessRecordResponse,
-    responseDeserialize: deserialize_szengine_PreprocessRecordResponse,
   },
   primeEngine: {
     path: '/szengine.SzEngine/PrimeEngine',
