@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], [markdownlint],
 and this project adheres to [Semantic Versioning].
 
-## [4.0.0-beta.3.0] - 2025-06-06
+## [4.0.0-beta.3.0] - 2025-07-28
 
 ### Modified
 
@@ -33,10 +33,6 @@ and this project adheres to [Semantic Versioning].
 - `SzGrpcWebEngine`
   - renamed `closeExport` to `closeExportReport`
   - renamed `preprocessRecord` to `getRecordPreview`
-
-### Added
-
-### Removed
 
 ## [4.0.0-beta.2.2] - 2025-06-06
 
