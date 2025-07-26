@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning].
 - `SzGrpcEngine`
   - renamed `closeExport` to `closeExportReport`
   - renamed `preprocessRecord` to `getRecordPreview`
-- `SzGrpWebcConfig`
+- `SzGrpcWebConfig`
   - renamed `addDataSource` to `registerDataSource`
   - renamed `deleteDataSource` to `unregisterDataSource`
   - renamed `getDataSources` to `getDataSourceRegistry`
