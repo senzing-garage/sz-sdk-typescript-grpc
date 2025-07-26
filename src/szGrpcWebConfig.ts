@@ -1,5 +1,5 @@
 import * as grpc from '@grpc/grpc-js';
-import { AddDataSourceRequest, AddDataSourceResponse, DeleteDataSourceRequest, DeleteDataSourceResponse, GetDataSourcesRequest, GetDataSourcesResponse, VerifyConfigRequest, VerifyConfigResponse } from './szconfig/szconfig_web_pb';
+import { RegisterDataSourceRequest, RegisterDataSourceResponse, UnregisterDataSourceRequest, UnregisterDataSourceResponse, GetDataSourceRegistryRequest, GetDataSourceRegistryResponse, VerifyConfigRequest, VerifyConfigResponse } from './szconfig/szconfig_web_pb';
 import { SzConfigClient as SzConfigWebClient } from './szconfig/szconfig_web_client';
 import { SzConfig } from './abstracts/szConfig';
 import { newException } from './szHelpers';
@@ -76,12 +76,12 @@ export class SzGrpcWebConfig extends SzGrpcWebBase implements SzConfig {
             throw new Error(`not enough parameters to initialize`);
         }
     }
-        /**
+    /**
      * Adds a data source to an existing in-memory configuration.
      * @param dataSourceCode Name of data source code to add.
      * @returns {Promise<string>} JSON document listing the newly created data source
      */
-    addDataSource(dataSourceCode: string) {
+    registerDataSource(dataSourceCode: string) {
         return new Promise<string>((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
@@ -92,11 +92,11 @@ export class SzGrpcWebConfig extends SzGrpcWebBase implements SzConfig {
                     reject( err )
                     return;
                 }
-                const request = new AddDataSourceRequest();
+                const request = new RegisterDataSourceRequest();
                 request.setConfigDefinition(this.definition);
                 request.setDataSourceCode(dataSourceCode);
     
-                this.client.addDataSource(request, this._metadata, (err, res: AddDataSourceResponse) => {
+                this.client.registerDataSource(request, this._metadata, (err, res: RegisterDataSourceResponse) => {
                     if(err) {
                         reject( newException(err) )
                         return;
@@ -114,7 +114,7 @@ export class SzGrpcWebConfig extends SzGrpcWebBase implements SzConfig {
      * @param {string[]} dataSourceCodes 
      * @returns {Promise<string[]>} JSON documents for each datasource listing the newly created data source
      */
-    addDataSources(dataSourceCodes: string[]) {
+    registerDataSources(dataSourceCodes: string[]) {
         /** 
          * Attempting to create multiple datasources asynchronously ends up causing a connection closed error.
          * JavaScript/TypeScript does not have a good paradigm for synchronously requesting promises one after the other. 
@@ -139,7 +139,7 @@ export class SzGrpcWebConfig extends SzGrpcWebBase implements SzConfig {
                     return;
                 }
                 //return new Promise((resolve, reject) => {
-                    this.addDataSource(dsName as string)
+                    this.registerDataSource(dsName as string)
                     .then((resp) => {
                         // add response to results
                         _responses.push(resp);
@@ -191,7 +191,7 @@ export class SzGrpcWebConfig extends SzGrpcWebBase implements SzConfig {
      * @param dataSourceCode Name of data source code to delete.
      * @returns {Promise<undefined>} for async flow control
      */
-    deleteDataSource(dataSourceCode: string) {
+    unregisterDataSource(dataSourceCode: string) {
         return new Promise((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
@@ -202,11 +202,11 @@ export class SzGrpcWebConfig extends SzGrpcWebBase implements SzConfig {
                     reject( err )
                     return;
                 }
-                const request = new DeleteDataSourceRequest();
+                const request = new UnregisterDataSourceRequest();
                 request.setConfigDefinition(this.definition);
                 request.setDataSourceCode(dataSourceCode);
 
-                this.client.deleteDataSource(request, this._metadata, (err, res: DeleteDataSourceResponse) => {
+                this.client.unregisterDataSource(request, this._metadata, (err, res: UnregisterDataSourceResponse) => {
                     if(err) {
                         reject( newException(err) )
                         return;
@@ -222,7 +222,7 @@ export class SzGrpcWebConfig extends SzGrpcWebBase implements SzConfig {
      * Returns a JSON document of data sources contained in an in-memory configuration.
      * @returns {Promise<{DSRC_ID: number, DSRC_CODE: string}[]>} containing a JSON document listing all of the data sources.
      */
-    getDataSources(): Promise<{DSRC_ID: number, DSRC_CODE: string}[]> {
+    getDataSourceRegistry(): Promise<{DSRC_ID: number, DSRC_CODE: string}[]> {
         return new Promise((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
@@ -234,9 +234,9 @@ export class SzGrpcWebConfig extends SzGrpcWebBase implements SzConfig {
                     return;
                 }
 
-                const request = new GetDataSourcesRequest();
+                const request = new GetDataSourceRegistryRequest();
                 request.setConfigDefinition(this.definition);
-                this.client.getDataSources(request, this._metadata, (err, res: GetDataSourcesResponse) => {
+                this.client.getDataSourceRegistry(request, this._metadata, (err, res: GetDataSourceRegistryResponse) => {
                     if(err) {
                         reject( newException(err) )
                         return;

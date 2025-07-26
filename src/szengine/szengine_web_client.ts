@@ -82,47 +82,47 @@ export class SzEngineClient {
     this.methodDescriptorAddRecord);
   }
 
-  methodDescriptorCloseExport = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/CloseExport',
+  methodDescriptorCloseExportReport = new grpcWeb.MethodDescriptor(
+    '/szengine.SzEngine/CloseExportReport',
     grpcWeb.MethodType.UNARY,
-    szengine_pb.CloseExportRequest,
-    szengine_pb.CloseExportResponse,
-    (request: szengine_pb.CloseExportRequest) => {
+    szengine_pb.CloseExportReportRequest,
+    szengine_pb.CloseExportReportResponse,
+    (request: szengine_pb.CloseExportReportRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.CloseExportResponse.deserializeBinary
+    szengine_pb.CloseExportReportResponse.deserializeBinary
   );
 
-  closeExport(
-    request: szengine_pb.CloseExportRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.CloseExportResponse>;
+  closeExportReport(
+    request: szengine_pb.CloseExportReportRequest,
+    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.CloseExportReportResponse>;
 
-  closeExport(
-    request: szengine_pb.CloseExportRequest,
+  closeExportReport(
+    request: szengine_pb.CloseExportReportRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.CloseExportResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.CloseExportResponse>;
+               response: szengine_pb.CloseExportReportResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.CloseExportReportResponse>;
 
-  closeExport(
-    request: szengine_pb.CloseExportRequest,
+  closeExportReport(
+    request: szengine_pb.CloseExportReportRequest,
     metadata?: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.CloseExportResponse) => void) {
+               response: szengine_pb.CloseExportReportResponse) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
-          '/szengine.SzEngine/CloseExport',
+          '/szengine.SzEngine/CloseExportReport',
         request,
         metadata || {},
-        this.methodDescriptorCloseExport,
+        this.methodDescriptorCloseExportReport,
         callback);
     }
     return this.client_.unaryCall(
     this.hostname_ +
-      '/szengine.SzEngine/CloseExport',
+      '/szengine.SzEngine/CloseExportReport',
     request,
     metadata || {},
-    this.methodDescriptorCloseExport);
+    this.methodDescriptorCloseExportReport);
   }
 
   methodDescriptorCountRedoRecords = new grpcWeb.MethodDescriptor(
@@ -770,6 +770,49 @@ export class SzEngineClient {
     this.methodDescriptorGetRecord);
   }
 
+  methodDescriptorGetRecordPreview = new grpcWeb.MethodDescriptor(
+    '/szengine.SzEngine/GetRecordPreview',
+    grpcWeb.MethodType.UNARY,
+    szengine_pb.GetRecordPreviewRequest,
+    szengine_pb.GetRecordPreviewResponse,
+    (request: szengine_pb.GetRecordPreviewRequest) => {
+      return request.serializeBinary();
+    },
+    szengine_pb.GetRecordPreviewResponse.deserializeBinary
+  );
+
+  getRecordPreview(
+    request: szengine_pb.GetRecordPreviewRequest,
+    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.GetRecordPreviewResponse>;
+
+  getRecordPreview(
+    request: szengine_pb.GetRecordPreviewRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.RpcError,
+               response: szengine_pb.GetRecordPreviewResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.GetRecordPreviewResponse>;
+
+  getRecordPreview(
+    request: szengine_pb.GetRecordPreviewRequest,
+    metadata?: grpcWeb.Metadata | null,
+    callback?: (err: grpcWeb.RpcError,
+               response: szengine_pb.GetRecordPreviewResponse) => void) {
+    if (callback !== undefined) {
+      return this.client_.rpcCall(
+        this.hostname_ +
+          '/szengine.SzEngine/GetRecordPreview',
+        request,
+        metadata || {},
+        this.methodDescriptorGetRecordPreview,
+        callback);
+    }
+    return this.client_.unaryCall(
+    this.hostname_ +
+      '/szengine.SzEngine/GetRecordPreview',
+    request,
+    metadata || {},
+    this.methodDescriptorGetRecordPreview);
+  }
+
   methodDescriptorGetRedoRecord = new grpcWeb.MethodDescriptor(
     '/szengine.SzEngine/GetRedoRecord',
     grpcWeb.MethodType.UNARY,
@@ -940,49 +983,6 @@ export class SzEngineClient {
     request,
     metadata || {},
     this.methodDescriptorHowEntityByEntityId);
-  }
-
-  methodDescriptorPreprocessRecord = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/PreprocessRecord',
-    grpcWeb.MethodType.UNARY,
-    szengine_pb.PreprocessRecordRequest,
-    szengine_pb.PreprocessRecordResponse,
-    (request: szengine_pb.PreprocessRecordRequest) => {
-      return request.serializeBinary();
-    },
-    szengine_pb.PreprocessRecordResponse.deserializeBinary
-  );
-
-  preprocessRecord(
-    request: szengine_pb.PreprocessRecordRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.PreprocessRecordResponse>;
-
-  preprocessRecord(
-    request: szengine_pb.PreprocessRecordRequest,
-    metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.PreprocessRecordResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.PreprocessRecordResponse>;
-
-  preprocessRecord(
-    request: szengine_pb.PreprocessRecordRequest,
-    metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.PreprocessRecordResponse) => void) {
-    if (callback !== undefined) {
-      return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/PreprocessRecord',
-        request,
-        metadata || {},
-        this.methodDescriptorPreprocessRecord,
-        callback);
-    }
-    return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/PreprocessRecord',
-    request,
-    metadata || {},
-    this.methodDescriptorPreprocessRecord);
   }
 
   methodDescriptorPrimeEngine = new grpcWeb.MethodDescriptor(

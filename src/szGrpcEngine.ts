@@ -1,5 +1,5 @@
 import * as grpc from '@grpc/grpc-js';
-import { AddRecordRequest, AddRecordResponse, CloseExportRequest, CloseExportResponse, CountRedoRecordsRequest, CountRedoRecordsResponse, DeleteRecordRequest, DeleteRecordResponse, ExportJsonEntityReportRequest, ExportJsonEntityReportResponse, FetchNextRequest, FetchNextResponse, FindInterestingEntitiesByEntityIdRequest, FindInterestingEntitiesByEntityIdResponse, FindInterestingEntitiesByRecordIdRequest, FindInterestingEntitiesByRecordIdResponse, FindNetworkByEntityIdRequest, FindNetworkByEntityIdResponse, FindNetworkByRecordIdRequest, FindNetworkByRecordIdResponse, FindPathByEntityIdRequest, FindPathByEntityIdResponse, FindPathByRecordIdRequest, FindPathByRecordIdResponse, GetActiveConfigIdRequest, GetActiveConfigIdResponse, GetEntityByEntityIdRequest, GetEntityByEntityIdResponse, GetEntityByRecordIdRequest, GetEntityByRecordIdResponse, GetRecordRequest, GetRecordResponse, GetRedoRecordRequest, GetRedoRecordResponse, GetStatsRequest, GetStatsResponse, GetVirtualEntityByRecordIdRequest, GetVirtualEntityByRecordIdResponse, HowEntityByEntityIdRequest, HowEntityByEntityIdResponse, PreprocessRecordRequest, PreprocessRecordResponse, PrimeEngineRequest, PrimeEngineResponse, ProcessRedoRecordRequest, ProcessRedoRecordResponse, ReevaluateEntityRequest, ReevaluateEntityResponse, ReevaluateRecordRequest, ReevaluateRecordResponse, ReinitializeRequest, ReinitializeResponse, SearchByAttributesRequest, SearchByAttributesResponse, StreamExportJsonEntityReportRequest, StreamExportJsonEntityReportResponse, WhyEntitiesRequest, WhyEntitiesResponse, WhyRecordInEntityRequest, WhyRecordInEntityResponse, WhyRecordsRequest, WhyRecordsResponse, WhySearchRequest, WhySearchResponse } from './szengine/szengine_pb';
+import { AddRecordRequest, AddRecordResponse, CloseExportReportRequest, CloseExportReportResponse, CountRedoRecordsRequest, CountRedoRecordsResponse, DeleteRecordRequest, DeleteRecordResponse, ExportJsonEntityReportRequest, ExportJsonEntityReportResponse, FetchNextRequest, FetchNextResponse, FindInterestingEntitiesByEntityIdRequest, FindInterestingEntitiesByEntityIdResponse, FindInterestingEntitiesByRecordIdRequest, FindInterestingEntitiesByRecordIdResponse, FindNetworkByEntityIdRequest, FindNetworkByEntityIdResponse, FindNetworkByRecordIdRequest, FindNetworkByRecordIdResponse, FindPathByEntityIdRequest, FindPathByEntityIdResponse, FindPathByRecordIdRequest, FindPathByRecordIdResponse, GetActiveConfigIdRequest, GetActiveConfigIdResponse, GetEntityByEntityIdRequest, GetEntityByEntityIdResponse, GetEntityByRecordIdRequest, GetEntityByRecordIdResponse, GetRecordRequest, GetRecordResponse, GetRedoRecordRequest, GetRedoRecordResponse, GetStatsRequest, GetStatsResponse, GetVirtualEntityByRecordIdRequest, GetVirtualEntityByRecordIdResponse, HowEntityByEntityIdRequest, HowEntityByEntityIdResponse, GetRecordPreviewRequest, GetRecordPreviewResponse, PrimeEngineRequest, PrimeEngineResponse, ProcessRedoRecordRequest, ProcessRedoRecordResponse, ReevaluateEntityRequest, ReevaluateEntityResponse, ReevaluateRecordRequest, ReevaluateRecordResponse, ReinitializeRequest, ReinitializeResponse, SearchByAttributesRequest, SearchByAttributesResponse, StreamExportJsonEntityReportRequest, StreamExportJsonEntityReportResponse, WhyEntitiesRequest, WhyEntitiesResponse, WhyRecordInEntityRequest, WhyRecordInEntityResponse, WhyRecordsRequest, WhyRecordsResponse, WhySearchRequest, WhySearchResponse } from './szengine/szengine_pb';
 import { SzEngineClient } from './szengine/szengine_grpc_pb';
 import { SzEngine } from './abstracts/szEngine';
 import { DEFAULT_CHANNEL_OPTIONS, DEFAULT_CONNECTION_READY_TIMEOUT, DEFAULT_CONNECTION_STRING, DEFAULT_CREDENTIALS, SzGrpcEnvironmentOptions } from './szGrpcEnvironment';
@@ -128,7 +128,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
      * @param exportHandle A handle created by exportJsonEntityReport or exportCsvEntityReport.
      * @returns {Promise<undefined>} for better support of async waiting
      */
-    closeExport(exportHandle: number) {
+    closeExportReport(exportHandle: number) {
         return new Promise((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
@@ -139,9 +139,9 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     reject( err )
                     return;
                 }
-                const request = new CloseExportRequest();
+                const request = new CloseExportReportRequest();
                 request.setExportHandle(exportHandle);
-                this.client.closeExport(request, this._metadata, (err, res: CloseExportResponse) => {
+                this.client.closeExportReport(request, this._metadata, (err, res: CloseExportReportResponse) => {
                     if(err) {
                         let _err = newException(err);
                         reject(_err);
@@ -716,6 +716,39 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
         });
     }
     /**
+     * The preprocess_record method tests adding a record into the Senzing datastore.
+     * @param recordDefinition A JSON document containing the record to be tested.
+     * @param flags Flags used to control information returned. Defaults to 0.
+     * @returns {Promise<string>} A JSON document containing metadata as specified by the flags.
+     */
+    getRecordPreview(recordDefinition: string, flags: BigInt | number = SzEngineFlags.SZ_RECORD_DEFAULT_FLAGS): Promise<string | SzError> {
+        return new Promise((resolve, reject) => {
+            if(!this.client){
+                reject(new SzNoGrpcConnectionError());
+                return
+            }
+            this.waitForReady(this.getDeadlineFromNow(), (err) => {
+                if(err) {
+                    reject( err )
+                    return;
+                }
+                const request = new GetRecordPreviewRequest();
+                request.setRecordDefinition(recordDefinition);
+                request.setFlags(bigIntToNumber(flags));
+                this.client.getRecordPreview(request, this._metadata, (err, res: GetRecordPreviewResponse)=>{
+                    if(err) {
+                        let _err = newException(err);
+                        reject(_err);
+                        throw _err;
+                        return;
+                    }
+                    let result = res.getResult();
+                    resolve(result);
+                });
+            });
+        });
+    }
+    /**
      * returns the next internally queued redo record from the Senzing repository. The processRedoRecord method is called to process the redo record retrieved by getRedoRecord.
      * @returns {Promise<string>} A JSON document.
      */
@@ -829,39 +862,6 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                 request.setEntityId(entityId);
                 request.setFlags(bigIntToNumber(flags));
                 this.client.howEntityByEntityId(request, this._metadata, (err, res: HowEntityByEntityIdResponse)=>{
-                    if(err) {
-                        let _err = newException(err);
-                        reject(_err);
-                        throw _err;
-                        return;
-                    }
-                    let result = res.getResult();
-                    resolve(result);
-                });
-            });
-        });
-    }
-    /**
-     * The preprocess_record method tests adding a record into the Senzing datastore.
-     * @param recordDefinition A JSON document containing the record to be tested.
-     * @param flags Flags used to control information returned. Defaults to 0.
-     * @returns {Promise<string>} A JSON document containing metadata as specified by the flags.
-     */
-    preprocessRecord(recordDefinition: string, flags: BigInt | number = SzEngineFlags.SZ_RECORD_DEFAULT_FLAGS): Promise<string | SzError> {
-        return new Promise((resolve, reject) => {
-            if(!this.client){
-                reject(new SzNoGrpcConnectionError());
-                return
-            }
-            this.waitForReady(this.getDeadlineFromNow(), (err) => {
-                if(err) {
-                    reject( err )
-                    return;
-                }
-                const request = new PreprocessRecordRequest();
-                request.setRecordDefinition(recordDefinition);
-                request.setFlags(bigIntToNumber(flags));
-                this.client.preprocessRecord(request, this._metadata, (err, res: PreprocessRecordResponse)=>{
                     if(err) {
                         let _err = newException(err);
                         reject(_err);

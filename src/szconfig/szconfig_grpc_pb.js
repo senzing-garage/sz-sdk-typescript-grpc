@@ -4,70 +4,70 @@
 var grpc = require('@grpc/grpc-js');
 var szconfig_pb = require('./szconfig_pb.js');
 
-function serialize_szconfig_AddDataSourceRequest(arg) {
-  if (!(arg instanceof szconfig_pb.AddDataSourceRequest)) {
-    throw new Error('Expected argument of type szconfig.AddDataSourceRequest');
+function serialize_szconfig_GetDataSourceRegistryRequest(arg) {
+  if (!(arg instanceof szconfig_pb.GetDataSourceRegistryRequest)) {
+    throw new Error('Expected argument of type szconfig.GetDataSourceRegistryRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_szconfig_AddDataSourceRequest(buffer_arg) {
-  return szconfig_pb.AddDataSourceRequest.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_szconfig_GetDataSourceRegistryRequest(buffer_arg) {
+  return szconfig_pb.GetDataSourceRegistryRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_szconfig_AddDataSourceResponse(arg) {
-  if (!(arg instanceof szconfig_pb.AddDataSourceResponse)) {
-    throw new Error('Expected argument of type szconfig.AddDataSourceResponse');
+function serialize_szconfig_GetDataSourceRegistryResponse(arg) {
+  if (!(arg instanceof szconfig_pb.GetDataSourceRegistryResponse)) {
+    throw new Error('Expected argument of type szconfig.GetDataSourceRegistryResponse');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_szconfig_AddDataSourceResponse(buffer_arg) {
-  return szconfig_pb.AddDataSourceResponse.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_szconfig_GetDataSourceRegistryResponse(buffer_arg) {
+  return szconfig_pb.GetDataSourceRegistryResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_szconfig_DeleteDataSourceRequest(arg) {
-  if (!(arg instanceof szconfig_pb.DeleteDataSourceRequest)) {
-    throw new Error('Expected argument of type szconfig.DeleteDataSourceRequest');
+function serialize_szconfig_RegisterDataSourceRequest(arg) {
+  if (!(arg instanceof szconfig_pb.RegisterDataSourceRequest)) {
+    throw new Error('Expected argument of type szconfig.RegisterDataSourceRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_szconfig_DeleteDataSourceRequest(buffer_arg) {
-  return szconfig_pb.DeleteDataSourceRequest.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_szconfig_RegisterDataSourceRequest(buffer_arg) {
+  return szconfig_pb.RegisterDataSourceRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_szconfig_DeleteDataSourceResponse(arg) {
-  if (!(arg instanceof szconfig_pb.DeleteDataSourceResponse)) {
-    throw new Error('Expected argument of type szconfig.DeleteDataSourceResponse');
+function serialize_szconfig_RegisterDataSourceResponse(arg) {
+  if (!(arg instanceof szconfig_pb.RegisterDataSourceResponse)) {
+    throw new Error('Expected argument of type szconfig.RegisterDataSourceResponse');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_szconfig_DeleteDataSourceResponse(buffer_arg) {
-  return szconfig_pb.DeleteDataSourceResponse.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_szconfig_RegisterDataSourceResponse(buffer_arg) {
+  return szconfig_pb.RegisterDataSourceResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_szconfig_GetDataSourcesRequest(arg) {
-  if (!(arg instanceof szconfig_pb.GetDataSourcesRequest)) {
-    throw new Error('Expected argument of type szconfig.GetDataSourcesRequest');
+function serialize_szconfig_UnregisterDataSourceRequest(arg) {
+  if (!(arg instanceof szconfig_pb.UnregisterDataSourceRequest)) {
+    throw new Error('Expected argument of type szconfig.UnregisterDataSourceRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_szconfig_GetDataSourcesRequest(buffer_arg) {
-  return szconfig_pb.GetDataSourcesRequest.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_szconfig_UnregisterDataSourceRequest(buffer_arg) {
+  return szconfig_pb.UnregisterDataSourceRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_szconfig_GetDataSourcesResponse(arg) {
-  if (!(arg instanceof szconfig_pb.GetDataSourcesResponse)) {
-    throw new Error('Expected argument of type szconfig.GetDataSourcesResponse');
+function serialize_szconfig_UnregisterDataSourceResponse(arg) {
+  if (!(arg instanceof szconfig_pb.UnregisterDataSourceResponse)) {
+    throw new Error('Expected argument of type szconfig.UnregisterDataSourceResponse');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_szconfig_GetDataSourcesResponse(buffer_arg) {
-  return szconfig_pb.GetDataSourcesResponse.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_szconfig_UnregisterDataSourceResponse(buffer_arg) {
+  return szconfig_pb.UnregisterDataSourceResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_szconfig_VerifyConfigRequest(arg) {
@@ -94,38 +94,38 @@ function deserialize_szconfig_VerifyConfigResponse(buffer_arg) {
 
 
 var SzConfigService = exports.SzConfigService = {
-  addDataSource: {
-    path: '/szconfig.SzConfig/AddDataSource',
+  getDataSourceRegistry: {
+    path: '/szconfig.SzConfig/GetDataSourceRegistry',
     requestStream: false,
     responseStream: false,
-    requestType: szconfig_pb.AddDataSourceRequest,
-    responseType: szconfig_pb.AddDataSourceResponse,
-    requestSerialize: serialize_szconfig_AddDataSourceRequest,
-    requestDeserialize: deserialize_szconfig_AddDataSourceRequest,
-    responseSerialize: serialize_szconfig_AddDataSourceResponse,
-    responseDeserialize: deserialize_szconfig_AddDataSourceResponse,
+    requestType: szconfig_pb.GetDataSourceRegistryRequest,
+    responseType: szconfig_pb.GetDataSourceRegistryResponse,
+    requestSerialize: serialize_szconfig_GetDataSourceRegistryRequest,
+    requestDeserialize: deserialize_szconfig_GetDataSourceRegistryRequest,
+    responseSerialize: serialize_szconfig_GetDataSourceRegistryResponse,
+    responseDeserialize: deserialize_szconfig_GetDataSourceRegistryResponse,
   },
-  deleteDataSource: {
-    path: '/szconfig.SzConfig/DeleteDataSource',
+  registerDataSource: {
+    path: '/szconfig.SzConfig/RegisterDataSource',
     requestStream: false,
     responseStream: false,
-    requestType: szconfig_pb.DeleteDataSourceRequest,
-    responseType: szconfig_pb.DeleteDataSourceResponse,
-    requestSerialize: serialize_szconfig_DeleteDataSourceRequest,
-    requestDeserialize: deserialize_szconfig_DeleteDataSourceRequest,
-    responseSerialize: serialize_szconfig_DeleteDataSourceResponse,
-    responseDeserialize: deserialize_szconfig_DeleteDataSourceResponse,
+    requestType: szconfig_pb.RegisterDataSourceRequest,
+    responseType: szconfig_pb.RegisterDataSourceResponse,
+    requestSerialize: serialize_szconfig_RegisterDataSourceRequest,
+    requestDeserialize: deserialize_szconfig_RegisterDataSourceRequest,
+    responseSerialize: serialize_szconfig_RegisterDataSourceResponse,
+    responseDeserialize: deserialize_szconfig_RegisterDataSourceResponse,
   },
-  getDataSources: {
-    path: '/szconfig.SzConfig/GetDataSources',
+  unregisterDataSource: {
+    path: '/szconfig.SzConfig/UnregisterDataSource',
     requestStream: false,
     responseStream: false,
-    requestType: szconfig_pb.GetDataSourcesRequest,
-    responseType: szconfig_pb.GetDataSourcesResponse,
-    requestSerialize: serialize_szconfig_GetDataSourcesRequest,
-    requestDeserialize: deserialize_szconfig_GetDataSourcesRequest,
-    responseSerialize: serialize_szconfig_GetDataSourcesResponse,
-    responseDeserialize: deserialize_szconfig_GetDataSourcesResponse,
+    requestType: szconfig_pb.UnregisterDataSourceRequest,
+    responseType: szconfig_pb.UnregisterDataSourceResponse,
+    requestSerialize: serialize_szconfig_UnregisterDataSourceRequest,
+    requestDeserialize: deserialize_szconfig_UnregisterDataSourceRequest,
+    responseSerialize: serialize_szconfig_UnregisterDataSourceResponse,
+    responseDeserialize: deserialize_szconfig_UnregisterDataSourceResponse,
   },
   verifyConfig: {
     path: '/szconfig.SzConfig/VerifyConfig',

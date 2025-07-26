@@ -50,34 +50,34 @@ export namespace AddRecordResponse {
   }
 }
 
-export class CloseExportRequest extends jspb.Message {
+export class CloseExportReportRequest extends jspb.Message {
   getExportHandle(): number;
-  setExportHandle(value: number): CloseExportRequest;
+  setExportHandle(value: number): CloseExportReportRequest;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): CloseExportRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: CloseExportRequest): CloseExportRequest.AsObject;
-  static serializeBinaryToWriter(message: CloseExportRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): CloseExportRequest;
-  static deserializeBinaryFromReader(message: CloseExportRequest, reader: jspb.BinaryReader): CloseExportRequest;
+  toObject(includeInstance?: boolean): CloseExportReportRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: CloseExportReportRequest): CloseExportReportRequest.AsObject;
+  static serializeBinaryToWriter(message: CloseExportReportRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CloseExportReportRequest;
+  static deserializeBinaryFromReader(message: CloseExportReportRequest, reader: jspb.BinaryReader): CloseExportReportRequest;
 }
 
-export namespace CloseExportRequest {
+export namespace CloseExportReportRequest {
   export type AsObject = {
     exportHandle: number,
   }
 }
 
-export class CloseExportResponse extends jspb.Message {
+export class CloseExportReportResponse extends jspb.Message {
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): CloseExportResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: CloseExportResponse): CloseExportResponse.AsObject;
-  static serializeBinaryToWriter(message: CloseExportResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): CloseExportResponse;
-  static deserializeBinaryFromReader(message: CloseExportResponse, reader: jspb.BinaryReader): CloseExportResponse;
+  toObject(includeInstance?: boolean): CloseExportReportResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: CloseExportReportResponse): CloseExportReportResponse.AsObject;
+  static serializeBinaryToWriter(message: CloseExportReportResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CloseExportReportResponse;
+  static deserializeBinaryFromReader(message: CloseExportReportResponse, reader: jspb.BinaryReader): CloseExportReportResponse;
 }
 
-export namespace CloseExportResponse {
+export namespace CloseExportReportResponse {
   export type AsObject = {
   }
 }
@@ -694,6 +694,46 @@ export namespace GetEntityByRecordIdResponse {
   }
 }
 
+export class GetRecordPreviewRequest extends jspb.Message {
+  getRecordDefinition(): string;
+  setRecordDefinition(value: string): GetRecordPreviewRequest;
+
+  getFlags(): number;
+  setFlags(value: number): GetRecordPreviewRequest;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetRecordPreviewRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetRecordPreviewRequest): GetRecordPreviewRequest.AsObject;
+  static serializeBinaryToWriter(message: GetRecordPreviewRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetRecordPreviewRequest;
+  static deserializeBinaryFromReader(message: GetRecordPreviewRequest, reader: jspb.BinaryReader): GetRecordPreviewRequest;
+}
+
+export namespace GetRecordPreviewRequest {
+  export type AsObject = {
+    recordDefinition: string,
+    flags: number,
+  }
+}
+
+export class GetRecordPreviewResponse extends jspb.Message {
+  getResult(): string;
+  setResult(value: string): GetRecordPreviewResponse;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetRecordPreviewResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetRecordPreviewResponse): GetRecordPreviewResponse.AsObject;
+  static serializeBinaryToWriter(message: GetRecordPreviewResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetRecordPreviewResponse;
+  static deserializeBinaryFromReader(message: GetRecordPreviewResponse, reader: jspb.BinaryReader): GetRecordPreviewResponse;
+}
+
+export namespace GetRecordPreviewResponse {
+  export type AsObject = {
+    result: string,
+  }
+}
+
 export class GetRecordRequest extends jspb.Message {
   getDataSourceCode(): string;
   setDataSourceCode(value: string): GetRecordRequest;
@@ -877,46 +917,6 @@ export class HowEntityByEntityIdResponse extends jspb.Message {
 }
 
 export namespace HowEntityByEntityIdResponse {
-  export type AsObject = {
-    result: string,
-  }
-}
-
-export class PreprocessRecordRequest extends jspb.Message {
-  getRecordDefinition(): string;
-  setRecordDefinition(value: string): PreprocessRecordRequest;
-
-  getFlags(): number;
-  setFlags(value: number): PreprocessRecordRequest;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): PreprocessRecordRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: PreprocessRecordRequest): PreprocessRecordRequest.AsObject;
-  static serializeBinaryToWriter(message: PreprocessRecordRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): PreprocessRecordRequest;
-  static deserializeBinaryFromReader(message: PreprocessRecordRequest, reader: jspb.BinaryReader): PreprocessRecordRequest;
-}
-
-export namespace PreprocessRecordRequest {
-  export type AsObject = {
-    recordDefinition: string,
-    flags: number,
-  }
-}
-
-export class PreprocessRecordResponse extends jspb.Message {
-  getResult(): string;
-  setResult(value: string): PreprocessRecordResponse;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): PreprocessRecordResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: PreprocessRecordResponse): PreprocessRecordResponse.AsObject;
-  static serializeBinaryToWriter(message: PreprocessRecordResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): PreprocessRecordResponse;
-  static deserializeBinaryFromReader(message: PreprocessRecordResponse, reader: jspb.BinaryReader): PreprocessRecordResponse;
-}
-
-export namespace PreprocessRecordResponse {
   export type AsObject = {
     result: string,
   }

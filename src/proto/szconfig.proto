@@ -6,38 +6,38 @@ option java_package = "com.senzing.sdk.grpc";
 option java_outer_classname = "SzConfigProto";
 
 service SzConfig {
-  rpc AddDataSource (AddDataSourceRequest) returns (AddDataSourceResponse) {}
-  rpc DeleteDataSource (DeleteDataSourceRequest) returns (DeleteDataSourceResponse) {}
-  rpc GetDataSources (GetDataSourcesRequest) returns (GetDataSourcesResponse) {}
+  rpc GetDataSourceRegistry (GetDataSourceRegistryRequest) returns (GetDataSourceRegistryResponse) {}
+  rpc RegisterDataSource (RegisterDataSourceRequest) returns (RegisterDataSourceResponse) {}
+  rpc UnregisterDataSource (UnregisterDataSourceRequest) returns (UnregisterDataSourceResponse) {}
   rpc VerifyConfig (VerifyConfigRequest) returns (VerifyConfigResponse) {}
 }
 
-message AddDataSourceRequest {
+message GetDataSourceRegistryRequest {
+  string config_definition = 1;
+}
+
+message GetDataSourceRegistryResponse {
+  string result = 1;
+}
+
+message RegisterDataSourceRequest {
   string config_definition = 1;
   string data_source_code = 2;
 }
 
-message AddDataSourceResponse {
+message RegisterDataSourceResponse {
   string result = 1;
   string config_definition = 2;
 }
 
-message DeleteDataSourceRequest {
+message UnregisterDataSourceRequest {
   string config_definition = 1;
   string data_source_code = 2;
 }
 
-message DeleteDataSourceResponse {
+message UnregisterDataSourceResponse {
   string result = 1;
   string config_definition = 2;
-}
-
-message GetDataSourcesRequest {
-  string config_definition = 1;
-}
-
-message GetDataSourcesResponse {
-  string result = 1;
 }
 
 message VerifyConfigRequest {

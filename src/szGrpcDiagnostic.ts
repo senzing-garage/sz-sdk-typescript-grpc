@@ -1,5 +1,5 @@
 import * as grpc from '@grpc/grpc-js';
-import { CheckDatastorePerformanceRequest, CheckDatastorePerformanceResponse, GetDatastoreInfoRequest, GetDatastoreInfoResponse, GetFeatureRequest, GetFeatureResponse, PurgeRepositoryRequest, PurgeRepositoryResponse, ReinitializeRequest, ReinitializeResponse } from './szdiagnostic/szdiagnostic_pb';
+import { CheckRepositoryPerformanceRequest, CheckRepositoryPerformanceResponse, GetRepositoryInfoRequest, GetRepositoryInfoResponse, GetFeatureRequest, GetFeatureResponse, PurgeRepositoryRequest, PurgeRepositoryResponse, ReinitializeRequest, ReinitializeResponse } from './szdiagnostic/szdiagnostic_pb';
 import { SzDiagnosticClient } from './szdiagnostic/szdiagnostic_grpc_pb';
 import { SzDiagnostic } from './abstracts/szDiagnostic';
 import { newException } from './szHelpers';
@@ -67,7 +67,7 @@ export class SzGrpcDiagnostic extends SzGrpcBase implements SzDiagnostic {
      * @param secondsToRun Duration of the test in seconds.
      * @returns {Promise<CHECK_DATASTORE_PERFORMANCE_RESPONSE>} A JSON document
      */
-    checkDataStorePerformance(secondsToRun: number): Promise<CHECK_DATASTORE_PERFORMANCE_RESPONSE | SzError> {
+    checkRepositoryPerformance(secondsToRun: number): Promise<CHECK_DATASTORE_PERFORMANCE_RESPONSE | SzError> {
         return new Promise((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
@@ -78,9 +78,9 @@ export class SzGrpcDiagnostic extends SzGrpcBase implements SzDiagnostic {
                     reject( err )
                     return;
                 }
-                const request = new CheckDatastorePerformanceRequest();
+                const request = new CheckRepositoryPerformanceRequest();
                 request.setSecondsToRun(secondsToRun);
-                this.client.checkDatastorePerformance(request, this._metadata, (err, res: CheckDatastorePerformanceResponse) => {
+                this.client.checkRepositoryPerformance(request, this._metadata, (err, res: CheckRepositoryPerformanceResponse) => {
                     if(err) {
                         let _err = newException(err);
                         reject(_err);
@@ -98,7 +98,7 @@ export class SzGrpcDiagnostic extends SzGrpcBase implements SzDiagnostic {
      * Returns details of the datastore currently in use by Senzing.
      * @returns {Promise<string>}
      */
-    getDatastoreInfo(): Promise<string> {
+    getRepositoryInfo(): Promise<string> {
         return new Promise((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
@@ -109,8 +109,8 @@ export class SzGrpcDiagnostic extends SzGrpcBase implements SzDiagnostic {
                     reject( err )
                     return;
                 }
-                const request = new GetDatastoreInfoRequest();
-                this.client.getDatastoreInfo(request, this._metadata, (err, res: GetDatastoreInfoResponse) => {
+                const request = new GetRepositoryInfoRequest();
+                this.client.getRepositoryInfo(request, this._metadata, (err, res: GetRepositoryInfoResponse) => {
                     if(err) {
                         let _err = newException(err);
                         reject(_err);

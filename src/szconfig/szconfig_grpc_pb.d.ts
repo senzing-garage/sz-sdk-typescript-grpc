@@ -8,38 +8,38 @@ import * as grpc from "grpc";
 import * as szconfig_pb from "./szconfig_pb";
 
 interface ISzConfigService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
-    addDataSource: ISzConfigService_IAddDataSource;
-    deleteDataSource: ISzConfigService_IDeleteDataSource;
-    getDataSources: ISzConfigService_IGetDataSources;
+    getDataSourceRegistry: ISzConfigService_IGetDataSourceRegistry;
+    registerDataSource: ISzConfigService_IRegisterDataSource;
+    unregisterDataSource: ISzConfigService_IUnregisterDataSource;
     verifyConfig: ISzConfigService_IVerifyConfig;
 }
 
-interface ISzConfigService_IAddDataSource extends grpc.MethodDefinition<szconfig_pb.AddDataSourceRequest, szconfig_pb.AddDataSourceResponse> {
-    path: "/szconfig.SzConfig/AddDataSource";
+interface ISzConfigService_IGetDataSourceRegistry extends grpc.MethodDefinition<szconfig_pb.GetDataSourceRegistryRequest, szconfig_pb.GetDataSourceRegistryResponse> {
+    path: "/szconfig.SzConfig/GetDataSourceRegistry";
     requestStream: false;
     responseStream: false;
-    requestSerialize: grpc.serialize<szconfig_pb.AddDataSourceRequest>;
-    requestDeserialize: grpc.deserialize<szconfig_pb.AddDataSourceRequest>;
-    responseSerialize: grpc.serialize<szconfig_pb.AddDataSourceResponse>;
-    responseDeserialize: grpc.deserialize<szconfig_pb.AddDataSourceResponse>;
+    requestSerialize: grpc.serialize<szconfig_pb.GetDataSourceRegistryRequest>;
+    requestDeserialize: grpc.deserialize<szconfig_pb.GetDataSourceRegistryRequest>;
+    responseSerialize: grpc.serialize<szconfig_pb.GetDataSourceRegistryResponse>;
+    responseDeserialize: grpc.deserialize<szconfig_pb.GetDataSourceRegistryResponse>;
 }
-interface ISzConfigService_IDeleteDataSource extends grpc.MethodDefinition<szconfig_pb.DeleteDataSourceRequest, szconfig_pb.DeleteDataSourceResponse> {
-    path: "/szconfig.SzConfig/DeleteDataSource";
+interface ISzConfigService_IRegisterDataSource extends grpc.MethodDefinition<szconfig_pb.RegisterDataSourceRequest, szconfig_pb.RegisterDataSourceResponse> {
+    path: "/szconfig.SzConfig/RegisterDataSource";
     requestStream: false;
     responseStream: false;
-    requestSerialize: grpc.serialize<szconfig_pb.DeleteDataSourceRequest>;
-    requestDeserialize: grpc.deserialize<szconfig_pb.DeleteDataSourceRequest>;
-    responseSerialize: grpc.serialize<szconfig_pb.DeleteDataSourceResponse>;
-    responseDeserialize: grpc.deserialize<szconfig_pb.DeleteDataSourceResponse>;
+    requestSerialize: grpc.serialize<szconfig_pb.RegisterDataSourceRequest>;
+    requestDeserialize: grpc.deserialize<szconfig_pb.RegisterDataSourceRequest>;
+    responseSerialize: grpc.serialize<szconfig_pb.RegisterDataSourceResponse>;
+    responseDeserialize: grpc.deserialize<szconfig_pb.RegisterDataSourceResponse>;
 }
-interface ISzConfigService_IGetDataSources extends grpc.MethodDefinition<szconfig_pb.GetDataSourcesRequest, szconfig_pb.GetDataSourcesResponse> {
-    path: "/szconfig.SzConfig/GetDataSources";
+interface ISzConfigService_IUnregisterDataSource extends grpc.MethodDefinition<szconfig_pb.UnregisterDataSourceRequest, szconfig_pb.UnregisterDataSourceResponse> {
+    path: "/szconfig.SzConfig/UnregisterDataSource";
     requestStream: false;
     responseStream: false;
-    requestSerialize: grpc.serialize<szconfig_pb.GetDataSourcesRequest>;
-    requestDeserialize: grpc.deserialize<szconfig_pb.GetDataSourcesRequest>;
-    responseSerialize: grpc.serialize<szconfig_pb.GetDataSourcesResponse>;
-    responseDeserialize: grpc.deserialize<szconfig_pb.GetDataSourcesResponse>;
+    requestSerialize: grpc.serialize<szconfig_pb.UnregisterDataSourceRequest>;
+    requestDeserialize: grpc.deserialize<szconfig_pb.UnregisterDataSourceRequest>;
+    responseSerialize: grpc.serialize<szconfig_pb.UnregisterDataSourceResponse>;
+    responseDeserialize: grpc.deserialize<szconfig_pb.UnregisterDataSourceResponse>;
 }
 interface ISzConfigService_IVerifyConfig extends grpc.MethodDefinition<szconfig_pb.VerifyConfigRequest, szconfig_pb.VerifyConfigResponse> {
     path: "/szconfig.SzConfig/VerifyConfig";
@@ -54,22 +54,22 @@ interface ISzConfigService_IVerifyConfig extends grpc.MethodDefinition<szconfig_
 export const SzConfigService: ISzConfigService;
 
 export interface ISzConfigServer {
-    addDataSource: grpc.handleUnaryCall<szconfig_pb.AddDataSourceRequest, szconfig_pb.AddDataSourceResponse>;
-    deleteDataSource: grpc.handleUnaryCall<szconfig_pb.DeleteDataSourceRequest, szconfig_pb.DeleteDataSourceResponse>;
-    getDataSources: grpc.handleUnaryCall<szconfig_pb.GetDataSourcesRequest, szconfig_pb.GetDataSourcesResponse>;
+    getDataSourceRegistry: grpc.handleUnaryCall<szconfig_pb.GetDataSourceRegistryRequest, szconfig_pb.GetDataSourceRegistryResponse>;
+    registerDataSource: grpc.handleUnaryCall<szconfig_pb.RegisterDataSourceRequest, szconfig_pb.RegisterDataSourceResponse>;
+    unregisterDataSource: grpc.handleUnaryCall<szconfig_pb.UnregisterDataSourceRequest, szconfig_pb.UnregisterDataSourceResponse>;
     verifyConfig: grpc.handleUnaryCall<szconfig_pb.VerifyConfigRequest, szconfig_pb.VerifyConfigResponse>;
 }
 
 export interface ISzConfigClient {
-    addDataSource(request: szconfig_pb.AddDataSourceRequest, callback: (error: grpc.ServiceError | null, response: szconfig_pb.AddDataSourceResponse) => void): grpc.ClientUnaryCall;
-    addDataSource(request: szconfig_pb.AddDataSourceRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfig_pb.AddDataSourceResponse) => void): grpc.ClientUnaryCall;
-    addDataSource(request: szconfig_pb.AddDataSourceRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfig_pb.AddDataSourceResponse) => void): grpc.ClientUnaryCall;
-    deleteDataSource(request: szconfig_pb.DeleteDataSourceRequest, callback: (error: grpc.ServiceError | null, response: szconfig_pb.DeleteDataSourceResponse) => void): grpc.ClientUnaryCall;
-    deleteDataSource(request: szconfig_pb.DeleteDataSourceRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfig_pb.DeleteDataSourceResponse) => void): grpc.ClientUnaryCall;
-    deleteDataSource(request: szconfig_pb.DeleteDataSourceRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfig_pb.DeleteDataSourceResponse) => void): grpc.ClientUnaryCall;
-    getDataSources(request: szconfig_pb.GetDataSourcesRequest, callback: (error: grpc.ServiceError | null, response: szconfig_pb.GetDataSourcesResponse) => void): grpc.ClientUnaryCall;
-    getDataSources(request: szconfig_pb.GetDataSourcesRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfig_pb.GetDataSourcesResponse) => void): grpc.ClientUnaryCall;
-    getDataSources(request: szconfig_pb.GetDataSourcesRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfig_pb.GetDataSourcesResponse) => void): grpc.ClientUnaryCall;
+    getDataSourceRegistry(request: szconfig_pb.GetDataSourceRegistryRequest, callback: (error: grpc.ServiceError | null, response: szconfig_pb.GetDataSourceRegistryResponse) => void): grpc.ClientUnaryCall;
+    getDataSourceRegistry(request: szconfig_pb.GetDataSourceRegistryRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfig_pb.GetDataSourceRegistryResponse) => void): grpc.ClientUnaryCall;
+    getDataSourceRegistry(request: szconfig_pb.GetDataSourceRegistryRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfig_pb.GetDataSourceRegistryResponse) => void): grpc.ClientUnaryCall;
+    registerDataSource(request: szconfig_pb.RegisterDataSourceRequest, callback: (error: grpc.ServiceError | null, response: szconfig_pb.RegisterDataSourceResponse) => void): grpc.ClientUnaryCall;
+    registerDataSource(request: szconfig_pb.RegisterDataSourceRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfig_pb.RegisterDataSourceResponse) => void): grpc.ClientUnaryCall;
+    registerDataSource(request: szconfig_pb.RegisterDataSourceRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfig_pb.RegisterDataSourceResponse) => void): grpc.ClientUnaryCall;
+    unregisterDataSource(request: szconfig_pb.UnregisterDataSourceRequest, callback: (error: grpc.ServiceError | null, response: szconfig_pb.UnregisterDataSourceResponse) => void): grpc.ClientUnaryCall;
+    unregisterDataSource(request: szconfig_pb.UnregisterDataSourceRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfig_pb.UnregisterDataSourceResponse) => void): grpc.ClientUnaryCall;
+    unregisterDataSource(request: szconfig_pb.UnregisterDataSourceRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfig_pb.UnregisterDataSourceResponse) => void): grpc.ClientUnaryCall;
     verifyConfig(request: szconfig_pb.VerifyConfigRequest, callback: (error: grpc.ServiceError | null, response: szconfig_pb.VerifyConfigResponse) => void): grpc.ClientUnaryCall;
     verifyConfig(request: szconfig_pb.VerifyConfigRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfig_pb.VerifyConfigResponse) => void): grpc.ClientUnaryCall;
     verifyConfig(request: szconfig_pb.VerifyConfigRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfig_pb.VerifyConfigResponse) => void): grpc.ClientUnaryCall;
@@ -77,15 +77,15 @@ export interface ISzConfigClient {
 
 export class SzConfigClient extends grpc.Client implements ISzConfigClient {
     constructor(address: string, credentials: grpc.ChannelCredentials, options?: object);
-    public addDataSource(request: szconfig_pb.AddDataSourceRequest, callback: (error: grpc.ServiceError | null, response: szconfig_pb.AddDataSourceResponse) => void): grpc.ClientUnaryCall;
-    public addDataSource(request: szconfig_pb.AddDataSourceRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfig_pb.AddDataSourceResponse) => void): grpc.ClientUnaryCall;
-    public addDataSource(request: szconfig_pb.AddDataSourceRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfig_pb.AddDataSourceResponse) => void): grpc.ClientUnaryCall;
-    public deleteDataSource(request: szconfig_pb.DeleteDataSourceRequest, callback: (error: grpc.ServiceError | null, response: szconfig_pb.DeleteDataSourceResponse) => void): grpc.ClientUnaryCall;
-    public deleteDataSource(request: szconfig_pb.DeleteDataSourceRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfig_pb.DeleteDataSourceResponse) => void): grpc.ClientUnaryCall;
-    public deleteDataSource(request: szconfig_pb.DeleteDataSourceRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfig_pb.DeleteDataSourceResponse) => void): grpc.ClientUnaryCall;
-    public getDataSources(request: szconfig_pb.GetDataSourcesRequest, callback: (error: grpc.ServiceError | null, response: szconfig_pb.GetDataSourcesResponse) => void): grpc.ClientUnaryCall;
-    public getDataSources(request: szconfig_pb.GetDataSourcesRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfig_pb.GetDataSourcesResponse) => void): grpc.ClientUnaryCall;
-    public getDataSources(request: szconfig_pb.GetDataSourcesRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfig_pb.GetDataSourcesResponse) => void): grpc.ClientUnaryCall;
+    public getDataSourceRegistry(request: szconfig_pb.GetDataSourceRegistryRequest, callback: (error: grpc.ServiceError | null, response: szconfig_pb.GetDataSourceRegistryResponse) => void): grpc.ClientUnaryCall;
+    public getDataSourceRegistry(request: szconfig_pb.GetDataSourceRegistryRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfig_pb.GetDataSourceRegistryResponse) => void): grpc.ClientUnaryCall;
+    public getDataSourceRegistry(request: szconfig_pb.GetDataSourceRegistryRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfig_pb.GetDataSourceRegistryResponse) => void): grpc.ClientUnaryCall;
+    public registerDataSource(request: szconfig_pb.RegisterDataSourceRequest, callback: (error: grpc.ServiceError | null, response: szconfig_pb.RegisterDataSourceResponse) => void): grpc.ClientUnaryCall;
+    public registerDataSource(request: szconfig_pb.RegisterDataSourceRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfig_pb.RegisterDataSourceResponse) => void): grpc.ClientUnaryCall;
+    public registerDataSource(request: szconfig_pb.RegisterDataSourceRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfig_pb.RegisterDataSourceResponse) => void): grpc.ClientUnaryCall;
+    public unregisterDataSource(request: szconfig_pb.UnregisterDataSourceRequest, callback: (error: grpc.ServiceError | null, response: szconfig_pb.UnregisterDataSourceResponse) => void): grpc.ClientUnaryCall;
+    public unregisterDataSource(request: szconfig_pb.UnregisterDataSourceRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfig_pb.UnregisterDataSourceResponse) => void): grpc.ClientUnaryCall;
+    public unregisterDataSource(request: szconfig_pb.UnregisterDataSourceRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfig_pb.UnregisterDataSourceResponse) => void): grpc.ClientUnaryCall;
     public verifyConfig(request: szconfig_pb.VerifyConfigRequest, callback: (error: grpc.ServiceError | null, response: szconfig_pb.VerifyConfigResponse) => void): grpc.ClientUnaryCall;
     public verifyConfig(request: szconfig_pb.VerifyConfigRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szconfig_pb.VerifyConfigResponse) => void): grpc.ClientUnaryCall;
     public verifyConfig(request: szconfig_pb.VerifyConfigRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szconfig_pb.VerifyConfigResponse) => void): grpc.ClientUnaryCall;

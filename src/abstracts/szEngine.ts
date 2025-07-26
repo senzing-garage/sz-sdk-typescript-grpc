@@ -2,7 +2,7 @@
 // ---------------  abstract diagnostic from main package
 export interface SzEngine {
     addRecord(dataSourceCode: string, recordId: string, recordDefinition: string, flags: number): void;
-    closeExport(exportHandle: number): void;
+    closeExportReport(exportHandle: number): void;
     countRedoRecords(): void;
     deleteRecord(dataSourceCode: string, recordId: string, flags: number): void;
     exportCsvEntityReport(csv_column_list: string, flags: number): void;
@@ -49,11 +49,11 @@ export interface SzEngine {
     getEntityByEntityId(entityId: number, flags: number): void;
     getEntityByRecordId(dataSourceCode: string, recordId: string, flags: number): void;
     getRecord(dataSourceCode: string, recordId: string, flags: number): void;
+    getRecordPreview(recordDefinition: string, flags: number): void;
     getRedoRecord(): void;
     getStats(): void;
     getVirtualEntityByRecordId(record_keys: Array<[string, string]>, flags: number): void;
     howEntityByEntityId(entityId: number, flags: number): void;
-    preprocessRecord(recordDefinition: string, flags: number): void;
     primeEngine(): void;
     processRedoRecord(redoRecord: string, flags: number): void;
     reevaluateEntity(entityId: number, flags: number): void;

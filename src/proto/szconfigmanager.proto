@@ -7,7 +7,7 @@ option java_outer_classname = "SzConfigManagerProto";
 
 service SzConfigManager {
   rpc GetConfig (GetConfigRequest) returns (GetConfigResponse) {}
-  rpc GetConfigs (GetConfigsRequest) returns (GetConfigsResponse) {}
+  rpc GetConfigRegistry (GetConfigRegistryRequest) returns (GetConfigRegistryResponse) {}
   rpc GetDefaultConfigId (GetDefaultConfigIdRequest) returns (GetDefaultConfigIdResponse) {}
   rpc GetTemplateConfig (GetTemplateConfigRequest) returns (GetTemplateConfigResponse) {}
   rpc RegisterConfig (RegisterConfigRequest) returns (RegisterConfigResponse) {}
@@ -24,9 +24,9 @@ message GetConfigResponse {
   string result = 1;
 }
 
-message GetConfigsRequest {}
+message GetConfigRegistryRequest {}
 
-message GetConfigsResponse {
+message GetConfigRegistryResponse {
   string result = 1;
 }
 

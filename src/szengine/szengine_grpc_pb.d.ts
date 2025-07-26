@@ -9,7 +9,7 @@ import * as szengine_pb from "./szengine_pb";
 
 interface ISzEngineService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
     addRecord: ISzEngineService_IAddRecord;
-    closeExport: ISzEngineService_ICloseExport;
+    closeExportReport: ISzEngineService_ICloseExportReport;
     countRedoRecords: ISzEngineService_ICountRedoRecords;
     deleteRecord: ISzEngineService_IDeleteRecord;
     exportCsvEntityReport: ISzEngineService_IExportCsvEntityReport;
@@ -25,11 +25,11 @@ interface ISzEngineService extends grpc.ServiceDefinition<grpc.UntypedServiceImp
     getEntityByEntityId: ISzEngineService_IGetEntityByEntityId;
     getEntityByRecordId: ISzEngineService_IGetEntityByRecordId;
     getRecord: ISzEngineService_IGetRecord;
+    getRecordPreview: ISzEngineService_IGetRecordPreview;
     getRedoRecord: ISzEngineService_IGetRedoRecord;
     getStats: ISzEngineService_IGetStats;
     getVirtualEntityByRecordId: ISzEngineService_IGetVirtualEntityByRecordId;
     howEntityByEntityId: ISzEngineService_IHowEntityByEntityId;
-    preprocessRecord: ISzEngineService_IPreprocessRecord;
     primeEngine: ISzEngineService_IPrimeEngine;
     processRedoRecord: ISzEngineService_IProcessRedoRecord;
     reevaluateEntity: ISzEngineService_IReevaluateEntity;
@@ -53,14 +53,14 @@ interface ISzEngineService_IAddRecord extends grpc.MethodDefinition<szengine_pb.
     responseSerialize: grpc.serialize<szengine_pb.AddRecordResponse>;
     responseDeserialize: grpc.deserialize<szengine_pb.AddRecordResponse>;
 }
-interface ISzEngineService_ICloseExport extends grpc.MethodDefinition<szengine_pb.CloseExportRequest, szengine_pb.CloseExportResponse> {
-    path: "/szengine.SzEngine/CloseExport";
+interface ISzEngineService_ICloseExportReport extends grpc.MethodDefinition<szengine_pb.CloseExportReportRequest, szengine_pb.CloseExportReportResponse> {
+    path: "/szengine.SzEngine/CloseExportReport";
     requestStream: false;
     responseStream: false;
-    requestSerialize: grpc.serialize<szengine_pb.CloseExportRequest>;
-    requestDeserialize: grpc.deserialize<szengine_pb.CloseExportRequest>;
-    responseSerialize: grpc.serialize<szengine_pb.CloseExportResponse>;
-    responseDeserialize: grpc.deserialize<szengine_pb.CloseExportResponse>;
+    requestSerialize: grpc.serialize<szengine_pb.CloseExportReportRequest>;
+    requestDeserialize: grpc.deserialize<szengine_pb.CloseExportReportRequest>;
+    responseSerialize: grpc.serialize<szengine_pb.CloseExportReportResponse>;
+    responseDeserialize: grpc.deserialize<szengine_pb.CloseExportReportResponse>;
 }
 interface ISzEngineService_ICountRedoRecords extends grpc.MethodDefinition<szengine_pb.CountRedoRecordsRequest, szengine_pb.CountRedoRecordsResponse> {
     path: "/szengine.SzEngine/CountRedoRecords";
@@ -197,6 +197,15 @@ interface ISzEngineService_IGetRecord extends grpc.MethodDefinition<szengine_pb.
     responseSerialize: grpc.serialize<szengine_pb.GetRecordResponse>;
     responseDeserialize: grpc.deserialize<szengine_pb.GetRecordResponse>;
 }
+interface ISzEngineService_IGetRecordPreview extends grpc.MethodDefinition<szengine_pb.GetRecordPreviewRequest, szengine_pb.GetRecordPreviewResponse> {
+    path: "/szengine.SzEngine/GetRecordPreview";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<szengine_pb.GetRecordPreviewRequest>;
+    requestDeserialize: grpc.deserialize<szengine_pb.GetRecordPreviewRequest>;
+    responseSerialize: grpc.serialize<szengine_pb.GetRecordPreviewResponse>;
+    responseDeserialize: grpc.deserialize<szengine_pb.GetRecordPreviewResponse>;
+}
 interface ISzEngineService_IGetRedoRecord extends grpc.MethodDefinition<szengine_pb.GetRedoRecordRequest, szengine_pb.GetRedoRecordResponse> {
     path: "/szengine.SzEngine/GetRedoRecord";
     requestStream: false;
@@ -232,15 +241,6 @@ interface ISzEngineService_IHowEntityByEntityId extends grpc.MethodDefinition<sz
     requestDeserialize: grpc.deserialize<szengine_pb.HowEntityByEntityIdRequest>;
     responseSerialize: grpc.serialize<szengine_pb.HowEntityByEntityIdResponse>;
     responseDeserialize: grpc.deserialize<szengine_pb.HowEntityByEntityIdResponse>;
-}
-interface ISzEngineService_IPreprocessRecord extends grpc.MethodDefinition<szengine_pb.PreprocessRecordRequest, szengine_pb.PreprocessRecordResponse> {
-    path: "/szengine.SzEngine/PreprocessRecord";
-    requestStream: false;
-    responseStream: false;
-    requestSerialize: grpc.serialize<szengine_pb.PreprocessRecordRequest>;
-    requestDeserialize: grpc.deserialize<szengine_pb.PreprocessRecordRequest>;
-    responseSerialize: grpc.serialize<szengine_pb.PreprocessRecordResponse>;
-    responseDeserialize: grpc.deserialize<szengine_pb.PreprocessRecordResponse>;
 }
 interface ISzEngineService_IPrimeEngine extends grpc.MethodDefinition<szengine_pb.PrimeEngineRequest, szengine_pb.PrimeEngineResponse> {
     path: "/szengine.SzEngine/PrimeEngine";
@@ -355,7 +355,7 @@ export const SzEngineService: ISzEngineService;
 
 export interface ISzEngineServer {
     addRecord: grpc.handleUnaryCall<szengine_pb.AddRecordRequest, szengine_pb.AddRecordResponse>;
-    closeExport: grpc.handleUnaryCall<szengine_pb.CloseExportRequest, szengine_pb.CloseExportResponse>;
+    closeExportReport: grpc.handleUnaryCall<szengine_pb.CloseExportReportRequest, szengine_pb.CloseExportReportResponse>;
     countRedoRecords: grpc.handleUnaryCall<szengine_pb.CountRedoRecordsRequest, szengine_pb.CountRedoRecordsResponse>;
     deleteRecord: grpc.handleUnaryCall<szengine_pb.DeleteRecordRequest, szengine_pb.DeleteRecordResponse>;
     exportCsvEntityReport: grpc.handleUnaryCall<szengine_pb.ExportCsvEntityReportRequest, szengine_pb.ExportCsvEntityReportResponse>;
@@ -371,11 +371,11 @@ export interface ISzEngineServer {
     getEntityByEntityId: grpc.handleUnaryCall<szengine_pb.GetEntityByEntityIdRequest, szengine_pb.GetEntityByEntityIdResponse>;
     getEntityByRecordId: grpc.handleUnaryCall<szengine_pb.GetEntityByRecordIdRequest, szengine_pb.GetEntityByRecordIdResponse>;
     getRecord: grpc.handleUnaryCall<szengine_pb.GetRecordRequest, szengine_pb.GetRecordResponse>;
+    getRecordPreview: grpc.handleUnaryCall<szengine_pb.GetRecordPreviewRequest, szengine_pb.GetRecordPreviewResponse>;
     getRedoRecord: grpc.handleUnaryCall<szengine_pb.GetRedoRecordRequest, szengine_pb.GetRedoRecordResponse>;
     getStats: grpc.handleUnaryCall<szengine_pb.GetStatsRequest, szengine_pb.GetStatsResponse>;
     getVirtualEntityByRecordId: grpc.handleUnaryCall<szengine_pb.GetVirtualEntityByRecordIdRequest, szengine_pb.GetVirtualEntityByRecordIdResponse>;
     howEntityByEntityId: grpc.handleUnaryCall<szengine_pb.HowEntityByEntityIdRequest, szengine_pb.HowEntityByEntityIdResponse>;
-    preprocessRecord: grpc.handleUnaryCall<szengine_pb.PreprocessRecordRequest, szengine_pb.PreprocessRecordResponse>;
     primeEngine: grpc.handleUnaryCall<szengine_pb.PrimeEngineRequest, szengine_pb.PrimeEngineResponse>;
     processRedoRecord: grpc.handleUnaryCall<szengine_pb.ProcessRedoRecordRequest, szengine_pb.ProcessRedoRecordResponse>;
     reevaluateEntity: grpc.handleUnaryCall<szengine_pb.ReevaluateEntityRequest, szengine_pb.ReevaluateEntityResponse>;
@@ -394,9 +394,9 @@ export interface ISzEngineClient {
     addRecord(request: szengine_pb.AddRecordRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.AddRecordResponse) => void): grpc.ClientUnaryCall;
     addRecord(request: szengine_pb.AddRecordRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.AddRecordResponse) => void): grpc.ClientUnaryCall;
     addRecord(request: szengine_pb.AddRecordRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.AddRecordResponse) => void): grpc.ClientUnaryCall;
-    closeExport(request: szengine_pb.CloseExportRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.CloseExportResponse) => void): grpc.ClientUnaryCall;
-    closeExport(request: szengine_pb.CloseExportRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.CloseExportResponse) => void): grpc.ClientUnaryCall;
-    closeExport(request: szengine_pb.CloseExportRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.CloseExportResponse) => void): grpc.ClientUnaryCall;
+    closeExportReport(request: szengine_pb.CloseExportReportRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.CloseExportReportResponse) => void): grpc.ClientUnaryCall;
+    closeExportReport(request: szengine_pb.CloseExportReportRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.CloseExportReportResponse) => void): grpc.ClientUnaryCall;
+    closeExportReport(request: szengine_pb.CloseExportReportRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.CloseExportReportResponse) => void): grpc.ClientUnaryCall;
     countRedoRecords(request: szengine_pb.CountRedoRecordsRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.CountRedoRecordsResponse) => void): grpc.ClientUnaryCall;
     countRedoRecords(request: szengine_pb.CountRedoRecordsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.CountRedoRecordsResponse) => void): grpc.ClientUnaryCall;
     countRedoRecords(request: szengine_pb.CountRedoRecordsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.CountRedoRecordsResponse) => void): grpc.ClientUnaryCall;
@@ -442,6 +442,9 @@ export interface ISzEngineClient {
     getRecord(request: szengine_pb.GetRecordRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.GetRecordResponse) => void): grpc.ClientUnaryCall;
     getRecord(request: szengine_pb.GetRecordRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.GetRecordResponse) => void): grpc.ClientUnaryCall;
     getRecord(request: szengine_pb.GetRecordRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.GetRecordResponse) => void): grpc.ClientUnaryCall;
+    getRecordPreview(request: szengine_pb.GetRecordPreviewRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.GetRecordPreviewResponse) => void): grpc.ClientUnaryCall;
+    getRecordPreview(request: szengine_pb.GetRecordPreviewRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.GetRecordPreviewResponse) => void): grpc.ClientUnaryCall;
+    getRecordPreview(request: szengine_pb.GetRecordPreviewRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.GetRecordPreviewResponse) => void): grpc.ClientUnaryCall;
     getRedoRecord(request: szengine_pb.GetRedoRecordRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.GetRedoRecordResponse) => void): grpc.ClientUnaryCall;
     getRedoRecord(request: szengine_pb.GetRedoRecordRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.GetRedoRecordResponse) => void): grpc.ClientUnaryCall;
     getRedoRecord(request: szengine_pb.GetRedoRecordRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.GetRedoRecordResponse) => void): grpc.ClientUnaryCall;
@@ -454,9 +457,6 @@ export interface ISzEngineClient {
     howEntityByEntityId(request: szengine_pb.HowEntityByEntityIdRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.HowEntityByEntityIdResponse) => void): grpc.ClientUnaryCall;
     howEntityByEntityId(request: szengine_pb.HowEntityByEntityIdRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.HowEntityByEntityIdResponse) => void): grpc.ClientUnaryCall;
     howEntityByEntityId(request: szengine_pb.HowEntityByEntityIdRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.HowEntityByEntityIdResponse) => void): grpc.ClientUnaryCall;
-    preprocessRecord(request: szengine_pb.PreprocessRecordRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.PreprocessRecordResponse) => void): grpc.ClientUnaryCall;
-    preprocessRecord(request: szengine_pb.PreprocessRecordRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.PreprocessRecordResponse) => void): grpc.ClientUnaryCall;
-    preprocessRecord(request: szengine_pb.PreprocessRecordRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.PreprocessRecordResponse) => void): grpc.ClientUnaryCall;
     primeEngine(request: szengine_pb.PrimeEngineRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.PrimeEngineResponse) => void): grpc.ClientUnaryCall;
     primeEngine(request: szengine_pb.PrimeEngineRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.PrimeEngineResponse) => void): grpc.ClientUnaryCall;
     primeEngine(request: szengine_pb.PrimeEngineRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.PrimeEngineResponse) => void): grpc.ClientUnaryCall;
@@ -498,9 +498,9 @@ export class SzEngineClient extends grpc.Client implements ISzEngineClient {
     public addRecord(request: szengine_pb.AddRecordRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.AddRecordResponse) => void): grpc.ClientUnaryCall;
     public addRecord(request: szengine_pb.AddRecordRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.AddRecordResponse) => void): grpc.ClientUnaryCall;
     public addRecord(request: szengine_pb.AddRecordRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.AddRecordResponse) => void): grpc.ClientUnaryCall;
-    public closeExport(request: szengine_pb.CloseExportRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.CloseExportResponse) => void): grpc.ClientUnaryCall;
-    public closeExport(request: szengine_pb.CloseExportRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.CloseExportResponse) => void): grpc.ClientUnaryCall;
-    public closeExport(request: szengine_pb.CloseExportRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.CloseExportResponse) => void): grpc.ClientUnaryCall;
+    public closeExportReport(request: szengine_pb.CloseExportReportRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.CloseExportReportResponse) => void): grpc.ClientUnaryCall;
+    public closeExportReport(request: szengine_pb.CloseExportReportRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.CloseExportReportResponse) => void): grpc.ClientUnaryCall;
+    public closeExportReport(request: szengine_pb.CloseExportReportRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.CloseExportReportResponse) => void): grpc.ClientUnaryCall;
     public countRedoRecords(request: szengine_pb.CountRedoRecordsRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.CountRedoRecordsResponse) => void): grpc.ClientUnaryCall;
     public countRedoRecords(request: szengine_pb.CountRedoRecordsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.CountRedoRecordsResponse) => void): grpc.ClientUnaryCall;
     public countRedoRecords(request: szengine_pb.CountRedoRecordsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.CountRedoRecordsResponse) => void): grpc.ClientUnaryCall;
@@ -546,6 +546,9 @@ export class SzEngineClient extends grpc.Client implements ISzEngineClient {
     public getRecord(request: szengine_pb.GetRecordRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.GetRecordResponse) => void): grpc.ClientUnaryCall;
     public getRecord(request: szengine_pb.GetRecordRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.GetRecordResponse) => void): grpc.ClientUnaryCall;
     public getRecord(request: szengine_pb.GetRecordRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.GetRecordResponse) => void): grpc.ClientUnaryCall;
+    public getRecordPreview(request: szengine_pb.GetRecordPreviewRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.GetRecordPreviewResponse) => void): grpc.ClientUnaryCall;
+    public getRecordPreview(request: szengine_pb.GetRecordPreviewRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.GetRecordPreviewResponse) => void): grpc.ClientUnaryCall;
+    public getRecordPreview(request: szengine_pb.GetRecordPreviewRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.GetRecordPreviewResponse) => void): grpc.ClientUnaryCall;
     public getRedoRecord(request: szengine_pb.GetRedoRecordRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.GetRedoRecordResponse) => void): grpc.ClientUnaryCall;
     public getRedoRecord(request: szengine_pb.GetRedoRecordRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.GetRedoRecordResponse) => void): grpc.ClientUnaryCall;
     public getRedoRecord(request: szengine_pb.GetRedoRecordRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.GetRedoRecordResponse) => void): grpc.ClientUnaryCall;
@@ -558,9 +561,6 @@ export class SzEngineClient extends grpc.Client implements ISzEngineClient {
     public howEntityByEntityId(request: szengine_pb.HowEntityByEntityIdRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.HowEntityByEntityIdResponse) => void): grpc.ClientUnaryCall;
     public howEntityByEntityId(request: szengine_pb.HowEntityByEntityIdRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.HowEntityByEntityIdResponse) => void): grpc.ClientUnaryCall;
     public howEntityByEntityId(request: szengine_pb.HowEntityByEntityIdRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.HowEntityByEntityIdResponse) => void): grpc.ClientUnaryCall;
-    public preprocessRecord(request: szengine_pb.PreprocessRecordRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.PreprocessRecordResponse) => void): grpc.ClientUnaryCall;
-    public preprocessRecord(request: szengine_pb.PreprocessRecordRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.PreprocessRecordResponse) => void): grpc.ClientUnaryCall;
-    public preprocessRecord(request: szengine_pb.PreprocessRecordRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.PreprocessRecordResponse) => void): grpc.ClientUnaryCall;
     public primeEngine(request: szengine_pb.PrimeEngineRequest, callback: (error: grpc.ServiceError | null, response: szengine_pb.PrimeEngineResponse) => void): grpc.ClientUnaryCall;
     public primeEngine(request: szengine_pb.PrimeEngineRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: szengine_pb.PrimeEngineResponse) => void): grpc.ClientUnaryCall;
     public primeEngine(request: szengine_pb.PrimeEngineRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: szengine_pb.PrimeEngineResponse) => void): grpc.ClientUnaryCall;

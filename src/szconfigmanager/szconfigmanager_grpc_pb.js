@@ -4,6 +4,28 @@
 var grpc = require('@grpc/grpc-js');
 var szconfigmanager_pb = require('./szconfigmanager_pb.js');
 
+function serialize_szconfigmanager_GetConfigRegistryRequest(arg) {
+  if (!(arg instanceof szconfigmanager_pb.GetConfigRegistryRequest)) {
+    throw new Error('Expected argument of type szconfigmanager.GetConfigRegistryRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_szconfigmanager_GetConfigRegistryRequest(buffer_arg) {
+  return szconfigmanager_pb.GetConfigRegistryRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_szconfigmanager_GetConfigRegistryResponse(arg) {
+  if (!(arg instanceof szconfigmanager_pb.GetConfigRegistryResponse)) {
+    throw new Error('Expected argument of type szconfigmanager.GetConfigRegistryResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_szconfigmanager_GetConfigRegistryResponse(buffer_arg) {
+  return szconfigmanager_pb.GetConfigRegistryResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_szconfigmanager_GetConfigRequest(arg) {
   if (!(arg instanceof szconfigmanager_pb.GetConfigRequest)) {
     throw new Error('Expected argument of type szconfigmanager.GetConfigRequest');
@@ -24,28 +46,6 @@ function serialize_szconfigmanager_GetConfigResponse(arg) {
 
 function deserialize_szconfigmanager_GetConfigResponse(buffer_arg) {
   return szconfigmanager_pb.GetConfigResponse.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_szconfigmanager_GetConfigsRequest(arg) {
-  if (!(arg instanceof szconfigmanager_pb.GetConfigsRequest)) {
-    throw new Error('Expected argument of type szconfigmanager.GetConfigsRequest');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_szconfigmanager_GetConfigsRequest(buffer_arg) {
-  return szconfigmanager_pb.GetConfigsRequest.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_szconfigmanager_GetConfigsResponse(arg) {
-  if (!(arg instanceof szconfigmanager_pb.GetConfigsResponse)) {
-    throw new Error('Expected argument of type szconfigmanager.GetConfigsResponse');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_szconfigmanager_GetConfigsResponse(buffer_arg) {
-  return szconfigmanager_pb.GetConfigsResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_szconfigmanager_GetDefaultConfigIdRequest(arg) {
@@ -193,16 +193,16 @@ var SzConfigManagerService = exports.SzConfigManagerService = {
     responseSerialize: serialize_szconfigmanager_GetConfigResponse,
     responseDeserialize: deserialize_szconfigmanager_GetConfigResponse,
   },
-  getConfigs: {
-    path: '/szconfigmanager.SzConfigManager/GetConfigs',
+  getConfigRegistry: {
+    path: '/szconfigmanager.SzConfigManager/GetConfigRegistry',
     requestStream: false,
     responseStream: false,
-    requestType: szconfigmanager_pb.GetConfigsRequest,
-    responseType: szconfigmanager_pb.GetConfigsResponse,
-    requestSerialize: serialize_szconfigmanager_GetConfigsRequest,
-    requestDeserialize: deserialize_szconfigmanager_GetConfigsRequest,
-    responseSerialize: serialize_szconfigmanager_GetConfigsResponse,
-    responseDeserialize: deserialize_szconfigmanager_GetConfigsResponse,
+    requestType: szconfigmanager_pb.GetConfigRegistryRequest,
+    responseType: szconfigmanager_pb.GetConfigRegistryResponse,
+    requestSerialize: serialize_szconfigmanager_GetConfigRegistryRequest,
+    requestDeserialize: deserialize_szconfigmanager_GetConfigRegistryRequest,
+    responseSerialize: serialize_szconfigmanager_GetConfigRegistryResponse,
+    responseDeserialize: deserialize_szconfigmanager_GetConfigRegistryResponse,
   },
   getDefaultConfigId: {
     path: '/szconfigmanager.SzConfigManager/GetDefaultConfigId',

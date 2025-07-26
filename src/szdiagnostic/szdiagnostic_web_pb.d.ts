@@ -2,69 +2,69 @@ import * as jspb from 'google-protobuf'
 
 
 
-export class CheckDatastorePerformanceRequest extends jspb.Message {
+export class CheckRepositoryPerformanceRequest extends jspb.Message {
   getSecondsToRun(): number;
-  setSecondsToRun(value: number): CheckDatastorePerformanceRequest;
+  setSecondsToRun(value: number): CheckRepositoryPerformanceRequest;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): CheckDatastorePerformanceRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: CheckDatastorePerformanceRequest): CheckDatastorePerformanceRequest.AsObject;
-  static serializeBinaryToWriter(message: CheckDatastorePerformanceRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): CheckDatastorePerformanceRequest;
-  static deserializeBinaryFromReader(message: CheckDatastorePerformanceRequest, reader: jspb.BinaryReader): CheckDatastorePerformanceRequest;
+  toObject(includeInstance?: boolean): CheckRepositoryPerformanceRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: CheckRepositoryPerformanceRequest): CheckRepositoryPerformanceRequest.AsObject;
+  static serializeBinaryToWriter(message: CheckRepositoryPerformanceRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CheckRepositoryPerformanceRequest;
+  static deserializeBinaryFromReader(message: CheckRepositoryPerformanceRequest, reader: jspb.BinaryReader): CheckRepositoryPerformanceRequest;
 }
 
-export namespace CheckDatastorePerformanceRequest {
+export namespace CheckRepositoryPerformanceRequest {
   export type AsObject = {
     secondsToRun: number,
   }
 }
 
-export class CheckDatastorePerformanceResponse extends jspb.Message {
+export class CheckRepositoryPerformanceResponse extends jspb.Message {
   getResult(): string;
-  setResult(value: string): CheckDatastorePerformanceResponse;
+  setResult(value: string): CheckRepositoryPerformanceResponse;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): CheckDatastorePerformanceResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: CheckDatastorePerformanceResponse): CheckDatastorePerformanceResponse.AsObject;
-  static serializeBinaryToWriter(message: CheckDatastorePerformanceResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): CheckDatastorePerformanceResponse;
-  static deserializeBinaryFromReader(message: CheckDatastorePerformanceResponse, reader: jspb.BinaryReader): CheckDatastorePerformanceResponse;
+  toObject(includeInstance?: boolean): CheckRepositoryPerformanceResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: CheckRepositoryPerformanceResponse): CheckRepositoryPerformanceResponse.AsObject;
+  static serializeBinaryToWriter(message: CheckRepositoryPerformanceResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CheckRepositoryPerformanceResponse;
+  static deserializeBinaryFromReader(message: CheckRepositoryPerformanceResponse, reader: jspb.BinaryReader): CheckRepositoryPerformanceResponse;
 }
 
-export namespace CheckDatastorePerformanceResponse {
+export namespace CheckRepositoryPerformanceResponse {
   export type AsObject = {
     result: string,
   }
 }
 
-export class GetDatastoreInfoRequest extends jspb.Message {
+export class GetRepositoryInfoRequest extends jspb.Message {
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetDatastoreInfoRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: GetDatastoreInfoRequest): GetDatastoreInfoRequest.AsObject;
-  static serializeBinaryToWriter(message: GetDatastoreInfoRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetDatastoreInfoRequest;
-  static deserializeBinaryFromReader(message: GetDatastoreInfoRequest, reader: jspb.BinaryReader): GetDatastoreInfoRequest;
+  toObject(includeInstance?: boolean): GetRepositoryInfoRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetRepositoryInfoRequest): GetRepositoryInfoRequest.AsObject;
+  static serializeBinaryToWriter(message: GetRepositoryInfoRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetRepositoryInfoRequest;
+  static deserializeBinaryFromReader(message: GetRepositoryInfoRequest, reader: jspb.BinaryReader): GetRepositoryInfoRequest;
 }
 
-export namespace GetDatastoreInfoRequest {
+export namespace GetRepositoryInfoRequest {
   export type AsObject = {
   }
 }
 
-export class GetDatastoreInfoResponse extends jspb.Message {
+export class GetRepositoryInfoResponse extends jspb.Message {
   getResult(): string;
-  setResult(value: string): GetDatastoreInfoResponse;
+  setResult(value: string): GetRepositoryInfoResponse;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetDatastoreInfoResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: GetDatastoreInfoResponse): GetDatastoreInfoResponse.AsObject;
-  static serializeBinaryToWriter(message: GetDatastoreInfoResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetDatastoreInfoResponse;
-  static deserializeBinaryFromReader(message: GetDatastoreInfoResponse, reader: jspb.BinaryReader): GetDatastoreInfoResponse;
+  toObject(includeInstance?: boolean): GetRepositoryInfoResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetRepositoryInfoResponse): GetRepositoryInfoResponse.AsObject;
+  static serializeBinaryToWriter(message: GetRepositoryInfoResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetRepositoryInfoResponse;
+  static deserializeBinaryFromReader(message: GetRepositoryInfoResponse, reader: jspb.BinaryReader): GetRepositoryInfoResponse;
 }
 
-export namespace GetDatastoreInfoResponse {
+export namespace GetRepositoryInfoResponse {
   export type AsObject = {
     result: string,
   }

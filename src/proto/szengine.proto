@@ -7,7 +7,7 @@ option java_outer_classname = "SzEngineProto";
 
 service SzEngine {
   rpc AddRecord(AddRecordRequest) returns (AddRecordResponse) {}
-  rpc CloseExport(CloseExportRequest) returns (CloseExportResponse) {}
+  rpc CloseExportReport(CloseExportReportRequest) returns (CloseExportReportResponse) {}
   rpc CountRedoRecords(CountRedoRecordsRequest) returns (CountRedoRecordsResponse) {}
   rpc DeleteRecord(DeleteRecordRequest) returns (DeleteRecordResponse) {}
   rpc ExportCsvEntityReport(ExportCsvEntityReportRequest) returns (ExportCsvEntityReportResponse) {}
@@ -23,11 +23,11 @@ service SzEngine {
   rpc GetEntityByEntityId(GetEntityByEntityIdRequest) returns (GetEntityByEntityIdResponse) {}
   rpc GetEntityByRecordId(GetEntityByRecordIdRequest) returns (GetEntityByRecordIdResponse) {}
   rpc GetRecord(GetRecordRequest) returns (GetRecordResponse) {}
+  rpc GetRecordPreview(GetRecordPreviewRequest) returns (GetRecordPreviewResponse) {}
   rpc GetRedoRecord(GetRedoRecordRequest) returns (GetRedoRecordResponse) {}
   rpc GetStats(GetStatsRequest) returns (GetStatsResponse) {}
   rpc GetVirtualEntityByRecordId(GetVirtualEntityByRecordIdRequest) returns (GetVirtualEntityByRecordIdResponse) {}
   rpc HowEntityByEntityId(HowEntityByEntityIdRequest) returns (HowEntityByEntityIdResponse) {}
-  rpc PreprocessRecord(PreprocessRecordRequest) returns (PreprocessRecordResponse) {}
   rpc PrimeEngine(PrimeEngineRequest) returns (PrimeEngineResponse) {}
   rpc ProcessRedoRecord(ProcessRedoRecordRequest) returns (ProcessRedoRecordResponse) {}
   rpc ReevaluateEntity(ReevaluateEntityRequest) returns (ReevaluateEntityResponse) {}
@@ -50,14 +50,14 @@ message AddRecordRequest {
 }
 
 message AddRecordResponse {
-   string result = 1;
+  string result = 1;
 }
 
-message CloseExportRequest {
+message CloseExportReportRequest {
   int64 export_handle = 1;
 }
 
-message CloseExportResponse {}
+message CloseExportReportResponse {}
 
 message CountRedoRecordsRequest {}
 
@@ -196,6 +196,15 @@ message GetEntityByRecordIdResponse {
   string result = 1;
 }
 
+message GetRecordPreviewRequest {
+  string record_definition = 1;
+  int64 flags = 2;
+}
+
+message GetRecordPreviewResponse {
+  string result = 1;
+}
+
 message GetRecordRequest {
   string data_source_code = 1;
   string record_id = 2;
@@ -234,16 +243,6 @@ message HowEntityByEntityIdRequest {
 
 message HowEntityByEntityIdResponse {
   string result = 1;
-}
-
-
-message PreprocessRecordRequest {
-  string record_definition = 1;
-  int64 flags = 2;
-}
-
-message PreprocessRecordResponse {
-   string result = 1;
 }
 
 message PrimeEngineRequest {}
