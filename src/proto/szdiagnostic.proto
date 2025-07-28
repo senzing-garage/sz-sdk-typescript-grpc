@@ -6,25 +6,25 @@ option java_package = "com.senzing.sdk.grpc";
 option java_outer_classname = "SzDiagnosticProto";
 
 service SzDiagnostic {
-  rpc CheckDatastorePerformance (CheckDatastorePerformanceRequest) returns (CheckDatastorePerformanceResponse) {}
-  rpc GetDatastoreInfo (GetDatastoreInfoRequest) returns (GetDatastoreInfoResponse) {}
+  rpc CheckRepositoryPerformance (CheckRepositoryPerformanceRequest) returns (CheckRepositoryPerformanceResponse) {}
   rpc GetFeature (GetFeatureRequest) returns (GetFeatureResponse) {}
+  rpc GetRepositoryInfo (GetRepositoryInfoRequest) returns (GetRepositoryInfoResponse) {}
   rpc PurgeRepository(PurgeRepositoryRequest) returns (PurgeRepositoryResponse) {}
   rpc Reinitialize (ReinitializeRequest) returns (ReinitializeResponse) {}
 }
 
-message CheckDatastorePerformanceRequest {
+message CheckRepositoryPerformanceRequest {
   int32 seconds_to_run = 1;
 }
 
-message CheckDatastorePerformanceResponse {
+message CheckRepositoryPerformanceResponse {
   string result = 1;
 }
 
-message GetDatastoreInfoRequest {
+message GetRepositoryInfoRequest {
 }
 
-message GetDatastoreInfoResponse {
+message GetRepositoryInfoResponse {
   string result = 1;
 }
 

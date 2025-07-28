@@ -1,6 +1,6 @@
 {
   "name": "sz-sdk-typescript-grpc",
-  "version": "4.0.0-beta.2.2",
+  "version": "4.0.0-beta.3.0",
   "scripts": {
     "build": "npm run tsc && node --disable-warning=ExperimentalWarning build.js",
     "build:web": "npm run tsc -- --project tsconfig.web.json && node --disable-warning=ExperimentalWarning build.web.js",

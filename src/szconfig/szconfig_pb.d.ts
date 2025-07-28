@@ -6,135 +6,135 @@
 
 import * as jspb from "google-protobuf";
 
-export class AddDataSourceRequest extends jspb.Message { 
+export class GetDataSourceRegistryRequest extends jspb.Message { 
     getConfigDefinition(): string;
-    setConfigDefinition(value: string): AddDataSourceRequest;
-    getDataSourceCode(): string;
-    setDataSourceCode(value: string): AddDataSourceRequest;
+    setConfigDefinition(value: string): GetDataSourceRegistryRequest;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): AddDataSourceRequest.AsObject;
-    static toObject(includeInstance: boolean, msg: AddDataSourceRequest): AddDataSourceRequest.AsObject;
+    toObject(includeInstance?: boolean): GetDataSourceRegistryRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDataSourceRegistryRequest): GetDataSourceRegistryRequest.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: AddDataSourceRequest, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): AddDataSourceRequest;
-    static deserializeBinaryFromReader(message: AddDataSourceRequest, reader: jspb.BinaryReader): AddDataSourceRequest;
+    static serializeBinaryToWriter(message: GetDataSourceRegistryRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDataSourceRegistryRequest;
+    static deserializeBinaryFromReader(message: GetDataSourceRegistryRequest, reader: jspb.BinaryReader): GetDataSourceRegistryRequest;
 }
 
-export namespace AddDataSourceRequest {
+export namespace GetDataSourceRegistryRequest {
+    export type AsObject = {
+        configDefinition: string,
+    }
+}
+
+export class GetDataSourceRegistryResponse extends jspb.Message { 
+    getResult(): string;
+    setResult(value: string): GetDataSourceRegistryResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDataSourceRegistryResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDataSourceRegistryResponse): GetDataSourceRegistryResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDataSourceRegistryResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDataSourceRegistryResponse;
+    static deserializeBinaryFromReader(message: GetDataSourceRegistryResponse, reader: jspb.BinaryReader): GetDataSourceRegistryResponse;
+}
+
+export namespace GetDataSourceRegistryResponse {
+    export type AsObject = {
+        result: string,
+    }
+}
+
+export class RegisterDataSourceRequest extends jspb.Message { 
+    getConfigDefinition(): string;
+    setConfigDefinition(value: string): RegisterDataSourceRequest;
+    getDataSourceCode(): string;
+    setDataSourceCode(value: string): RegisterDataSourceRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): RegisterDataSourceRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: RegisterDataSourceRequest): RegisterDataSourceRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: RegisterDataSourceRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): RegisterDataSourceRequest;
+    static deserializeBinaryFromReader(message: RegisterDataSourceRequest, reader: jspb.BinaryReader): RegisterDataSourceRequest;
+}
+
+export namespace RegisterDataSourceRequest {
     export type AsObject = {
         configDefinition: string,
         dataSourceCode: string,
     }
 }
 
-export class AddDataSourceResponse extends jspb.Message { 
+export class RegisterDataSourceResponse extends jspb.Message { 
     getResult(): string;
-    setResult(value: string): AddDataSourceResponse;
+    setResult(value: string): RegisterDataSourceResponse;
     getConfigDefinition(): string;
-    setConfigDefinition(value: string): AddDataSourceResponse;
+    setConfigDefinition(value: string): RegisterDataSourceResponse;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): AddDataSourceResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: AddDataSourceResponse): AddDataSourceResponse.AsObject;
+    toObject(includeInstance?: boolean): RegisterDataSourceResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: RegisterDataSourceResponse): RegisterDataSourceResponse.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: AddDataSourceResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): AddDataSourceResponse;
-    static deserializeBinaryFromReader(message: AddDataSourceResponse, reader: jspb.BinaryReader): AddDataSourceResponse;
+    static serializeBinaryToWriter(message: RegisterDataSourceResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): RegisterDataSourceResponse;
+    static deserializeBinaryFromReader(message: RegisterDataSourceResponse, reader: jspb.BinaryReader): RegisterDataSourceResponse;
 }
 
-export namespace AddDataSourceResponse {
+export namespace RegisterDataSourceResponse {
     export type AsObject = {
         result: string,
         configDefinition: string,
     }
 }
 
-export class DeleteDataSourceRequest extends jspb.Message { 
+export class UnregisterDataSourceRequest extends jspb.Message { 
     getConfigDefinition(): string;
-    setConfigDefinition(value: string): DeleteDataSourceRequest;
+    setConfigDefinition(value: string): UnregisterDataSourceRequest;
     getDataSourceCode(): string;
-    setDataSourceCode(value: string): DeleteDataSourceRequest;
+    setDataSourceCode(value: string): UnregisterDataSourceRequest;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): DeleteDataSourceRequest.AsObject;
-    static toObject(includeInstance: boolean, msg: DeleteDataSourceRequest): DeleteDataSourceRequest.AsObject;
+    toObject(includeInstance?: boolean): UnregisterDataSourceRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: UnregisterDataSourceRequest): UnregisterDataSourceRequest.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: DeleteDataSourceRequest, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): DeleteDataSourceRequest;
-    static deserializeBinaryFromReader(message: DeleteDataSourceRequest, reader: jspb.BinaryReader): DeleteDataSourceRequest;
+    static serializeBinaryToWriter(message: UnregisterDataSourceRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): UnregisterDataSourceRequest;
+    static deserializeBinaryFromReader(message: UnregisterDataSourceRequest, reader: jspb.BinaryReader): UnregisterDataSourceRequest;
 }
 
-export namespace DeleteDataSourceRequest {
+export namespace UnregisterDataSourceRequest {
     export type AsObject = {
         configDefinition: string,
         dataSourceCode: string,
     }
 }
 
-export class DeleteDataSourceResponse extends jspb.Message { 
+export class UnregisterDataSourceResponse extends jspb.Message { 
     getResult(): string;
-    setResult(value: string): DeleteDataSourceResponse;
+    setResult(value: string): UnregisterDataSourceResponse;
     getConfigDefinition(): string;
-    setConfigDefinition(value: string): DeleteDataSourceResponse;
+    setConfigDefinition(value: string): UnregisterDataSourceResponse;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): DeleteDataSourceResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: DeleteDataSourceResponse): DeleteDataSourceResponse.AsObject;
+    toObject(includeInstance?: boolean): UnregisterDataSourceResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: UnregisterDataSourceResponse): UnregisterDataSourceResponse.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: DeleteDataSourceResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): DeleteDataSourceResponse;
-    static deserializeBinaryFromReader(message: DeleteDataSourceResponse, reader: jspb.BinaryReader): DeleteDataSourceResponse;
+    static serializeBinaryToWriter(message: UnregisterDataSourceResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): UnregisterDataSourceResponse;
+    static deserializeBinaryFromReader(message: UnregisterDataSourceResponse, reader: jspb.BinaryReader): UnregisterDataSourceResponse;
 }
 
-export namespace DeleteDataSourceResponse {
+export namespace UnregisterDataSourceResponse {
     export type AsObject = {
         result: string,
         configDefinition: string,
-    }
-}
-
-export class GetDataSourcesRequest extends jspb.Message { 
-    getConfigDefinition(): string;
-    setConfigDefinition(value: string): GetDataSourcesRequest;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetDataSourcesRequest.AsObject;
-    static toObject(includeInstance: boolean, msg: GetDataSourcesRequest): GetDataSourcesRequest.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetDataSourcesRequest, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetDataSourcesRequest;
-    static deserializeBinaryFromReader(message: GetDataSourcesRequest, reader: jspb.BinaryReader): GetDataSourcesRequest;
-}
-
-export namespace GetDataSourcesRequest {
-    export type AsObject = {
-        configDefinition: string,
-    }
-}
-
-export class GetDataSourcesResponse extends jspb.Message { 
-    getResult(): string;
-    setResult(value: string): GetDataSourcesResponse;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetDataSourcesResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: GetDataSourcesResponse): GetDataSourcesResponse.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetDataSourcesResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetDataSourcesResponse;
-    static deserializeBinaryFromReader(message: GetDataSourcesResponse, reader: jspb.BinaryReader): GetDataSourcesResponse;
-}
-
-export namespace GetDataSourcesResponse {
-    export type AsObject = {
-        result: string,
     }
 }
 

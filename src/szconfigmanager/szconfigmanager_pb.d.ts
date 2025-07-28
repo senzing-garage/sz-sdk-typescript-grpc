@@ -46,38 +46,38 @@ export namespace GetConfigResponse {
     }
 }
 
-export class GetConfigsRequest extends jspb.Message { 
+export class GetConfigRegistryRequest extends jspb.Message { 
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetConfigsRequest.AsObject;
-    static toObject(includeInstance: boolean, msg: GetConfigsRequest): GetConfigsRequest.AsObject;
+    toObject(includeInstance?: boolean): GetConfigRegistryRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetConfigRegistryRequest): GetConfigRegistryRequest.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetConfigsRequest, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetConfigsRequest;
-    static deserializeBinaryFromReader(message: GetConfigsRequest, reader: jspb.BinaryReader): GetConfigsRequest;
+    static serializeBinaryToWriter(message: GetConfigRegistryRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetConfigRegistryRequest;
+    static deserializeBinaryFromReader(message: GetConfigRegistryRequest, reader: jspb.BinaryReader): GetConfigRegistryRequest;
 }
 
-export namespace GetConfigsRequest {
+export namespace GetConfigRegistryRequest {
     export type AsObject = {
     }
 }
 
-export class GetConfigsResponse extends jspb.Message { 
+export class GetConfigRegistryResponse extends jspb.Message { 
     getResult(): string;
-    setResult(value: string): GetConfigsResponse;
+    setResult(value: string): GetConfigRegistryResponse;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetConfigsResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: GetConfigsResponse): GetConfigsResponse.AsObject;
+    toObject(includeInstance?: boolean): GetConfigRegistryResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetConfigRegistryResponse): GetConfigRegistryResponse.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetConfigsResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetConfigsResponse;
-    static deserializeBinaryFromReader(message: GetConfigsResponse, reader: jspb.BinaryReader): GetConfigsResponse;
+    static serializeBinaryToWriter(message: GetConfigRegistryResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetConfigRegistryResponse;
+    static deserializeBinaryFromReader(message: GetConfigRegistryResponse, reader: jspb.BinaryReader): GetConfigRegistryResponse;
 }
 
-export namespace GetConfigsResponse {
+export namespace GetConfigRegistryResponse {
     export type AsObject = {
         result: string,
     }
