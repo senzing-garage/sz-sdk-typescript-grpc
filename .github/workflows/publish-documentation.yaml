@@ -7,8 +7,7 @@ on:
       - "[0-9]+.[0-9]+.[0-9]+"
   workflow_dispatch:
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   build:
@@ -23,6 +22,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
 
       - name: use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v5
