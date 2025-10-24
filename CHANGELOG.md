@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], [markdownlint],
 and this project adheres to [Semantic Versioning].
 
+## [4.0.0-beta.4.0] - 2025-10-25
+
+### Added
+
+- `SzGrpcEnvironment` and `SzGrpcWebEnvironment` now extend from [EventTarget](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget) which allows consuming applications to listen for key events using the standard pub/sub paradigm. ie: `SzGrpcEnvironmentInstance.addEventListener("connectivityChange", myCallbackFn)`, `SzGrpcEnvironmentInstance.addEventListener("exception", myErrorFn)`
+- `SzGrpcConfig.unregisterDataSources()` and `SzGrpcWebConfig.unregisterDataSources()` removes multiple datasources from the config definition.
+
 ## [4.0.0-beta.3.0] - 2025-07-28
 
 ### Modified

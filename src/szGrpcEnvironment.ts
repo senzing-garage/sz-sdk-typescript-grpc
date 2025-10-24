@@ -220,7 +220,6 @@ export class SzGrpcEnvironment extends SzEnvironment {
     // -------------------------------- start alias getters --------------------------------
     /** 
      * the grpc connection string. `${HOST}:${PORT}` 
-     * @readonly
      */
     public get connectionString() {
         return this._connectionString;
@@ -228,13 +227,30 @@ export class SzGrpcEnvironment extends SzEnvironment {
     /** 
      * channel credentials to use for authentication. defaults to "grpc.credentials.createInsecure()"
      * @see https://grpc.io/docs/guides/auth/
-     * @readonly
      */
     public get credentials() {
         return this._credentials;
     }
+    /** channel options */
     public get grpcOptions() {
         return this._grpcOptions;
+    }
+    /** 
+     * the grpc connection string. `${HOST}:${PORT}` 
+     */
+    public set connectionString(value: string) {
+        this._connectionString = value;
+    }
+    /** 
+     * channel credentials to use for authentication. defaults to "grpc.credentials.createInsecure()"
+     * @see https://grpc.io/docs/guides/auth/
+     */
+    public set credentials(value) {
+        this._credentials = value;
+    }
+    /** channel options */
+    public set grpcOptions(value) {
+        this._grpcOptions = value;
     }
     /** 
      * getter alias of {@link getConfigManager}.  Syntax sugar for using {@link getConfigManager} as if it were a property ie `MySenzingEnvironment.configManager.getDefaultConfigId()`.
