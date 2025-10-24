@@ -240,24 +240,24 @@ export class SzGrpcWebEnvironment extends EventTarget {
      * the grpc connection string. `${HOST}:${PORT}` 
      */
     public set connectionString(value: string) {
-        let reinit = value !== this._connectionString;
+        let reInitialize = value !== this._connectionString;
         this._connectionString = value;
-        if(reinit){ this._reinitializeClients(); }
+        if(reInitialize){ this._reinitializeClients(); }
     }
     /** 
      * channel credentials to use for authentication. defaults to "grpc.credentials.createInsecure()"
      * @see https://grpc.io/docs/guides/auth/
      */
     public set credentials(value) {
-        let reinit = value !== this._credentials;
+        let reInitialize = value !== this._credentials;
         this._credentials = value;
-        if(reinit){ this._reinitializeClients(); }
+        if(reInitialize){ this._reinitializeClients(); }
     }
     /** channel options */
     public set grpcOptions(value) {
-        let reinit = value !== this._grpcOptions;
+        let reInitialize = value !== this._grpcOptions;
         this._grpcOptions = value;
-        if(reinit){ this._reinitializeClients(); }
+        if(reInitialize){ this._reinitializeClients(); }
     }
     /** 
      * getter alias of {@link getConfigManager}.  Syntax sugar for using {@link getConfigManager} as if it were a property ie `MySenzingEnvironment.configManager.getDefaultConfigId()`.
