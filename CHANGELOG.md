@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], [markdownlint],
 and this project adheres to [Semantic Versioning].
 
+## [4.0.0-beta.4.0] - 2025-10-28
+
+## Added
+
+- `SzGrpcEnvironment.connectionString` setter added. (previously read only)
+- `SzGrpcEnvironment.credentials` setter added. (previously read only)
+- `SzGrpcEnvironment.grpcOptions` setter added. (previously read only)
+- `SzGrpcWebEnvironment.connectionString` setter added. (previously read only)
+- `SzGrpcWebEnvironment.credentials` setter added. (previously read only)
+- `SzGrpcWebEnvironment.grpcOptions` setter added. (previously read only)
+- `SzGrpcEnvironment._reinitializeClients` and `SzGrpcWebEnvironment._reinitializeClients` added. Previously each client initialized from the environment context could not be changed after the constructor for environment was called.
+- `SzGrpcWebEnvironment` now extends from [EventTarget](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget) which allows consuming applications to listen for key events using the standard pub/sub paradigm. ie: `SzGrpcEnvironmentInstance.addEventListener("connectivityChange", myCallbackFn)`, `SzGrpcEnvironmentInstance.addEventListener("exception", myErrorFn)`. 
+- `SzGrpcConfig.unregisterDataSources()` and `SzGrpcWebConfig.unregisterDataSources()` removes multiple datasources from the config definition.
+
 ## [4.0.0-beta.3.0] - 2025-07-28
 
 ### Modified
