@@ -192,7 +192,7 @@ export class SzGrpcWebConfig extends SzGrpcWebBase implements SzConfig {
      * @returns {Promise<undefined>} for async flow control
      */
     unregisterDataSource(dataSourceCode: string) {
-        return new Promise((resolve, reject) => {
+        return new Promise<boolean>((resolve, reject) => {
             if(!this.client){
                 reject(new SzNoGrpcConnectionError());
                 return
@@ -216,6 +216,81 @@ export class SzGrpcWebConfig extends SzGrpcWebBase implements SzConfig {
                     resolve(true);
                 });
             });
+        });
+    }
+    /**
+     * Removed multiple data sources from an existing in-memory configuration.
+     * @param {string[]} dataSourceCodes 
+     * @returns {Promise<string[]>} JSON documents for each datasource listing the newly created data source
+     */
+    unregisterDataSources(dataSourceCodes: string[]) {
+        /** 
+         * Attempting to remove multiple datasources asynchronously ends up causing a connection closed error.
+         * JavaScript/TypeScript does not have a good paradigm for synchronously requesting promises one after the other. 
+         * (technically we could use generators but google's protoc generated files do not support ESM which would be required for 
+         * using "async" and "await" so that leaves us with recursive function calls). Asking the end user to come up 
+         * with that logic on their own might be a bit daunting so I'm providing this convenience method that 
+         * handles it for them.
+         */
+        /** private class used for managing sequential requests */
+        let removeDataSourcesSequentially = (dataSources: string[], callback?: Function) => {
+            let _dataSources    = dataSources;
+            let _callback: Function | undefined;
+            let _onComplete: Promise<{DSRC_CODE: string, DELETED: boolean}[]>;
+            let _responses: {DSRC_CODE: string, DELETED: boolean}[] = [];
+
+            // define subs
+            let next = () => {
+                let dsCode = _dataSources.shift();
+                if(!dsCode || dsCode == undefined) {
+                    // we're done
+                    onComplete();
+                    return;
+                }
+                //return new Promise((resolve, reject) => {
+                    this.unregisterDataSource(dsCode as string)
+                    .then((resp) => {
+                        // add response to results
+                        _responses.push({DSRC_CODE: dsCode, DELETED: resp});
+                        // call "getNextRequest" again
+                        next();
+                    })
+                //})
+            }
+        
+            let onComplete = () => {
+                // when we're done call this method
+                if(_callback) {
+                    _callback.call(this, _responses);
+                }
+            }
+
+            // initialization logic
+            if(callback) {
+                _callback = callback;
+            }
+            // set up onComplete promise now that we know the number of requests
+            _onComplete = new Promise<{DSRC_CODE: string, DELETED: boolean}[]>((resolve, reject) => {
+                if(_responses.length >= _dataSources.length) {
+                    resolve(_responses);
+                }
+            });
+            // if there's a callback attach it to the _onComplete promise chain
+            if(callback) {
+                _onComplete.then(callback as any)
+            }
+            // kick off the first request. (recursive method chain)
+            if(_dataSources && _dataSources.length > 0) {
+                next();
+            }
+        }
+        return new Promise<{DSRC_CODE: string, DELETED: boolean}[]>((resolve, reject) => {
+            let removeDataSources = removeDataSourcesSequentially(dataSourceCodes, (results: {DSRC_CODE: string, DELETED: boolean}[], error?: Error | undefined) => {
+                if(error) {
+                    reject(error);
+                }
+                resolve(results);
+            })
         });
     }
     /**
