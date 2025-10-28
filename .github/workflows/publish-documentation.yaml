@@ -7,15 +7,14 @@ on:
       - "[0-9]+.[0-9]+.[0-9]+"
   workflow_dispatch:
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   build:
     outputs:
       status: ${{ job.status }}
     permissions:
-      contents: write
+      contents: read
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -23,12 +22,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
 
       - name: use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          package-manager-cache: false
 
       - name: Install Dependencies
         run: npm ci
@@ -69,6 +70,6 @@ jobs:
     if: ${{ always() && contains(fromJSON('["failure", "cancelled"]'), needs.build.outputs.status) && contains(fromJSON('["failure", "cancelled"]'), needs.publish.outputs.status) }}
     secrets:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-    uses: senzing-factory/build-resources/.github/workflows/build-failure-slack-notification.yaml@v2
+    uses: senzing-factory/build-resources/.github/workflows/build-failure-slack-notification.yaml@v3
     with:
       job-status: ${{ needs.build.outputs.status && needs.publish.outputs.status }}

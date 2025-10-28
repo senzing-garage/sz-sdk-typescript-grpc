@@ -21,7 +21,7 @@
     "tsc": "./node_modules/typescript/bin/tsc"
   },
   "author": "",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "description": "",
   "devDependencies": {
     "@grpc/grpc-js": "^1.12.5",
