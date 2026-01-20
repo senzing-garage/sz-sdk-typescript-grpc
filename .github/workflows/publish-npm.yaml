@@ -80,8 +80,6 @@ jobs:
 
       - name: Publish to npm
         run: npm publish sz-sdk-typescript-grpc-*.tgz --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   publish-grpc-web:
     name: Publish @senzing/sz-sdk-typescript-grpc-web
@@ -107,8 +105,6 @@ jobs:
 
       - name: Publish to npm
         run: npm publish sz-sdk-typescript-grpc-web-*.tgz --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   slack-notification:
     needs: [build, publish-grpc, publish-grpc-web]
