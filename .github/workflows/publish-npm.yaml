@@ -25,8 +25,7 @@ jobs:
           persist-credentials: false
 
       - name: Use Node.js 22.x
-        # zizmor: ignore[cache-poisoning]
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v6  # zizmor: ignore[cache-poisoning]
         with:
           node-version: 22.x
           cache: ""
@@ -75,8 +74,7 @@ jobs:
           name: grpc-package
 
       - name: Use Node.js 22.x
-        # zizmor: ignore[cache-poisoning]
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v6  # zizmor: ignore[cache-poisoning]
         with:
           node-version: 22.x
           cache: ""
@@ -103,8 +101,7 @@ jobs:
           name: grpc-web-package
 
       - name: Use Node.js 22.x
-        # zizmor: ignore[cache-poisoning]
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v6  # zizmor: ignore[cache-poisoning]
         with:
           node-version: 22.x
           cache: ""
