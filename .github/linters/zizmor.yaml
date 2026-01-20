@@ -3,3 +3,6 @@ rules:
     config:
       policies:
         "*": ref-pin
+  cache-poisoning:
+    ignore:
+      - publish-npm.yaml

@@ -1,0 +1,131 @@
+---
+name: Publish to npm
+
+on:
+  push:
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+"
+      - "[0-9]+.[0-9]+.[0-9]+-*"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  build:
+    name: Build packages
+    outputs:
+      status: ${{ job.status }}
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.x
+          cache: ""
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build packages
+        run: |
+          npm run build
+          npm run build:web
+
+      - name: Create archives
+        run: |
+          npm run package
+          npm run package:web
+
+      - name: Upload grpc package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: grpc-package
+          path: dist/@senzing/sz-sdk-typescript-grpc-*.tgz
+          retention-days: 1
+
+      - name: Upload grpc-web package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: grpc-web-package
+          path: dist/@senzing/sz-sdk-typescript-grpc-web-*.tgz
+          retention-days: 1
+
+  publish-grpc:
+    name: Publish @senzing/sz-sdk-typescript-grpc
+    needs: build
+    outputs:
+      status: ${{ job.status }}
+    permissions:
+      contents: read
+      id-token: write
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download grpc package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: grpc-package
+
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.x
+          cache: ""
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Publish to npm
+        run: |
+          npm publish sz-sdk-typescript-grpc-*.tgz --provenance --access public
+
+  publish-grpc-web:
+    name: Publish @senzing/sz-sdk-typescript-grpc-web
+    needs: build
+    outputs:
+      status: ${{ job.status }}
+    permissions:
+      contents: read
+      id-token: write
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download grpc-web package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: grpc-web-package
+
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.x
+          cache: ""
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Publish to npm
+        run: |
+          npm publish sz-sdk-typescript-grpc-web-*.tgz --provenance --access public
+
+  slack-notification:
+    needs: [build, publish-grpc, publish-grpc-web]
+    if: >-
+      ${{
+        always() && (
+          contains(fromJSON('["failure", "cancelled"]'),
+            needs.build.outputs.status) ||
+          contains(fromJSON('["failure", "cancelled"]'),
+            needs.publish-grpc.outputs.status) ||
+          contains(fromJSON('["failure", "cancelled"]'),
+            needs.publish-grpc-web.outputs.status)
+        )
+      }}
+    secrets:
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+    uses: senzing-factory/build-resources/.github/workflows/build-failure-slack-notification.yaml@v3
+    with:
+      job-status: "failure"
