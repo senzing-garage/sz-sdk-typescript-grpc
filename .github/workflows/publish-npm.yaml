@@ -1,3 +1,4 @@
+---
 name: Publish to npm
 
 on:
@@ -27,7 +28,6 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 22.x
-          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
@@ -79,7 +79,8 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Publish to npm
-        run: npm publish sz-sdk-typescript-grpc-*.tgz --provenance --access public
+        run: |
+          npm publish sz-sdk-typescript-grpc-*.tgz --provenance --access public
 
   publish-grpc-web:
     name: Publish @senzing/sz-sdk-typescript-grpc-web
@@ -104,11 +105,20 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Publish to npm
-        run: npm publish sz-sdk-typescript-grpc-web-*.tgz --provenance --access public
+        run: |
+          npm publish sz-sdk-typescript-grpc-web-*.tgz --provenance --access public
 
   slack-notification:
     needs: [build, publish-grpc, publish-grpc-web]
-    if: ${{ always() && (contains(fromJSON('["failure", "cancelled"]'), needs.build.outputs.status) || contains(fromJSON('["failure", "cancelled"]'), needs.publish-grpc.outputs.status) || contains(fromJSON('["failure", "cancelled"]'), needs.publish-grpc-web.outputs.status)) }}
+    if: >-
+      ${{
+        always() &&
+        (
+          contains(fromJSON('["failure", "cancelled"]'), needs.build.outputs.status) ||
+          contains(fromJSON('["failure", "cancelled"]'), needs.publish-grpc.outputs.status) ||
+          contains(fromJSON('["failure", "cancelled"]'), needs.publish-grpc-web.outputs.status)
+        )
+      }}
     secrets:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
     uses: senzing-factory/build-resources/.github/workflows/build-failure-slack-notification.yaml@v3
