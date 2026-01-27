@@ -146,6 +146,6 @@ You may want to use NPM Link to force node to pull the code from your dist packa
 [License Badge]: https://img.shields.io/badge/License-Apache2-brightgreen.svg
 [License]: https://github.com/senzing-garage/sz-sdk-typescript-grpc/blob/main/LICENSE
 [Senzing Garage]: https://github.com/senzing-garage
-[Senzing gRPC server]: https://github.com/senzing-garage/serve-grpc
+[Senzing gRPC server]: https://github.com/senzing-garage/sz-sdk-java-grpc
 [Senzing Quick Start guides]: https://docs.senzing.com/quickstart/
 [Senzing]: https://senzing.com/
