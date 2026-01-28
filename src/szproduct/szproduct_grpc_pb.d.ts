@@ -4,7 +4,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import * as grpc from "grpc";
+import * as grpc from "@grpc/grpc-js";
 import * as szproduct_pb from "./szproduct_pb";
 
 interface ISzProductService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {

@@ -4,7 +4,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import * as grpc from "grpc";
+import * as grpc from "@grpc/grpc-js";
 import * as szdiagnostic_pb from "./szdiagnostic_pb";
 
 interface ISzDiagnosticService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {

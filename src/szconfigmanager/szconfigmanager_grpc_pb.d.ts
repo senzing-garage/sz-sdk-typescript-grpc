@@ -4,7 +4,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import * as grpc from "grpc";
+import * as grpc from "@grpc/grpc-js";
 import * as szconfigmanager_pb from "./szconfigmanager_pb";
 
 interface ISzConfigManagerService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
