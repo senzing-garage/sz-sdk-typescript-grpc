@@ -4,7 +4,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import * as grpc from "grpc";
+import * as grpc from "@grpc/grpc-js";
 import * as szengine_pb from "./szengine_pb";
 
 interface ISzEngineService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
