@@ -38,6 +38,7 @@
     "Retryable",
     "SCORESET",
     "SENZ",
+    "TRUTHSET",
     "SFCALL",
     "SFUNC",
     "SOPIN",

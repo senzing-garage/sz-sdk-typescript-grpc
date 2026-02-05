@@ -1,6 +1,5 @@
-import * as grpc from 'grpc';
 import * as grpcweb from 'grpc-web';
-import * as grpcjs from '@grpc/grpc-js';
+import * as grpc from '@grpc/grpc-js';
 import { ENGINE_EXCEPTION_MAP, SzError } from './senzing/SzError';
 
 
