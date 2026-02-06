@@ -824,7 +824,7 @@ export class SzGrpcEngine extends SzGrpcBase implements SzEngine {
                     return;
                 }
                 const request = new GetVirtualEntityByRecordIdRequest();
-                request.setRecordKeys(JSON.stringify( recordIdsAsJsonString(recordKeys) ));
+                request.setRecordKeys(recordIdsAsJsonString(recordKeys));
                 request.setFlags(bigIntToNumber(flags));
                 this.client.getVirtualEntityByRecordId(request, this._metadata, (err, res: GetVirtualEntityByRecordIdResponse)=>{
                     if(err) {
