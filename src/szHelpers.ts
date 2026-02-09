@@ -79,9 +79,11 @@ export function newException(
  * so just casting them to numbers doesn't work due to some values being bitwise ops on
  * long numbers. the casting needs to be done inside the methods handing values to the engine.
  */
-export function bigIntToNumber(value: bigint | number): number {
+// eslint-disable-next-line @typescript-eslint/no-wrapper-object-types
+export function bigIntToNumber(value: BigInt | number): number {
   if (typeof value === "bigint") {
-    return Number(value);
+    // eslint-disable-next-line @typescript-eslint/no-wrapper-object-types
+    return Number(value as BigInt);
   } else {
     return value as number;
   }
