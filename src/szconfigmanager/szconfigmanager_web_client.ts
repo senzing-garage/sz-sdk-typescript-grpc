@@ -10,378 +10,433 @@
 // 	protoc              v3.19.1
 // source: szconfigmanager.proto
 
-
 /* eslint-disable */
 // @ts-nocheck
 
+import * as grpcWeb from "grpc-web";
 
-import * as grpcWeb from 'grpc-web';
-
-import * as szconfigmanager_pb from './szconfigmanager_web_pb'; // proto import: "szconfigmanager.proto"
-
+import * as szconfigmanager_pb from "./szconfigmanager_web_pb"; // proto import: "szconfigmanager.proto"
 
 export class SzConfigManagerClient {
   client_: grpcWeb.AbstractClientBase;
   hostname_: string;
-  credentials_: null | { [index: string]: string; };
-  options_: null | { [index: string]: any; };
+  credentials_: null | { [index: string]: string };
+  options_: null | { [index: string]: any };
 
-  constructor (hostname: string,
-               credentials?: null | { [index: string]: string; },
-               options?: null | { [index: string]: any; }) {
+  constructor(
+    hostname: string,
+    credentials?: null | { [index: string]: string },
+    options?: null | { [index: string]: any },
+  ) {
     if (!options) options = {};
     if (!credentials) credentials = {};
-    options['format'] = 'text';
+    options["format"] = "text";
 
     this.client_ = new grpcWeb.GrpcWebClientBase(options);
-    this.hostname_ = hostname.replace(/\/+$/, '');
+    this.hostname_ = hostname.replace(/\/+$/, "");
     this.credentials_ = credentials;
     this.options_ = options;
   }
 
   methodDescriptorGetConfig = new grpcWeb.MethodDescriptor(
-    '/szconfigmanager.SzConfigManager/GetConfig',
+    "/szconfigmanager.SzConfigManager/GetConfig",
     grpcWeb.MethodType.UNARY,
     szconfigmanager_pb.GetConfigRequest,
     szconfigmanager_pb.GetConfigResponse,
     (request: szconfigmanager_pb.GetConfigRequest) => {
       return request.serializeBinary();
     },
-    szconfigmanager_pb.GetConfigResponse.deserializeBinary
+    szconfigmanager_pb.GetConfigResponse.deserializeBinary,
   );
 
   getConfig(
     request: szconfigmanager_pb.GetConfigRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szconfigmanager_pb.GetConfigResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szconfigmanager_pb.GetConfigResponse>;
 
   getConfig(
     request: szconfigmanager_pb.GetConfigRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szconfigmanager_pb.GetConfigResponse) => void): grpcWeb.ClientReadableStream<szconfigmanager_pb.GetConfigResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szconfigmanager_pb.GetConfigResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szconfigmanager_pb.GetConfigResponse>;
 
   getConfig(
     request: szconfigmanager_pb.GetConfigRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szconfigmanager_pb.GetConfigResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szconfigmanager_pb.GetConfigResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szconfigmanager.SzConfigManager/GetConfig',
+        this.hostname_ + "/szconfigmanager.SzConfigManager/GetConfig",
         request,
         metadata || {},
         this.methodDescriptorGetConfig,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szconfigmanager.SzConfigManager/GetConfig',
-    request,
-    metadata || {},
-    this.methodDescriptorGetConfig);
+      this.hostname_ + "/szconfigmanager.SzConfigManager/GetConfig",
+      request,
+      metadata || {},
+      this.methodDescriptorGetConfig,
+    );
   }
 
   methodDescriptorGetConfigRegistry = new grpcWeb.MethodDescriptor(
-    '/szconfigmanager.SzConfigManager/GetConfigRegistry',
+    "/szconfigmanager.SzConfigManager/GetConfigRegistry",
     grpcWeb.MethodType.UNARY,
     szconfigmanager_pb.GetConfigRegistryRequest,
     szconfigmanager_pb.GetConfigRegistryResponse,
     (request: szconfigmanager_pb.GetConfigRegistryRequest) => {
       return request.serializeBinary();
     },
-    szconfigmanager_pb.GetConfigRegistryResponse.deserializeBinary
+    szconfigmanager_pb.GetConfigRegistryResponse.deserializeBinary,
   );
 
   getConfigRegistry(
     request: szconfigmanager_pb.GetConfigRegistryRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szconfigmanager_pb.GetConfigRegistryResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szconfigmanager_pb.GetConfigRegistryResponse>;
 
   getConfigRegistry(
     request: szconfigmanager_pb.GetConfigRegistryRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szconfigmanager_pb.GetConfigRegistryResponse) => void): grpcWeb.ClientReadableStream<szconfigmanager_pb.GetConfigRegistryResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szconfigmanager_pb.GetConfigRegistryResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szconfigmanager_pb.GetConfigRegistryResponse>;
 
   getConfigRegistry(
     request: szconfigmanager_pb.GetConfigRegistryRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szconfigmanager_pb.GetConfigRegistryResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szconfigmanager_pb.GetConfigRegistryResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szconfigmanager.SzConfigManager/GetConfigRegistry',
+        this.hostname_ + "/szconfigmanager.SzConfigManager/GetConfigRegistry",
         request,
         metadata || {},
         this.methodDescriptorGetConfigRegistry,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szconfigmanager.SzConfigManager/GetConfigRegistry',
-    request,
-    metadata || {},
-    this.methodDescriptorGetConfigRegistry);
+      this.hostname_ + "/szconfigmanager.SzConfigManager/GetConfigRegistry",
+      request,
+      metadata || {},
+      this.methodDescriptorGetConfigRegistry,
+    );
   }
 
   methodDescriptorGetDefaultConfigId = new grpcWeb.MethodDescriptor(
-    '/szconfigmanager.SzConfigManager/GetDefaultConfigId',
+    "/szconfigmanager.SzConfigManager/GetDefaultConfigId",
     grpcWeb.MethodType.UNARY,
     szconfigmanager_pb.GetDefaultConfigIdRequest,
     szconfigmanager_pb.GetDefaultConfigIdResponse,
     (request: szconfigmanager_pb.GetDefaultConfigIdRequest) => {
       return request.serializeBinary();
     },
-    szconfigmanager_pb.GetDefaultConfigIdResponse.deserializeBinary
+    szconfigmanager_pb.GetDefaultConfigIdResponse.deserializeBinary,
   );
 
   getDefaultConfigId(
     request: szconfigmanager_pb.GetDefaultConfigIdRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szconfigmanager_pb.GetDefaultConfigIdResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szconfigmanager_pb.GetDefaultConfigIdResponse>;
 
   getDefaultConfigId(
     request: szconfigmanager_pb.GetDefaultConfigIdRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szconfigmanager_pb.GetDefaultConfigIdResponse) => void): grpcWeb.ClientReadableStream<szconfigmanager_pb.GetDefaultConfigIdResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szconfigmanager_pb.GetDefaultConfigIdResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szconfigmanager_pb.GetDefaultConfigIdResponse>;
 
   getDefaultConfigId(
     request: szconfigmanager_pb.GetDefaultConfigIdRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szconfigmanager_pb.GetDefaultConfigIdResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szconfigmanager_pb.GetDefaultConfigIdResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szconfigmanager.SzConfigManager/GetDefaultConfigId',
+        this.hostname_ + "/szconfigmanager.SzConfigManager/GetDefaultConfigId",
         request,
         metadata || {},
         this.methodDescriptorGetDefaultConfigId,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szconfigmanager.SzConfigManager/GetDefaultConfigId',
-    request,
-    metadata || {},
-    this.methodDescriptorGetDefaultConfigId);
+      this.hostname_ + "/szconfigmanager.SzConfigManager/GetDefaultConfigId",
+      request,
+      metadata || {},
+      this.methodDescriptorGetDefaultConfigId,
+    );
   }
 
   methodDescriptorGetTemplateConfig = new grpcWeb.MethodDescriptor(
-    '/szconfigmanager.SzConfigManager/GetTemplateConfig',
+    "/szconfigmanager.SzConfigManager/GetTemplateConfig",
     grpcWeb.MethodType.UNARY,
     szconfigmanager_pb.GetTemplateConfigRequest,
     szconfigmanager_pb.GetTemplateConfigResponse,
     (request: szconfigmanager_pb.GetTemplateConfigRequest) => {
       return request.serializeBinary();
     },
-    szconfigmanager_pb.GetTemplateConfigResponse.deserializeBinary
+    szconfigmanager_pb.GetTemplateConfigResponse.deserializeBinary,
   );
 
   getTemplateConfig(
     request: szconfigmanager_pb.GetTemplateConfigRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szconfigmanager_pb.GetTemplateConfigResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szconfigmanager_pb.GetTemplateConfigResponse>;
 
   getTemplateConfig(
     request: szconfigmanager_pb.GetTemplateConfigRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szconfigmanager_pb.GetTemplateConfigResponse) => void): grpcWeb.ClientReadableStream<szconfigmanager_pb.GetTemplateConfigResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szconfigmanager_pb.GetTemplateConfigResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szconfigmanager_pb.GetTemplateConfigResponse>;
 
   getTemplateConfig(
     request: szconfigmanager_pb.GetTemplateConfigRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szconfigmanager_pb.GetTemplateConfigResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szconfigmanager_pb.GetTemplateConfigResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szconfigmanager.SzConfigManager/GetTemplateConfig',
+        this.hostname_ + "/szconfigmanager.SzConfigManager/GetTemplateConfig",
         request,
         metadata || {},
         this.methodDescriptorGetTemplateConfig,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szconfigmanager.SzConfigManager/GetTemplateConfig',
-    request,
-    metadata || {},
-    this.methodDescriptorGetTemplateConfig);
+      this.hostname_ + "/szconfigmanager.SzConfigManager/GetTemplateConfig",
+      request,
+      metadata || {},
+      this.methodDescriptorGetTemplateConfig,
+    );
   }
 
   methodDescriptorRegisterConfig = new grpcWeb.MethodDescriptor(
-    '/szconfigmanager.SzConfigManager/RegisterConfig',
+    "/szconfigmanager.SzConfigManager/RegisterConfig",
     grpcWeb.MethodType.UNARY,
     szconfigmanager_pb.RegisterConfigRequest,
     szconfigmanager_pb.RegisterConfigResponse,
     (request: szconfigmanager_pb.RegisterConfigRequest) => {
       return request.serializeBinary();
     },
-    szconfigmanager_pb.RegisterConfigResponse.deserializeBinary
+    szconfigmanager_pb.RegisterConfigResponse.deserializeBinary,
   );
 
   registerConfig(
     request: szconfigmanager_pb.RegisterConfigRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szconfigmanager_pb.RegisterConfigResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szconfigmanager_pb.RegisterConfigResponse>;
 
   registerConfig(
     request: szconfigmanager_pb.RegisterConfigRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szconfigmanager_pb.RegisterConfigResponse) => void): grpcWeb.ClientReadableStream<szconfigmanager_pb.RegisterConfigResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szconfigmanager_pb.RegisterConfigResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szconfigmanager_pb.RegisterConfigResponse>;
 
   registerConfig(
     request: szconfigmanager_pb.RegisterConfigRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szconfigmanager_pb.RegisterConfigResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szconfigmanager_pb.RegisterConfigResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szconfigmanager.SzConfigManager/RegisterConfig',
+        this.hostname_ + "/szconfigmanager.SzConfigManager/RegisterConfig",
         request,
         metadata || {},
         this.methodDescriptorRegisterConfig,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szconfigmanager.SzConfigManager/RegisterConfig',
-    request,
-    metadata || {},
-    this.methodDescriptorRegisterConfig);
+      this.hostname_ + "/szconfigmanager.SzConfigManager/RegisterConfig",
+      request,
+      metadata || {},
+      this.methodDescriptorRegisterConfig,
+    );
   }
 
   methodDescriptorReplaceDefaultConfigId = new grpcWeb.MethodDescriptor(
-    '/szconfigmanager.SzConfigManager/ReplaceDefaultConfigId',
+    "/szconfigmanager.SzConfigManager/ReplaceDefaultConfigId",
     grpcWeb.MethodType.UNARY,
     szconfigmanager_pb.ReplaceDefaultConfigIdRequest,
     szconfigmanager_pb.ReplaceDefaultConfigIdResponse,
     (request: szconfigmanager_pb.ReplaceDefaultConfigIdRequest) => {
       return request.serializeBinary();
     },
-    szconfigmanager_pb.ReplaceDefaultConfigIdResponse.deserializeBinary
+    szconfigmanager_pb.ReplaceDefaultConfigIdResponse.deserializeBinary,
   );
 
   replaceDefaultConfigId(
     request: szconfigmanager_pb.ReplaceDefaultConfigIdRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szconfigmanager_pb.ReplaceDefaultConfigIdResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szconfigmanager_pb.ReplaceDefaultConfigIdResponse>;
 
   replaceDefaultConfigId(
     request: szconfigmanager_pb.ReplaceDefaultConfigIdRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szconfigmanager_pb.ReplaceDefaultConfigIdResponse) => void): grpcWeb.ClientReadableStream<szconfigmanager_pb.ReplaceDefaultConfigIdResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szconfigmanager_pb.ReplaceDefaultConfigIdResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szconfigmanager_pb.ReplaceDefaultConfigIdResponse>;
 
   replaceDefaultConfigId(
     request: szconfigmanager_pb.ReplaceDefaultConfigIdRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szconfigmanager_pb.ReplaceDefaultConfigIdResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szconfigmanager_pb.ReplaceDefaultConfigIdResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
-          '/szconfigmanager.SzConfigManager/ReplaceDefaultConfigId',
+          "/szconfigmanager.SzConfigManager/ReplaceDefaultConfigId",
         request,
         metadata || {},
         this.methodDescriptorReplaceDefaultConfigId,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szconfigmanager.SzConfigManager/ReplaceDefaultConfigId',
-    request,
-    metadata || {},
-    this.methodDescriptorReplaceDefaultConfigId);
+      this.hostname_ +
+        "/szconfigmanager.SzConfigManager/ReplaceDefaultConfigId",
+      request,
+      metadata || {},
+      this.methodDescriptorReplaceDefaultConfigId,
+    );
   }
 
   methodDescriptorSetDefaultConfig = new grpcWeb.MethodDescriptor(
-    '/szconfigmanager.SzConfigManager/SetDefaultConfig',
+    "/szconfigmanager.SzConfigManager/SetDefaultConfig",
     grpcWeb.MethodType.UNARY,
     szconfigmanager_pb.SetDefaultConfigRequest,
     szconfigmanager_pb.SetDefaultConfigResponse,
     (request: szconfigmanager_pb.SetDefaultConfigRequest) => {
       return request.serializeBinary();
     },
-    szconfigmanager_pb.SetDefaultConfigResponse.deserializeBinary
+    szconfigmanager_pb.SetDefaultConfigResponse.deserializeBinary,
   );
 
   setDefaultConfig(
     request: szconfigmanager_pb.SetDefaultConfigRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szconfigmanager_pb.SetDefaultConfigResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szconfigmanager_pb.SetDefaultConfigResponse>;
 
   setDefaultConfig(
     request: szconfigmanager_pb.SetDefaultConfigRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szconfigmanager_pb.SetDefaultConfigResponse) => void): grpcWeb.ClientReadableStream<szconfigmanager_pb.SetDefaultConfigResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szconfigmanager_pb.SetDefaultConfigResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szconfigmanager_pb.SetDefaultConfigResponse>;
 
   setDefaultConfig(
     request: szconfigmanager_pb.SetDefaultConfigRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szconfigmanager_pb.SetDefaultConfigResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szconfigmanager_pb.SetDefaultConfigResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szconfigmanager.SzConfigManager/SetDefaultConfig',
+        this.hostname_ + "/szconfigmanager.SzConfigManager/SetDefaultConfig",
         request,
         metadata || {},
         this.methodDescriptorSetDefaultConfig,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szconfigmanager.SzConfigManager/SetDefaultConfig',
-    request,
-    metadata || {},
-    this.methodDescriptorSetDefaultConfig);
+      this.hostname_ + "/szconfigmanager.SzConfigManager/SetDefaultConfig",
+      request,
+      metadata || {},
+      this.methodDescriptorSetDefaultConfig,
+    );
   }
 
   methodDescriptorSetDefaultConfigId = new grpcWeb.MethodDescriptor(
-    '/szconfigmanager.SzConfigManager/SetDefaultConfigId',
+    "/szconfigmanager.SzConfigManager/SetDefaultConfigId",
     grpcWeb.MethodType.UNARY,
     szconfigmanager_pb.SetDefaultConfigIdRequest,
     szconfigmanager_pb.SetDefaultConfigIdResponse,
     (request: szconfigmanager_pb.SetDefaultConfigIdRequest) => {
       return request.serializeBinary();
     },
-    szconfigmanager_pb.SetDefaultConfigIdResponse.deserializeBinary
+    szconfigmanager_pb.SetDefaultConfigIdResponse.deserializeBinary,
   );
 
   setDefaultConfigId(
     request: szconfigmanager_pb.SetDefaultConfigIdRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szconfigmanager_pb.SetDefaultConfigIdResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szconfigmanager_pb.SetDefaultConfigIdResponse>;
 
   setDefaultConfigId(
     request: szconfigmanager_pb.SetDefaultConfigIdRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szconfigmanager_pb.SetDefaultConfigIdResponse) => void): grpcWeb.ClientReadableStream<szconfigmanager_pb.SetDefaultConfigIdResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szconfigmanager_pb.SetDefaultConfigIdResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szconfigmanager_pb.SetDefaultConfigIdResponse>;
 
   setDefaultConfigId(
     request: szconfigmanager_pb.SetDefaultConfigIdRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szconfigmanager_pb.SetDefaultConfigIdResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szconfigmanager_pb.SetDefaultConfigIdResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szconfigmanager.SzConfigManager/SetDefaultConfigId',
+        this.hostname_ + "/szconfigmanager.SzConfigManager/SetDefaultConfigId",
         request,
         metadata || {},
         this.methodDescriptorSetDefaultConfigId,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szconfigmanager.SzConfigManager/SetDefaultConfigId',
-    request,
-    metadata || {},
-    this.methodDescriptorSetDefaultConfigId);
+      this.hostname_ + "/szconfigmanager.SzConfigManager/SetDefaultConfigId",
+      request,
+      metadata || {},
+      this.methodDescriptorSetDefaultConfigId,
+    );
   }
-
 }
-

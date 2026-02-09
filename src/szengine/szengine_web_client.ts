@@ -10,1454 +10,1679 @@
 // 	protoc              v3.19.1
 // source: szengine.proto
 
-
 /* eslint-disable */
 // @ts-nocheck
 
+import * as grpcWeb from "grpc-web";
 
-import * as grpcWeb from 'grpc-web';
-
-import * as szengine_pb from './szengine_web_pb'; // proto import: "szengine.proto"
-
+import * as szengine_pb from "./szengine_web_pb"; // proto import: "szengine.proto"
 
 export class SzEngineClient {
   client_: grpcWeb.AbstractClientBase;
   hostname_: string;
-  credentials_: null | { [index: string]: string; };
-  options_: null | { [index: string]: any; };
+  credentials_: null | { [index: string]: string };
+  options_: null | { [index: string]: any };
 
-  constructor (hostname: string,
-               credentials?: null | { [index: string]: string; },
-               options?: null | { [index: string]: any; }) {
+  constructor(
+    hostname: string,
+    credentials?: null | { [index: string]: string },
+    options?: null | { [index: string]: any },
+  ) {
     if (!options) options = {};
     if (!credentials) credentials = {};
-    options['format'] = 'text';
+    options["format"] = "text";
 
     this.client_ = new grpcWeb.GrpcWebClientBase(options);
-    this.hostname_ = hostname.replace(/\/+$/, '');
+    this.hostname_ = hostname.replace(/\/+$/, "");
     this.credentials_ = credentials;
     this.options_ = options;
   }
 
   methodDescriptorAddRecord = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/AddRecord',
+    "/szengine.SzEngine/AddRecord",
     grpcWeb.MethodType.UNARY,
     szengine_pb.AddRecordRequest,
     szengine_pb.AddRecordResponse,
     (request: szengine_pb.AddRecordRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.AddRecordResponse.deserializeBinary
+    szengine_pb.AddRecordResponse.deserializeBinary,
   );
 
   addRecord(
     request: szengine_pb.AddRecordRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.AddRecordResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.AddRecordResponse>;
 
   addRecord(
     request: szengine_pb.AddRecordRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.AddRecordResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.AddRecordResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.AddRecordResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.AddRecordResponse>;
 
   addRecord(
     request: szengine_pb.AddRecordRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.AddRecordResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.AddRecordResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/AddRecord',
+        this.hostname_ + "/szengine.SzEngine/AddRecord",
         request,
         metadata || {},
         this.methodDescriptorAddRecord,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/AddRecord',
-    request,
-    metadata || {},
-    this.methodDescriptorAddRecord);
+      this.hostname_ + "/szengine.SzEngine/AddRecord",
+      request,
+      metadata || {},
+      this.methodDescriptorAddRecord,
+    );
   }
 
   methodDescriptorCloseExportReport = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/CloseExportReport',
+    "/szengine.SzEngine/CloseExportReport",
     grpcWeb.MethodType.UNARY,
     szengine_pb.CloseExportReportRequest,
     szengine_pb.CloseExportReportResponse,
     (request: szengine_pb.CloseExportReportRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.CloseExportReportResponse.deserializeBinary
+    szengine_pb.CloseExportReportResponse.deserializeBinary,
   );
 
   closeExportReport(
     request: szengine_pb.CloseExportReportRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.CloseExportReportResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.CloseExportReportResponse>;
 
   closeExportReport(
     request: szengine_pb.CloseExportReportRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.CloseExportReportResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.CloseExportReportResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.CloseExportReportResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.CloseExportReportResponse>;
 
   closeExportReport(
     request: szengine_pb.CloseExportReportRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.CloseExportReportResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.CloseExportReportResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/CloseExportReport',
+        this.hostname_ + "/szengine.SzEngine/CloseExportReport",
         request,
         metadata || {},
         this.methodDescriptorCloseExportReport,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/CloseExportReport',
-    request,
-    metadata || {},
-    this.methodDescriptorCloseExportReport);
+      this.hostname_ + "/szengine.SzEngine/CloseExportReport",
+      request,
+      metadata || {},
+      this.methodDescriptorCloseExportReport,
+    );
   }
 
   methodDescriptorCountRedoRecords = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/CountRedoRecords',
+    "/szengine.SzEngine/CountRedoRecords",
     grpcWeb.MethodType.UNARY,
     szengine_pb.CountRedoRecordsRequest,
     szengine_pb.CountRedoRecordsResponse,
     (request: szengine_pb.CountRedoRecordsRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.CountRedoRecordsResponse.deserializeBinary
+    szengine_pb.CountRedoRecordsResponse.deserializeBinary,
   );
 
   countRedoRecords(
     request: szengine_pb.CountRedoRecordsRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.CountRedoRecordsResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.CountRedoRecordsResponse>;
 
   countRedoRecords(
     request: szengine_pb.CountRedoRecordsRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.CountRedoRecordsResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.CountRedoRecordsResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.CountRedoRecordsResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.CountRedoRecordsResponse>;
 
   countRedoRecords(
     request: szengine_pb.CountRedoRecordsRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.CountRedoRecordsResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.CountRedoRecordsResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/CountRedoRecords',
+        this.hostname_ + "/szengine.SzEngine/CountRedoRecords",
         request,
         metadata || {},
         this.methodDescriptorCountRedoRecords,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/CountRedoRecords',
-    request,
-    metadata || {},
-    this.methodDescriptorCountRedoRecords);
+      this.hostname_ + "/szengine.SzEngine/CountRedoRecords",
+      request,
+      metadata || {},
+      this.methodDescriptorCountRedoRecords,
+    );
   }
 
   methodDescriptorDeleteRecord = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/DeleteRecord',
+    "/szengine.SzEngine/DeleteRecord",
     grpcWeb.MethodType.UNARY,
     szengine_pb.DeleteRecordRequest,
     szengine_pb.DeleteRecordResponse,
     (request: szengine_pb.DeleteRecordRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.DeleteRecordResponse.deserializeBinary
+    szengine_pb.DeleteRecordResponse.deserializeBinary,
   );
 
   deleteRecord(
     request: szengine_pb.DeleteRecordRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.DeleteRecordResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.DeleteRecordResponse>;
 
   deleteRecord(
     request: szengine_pb.DeleteRecordRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.DeleteRecordResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.DeleteRecordResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.DeleteRecordResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.DeleteRecordResponse>;
 
   deleteRecord(
     request: szengine_pb.DeleteRecordRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.DeleteRecordResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.DeleteRecordResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/DeleteRecord',
+        this.hostname_ + "/szengine.SzEngine/DeleteRecord",
         request,
         metadata || {},
         this.methodDescriptorDeleteRecord,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/DeleteRecord',
-    request,
-    metadata || {},
-    this.methodDescriptorDeleteRecord);
+      this.hostname_ + "/szengine.SzEngine/DeleteRecord",
+      request,
+      metadata || {},
+      this.methodDescriptorDeleteRecord,
+    );
   }
 
   methodDescriptorExportCsvEntityReport = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/ExportCsvEntityReport',
+    "/szengine.SzEngine/ExportCsvEntityReport",
     grpcWeb.MethodType.UNARY,
     szengine_pb.ExportCsvEntityReportRequest,
     szengine_pb.ExportCsvEntityReportResponse,
     (request: szengine_pb.ExportCsvEntityReportRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.ExportCsvEntityReportResponse.deserializeBinary
+    szengine_pb.ExportCsvEntityReportResponse.deserializeBinary,
   );
 
   exportCsvEntityReport(
     request: szengine_pb.ExportCsvEntityReportRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.ExportCsvEntityReportResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.ExportCsvEntityReportResponse>;
 
   exportCsvEntityReport(
     request: szengine_pb.ExportCsvEntityReportRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.ExportCsvEntityReportResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.ExportCsvEntityReportResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.ExportCsvEntityReportResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.ExportCsvEntityReportResponse>;
 
   exportCsvEntityReport(
     request: szengine_pb.ExportCsvEntityReportRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.ExportCsvEntityReportResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.ExportCsvEntityReportResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/ExportCsvEntityReport',
+        this.hostname_ + "/szengine.SzEngine/ExportCsvEntityReport",
         request,
         metadata || {},
         this.methodDescriptorExportCsvEntityReport,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/ExportCsvEntityReport',
-    request,
-    metadata || {},
-    this.methodDescriptorExportCsvEntityReport);
+      this.hostname_ + "/szengine.SzEngine/ExportCsvEntityReport",
+      request,
+      metadata || {},
+      this.methodDescriptorExportCsvEntityReport,
+    );
   }
 
   methodDescriptorExportJsonEntityReport = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/ExportJsonEntityReport',
+    "/szengine.SzEngine/ExportJsonEntityReport",
     grpcWeb.MethodType.UNARY,
     szengine_pb.ExportJsonEntityReportRequest,
     szengine_pb.ExportJsonEntityReportResponse,
     (request: szengine_pb.ExportJsonEntityReportRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.ExportJsonEntityReportResponse.deserializeBinary
+    szengine_pb.ExportJsonEntityReportResponse.deserializeBinary,
   );
 
   exportJsonEntityReport(
     request: szengine_pb.ExportJsonEntityReportRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.ExportJsonEntityReportResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.ExportJsonEntityReportResponse>;
 
   exportJsonEntityReport(
     request: szengine_pb.ExportJsonEntityReportRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.ExportJsonEntityReportResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.ExportJsonEntityReportResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.ExportJsonEntityReportResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.ExportJsonEntityReportResponse>;
 
   exportJsonEntityReport(
     request: szengine_pb.ExportJsonEntityReportRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.ExportJsonEntityReportResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.ExportJsonEntityReportResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/ExportJsonEntityReport',
+        this.hostname_ + "/szengine.SzEngine/ExportJsonEntityReport",
         request,
         metadata || {},
         this.methodDescriptorExportJsonEntityReport,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/ExportJsonEntityReport',
-    request,
-    metadata || {},
-    this.methodDescriptorExportJsonEntityReport);
+      this.hostname_ + "/szengine.SzEngine/ExportJsonEntityReport",
+      request,
+      metadata || {},
+      this.methodDescriptorExportJsonEntityReport,
+    );
   }
 
   methodDescriptorFetchNext = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/FetchNext',
+    "/szengine.SzEngine/FetchNext",
     grpcWeb.MethodType.UNARY,
     szengine_pb.FetchNextRequest,
     szengine_pb.FetchNextResponse,
     (request: szengine_pb.FetchNextRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.FetchNextResponse.deserializeBinary
+    szengine_pb.FetchNextResponse.deserializeBinary,
   );
 
   fetchNext(
     request: szengine_pb.FetchNextRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.FetchNextResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.FetchNextResponse>;
 
   fetchNext(
     request: szengine_pb.FetchNextRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.FetchNextResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.FetchNextResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.FetchNextResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.FetchNextResponse>;
 
   fetchNext(
     request: szengine_pb.FetchNextRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.FetchNextResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.FetchNextResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/FetchNext',
+        this.hostname_ + "/szengine.SzEngine/FetchNext",
         request,
         metadata || {},
         this.methodDescriptorFetchNext,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/FetchNext',
-    request,
-    metadata || {},
-    this.methodDescriptorFetchNext);
+      this.hostname_ + "/szengine.SzEngine/FetchNext",
+      request,
+      metadata || {},
+      this.methodDescriptorFetchNext,
+    );
   }
 
-  methodDescriptorFindInterestingEntitiesByEntityId = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/FindInterestingEntitiesByEntityId',
-    grpcWeb.MethodType.UNARY,
-    szengine_pb.FindInterestingEntitiesByEntityIdRequest,
-    szengine_pb.FindInterestingEntitiesByEntityIdResponse,
-    (request: szengine_pb.FindInterestingEntitiesByEntityIdRequest) => {
-      return request.serializeBinary();
-    },
-    szengine_pb.FindInterestingEntitiesByEntityIdResponse.deserializeBinary
-  );
-
-  findInterestingEntitiesByEntityId(
-    request: szengine_pb.FindInterestingEntitiesByEntityIdRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.FindInterestingEntitiesByEntityIdResponse>;
-
-  findInterestingEntitiesByEntityId(
-    request: szengine_pb.FindInterestingEntitiesByEntityIdRequest,
-    metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.FindInterestingEntitiesByEntityIdResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.FindInterestingEntitiesByEntityIdResponse>;
+  methodDescriptorFindInterestingEntitiesByEntityId =
+    new grpcWeb.MethodDescriptor(
+      "/szengine.SzEngine/FindInterestingEntitiesByEntityId",
+      grpcWeb.MethodType.UNARY,
+      szengine_pb.FindInterestingEntitiesByEntityIdRequest,
+      szengine_pb.FindInterestingEntitiesByEntityIdResponse,
+      (request: szengine_pb.FindInterestingEntitiesByEntityIdRequest) => {
+        return request.serializeBinary();
+      },
+      szengine_pb.FindInterestingEntitiesByEntityIdResponse.deserializeBinary,
+    );
 
   findInterestingEntitiesByEntityId(
     request: szengine_pb.FindInterestingEntitiesByEntityIdRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.FindInterestingEntitiesByEntityIdResponse) => void) {
+  ): Promise<szengine_pb.FindInterestingEntitiesByEntityIdResponse>;
+
+  findInterestingEntitiesByEntityId(
+    request: szengine_pb.FindInterestingEntitiesByEntityIdRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.FindInterestingEntitiesByEntityIdResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.FindInterestingEntitiesByEntityIdResponse>;
+
+  findInterestingEntitiesByEntityId(
+    request: szengine_pb.FindInterestingEntitiesByEntityIdRequest,
+    metadata?: grpcWeb.Metadata | null,
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.FindInterestingEntitiesByEntityIdResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/FindInterestingEntitiesByEntityId',
+        this.hostname_ + "/szengine.SzEngine/FindInterestingEntitiesByEntityId",
         request,
         metadata || {},
         this.methodDescriptorFindInterestingEntitiesByEntityId,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/FindInterestingEntitiesByEntityId',
-    request,
-    metadata || {},
-    this.methodDescriptorFindInterestingEntitiesByEntityId);
+      this.hostname_ + "/szengine.SzEngine/FindInterestingEntitiesByEntityId",
+      request,
+      metadata || {},
+      this.methodDescriptorFindInterestingEntitiesByEntityId,
+    );
   }
 
-  methodDescriptorFindInterestingEntitiesByRecordId = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/FindInterestingEntitiesByRecordId',
-    grpcWeb.MethodType.UNARY,
-    szengine_pb.FindInterestingEntitiesByRecordIdRequest,
-    szengine_pb.FindInterestingEntitiesByRecordIdResponse,
-    (request: szengine_pb.FindInterestingEntitiesByRecordIdRequest) => {
-      return request.serializeBinary();
-    },
-    szengine_pb.FindInterestingEntitiesByRecordIdResponse.deserializeBinary
-  );
-
-  findInterestingEntitiesByRecordId(
-    request: szengine_pb.FindInterestingEntitiesByRecordIdRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.FindInterestingEntitiesByRecordIdResponse>;
-
-  findInterestingEntitiesByRecordId(
-    request: szengine_pb.FindInterestingEntitiesByRecordIdRequest,
-    metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.FindInterestingEntitiesByRecordIdResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.FindInterestingEntitiesByRecordIdResponse>;
+  methodDescriptorFindInterestingEntitiesByRecordId =
+    new grpcWeb.MethodDescriptor(
+      "/szengine.SzEngine/FindInterestingEntitiesByRecordId",
+      grpcWeb.MethodType.UNARY,
+      szengine_pb.FindInterestingEntitiesByRecordIdRequest,
+      szengine_pb.FindInterestingEntitiesByRecordIdResponse,
+      (request: szengine_pb.FindInterestingEntitiesByRecordIdRequest) => {
+        return request.serializeBinary();
+      },
+      szengine_pb.FindInterestingEntitiesByRecordIdResponse.deserializeBinary,
+    );
 
   findInterestingEntitiesByRecordId(
     request: szengine_pb.FindInterestingEntitiesByRecordIdRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.FindInterestingEntitiesByRecordIdResponse) => void) {
+  ): Promise<szengine_pb.FindInterestingEntitiesByRecordIdResponse>;
+
+  findInterestingEntitiesByRecordId(
+    request: szengine_pb.FindInterestingEntitiesByRecordIdRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.FindInterestingEntitiesByRecordIdResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.FindInterestingEntitiesByRecordIdResponse>;
+
+  findInterestingEntitiesByRecordId(
+    request: szengine_pb.FindInterestingEntitiesByRecordIdRequest,
+    metadata?: grpcWeb.Metadata | null,
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.FindInterestingEntitiesByRecordIdResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/FindInterestingEntitiesByRecordId',
+        this.hostname_ + "/szengine.SzEngine/FindInterestingEntitiesByRecordId",
         request,
         metadata || {},
         this.methodDescriptorFindInterestingEntitiesByRecordId,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/FindInterestingEntitiesByRecordId',
-    request,
-    metadata || {},
-    this.methodDescriptorFindInterestingEntitiesByRecordId);
+      this.hostname_ + "/szengine.SzEngine/FindInterestingEntitiesByRecordId",
+      request,
+      metadata || {},
+      this.methodDescriptorFindInterestingEntitiesByRecordId,
+    );
   }
 
   methodDescriptorFindNetworkByEntityId = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/FindNetworkByEntityId',
+    "/szengine.SzEngine/FindNetworkByEntityId",
     grpcWeb.MethodType.UNARY,
     szengine_pb.FindNetworkByEntityIdRequest,
     szengine_pb.FindNetworkByEntityIdResponse,
     (request: szengine_pb.FindNetworkByEntityIdRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.FindNetworkByEntityIdResponse.deserializeBinary
+    szengine_pb.FindNetworkByEntityIdResponse.deserializeBinary,
   );
 
   findNetworkByEntityId(
     request: szengine_pb.FindNetworkByEntityIdRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.FindNetworkByEntityIdResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.FindNetworkByEntityIdResponse>;
 
   findNetworkByEntityId(
     request: szengine_pb.FindNetworkByEntityIdRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.FindNetworkByEntityIdResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.FindNetworkByEntityIdResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.FindNetworkByEntityIdResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.FindNetworkByEntityIdResponse>;
 
   findNetworkByEntityId(
     request: szengine_pb.FindNetworkByEntityIdRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.FindNetworkByEntityIdResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.FindNetworkByEntityIdResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/FindNetworkByEntityId',
+        this.hostname_ + "/szengine.SzEngine/FindNetworkByEntityId",
         request,
         metadata || {},
         this.methodDescriptorFindNetworkByEntityId,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/FindNetworkByEntityId',
-    request,
-    metadata || {},
-    this.methodDescriptorFindNetworkByEntityId);
+      this.hostname_ + "/szengine.SzEngine/FindNetworkByEntityId",
+      request,
+      metadata || {},
+      this.methodDescriptorFindNetworkByEntityId,
+    );
   }
 
   methodDescriptorFindNetworkByRecordId = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/FindNetworkByRecordId',
+    "/szengine.SzEngine/FindNetworkByRecordId",
     grpcWeb.MethodType.UNARY,
     szengine_pb.FindNetworkByRecordIdRequest,
     szengine_pb.FindNetworkByRecordIdResponse,
     (request: szengine_pb.FindNetworkByRecordIdRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.FindNetworkByRecordIdResponse.deserializeBinary
+    szengine_pb.FindNetworkByRecordIdResponse.deserializeBinary,
   );
 
   findNetworkByRecordId(
     request: szengine_pb.FindNetworkByRecordIdRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.FindNetworkByRecordIdResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.FindNetworkByRecordIdResponse>;
 
   findNetworkByRecordId(
     request: szengine_pb.FindNetworkByRecordIdRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.FindNetworkByRecordIdResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.FindNetworkByRecordIdResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.FindNetworkByRecordIdResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.FindNetworkByRecordIdResponse>;
 
   findNetworkByRecordId(
     request: szengine_pb.FindNetworkByRecordIdRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.FindNetworkByRecordIdResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.FindNetworkByRecordIdResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/FindNetworkByRecordId',
+        this.hostname_ + "/szengine.SzEngine/FindNetworkByRecordId",
         request,
         metadata || {},
         this.methodDescriptorFindNetworkByRecordId,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/FindNetworkByRecordId',
-    request,
-    metadata || {},
-    this.methodDescriptorFindNetworkByRecordId);
+      this.hostname_ + "/szengine.SzEngine/FindNetworkByRecordId",
+      request,
+      metadata || {},
+      this.methodDescriptorFindNetworkByRecordId,
+    );
   }
 
   methodDescriptorFindPathByEntityId = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/FindPathByEntityId',
+    "/szengine.SzEngine/FindPathByEntityId",
     grpcWeb.MethodType.UNARY,
     szengine_pb.FindPathByEntityIdRequest,
     szengine_pb.FindPathByEntityIdResponse,
     (request: szengine_pb.FindPathByEntityIdRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.FindPathByEntityIdResponse.deserializeBinary
+    szengine_pb.FindPathByEntityIdResponse.deserializeBinary,
   );
 
   findPathByEntityId(
     request: szengine_pb.FindPathByEntityIdRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.FindPathByEntityIdResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.FindPathByEntityIdResponse>;
 
   findPathByEntityId(
     request: szengine_pb.FindPathByEntityIdRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.FindPathByEntityIdResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.FindPathByEntityIdResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.FindPathByEntityIdResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.FindPathByEntityIdResponse>;
 
   findPathByEntityId(
     request: szengine_pb.FindPathByEntityIdRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.FindPathByEntityIdResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.FindPathByEntityIdResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/FindPathByEntityId',
+        this.hostname_ + "/szengine.SzEngine/FindPathByEntityId",
         request,
         metadata || {},
         this.methodDescriptorFindPathByEntityId,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/FindPathByEntityId',
-    request,
-    metadata || {},
-    this.methodDescriptorFindPathByEntityId);
+      this.hostname_ + "/szengine.SzEngine/FindPathByEntityId",
+      request,
+      metadata || {},
+      this.methodDescriptorFindPathByEntityId,
+    );
   }
 
   methodDescriptorFindPathByRecordId = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/FindPathByRecordId',
+    "/szengine.SzEngine/FindPathByRecordId",
     grpcWeb.MethodType.UNARY,
     szengine_pb.FindPathByRecordIdRequest,
     szengine_pb.FindPathByRecordIdResponse,
     (request: szengine_pb.FindPathByRecordIdRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.FindPathByRecordIdResponse.deserializeBinary
+    szengine_pb.FindPathByRecordIdResponse.deserializeBinary,
   );
 
   findPathByRecordId(
     request: szengine_pb.FindPathByRecordIdRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.FindPathByRecordIdResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.FindPathByRecordIdResponse>;
 
   findPathByRecordId(
     request: szengine_pb.FindPathByRecordIdRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.FindPathByRecordIdResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.FindPathByRecordIdResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.FindPathByRecordIdResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.FindPathByRecordIdResponse>;
 
   findPathByRecordId(
     request: szengine_pb.FindPathByRecordIdRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.FindPathByRecordIdResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.FindPathByRecordIdResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/FindPathByRecordId',
+        this.hostname_ + "/szengine.SzEngine/FindPathByRecordId",
         request,
         metadata || {},
         this.methodDescriptorFindPathByRecordId,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/FindPathByRecordId',
-    request,
-    metadata || {},
-    this.methodDescriptorFindPathByRecordId);
+      this.hostname_ + "/szengine.SzEngine/FindPathByRecordId",
+      request,
+      metadata || {},
+      this.methodDescriptorFindPathByRecordId,
+    );
   }
 
   methodDescriptorGetActiveConfigId = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/GetActiveConfigId',
+    "/szengine.SzEngine/GetActiveConfigId",
     grpcWeb.MethodType.UNARY,
     szengine_pb.GetActiveConfigIdRequest,
     szengine_pb.GetActiveConfigIdResponse,
     (request: szengine_pb.GetActiveConfigIdRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.GetActiveConfigIdResponse.deserializeBinary
+    szengine_pb.GetActiveConfigIdResponse.deserializeBinary,
   );
 
   getActiveConfigId(
     request: szengine_pb.GetActiveConfigIdRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.GetActiveConfigIdResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.GetActiveConfigIdResponse>;
 
   getActiveConfigId(
     request: szengine_pb.GetActiveConfigIdRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.GetActiveConfigIdResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.GetActiveConfigIdResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.GetActiveConfigIdResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.GetActiveConfigIdResponse>;
 
   getActiveConfigId(
     request: szengine_pb.GetActiveConfigIdRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.GetActiveConfigIdResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.GetActiveConfigIdResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/GetActiveConfigId',
+        this.hostname_ + "/szengine.SzEngine/GetActiveConfigId",
         request,
         metadata || {},
         this.methodDescriptorGetActiveConfigId,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/GetActiveConfigId',
-    request,
-    metadata || {},
-    this.methodDescriptorGetActiveConfigId);
+      this.hostname_ + "/szengine.SzEngine/GetActiveConfigId",
+      request,
+      metadata || {},
+      this.methodDescriptorGetActiveConfigId,
+    );
   }
 
   methodDescriptorGetEntityByEntityId = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/GetEntityByEntityId',
+    "/szengine.SzEngine/GetEntityByEntityId",
     grpcWeb.MethodType.UNARY,
     szengine_pb.GetEntityByEntityIdRequest,
     szengine_pb.GetEntityByEntityIdResponse,
     (request: szengine_pb.GetEntityByEntityIdRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.GetEntityByEntityIdResponse.deserializeBinary
+    szengine_pb.GetEntityByEntityIdResponse.deserializeBinary,
   );
 
   getEntityByEntityId(
     request: szengine_pb.GetEntityByEntityIdRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.GetEntityByEntityIdResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.GetEntityByEntityIdResponse>;
 
   getEntityByEntityId(
     request: szengine_pb.GetEntityByEntityIdRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.GetEntityByEntityIdResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.GetEntityByEntityIdResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.GetEntityByEntityIdResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.GetEntityByEntityIdResponse>;
 
   getEntityByEntityId(
     request: szengine_pb.GetEntityByEntityIdRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.GetEntityByEntityIdResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.GetEntityByEntityIdResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/GetEntityByEntityId',
+        this.hostname_ + "/szengine.SzEngine/GetEntityByEntityId",
         request,
         metadata || {},
         this.methodDescriptorGetEntityByEntityId,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/GetEntityByEntityId',
-    request,
-    metadata || {},
-    this.methodDescriptorGetEntityByEntityId);
+      this.hostname_ + "/szengine.SzEngine/GetEntityByEntityId",
+      request,
+      metadata || {},
+      this.methodDescriptorGetEntityByEntityId,
+    );
   }
 
   methodDescriptorGetEntityByRecordId = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/GetEntityByRecordId',
+    "/szengine.SzEngine/GetEntityByRecordId",
     grpcWeb.MethodType.UNARY,
     szengine_pb.GetEntityByRecordIdRequest,
     szengine_pb.GetEntityByRecordIdResponse,
     (request: szengine_pb.GetEntityByRecordIdRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.GetEntityByRecordIdResponse.deserializeBinary
+    szengine_pb.GetEntityByRecordIdResponse.deserializeBinary,
   );
 
   getEntityByRecordId(
     request: szengine_pb.GetEntityByRecordIdRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.GetEntityByRecordIdResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.GetEntityByRecordIdResponse>;
 
   getEntityByRecordId(
     request: szengine_pb.GetEntityByRecordIdRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.GetEntityByRecordIdResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.GetEntityByRecordIdResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.GetEntityByRecordIdResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.GetEntityByRecordIdResponse>;
 
   getEntityByRecordId(
     request: szengine_pb.GetEntityByRecordIdRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.GetEntityByRecordIdResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.GetEntityByRecordIdResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/GetEntityByRecordId',
+        this.hostname_ + "/szengine.SzEngine/GetEntityByRecordId",
         request,
         metadata || {},
         this.methodDescriptorGetEntityByRecordId,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/GetEntityByRecordId',
-    request,
-    metadata || {},
-    this.methodDescriptorGetEntityByRecordId);
+      this.hostname_ + "/szengine.SzEngine/GetEntityByRecordId",
+      request,
+      metadata || {},
+      this.methodDescriptorGetEntityByRecordId,
+    );
   }
 
   methodDescriptorGetRecord = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/GetRecord',
+    "/szengine.SzEngine/GetRecord",
     grpcWeb.MethodType.UNARY,
     szengine_pb.GetRecordRequest,
     szengine_pb.GetRecordResponse,
     (request: szengine_pb.GetRecordRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.GetRecordResponse.deserializeBinary
+    szengine_pb.GetRecordResponse.deserializeBinary,
   );
 
   getRecord(
     request: szengine_pb.GetRecordRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.GetRecordResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.GetRecordResponse>;
 
   getRecord(
     request: szengine_pb.GetRecordRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.GetRecordResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.GetRecordResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.GetRecordResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.GetRecordResponse>;
 
   getRecord(
     request: szengine_pb.GetRecordRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.GetRecordResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.GetRecordResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/GetRecord',
+        this.hostname_ + "/szengine.SzEngine/GetRecord",
         request,
         metadata || {},
         this.methodDescriptorGetRecord,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/GetRecord',
-    request,
-    metadata || {},
-    this.methodDescriptorGetRecord);
+      this.hostname_ + "/szengine.SzEngine/GetRecord",
+      request,
+      metadata || {},
+      this.methodDescriptorGetRecord,
+    );
   }
 
   methodDescriptorGetRecordPreview = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/GetRecordPreview',
+    "/szengine.SzEngine/GetRecordPreview",
     grpcWeb.MethodType.UNARY,
     szengine_pb.GetRecordPreviewRequest,
     szengine_pb.GetRecordPreviewResponse,
     (request: szengine_pb.GetRecordPreviewRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.GetRecordPreviewResponse.deserializeBinary
+    szengine_pb.GetRecordPreviewResponse.deserializeBinary,
   );
 
   getRecordPreview(
     request: szengine_pb.GetRecordPreviewRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.GetRecordPreviewResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.GetRecordPreviewResponse>;
 
   getRecordPreview(
     request: szengine_pb.GetRecordPreviewRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.GetRecordPreviewResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.GetRecordPreviewResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.GetRecordPreviewResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.GetRecordPreviewResponse>;
 
   getRecordPreview(
     request: szengine_pb.GetRecordPreviewRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.GetRecordPreviewResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.GetRecordPreviewResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/GetRecordPreview',
+        this.hostname_ + "/szengine.SzEngine/GetRecordPreview",
         request,
         metadata || {},
         this.methodDescriptorGetRecordPreview,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/GetRecordPreview',
-    request,
-    metadata || {},
-    this.methodDescriptorGetRecordPreview);
+      this.hostname_ + "/szengine.SzEngine/GetRecordPreview",
+      request,
+      metadata || {},
+      this.methodDescriptorGetRecordPreview,
+    );
   }
 
   methodDescriptorGetRedoRecord = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/GetRedoRecord',
+    "/szengine.SzEngine/GetRedoRecord",
     grpcWeb.MethodType.UNARY,
     szengine_pb.GetRedoRecordRequest,
     szengine_pb.GetRedoRecordResponse,
     (request: szengine_pb.GetRedoRecordRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.GetRedoRecordResponse.deserializeBinary
+    szengine_pb.GetRedoRecordResponse.deserializeBinary,
   );
 
   getRedoRecord(
     request: szengine_pb.GetRedoRecordRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.GetRedoRecordResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.GetRedoRecordResponse>;
 
   getRedoRecord(
     request: szengine_pb.GetRedoRecordRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.GetRedoRecordResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.GetRedoRecordResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.GetRedoRecordResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.GetRedoRecordResponse>;
 
   getRedoRecord(
     request: szengine_pb.GetRedoRecordRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.GetRedoRecordResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.GetRedoRecordResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/GetRedoRecord',
+        this.hostname_ + "/szengine.SzEngine/GetRedoRecord",
         request,
         metadata || {},
         this.methodDescriptorGetRedoRecord,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/GetRedoRecord',
-    request,
-    metadata || {},
-    this.methodDescriptorGetRedoRecord);
+      this.hostname_ + "/szengine.SzEngine/GetRedoRecord",
+      request,
+      metadata || {},
+      this.methodDescriptorGetRedoRecord,
+    );
   }
 
   methodDescriptorGetStats = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/GetStats',
+    "/szengine.SzEngine/GetStats",
     grpcWeb.MethodType.UNARY,
     szengine_pb.GetStatsRequest,
     szengine_pb.GetStatsResponse,
     (request: szengine_pb.GetStatsRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.GetStatsResponse.deserializeBinary
+    szengine_pb.GetStatsResponse.deserializeBinary,
   );
 
   getStats(
     request: szengine_pb.GetStatsRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.GetStatsResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.GetStatsResponse>;
 
   getStats(
     request: szengine_pb.GetStatsRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.GetStatsResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.GetStatsResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.GetStatsResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.GetStatsResponse>;
 
   getStats(
     request: szengine_pb.GetStatsRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.GetStatsResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.GetStatsResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/GetStats',
+        this.hostname_ + "/szengine.SzEngine/GetStats",
         request,
         metadata || {},
         this.methodDescriptorGetStats,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/GetStats',
-    request,
-    metadata || {},
-    this.methodDescriptorGetStats);
+      this.hostname_ + "/szengine.SzEngine/GetStats",
+      request,
+      metadata || {},
+      this.methodDescriptorGetStats,
+    );
   }
 
   methodDescriptorGetVirtualEntityByRecordId = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/GetVirtualEntityByRecordId',
+    "/szengine.SzEngine/GetVirtualEntityByRecordId",
     grpcWeb.MethodType.UNARY,
     szengine_pb.GetVirtualEntityByRecordIdRequest,
     szengine_pb.GetVirtualEntityByRecordIdResponse,
     (request: szengine_pb.GetVirtualEntityByRecordIdRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.GetVirtualEntityByRecordIdResponse.deserializeBinary
+    szengine_pb.GetVirtualEntityByRecordIdResponse.deserializeBinary,
   );
 
   getVirtualEntityByRecordId(
     request: szengine_pb.GetVirtualEntityByRecordIdRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.GetVirtualEntityByRecordIdResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.GetVirtualEntityByRecordIdResponse>;
 
   getVirtualEntityByRecordId(
     request: szengine_pb.GetVirtualEntityByRecordIdRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.GetVirtualEntityByRecordIdResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.GetVirtualEntityByRecordIdResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.GetVirtualEntityByRecordIdResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.GetVirtualEntityByRecordIdResponse>;
 
   getVirtualEntityByRecordId(
     request: szengine_pb.GetVirtualEntityByRecordIdRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.GetVirtualEntityByRecordIdResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.GetVirtualEntityByRecordIdResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/GetVirtualEntityByRecordId',
+        this.hostname_ + "/szengine.SzEngine/GetVirtualEntityByRecordId",
         request,
         metadata || {},
         this.methodDescriptorGetVirtualEntityByRecordId,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/GetVirtualEntityByRecordId',
-    request,
-    metadata || {},
-    this.methodDescriptorGetVirtualEntityByRecordId);
+      this.hostname_ + "/szengine.SzEngine/GetVirtualEntityByRecordId",
+      request,
+      metadata || {},
+      this.methodDescriptorGetVirtualEntityByRecordId,
+    );
   }
 
   methodDescriptorHowEntityByEntityId = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/HowEntityByEntityId',
+    "/szengine.SzEngine/HowEntityByEntityId",
     grpcWeb.MethodType.UNARY,
     szengine_pb.HowEntityByEntityIdRequest,
     szengine_pb.HowEntityByEntityIdResponse,
     (request: szengine_pb.HowEntityByEntityIdRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.HowEntityByEntityIdResponse.deserializeBinary
+    szengine_pb.HowEntityByEntityIdResponse.deserializeBinary,
   );
 
   howEntityByEntityId(
     request: szengine_pb.HowEntityByEntityIdRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.HowEntityByEntityIdResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.HowEntityByEntityIdResponse>;
 
   howEntityByEntityId(
     request: szengine_pb.HowEntityByEntityIdRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.HowEntityByEntityIdResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.HowEntityByEntityIdResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.HowEntityByEntityIdResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.HowEntityByEntityIdResponse>;
 
   howEntityByEntityId(
     request: szengine_pb.HowEntityByEntityIdRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.HowEntityByEntityIdResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.HowEntityByEntityIdResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/HowEntityByEntityId',
+        this.hostname_ + "/szengine.SzEngine/HowEntityByEntityId",
         request,
         metadata || {},
         this.methodDescriptorHowEntityByEntityId,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/HowEntityByEntityId',
-    request,
-    metadata || {},
-    this.methodDescriptorHowEntityByEntityId);
+      this.hostname_ + "/szengine.SzEngine/HowEntityByEntityId",
+      request,
+      metadata || {},
+      this.methodDescriptorHowEntityByEntityId,
+    );
   }
 
   methodDescriptorPrimeEngine = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/PrimeEngine',
+    "/szengine.SzEngine/PrimeEngine",
     grpcWeb.MethodType.UNARY,
     szengine_pb.PrimeEngineRequest,
     szengine_pb.PrimeEngineResponse,
     (request: szengine_pb.PrimeEngineRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.PrimeEngineResponse.deserializeBinary
+    szengine_pb.PrimeEngineResponse.deserializeBinary,
   );
 
   primeEngine(
     request: szengine_pb.PrimeEngineRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.PrimeEngineResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.PrimeEngineResponse>;
 
   primeEngine(
     request: szengine_pb.PrimeEngineRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.PrimeEngineResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.PrimeEngineResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.PrimeEngineResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.PrimeEngineResponse>;
 
   primeEngine(
     request: szengine_pb.PrimeEngineRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.PrimeEngineResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.PrimeEngineResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/PrimeEngine',
+        this.hostname_ + "/szengine.SzEngine/PrimeEngine",
         request,
         metadata || {},
         this.methodDescriptorPrimeEngine,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/PrimeEngine',
-    request,
-    metadata || {},
-    this.methodDescriptorPrimeEngine);
+      this.hostname_ + "/szengine.SzEngine/PrimeEngine",
+      request,
+      metadata || {},
+      this.methodDescriptorPrimeEngine,
+    );
   }
 
   methodDescriptorProcessRedoRecord = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/ProcessRedoRecord',
+    "/szengine.SzEngine/ProcessRedoRecord",
     grpcWeb.MethodType.UNARY,
     szengine_pb.ProcessRedoRecordRequest,
     szengine_pb.ProcessRedoRecordResponse,
     (request: szengine_pb.ProcessRedoRecordRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.ProcessRedoRecordResponse.deserializeBinary
+    szengine_pb.ProcessRedoRecordResponse.deserializeBinary,
   );
 
   processRedoRecord(
     request: szengine_pb.ProcessRedoRecordRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.ProcessRedoRecordResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.ProcessRedoRecordResponse>;
 
   processRedoRecord(
     request: szengine_pb.ProcessRedoRecordRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.ProcessRedoRecordResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.ProcessRedoRecordResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.ProcessRedoRecordResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.ProcessRedoRecordResponse>;
 
   processRedoRecord(
     request: szengine_pb.ProcessRedoRecordRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.ProcessRedoRecordResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.ProcessRedoRecordResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/ProcessRedoRecord',
+        this.hostname_ + "/szengine.SzEngine/ProcessRedoRecord",
         request,
         metadata || {},
         this.methodDescriptorProcessRedoRecord,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/ProcessRedoRecord',
-    request,
-    metadata || {},
-    this.methodDescriptorProcessRedoRecord);
+      this.hostname_ + "/szengine.SzEngine/ProcessRedoRecord",
+      request,
+      metadata || {},
+      this.methodDescriptorProcessRedoRecord,
+    );
   }
 
   methodDescriptorReevaluateEntity = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/ReevaluateEntity',
+    "/szengine.SzEngine/ReevaluateEntity",
     grpcWeb.MethodType.UNARY,
     szengine_pb.ReevaluateEntityRequest,
     szengine_pb.ReevaluateEntityResponse,
     (request: szengine_pb.ReevaluateEntityRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.ReevaluateEntityResponse.deserializeBinary
+    szengine_pb.ReevaluateEntityResponse.deserializeBinary,
   );
 
   reevaluateEntity(
     request: szengine_pb.ReevaluateEntityRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.ReevaluateEntityResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.ReevaluateEntityResponse>;
 
   reevaluateEntity(
     request: szengine_pb.ReevaluateEntityRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.ReevaluateEntityResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.ReevaluateEntityResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.ReevaluateEntityResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.ReevaluateEntityResponse>;
 
   reevaluateEntity(
     request: szengine_pb.ReevaluateEntityRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.ReevaluateEntityResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.ReevaluateEntityResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/ReevaluateEntity',
+        this.hostname_ + "/szengine.SzEngine/ReevaluateEntity",
         request,
         metadata || {},
         this.methodDescriptorReevaluateEntity,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/ReevaluateEntity',
-    request,
-    metadata || {},
-    this.methodDescriptorReevaluateEntity);
+      this.hostname_ + "/szengine.SzEngine/ReevaluateEntity",
+      request,
+      metadata || {},
+      this.methodDescriptorReevaluateEntity,
+    );
   }
 
   methodDescriptorReevaluateRecord = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/ReevaluateRecord',
+    "/szengine.SzEngine/ReevaluateRecord",
     grpcWeb.MethodType.UNARY,
     szengine_pb.ReevaluateRecordRequest,
     szengine_pb.ReevaluateRecordResponse,
     (request: szengine_pb.ReevaluateRecordRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.ReevaluateRecordResponse.deserializeBinary
+    szengine_pb.ReevaluateRecordResponse.deserializeBinary,
   );
 
   reevaluateRecord(
     request: szengine_pb.ReevaluateRecordRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.ReevaluateRecordResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.ReevaluateRecordResponse>;
 
   reevaluateRecord(
     request: szengine_pb.ReevaluateRecordRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.ReevaluateRecordResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.ReevaluateRecordResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.ReevaluateRecordResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.ReevaluateRecordResponse>;
 
   reevaluateRecord(
     request: szengine_pb.ReevaluateRecordRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.ReevaluateRecordResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.ReevaluateRecordResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/ReevaluateRecord',
+        this.hostname_ + "/szengine.SzEngine/ReevaluateRecord",
         request,
         metadata || {},
         this.methodDescriptorReevaluateRecord,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/ReevaluateRecord',
-    request,
-    metadata || {},
-    this.methodDescriptorReevaluateRecord);
+      this.hostname_ + "/szengine.SzEngine/ReevaluateRecord",
+      request,
+      metadata || {},
+      this.methodDescriptorReevaluateRecord,
+    );
   }
 
   methodDescriptorReinitialize = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/Reinitialize',
+    "/szengine.SzEngine/Reinitialize",
     grpcWeb.MethodType.UNARY,
     szengine_pb.ReinitializeRequest,
     szengine_pb.ReinitializeResponse,
     (request: szengine_pb.ReinitializeRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.ReinitializeResponse.deserializeBinary
+    szengine_pb.ReinitializeResponse.deserializeBinary,
   );
 
   reinitialize(
     request: szengine_pb.ReinitializeRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.ReinitializeResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.ReinitializeResponse>;
 
   reinitialize(
     request: szengine_pb.ReinitializeRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.ReinitializeResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.ReinitializeResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.ReinitializeResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.ReinitializeResponse>;
 
   reinitialize(
     request: szengine_pb.ReinitializeRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.ReinitializeResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.ReinitializeResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/Reinitialize',
+        this.hostname_ + "/szengine.SzEngine/Reinitialize",
         request,
         metadata || {},
         this.methodDescriptorReinitialize,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/Reinitialize',
-    request,
-    metadata || {},
-    this.methodDescriptorReinitialize);
+      this.hostname_ + "/szengine.SzEngine/Reinitialize",
+      request,
+      metadata || {},
+      this.methodDescriptorReinitialize,
+    );
   }
 
   methodDescriptorSearchByAttributes = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/SearchByAttributes',
+    "/szengine.SzEngine/SearchByAttributes",
     grpcWeb.MethodType.UNARY,
     szengine_pb.SearchByAttributesRequest,
     szengine_pb.SearchByAttributesResponse,
     (request: szengine_pb.SearchByAttributesRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.SearchByAttributesResponse.deserializeBinary
+    szengine_pb.SearchByAttributesResponse.deserializeBinary,
   );
 
   searchByAttributes(
     request: szengine_pb.SearchByAttributesRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.SearchByAttributesResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.SearchByAttributesResponse>;
 
   searchByAttributes(
     request: szengine_pb.SearchByAttributesRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.SearchByAttributesResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.SearchByAttributesResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.SearchByAttributesResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.SearchByAttributesResponse>;
 
   searchByAttributes(
     request: szengine_pb.SearchByAttributesRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.SearchByAttributesResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.SearchByAttributesResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/SearchByAttributes',
+        this.hostname_ + "/szengine.SzEngine/SearchByAttributes",
         request,
         metadata || {},
         this.methodDescriptorSearchByAttributes,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/SearchByAttributes',
-    request,
-    metadata || {},
-    this.methodDescriptorSearchByAttributes);
+      this.hostname_ + "/szengine.SzEngine/SearchByAttributes",
+      request,
+      metadata || {},
+      this.methodDescriptorSearchByAttributes,
+    );
   }
 
   methodDescriptorStreamExportCsvEntityReport = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/StreamExportCsvEntityReport',
+    "/szengine.SzEngine/StreamExportCsvEntityReport",
     grpcWeb.MethodType.SERVER_STREAMING,
     szengine_pb.StreamExportCsvEntityReportRequest,
     szengine_pb.StreamExportCsvEntityReportResponse,
     (request: szengine_pb.StreamExportCsvEntityReportRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.StreamExportCsvEntityReportResponse.deserializeBinary
+    szengine_pb.StreamExportCsvEntityReportResponse.deserializeBinary,
   );
 
   streamExportCsvEntityReport(
     request: szengine_pb.StreamExportCsvEntityReportRequest,
-    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<szengine_pb.StreamExportCsvEntityReportResponse> {
+    metadata?: grpcWeb.Metadata,
+  ): grpcWeb.ClientReadableStream<szengine_pb.StreamExportCsvEntityReportResponse> {
     return this.client_.serverStreaming(
-      this.hostname_ +
-        '/szengine.SzEngine/StreamExportCsvEntityReport',
+      this.hostname_ + "/szengine.SzEngine/StreamExportCsvEntityReport",
       request,
       metadata || {},
-      this.methodDescriptorStreamExportCsvEntityReport);
+      this.methodDescriptorStreamExportCsvEntityReport,
+    );
   }
 
   methodDescriptorStreamExportJsonEntityReport = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/StreamExportJsonEntityReport',
+    "/szengine.SzEngine/StreamExportJsonEntityReport",
     grpcWeb.MethodType.SERVER_STREAMING,
     szengine_pb.StreamExportJsonEntityReportRequest,
     szengine_pb.StreamExportJsonEntityReportResponse,
     (request: szengine_pb.StreamExportJsonEntityReportRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.StreamExportJsonEntityReportResponse.deserializeBinary
+    szengine_pb.StreamExportJsonEntityReportResponse.deserializeBinary,
   );
 
   streamExportJsonEntityReport(
     request: szengine_pb.StreamExportJsonEntityReportRequest,
-    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<szengine_pb.StreamExportJsonEntityReportResponse> {
+    metadata?: grpcWeb.Metadata,
+  ): grpcWeb.ClientReadableStream<szengine_pb.StreamExportJsonEntityReportResponse> {
     return this.client_.serverStreaming(
-      this.hostname_ +
-        '/szengine.SzEngine/StreamExportJsonEntityReport',
+      this.hostname_ + "/szengine.SzEngine/StreamExportJsonEntityReport",
       request,
       metadata || {},
-      this.methodDescriptorStreamExportJsonEntityReport);
+      this.methodDescriptorStreamExportJsonEntityReport,
+    );
   }
 
   methodDescriptorWhyEntities = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/WhyEntities',
+    "/szengine.SzEngine/WhyEntities",
     grpcWeb.MethodType.UNARY,
     szengine_pb.WhyEntitiesRequest,
     szengine_pb.WhyEntitiesResponse,
     (request: szengine_pb.WhyEntitiesRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.WhyEntitiesResponse.deserializeBinary
+    szengine_pb.WhyEntitiesResponse.deserializeBinary,
   );
 
   whyEntities(
     request: szengine_pb.WhyEntitiesRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.WhyEntitiesResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.WhyEntitiesResponse>;
 
   whyEntities(
     request: szengine_pb.WhyEntitiesRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.WhyEntitiesResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.WhyEntitiesResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.WhyEntitiesResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.WhyEntitiesResponse>;
 
   whyEntities(
     request: szengine_pb.WhyEntitiesRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.WhyEntitiesResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.WhyEntitiesResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/WhyEntities',
+        this.hostname_ + "/szengine.SzEngine/WhyEntities",
         request,
         metadata || {},
         this.methodDescriptorWhyEntities,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/WhyEntities',
-    request,
-    metadata || {},
-    this.methodDescriptorWhyEntities);
+      this.hostname_ + "/szengine.SzEngine/WhyEntities",
+      request,
+      metadata || {},
+      this.methodDescriptorWhyEntities,
+    );
   }
 
   methodDescriptorWhyRecordInEntity = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/WhyRecordInEntity',
+    "/szengine.SzEngine/WhyRecordInEntity",
     grpcWeb.MethodType.UNARY,
     szengine_pb.WhyRecordInEntityRequest,
     szengine_pb.WhyRecordInEntityResponse,
     (request: szengine_pb.WhyRecordInEntityRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.WhyRecordInEntityResponse.deserializeBinary
+    szengine_pb.WhyRecordInEntityResponse.deserializeBinary,
   );
 
   whyRecordInEntity(
     request: szengine_pb.WhyRecordInEntityRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.WhyRecordInEntityResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.WhyRecordInEntityResponse>;
 
   whyRecordInEntity(
     request: szengine_pb.WhyRecordInEntityRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.WhyRecordInEntityResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.WhyRecordInEntityResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.WhyRecordInEntityResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.WhyRecordInEntityResponse>;
 
   whyRecordInEntity(
     request: szengine_pb.WhyRecordInEntityRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.WhyRecordInEntityResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.WhyRecordInEntityResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/WhyRecordInEntity',
+        this.hostname_ + "/szengine.SzEngine/WhyRecordInEntity",
         request,
         metadata || {},
         this.methodDescriptorWhyRecordInEntity,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/WhyRecordInEntity',
-    request,
-    metadata || {},
-    this.methodDescriptorWhyRecordInEntity);
+      this.hostname_ + "/szengine.SzEngine/WhyRecordInEntity",
+      request,
+      metadata || {},
+      this.methodDescriptorWhyRecordInEntity,
+    );
   }
 
   methodDescriptorWhyRecords = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/WhyRecords',
+    "/szengine.SzEngine/WhyRecords",
     grpcWeb.MethodType.UNARY,
     szengine_pb.WhyRecordsRequest,
     szengine_pb.WhyRecordsResponse,
     (request: szengine_pb.WhyRecordsRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.WhyRecordsResponse.deserializeBinary
+    szengine_pb.WhyRecordsResponse.deserializeBinary,
   );
 
   whyRecords(
     request: szengine_pb.WhyRecordsRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.WhyRecordsResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.WhyRecordsResponse>;
 
   whyRecords(
     request: szengine_pb.WhyRecordsRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.WhyRecordsResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.WhyRecordsResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.WhyRecordsResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.WhyRecordsResponse>;
 
   whyRecords(
     request: szengine_pb.WhyRecordsRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.WhyRecordsResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.WhyRecordsResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/WhyRecords',
+        this.hostname_ + "/szengine.SzEngine/WhyRecords",
         request,
         metadata || {},
         this.methodDescriptorWhyRecords,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/WhyRecords',
-    request,
-    metadata || {},
-    this.methodDescriptorWhyRecords);
+      this.hostname_ + "/szengine.SzEngine/WhyRecords",
+      request,
+      metadata || {},
+      this.methodDescriptorWhyRecords,
+    );
   }
 
   methodDescriptorWhySearch = new grpcWeb.MethodDescriptor(
-    '/szengine.SzEngine/WhySearch',
+    "/szengine.SzEngine/WhySearch",
     grpcWeb.MethodType.UNARY,
     szengine_pb.WhySearchRequest,
     szengine_pb.WhySearchResponse,
     (request: szengine_pb.WhySearchRequest) => {
       return request.serializeBinary();
     },
-    szengine_pb.WhySearchResponse.deserializeBinary
+    szengine_pb.WhySearchResponse.deserializeBinary,
   );
 
   whySearch(
     request: szengine_pb.WhySearchRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szengine_pb.WhySearchResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szengine_pb.WhySearchResponse>;
 
   whySearch(
     request: szengine_pb.WhySearchRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szengine_pb.WhySearchResponse) => void): grpcWeb.ClientReadableStream<szengine_pb.WhySearchResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.WhySearchResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szengine_pb.WhySearchResponse>;
 
   whySearch(
     request: szengine_pb.WhySearchRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szengine_pb.WhySearchResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szengine_pb.WhySearchResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szengine.SzEngine/WhySearch',
+        this.hostname_ + "/szengine.SzEngine/WhySearch",
         request,
         metadata || {},
         this.methodDescriptorWhySearch,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szengine.SzEngine/WhySearch',
-    request,
-    metadata || {},
-    this.methodDescriptorWhySearch);
+      this.hostname_ + "/szengine.SzEngine/WhySearch",
+      request,
+      metadata || {},
+      this.methodDescriptorWhySearch,
+    );
   }
-
 }
-

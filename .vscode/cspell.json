@@ -79,9 +79,5 @@
     "toplevel",
     "unrecoverablly"
   ],
-  "ignorePaths": [
-    ".git/**",
-    ".gitignore",
-    "docs/assets/main.js"
-  ]
+  "ignorePaths": [".git/**", ".gitignore", "docs/assets/main.js"]
 }

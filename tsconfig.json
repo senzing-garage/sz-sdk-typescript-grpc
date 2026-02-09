@@ -1,45 +1,40 @@
 {
-    "compilerOptions": {
-      "target": "ES2020",
-      "composite": true,
-      "module": "commonjs",
-      "lib": [
-        "es6",
-        "es2020", "esnext"
-      ],
-      "allowJs": false,
-      "outDir": "dist/@senzing/sz-sdk-typescript-grpc",
-      "rootDir": "./",
-      "strict": true,
-      "noImplicitAny": true,
-      "esModuleInterop": true,
-      "resolveJsonModule": true,
-      "removeComments": false,
-      "sourceMap": true,
-      "declaration": true,
-      "noEmitOnError": true
-    },
-    "include": [
-      "src/**/*.ts"
-    ],
-    "exclude": [
-      "dist",
-      "dist/**/*",
-      "node_modules",
-      "examples",
-      "examples/*",
-      "examples/**",
-      "examples/**/*",
-      "src/web/*",
-      "src/**/*_web_*.ts",
-      "src/index.web.ts",
-      "src/abstracts/szGrpcWebBase.ts",
-      "src/szGrpcWeb*.ts",
-      "src/**/*d.ts",
-      "package-lock.json",
-      "package.json",
-      "package.web.json",
-      "build/build.js",
-      "build/build.web.js"
-    ]
+  "compilerOptions": {
+    "target": "ES2020",
+    "composite": true,
+    "module": "commonjs",
+    "lib": ["es6", "es2020", "esnext"],
+    "allowJs": false,
+    "outDir": "dist/@senzing/sz-sdk-typescript-grpc",
+    "rootDir": "./",
+    "strict": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "declaration": true,
+    "noEmitOnError": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": [
+    "dist",
+    "dist/**/*",
+    "node_modules",
+    "examples",
+    "examples/*",
+    "examples/**",
+    "examples/**/*",
+    "src/web/*",
+    "src/**/*_web_*.ts",
+    "src/index.web.ts",
+    "src/abstracts/szGrpcWebBase.ts",
+    "src/szGrpcWeb*.ts",
+    "src/**/*d.ts",
+    "package-lock.json",
+    "package.json",
+    "package.web.json",
+    "build/build.js",
+    "build/build.web.js"
+  ]
 }

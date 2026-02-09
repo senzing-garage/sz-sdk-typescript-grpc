@@ -10,120 +10,131 @@
 // 	protoc              v3.19.1
 // source: szproduct.proto
 
-
 /* eslint-disable */
 // @ts-nocheck
 
+import * as grpcWeb from "grpc-web";
 
-import * as grpcWeb from 'grpc-web';
-
-import * as szproduct_pb from './szproduct_web_pb'; // proto import: "szproduct.proto"
-
+import * as szproduct_pb from "./szproduct_web_pb"; // proto import: "szproduct.proto"
 
 export class SzProductClient {
   client_: grpcWeb.AbstractClientBase;
   hostname_: string;
-  credentials_: null | { [index: string]: string; };
-  options_: null | { [index: string]: any; };
+  credentials_: null | { [index: string]: string };
+  options_: null | { [index: string]: any };
 
-  constructor (hostname: string,
-               credentials?: null | { [index: string]: string; },
-               options?: null | { [index: string]: any; }) {
+  constructor(
+    hostname: string,
+    credentials?: null | { [index: string]: string },
+    options?: null | { [index: string]: any },
+  ) {
     if (!options) options = {};
     if (!credentials) credentials = {};
-    options['format'] = 'text';
+    options["format"] = "text";
 
     this.client_ = new grpcWeb.GrpcWebClientBase(options);
-    this.hostname_ = hostname.replace(/\/+$/, '');
+    this.hostname_ = hostname.replace(/\/+$/, "");
     this.credentials_ = credentials;
     this.options_ = options;
   }
 
   methodDescriptorGetLicense = new grpcWeb.MethodDescriptor(
-    '/szproduct.SzProduct/GetLicense',
+    "/szproduct.SzProduct/GetLicense",
     grpcWeb.MethodType.UNARY,
     szproduct_pb.GetLicenseRequest,
     szproduct_pb.GetLicenseResponse,
     (request: szproduct_pb.GetLicenseRequest) => {
       return request.serializeBinary();
     },
-    szproduct_pb.GetLicenseResponse.deserializeBinary
+    szproduct_pb.GetLicenseResponse.deserializeBinary,
   );
 
   getLicense(
     request: szproduct_pb.GetLicenseRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szproduct_pb.GetLicenseResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szproduct_pb.GetLicenseResponse>;
 
   getLicense(
     request: szproduct_pb.GetLicenseRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szproduct_pb.GetLicenseResponse) => void): grpcWeb.ClientReadableStream<szproduct_pb.GetLicenseResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szproduct_pb.GetLicenseResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szproduct_pb.GetLicenseResponse>;
 
   getLicense(
     request: szproduct_pb.GetLicenseRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szproduct_pb.GetLicenseResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szproduct_pb.GetLicenseResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szproduct.SzProduct/GetLicense',
+        this.hostname_ + "/szproduct.SzProduct/GetLicense",
         request,
         metadata || {},
         this.methodDescriptorGetLicense,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szproduct.SzProduct/GetLicense',
-    request,
-    metadata || {},
-    this.methodDescriptorGetLicense);
+      this.hostname_ + "/szproduct.SzProduct/GetLicense",
+      request,
+      metadata || {},
+      this.methodDescriptorGetLicense,
+    );
   }
 
   methodDescriptorGetVersion = new grpcWeb.MethodDescriptor(
-    '/szproduct.SzProduct/GetVersion',
+    "/szproduct.SzProduct/GetVersion",
     grpcWeb.MethodType.UNARY,
     szproduct_pb.GetVersionRequest,
     szproduct_pb.GetVersionResponse,
     (request: szproduct_pb.GetVersionRequest) => {
       return request.serializeBinary();
     },
-    szproduct_pb.GetVersionResponse.deserializeBinary
+    szproduct_pb.GetVersionResponse.deserializeBinary,
   );
 
   getVersion(
     request: szproduct_pb.GetVersionRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szproduct_pb.GetVersionResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szproduct_pb.GetVersionResponse>;
 
   getVersion(
     request: szproduct_pb.GetVersionRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szproduct_pb.GetVersionResponse) => void): grpcWeb.ClientReadableStream<szproduct_pb.GetVersionResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szproduct_pb.GetVersionResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szproduct_pb.GetVersionResponse>;
 
   getVersion(
     request: szproduct_pb.GetVersionRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szproduct_pb.GetVersionResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szproduct_pb.GetVersionResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szproduct.SzProduct/GetVersion',
+        this.hostname_ + "/szproduct.SzProduct/GetVersion",
         request,
         metadata || {},
         this.methodDescriptorGetVersion,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szproduct.SzProduct/GetVersion',
-    request,
-    metadata || {},
-    this.methodDescriptorGetVersion);
+      this.hostname_ + "/szproduct.SzProduct/GetVersion",
+      request,
+      metadata || {},
+      this.methodDescriptorGetVersion,
+    );
   }
-
 }
-
