@@ -5,24 +5,22 @@ import { SzDiagnostic } from "./szDiagnostic";
 import { SzEngine } from "./szEngine";
 
 export interface SzEnvironmentOptions {}
-export abstract class SzEnvironmentOptions {
-
-}
+export abstract class SzEnvironmentOptions {}
 
 export abstract class SzEnvironment {
-    // these internal properties store either the core or grpc instances of the
-    // concrete modules in the derived classes
-    protected abstract _configManager: SzConfigManager | undefined;
-    protected abstract _diagnostic: SzDiagnostic | undefined;
-    protected abstract _engine: SzEngine | undefined;
-    protected abstract _product: SzProduct | undefined;
+  // these internal properties store either the core or grpc instances of the
+  // concrete modules in the derived classes
+  protected abstract _configManager: SzConfigManager | undefined;
+  protected abstract _diagnostic: SzDiagnostic | undefined;
+  protected abstract _engine: SzEngine | undefined;
+  protected abstract _product: SzProduct | undefined;
 
-    public abstract getConfigManager(): SzConfigManager;
-    public abstract getDiagnostic(): SzDiagnostic;
-    public abstract getEngine(): SzEngine;
-    public abstract getProduct(): SzProduct;
+  public abstract getConfigManager(): SzConfigManager;
+  public abstract getDiagnostic(): SzDiagnostic;
+  public abstract getEngine(): SzEngine;
+  public abstract getProduct(): SzProduct;
 
-    constructor(parameters: SzEnvironmentOptions) { 
-        return; 
-    }
+  constructor(parameters: SzEnvironmentOptions) {
+    return;
+  }
 }

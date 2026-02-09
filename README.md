@@ -33,6 +33,7 @@ The Class and method documentation can be found at [Documentation].
 
 ## Use
 
+See the [Examples] directory for more usage samples.
 The following example shows how to start a Senzing gRPC server Docker container
 and access it using the `@senzing/sz-sdk-typescript-grpc` package.
 
@@ -69,7 +70,6 @@ and access it using the `@senzing/sz-sdk-typescript-grpc` package.
    ```
 
 1. Create a new TS file:
-
    1. Option #1: Download the helloworld example from Github:
 
    ```console

@@ -10,249 +10,282 @@
 // 	protoc              v3.19.1
 // source: szdiagnostic.proto
 
-
 /* eslint-disable */
 // @ts-nocheck
 
+import * as grpcWeb from "grpc-web";
 
-import * as grpcWeb from 'grpc-web';
-
-import * as szdiagnostic_pb from './szdiagnostic_web_pb'; // proto import: "szdiagnostic.proto"
-
+import * as szdiagnostic_pb from "./szdiagnostic_web_pb"; // proto import: "szdiagnostic.proto"
 
 export class SzDiagnosticClient {
   client_: grpcWeb.AbstractClientBase;
   hostname_: string;
-  credentials_: null | { [index: string]: string; };
-  options_: null | { [index: string]: any; };
+  credentials_: null | { [index: string]: string };
+  options_: null | { [index: string]: any };
 
-  constructor (hostname: string,
-               credentials?: null | { [index: string]: string; },
-               options?: null | { [index: string]: any; }) {
+  constructor(
+    hostname: string,
+    credentials?: null | { [index: string]: string },
+    options?: null | { [index: string]: any },
+  ) {
     if (!options) options = {};
     if (!credentials) credentials = {};
-    options['format'] = 'text';
+    options["format"] = "text";
 
     this.client_ = new grpcWeb.GrpcWebClientBase(options);
-    this.hostname_ = hostname.replace(/\/+$/, '');
+    this.hostname_ = hostname.replace(/\/+$/, "");
     this.credentials_ = credentials;
     this.options_ = options;
   }
 
   methodDescriptorCheckRepositoryPerformance = new grpcWeb.MethodDescriptor(
-    '/szdiagnostic.SzDiagnostic/CheckRepositoryPerformance',
+    "/szdiagnostic.SzDiagnostic/CheckRepositoryPerformance",
     grpcWeb.MethodType.UNARY,
     szdiagnostic_pb.CheckRepositoryPerformanceRequest,
     szdiagnostic_pb.CheckRepositoryPerformanceResponse,
     (request: szdiagnostic_pb.CheckRepositoryPerformanceRequest) => {
       return request.serializeBinary();
     },
-    szdiagnostic_pb.CheckRepositoryPerformanceResponse.deserializeBinary
+    szdiagnostic_pb.CheckRepositoryPerformanceResponse.deserializeBinary,
   );
 
   checkRepositoryPerformance(
     request: szdiagnostic_pb.CheckRepositoryPerformanceRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szdiagnostic_pb.CheckRepositoryPerformanceResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szdiagnostic_pb.CheckRepositoryPerformanceResponse>;
 
   checkRepositoryPerformance(
     request: szdiagnostic_pb.CheckRepositoryPerformanceRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szdiagnostic_pb.CheckRepositoryPerformanceResponse) => void): grpcWeb.ClientReadableStream<szdiagnostic_pb.CheckRepositoryPerformanceResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szdiagnostic_pb.CheckRepositoryPerformanceResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szdiagnostic_pb.CheckRepositoryPerformanceResponse>;
 
   checkRepositoryPerformance(
     request: szdiagnostic_pb.CheckRepositoryPerformanceRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szdiagnostic_pb.CheckRepositoryPerformanceResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szdiagnostic_pb.CheckRepositoryPerformanceResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
-          '/szdiagnostic.SzDiagnostic/CheckRepositoryPerformance',
+          "/szdiagnostic.SzDiagnostic/CheckRepositoryPerformance",
         request,
         metadata || {},
         this.methodDescriptorCheckRepositoryPerformance,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szdiagnostic.SzDiagnostic/CheckRepositoryPerformance',
-    request,
-    metadata || {},
-    this.methodDescriptorCheckRepositoryPerformance);
+      this.hostname_ + "/szdiagnostic.SzDiagnostic/CheckRepositoryPerformance",
+      request,
+      metadata || {},
+      this.methodDescriptorCheckRepositoryPerformance,
+    );
   }
 
   methodDescriptorGetFeature = new grpcWeb.MethodDescriptor(
-    '/szdiagnostic.SzDiagnostic/GetFeature',
+    "/szdiagnostic.SzDiagnostic/GetFeature",
     grpcWeb.MethodType.UNARY,
     szdiagnostic_pb.GetFeatureRequest,
     szdiagnostic_pb.GetFeatureResponse,
     (request: szdiagnostic_pb.GetFeatureRequest) => {
       return request.serializeBinary();
     },
-    szdiagnostic_pb.GetFeatureResponse.deserializeBinary
+    szdiagnostic_pb.GetFeatureResponse.deserializeBinary,
   );
 
   getFeature(
     request: szdiagnostic_pb.GetFeatureRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szdiagnostic_pb.GetFeatureResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szdiagnostic_pb.GetFeatureResponse>;
 
   getFeature(
     request: szdiagnostic_pb.GetFeatureRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szdiagnostic_pb.GetFeatureResponse) => void): grpcWeb.ClientReadableStream<szdiagnostic_pb.GetFeatureResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szdiagnostic_pb.GetFeatureResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szdiagnostic_pb.GetFeatureResponse>;
 
   getFeature(
     request: szdiagnostic_pb.GetFeatureRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szdiagnostic_pb.GetFeatureResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szdiagnostic_pb.GetFeatureResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szdiagnostic.SzDiagnostic/GetFeature',
+        this.hostname_ + "/szdiagnostic.SzDiagnostic/GetFeature",
         request,
         metadata || {},
         this.methodDescriptorGetFeature,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szdiagnostic.SzDiagnostic/GetFeature',
-    request,
-    metadata || {},
-    this.methodDescriptorGetFeature);
+      this.hostname_ + "/szdiagnostic.SzDiagnostic/GetFeature",
+      request,
+      metadata || {},
+      this.methodDescriptorGetFeature,
+    );
   }
 
   methodDescriptorGetRepositoryInfo = new grpcWeb.MethodDescriptor(
-    '/szdiagnostic.SzDiagnostic/GetRepositoryInfo',
+    "/szdiagnostic.SzDiagnostic/GetRepositoryInfo",
     grpcWeb.MethodType.UNARY,
     szdiagnostic_pb.GetRepositoryInfoRequest,
     szdiagnostic_pb.GetRepositoryInfoResponse,
     (request: szdiagnostic_pb.GetRepositoryInfoRequest) => {
       return request.serializeBinary();
     },
-    szdiagnostic_pb.GetRepositoryInfoResponse.deserializeBinary
+    szdiagnostic_pb.GetRepositoryInfoResponse.deserializeBinary,
   );
 
   getRepositoryInfo(
     request: szdiagnostic_pb.GetRepositoryInfoRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szdiagnostic_pb.GetRepositoryInfoResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szdiagnostic_pb.GetRepositoryInfoResponse>;
 
   getRepositoryInfo(
     request: szdiagnostic_pb.GetRepositoryInfoRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szdiagnostic_pb.GetRepositoryInfoResponse) => void): grpcWeb.ClientReadableStream<szdiagnostic_pb.GetRepositoryInfoResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szdiagnostic_pb.GetRepositoryInfoResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szdiagnostic_pb.GetRepositoryInfoResponse>;
 
   getRepositoryInfo(
     request: szdiagnostic_pb.GetRepositoryInfoRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szdiagnostic_pb.GetRepositoryInfoResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szdiagnostic_pb.GetRepositoryInfoResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szdiagnostic.SzDiagnostic/GetRepositoryInfo',
+        this.hostname_ + "/szdiagnostic.SzDiagnostic/GetRepositoryInfo",
         request,
         metadata || {},
         this.methodDescriptorGetRepositoryInfo,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szdiagnostic.SzDiagnostic/GetRepositoryInfo',
-    request,
-    metadata || {},
-    this.methodDescriptorGetRepositoryInfo);
+      this.hostname_ + "/szdiagnostic.SzDiagnostic/GetRepositoryInfo",
+      request,
+      metadata || {},
+      this.methodDescriptorGetRepositoryInfo,
+    );
   }
 
   methodDescriptorPurgeRepository = new grpcWeb.MethodDescriptor(
-    '/szdiagnostic.SzDiagnostic/PurgeRepository',
+    "/szdiagnostic.SzDiagnostic/PurgeRepository",
     grpcWeb.MethodType.UNARY,
     szdiagnostic_pb.PurgeRepositoryRequest,
     szdiagnostic_pb.PurgeRepositoryResponse,
     (request: szdiagnostic_pb.PurgeRepositoryRequest) => {
       return request.serializeBinary();
     },
-    szdiagnostic_pb.PurgeRepositoryResponse.deserializeBinary
+    szdiagnostic_pb.PurgeRepositoryResponse.deserializeBinary,
   );
 
   purgeRepository(
     request: szdiagnostic_pb.PurgeRepositoryRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szdiagnostic_pb.PurgeRepositoryResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szdiagnostic_pb.PurgeRepositoryResponse>;
 
   purgeRepository(
     request: szdiagnostic_pb.PurgeRepositoryRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szdiagnostic_pb.PurgeRepositoryResponse) => void): grpcWeb.ClientReadableStream<szdiagnostic_pb.PurgeRepositoryResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szdiagnostic_pb.PurgeRepositoryResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szdiagnostic_pb.PurgeRepositoryResponse>;
 
   purgeRepository(
     request: szdiagnostic_pb.PurgeRepositoryRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szdiagnostic_pb.PurgeRepositoryResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szdiagnostic_pb.PurgeRepositoryResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szdiagnostic.SzDiagnostic/PurgeRepository',
+        this.hostname_ + "/szdiagnostic.SzDiagnostic/PurgeRepository",
         request,
         metadata || {},
         this.methodDescriptorPurgeRepository,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szdiagnostic.SzDiagnostic/PurgeRepository',
-    request,
-    metadata || {},
-    this.methodDescriptorPurgeRepository);
+      this.hostname_ + "/szdiagnostic.SzDiagnostic/PurgeRepository",
+      request,
+      metadata || {},
+      this.methodDescriptorPurgeRepository,
+    );
   }
 
   methodDescriptorReinitialize = new grpcWeb.MethodDescriptor(
-    '/szdiagnostic.SzDiagnostic/Reinitialize',
+    "/szdiagnostic.SzDiagnostic/Reinitialize",
     grpcWeb.MethodType.UNARY,
     szdiagnostic_pb.ReinitializeRequest,
     szdiagnostic_pb.ReinitializeResponse,
     (request: szdiagnostic_pb.ReinitializeRequest) => {
       return request.serializeBinary();
     },
-    szdiagnostic_pb.ReinitializeResponse.deserializeBinary
+    szdiagnostic_pb.ReinitializeResponse.deserializeBinary,
   );
 
   reinitialize(
     request: szdiagnostic_pb.ReinitializeRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szdiagnostic_pb.ReinitializeResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szdiagnostic_pb.ReinitializeResponse>;
 
   reinitialize(
     request: szdiagnostic_pb.ReinitializeRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szdiagnostic_pb.ReinitializeResponse) => void): grpcWeb.ClientReadableStream<szdiagnostic_pb.ReinitializeResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szdiagnostic_pb.ReinitializeResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szdiagnostic_pb.ReinitializeResponse>;
 
   reinitialize(
     request: szdiagnostic_pb.ReinitializeRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szdiagnostic_pb.ReinitializeResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szdiagnostic_pb.ReinitializeResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szdiagnostic.SzDiagnostic/Reinitialize',
+        this.hostname_ + "/szdiagnostic.SzDiagnostic/Reinitialize",
         request,
         metadata || {},
         this.methodDescriptorReinitialize,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szdiagnostic.SzDiagnostic/Reinitialize',
-    request,
-    metadata || {},
-    this.methodDescriptorReinitialize);
+      this.hostname_ + "/szdiagnostic.SzDiagnostic/Reinitialize",
+      request,
+      metadata || {},
+      this.methodDescriptorReinitialize,
+    );
   }
-
 }
-

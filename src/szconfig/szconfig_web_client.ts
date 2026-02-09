@@ -10,206 +10,231 @@
 // 	protoc              v3.19.1
 // source: szconfig.proto
 
-
 /* eslint-disable */
 // @ts-nocheck
 
+import * as grpcWeb from "grpc-web";
 
-import * as grpcWeb from 'grpc-web';
-
-import * as szconfig_pb from './szconfig_web_pb'; // proto import: "szconfig.proto"
-
+import * as szconfig_pb from "./szconfig_web_pb"; // proto import: "szconfig.proto"
 
 export class SzConfigClient {
   client_: grpcWeb.AbstractClientBase;
   hostname_: string;
-  credentials_: null | { [index: string]: string; };
-  options_: null | { [index: string]: any; };
+  credentials_: null | { [index: string]: string };
+  options_: null | { [index: string]: any };
 
-  constructor (hostname: string,
-               credentials?: null | { [index: string]: string; },
-               options?: null | { [index: string]: any; }) {
+  constructor(
+    hostname: string,
+    credentials?: null | { [index: string]: string },
+    options?: null | { [index: string]: any },
+  ) {
     if (!options) options = {};
     if (!credentials) credentials = {};
-    options['format'] = 'text';
+    options["format"] = "text";
 
     this.client_ = new grpcWeb.GrpcWebClientBase(options);
-    this.hostname_ = hostname.replace(/\/+$/, '');
+    this.hostname_ = hostname.replace(/\/+$/, "");
     this.credentials_ = credentials;
     this.options_ = options;
   }
 
   methodDescriptorGetDataSourceRegistry = new grpcWeb.MethodDescriptor(
-    '/szconfig.SzConfig/GetDataSourceRegistry',
+    "/szconfig.SzConfig/GetDataSourceRegistry",
     grpcWeb.MethodType.UNARY,
     szconfig_pb.GetDataSourceRegistryRequest,
     szconfig_pb.GetDataSourceRegistryResponse,
     (request: szconfig_pb.GetDataSourceRegistryRequest) => {
       return request.serializeBinary();
     },
-    szconfig_pb.GetDataSourceRegistryResponse.deserializeBinary
+    szconfig_pb.GetDataSourceRegistryResponse.deserializeBinary,
   );
 
   getDataSourceRegistry(
     request: szconfig_pb.GetDataSourceRegistryRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szconfig_pb.GetDataSourceRegistryResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szconfig_pb.GetDataSourceRegistryResponse>;
 
   getDataSourceRegistry(
     request: szconfig_pb.GetDataSourceRegistryRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szconfig_pb.GetDataSourceRegistryResponse) => void): grpcWeb.ClientReadableStream<szconfig_pb.GetDataSourceRegistryResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szconfig_pb.GetDataSourceRegistryResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szconfig_pb.GetDataSourceRegistryResponse>;
 
   getDataSourceRegistry(
     request: szconfig_pb.GetDataSourceRegistryRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szconfig_pb.GetDataSourceRegistryResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szconfig_pb.GetDataSourceRegistryResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szconfig.SzConfig/GetDataSourceRegistry',
+        this.hostname_ + "/szconfig.SzConfig/GetDataSourceRegistry",
         request,
         metadata || {},
         this.methodDescriptorGetDataSourceRegistry,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szconfig.SzConfig/GetDataSourceRegistry',
-    request,
-    metadata || {},
-    this.methodDescriptorGetDataSourceRegistry);
+      this.hostname_ + "/szconfig.SzConfig/GetDataSourceRegistry",
+      request,
+      metadata || {},
+      this.methodDescriptorGetDataSourceRegistry,
+    );
   }
 
   methodDescriptorRegisterDataSource = new grpcWeb.MethodDescriptor(
-    '/szconfig.SzConfig/RegisterDataSource',
+    "/szconfig.SzConfig/RegisterDataSource",
     grpcWeb.MethodType.UNARY,
     szconfig_pb.RegisterDataSourceRequest,
     szconfig_pb.RegisterDataSourceResponse,
     (request: szconfig_pb.RegisterDataSourceRequest) => {
       return request.serializeBinary();
     },
-    szconfig_pb.RegisterDataSourceResponse.deserializeBinary
+    szconfig_pb.RegisterDataSourceResponse.deserializeBinary,
   );
 
   registerDataSource(
     request: szconfig_pb.RegisterDataSourceRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szconfig_pb.RegisterDataSourceResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szconfig_pb.RegisterDataSourceResponse>;
 
   registerDataSource(
     request: szconfig_pb.RegisterDataSourceRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szconfig_pb.RegisterDataSourceResponse) => void): grpcWeb.ClientReadableStream<szconfig_pb.RegisterDataSourceResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szconfig_pb.RegisterDataSourceResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szconfig_pb.RegisterDataSourceResponse>;
 
   registerDataSource(
     request: szconfig_pb.RegisterDataSourceRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szconfig_pb.RegisterDataSourceResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szconfig_pb.RegisterDataSourceResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szconfig.SzConfig/RegisterDataSource',
+        this.hostname_ + "/szconfig.SzConfig/RegisterDataSource",
         request,
         metadata || {},
         this.methodDescriptorRegisterDataSource,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szconfig.SzConfig/RegisterDataSource',
-    request,
-    metadata || {},
-    this.methodDescriptorRegisterDataSource);
+      this.hostname_ + "/szconfig.SzConfig/RegisterDataSource",
+      request,
+      metadata || {},
+      this.methodDescriptorRegisterDataSource,
+    );
   }
 
   methodDescriptorUnregisterDataSource = new grpcWeb.MethodDescriptor(
-    '/szconfig.SzConfig/UnregisterDataSource',
+    "/szconfig.SzConfig/UnregisterDataSource",
     grpcWeb.MethodType.UNARY,
     szconfig_pb.UnregisterDataSourceRequest,
     szconfig_pb.UnregisterDataSourceResponse,
     (request: szconfig_pb.UnregisterDataSourceRequest) => {
       return request.serializeBinary();
     },
-    szconfig_pb.UnregisterDataSourceResponse.deserializeBinary
+    szconfig_pb.UnregisterDataSourceResponse.deserializeBinary,
   );
 
   unregisterDataSource(
     request: szconfig_pb.UnregisterDataSourceRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szconfig_pb.UnregisterDataSourceResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szconfig_pb.UnregisterDataSourceResponse>;
 
   unregisterDataSource(
     request: szconfig_pb.UnregisterDataSourceRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szconfig_pb.UnregisterDataSourceResponse) => void): grpcWeb.ClientReadableStream<szconfig_pb.UnregisterDataSourceResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szconfig_pb.UnregisterDataSourceResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szconfig_pb.UnregisterDataSourceResponse>;
 
   unregisterDataSource(
     request: szconfig_pb.UnregisterDataSourceRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szconfig_pb.UnregisterDataSourceResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szconfig_pb.UnregisterDataSourceResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szconfig.SzConfig/UnregisterDataSource',
+        this.hostname_ + "/szconfig.SzConfig/UnregisterDataSource",
         request,
         metadata || {},
         this.methodDescriptorUnregisterDataSource,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szconfig.SzConfig/UnregisterDataSource',
-    request,
-    metadata || {},
-    this.methodDescriptorUnregisterDataSource);
+      this.hostname_ + "/szconfig.SzConfig/UnregisterDataSource",
+      request,
+      metadata || {},
+      this.methodDescriptorUnregisterDataSource,
+    );
   }
 
   methodDescriptorVerifyConfig = new grpcWeb.MethodDescriptor(
-    '/szconfig.SzConfig/VerifyConfig',
+    "/szconfig.SzConfig/VerifyConfig",
     grpcWeb.MethodType.UNARY,
     szconfig_pb.VerifyConfigRequest,
     szconfig_pb.VerifyConfigResponse,
     (request: szconfig_pb.VerifyConfigRequest) => {
       return request.serializeBinary();
     },
-    szconfig_pb.VerifyConfigResponse.deserializeBinary
+    szconfig_pb.VerifyConfigResponse.deserializeBinary,
   );
 
   verifyConfig(
     request: szconfig_pb.VerifyConfigRequest,
-    metadata?: grpcWeb.Metadata | null): Promise<szconfig_pb.VerifyConfigResponse>;
+    metadata?: grpcWeb.Metadata | null,
+  ): Promise<szconfig_pb.VerifyConfigResponse>;
 
   verifyConfig(
     request: szconfig_pb.VerifyConfigRequest,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: szconfig_pb.VerifyConfigResponse) => void): grpcWeb.ClientReadableStream<szconfig_pb.VerifyConfigResponse>;
+    callback: (
+      err: grpcWeb.RpcError,
+      response: szconfig_pb.VerifyConfigResponse,
+    ) => void,
+  ): grpcWeb.ClientReadableStream<szconfig_pb.VerifyConfigResponse>;
 
   verifyConfig(
     request: szconfig_pb.VerifyConfigRequest,
     metadata?: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: szconfig_pb.VerifyConfigResponse) => void) {
+    callback?: (
+      err: grpcWeb.RpcError,
+      response: szconfig_pb.VerifyConfigResponse,
+    ) => void,
+  ) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ +
-          '/szconfig.SzConfig/VerifyConfig',
+        this.hostname_ + "/szconfig.SzConfig/VerifyConfig",
         request,
         metadata || {},
         this.methodDescriptorVerifyConfig,
-        callback);
+        callback,
+      );
     }
     return this.client_.unaryCall(
-    this.hostname_ +
-      '/szconfig.SzConfig/VerifyConfig',
-    request,
-    metadata || {},
-    this.methodDescriptorVerifyConfig);
+      this.hostname_ + "/szconfig.SzConfig/VerifyConfig",
+      request,
+      metadata || {},
+      this.methodDescriptorVerifyConfig,
+    );
   }
-
 }
-

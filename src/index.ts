@@ -1,4 +1,7 @@
-export { SzGrpcEnvironment, SzGrpcEnvironmentOptions } from "./szGrpcEnvironment";
+export {
+  SzGrpcEnvironment,
+  SzGrpcEnvironmentOptions,
+} from "./szGrpcEnvironment";
 export { SzEngineFlags } from "./senzing/SzEngineFlags";
 export { SzGrpcConfig } from "./szGrpcConfig";
 export { SzGrpcConfigManager } from "./szGrpcConfigManager";
