@@ -1046,7 +1046,7 @@ export class SzGrpcWebEngine extends SzGrpcWebBase implements SzEngine {
         }
         const request = new GetVirtualEntityByRecordIdRequest();
         request.setRecordKeys(
-          JSON.stringify(recordIdsAsJsonString(recordKeys)),
+          recordIdsAsJsonString(recordKeys),
         );
         request.setFlags(bigIntToNumber(flags));
         this.client.getVirtualEntityByRecordId(

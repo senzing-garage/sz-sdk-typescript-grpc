@@ -180,7 +180,7 @@ export function recordIdsAsJsonString(
   if (Array.isArray(values)) {
     const identifiersList = (values as Array<[string, string | number]>).map(
       (recordKey: [string, string | number]) => {
-        return `{"DATA_SOURCE": "${recordKey[0]}", "RECORD_ID": "${recordKey[1]}"})`;
+        return `{"DATA_SOURCE": "${recordKey[0]}", "RECORD_ID": "${recordKey[1]}"}`;
       },
     );
     retVal = `{"RECORDS": [${identifiersList.join(",")}]}`;
