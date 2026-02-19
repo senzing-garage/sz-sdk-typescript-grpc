@@ -44,14 +44,14 @@ jobs:
           npm run package:web
 
       - name: Upload grpc package artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: grpc-package
           path: dist/@senzing/sz-sdk-typescript-grpc-*.tgz
           retention-days: 1
 
       - name: Upload grpc-web package artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: grpc-web-package
           path: dist/@senzing/sz-sdk-typescript-grpc-web-*.tgz
