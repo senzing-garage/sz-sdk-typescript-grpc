@@ -14,7 +14,8 @@
     "removeComments": false,
     "sourceMap": true,
     "declaration": true,
-    "noEmitOnError": true
+    "noEmitOnError": true,
+    "typeRoots": ["./node_modules/@types"]
   },
   "files": [
     "src/szGrpcWebConfig.ts",
