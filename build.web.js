@@ -57,3 +57,18 @@ fs.cpSync(path.join('.','src'), path.join('.', ...'dist/@senzing/sz-sdk-typescri
         console.error(err);
     }
 });
+
+// convert CJS require('google-protobuf') in _web_pb.js files to ESM import
+const distDir = path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web'.split('/'));
+const pbFiles = glob.sync(path.join(distDir, '**/*_web_pb.js'));
+if (pbFiles.length > 0) {
+    replaceInFile({
+        files: pbFiles,
+        from: /var jspb = require\('google-protobuf'\);/g,
+        to: "import * as jspb from 'google-protobuf';",
+    }).then(results => {
+        console.log('Converted _web_pb.js require to ESM import:', results.filter(r => r.hasChanged).map(r => r.file));
+    }).catch(err => {
+        console.error('Error converting _web_pb.js files:', err);
+    });
+}
