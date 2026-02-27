@@ -57,8 +57,34 @@ fs.cpSync(path.join('.','src'), path.join('.', ...'dist/@senzing/sz-sdk-typescri
     }
 });
 
-// convert CJS patterns in _web_pb.js files to ESM
+// add .js extensions to relative imports in all .js files (Node.js ESM requires explicit extensions)
 const distDir = path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web'.split('/'));
+const allJsFiles = glob.sync(path.join(distDir, '**/*.js'));
+for (const file of allJsFiles) {
+    const fileDir = path.dirname(file);
+    let content = fs.readFileSync(file, 'utf8');
+    let changed = false;
+    // match: from "./path" or from "../path" (without .js extension)
+    const updated = content.replace(
+        /(from\s+["'])(\.\.?\/[^"']+)(["'])/g,
+        (match, pre, importPath, post) => {
+            if (importPath.endsWith('.js') || importPath.endsWith('.json')) return match;
+            const resolved = path.resolve(fileDir, importPath);
+            // check if it's a directory (resolve to /index.js)
+            if (fs.existsSync(resolved) && fs.statSync(resolved).isDirectory()) {
+                changed = true;
+                return `${pre}${importPath}/index.js${post}`;
+            }
+            changed = true;
+            return `${pre}${importPath}.js${post}`;
+        }
+    );
+    if (changed) {
+        fs.writeFileSync(file, updated, 'utf8');
+    }
+}
+
+// convert CJS patterns in _web_pb.js files to ESM
 const pbFiles = glob.sync(path.join(distDir, '**/*_web_pb.js'));
 for (const file of pbFiles) {
     let content = fs.readFileSync(file, 'utf8');
