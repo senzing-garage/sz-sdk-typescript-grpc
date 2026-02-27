@@ -32,13 +32,12 @@ if(fs.existsSync(path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web/ind
 fs.cpSync(path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web/src'.split('/')), path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web'.split('/')), { recursive: true});
 fs.rmSync(path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web/src'.split('/')), { recursive: true, force: true });
 
-// rename "package.web.json" -> "package.json"
-if(fs.existsSync(path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web/package.web.json'.split('/')))) {
-    fs.renameSync(
-        path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web/package.web.json'.split('/')), 
-        path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web/package.json'.split('/'))
-    );
-}
+// copy source "package.web.json" -> dist "package.json"
+// (tsc resolveJsonModule strips unknown fields like "type", so copy from source directly)
+fs.cpSync(
+    path.join('.', 'src', 'package.web.json'),
+    path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web/package.json'.split('/'))
+);
 
 // copy js/ts that include "_web_pb" in their names
 const foldersToScan = [
