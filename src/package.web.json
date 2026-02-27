@@ -1,5 +1,6 @@
 {
   "name": "@senzing/sz-sdk-typescript-grpc-web",
+  "type": "module",
   "main": "./index.web.js",
   "version": "4.0.0-beta.4.0",
   "author": "development@senzing.com",

@@ -32,13 +32,12 @@ if(fs.existsSync(path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web/ind
 fs.cpSync(path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web/src'.split('/')), path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web'.split('/')), { recursive: true});
 fs.rmSync(path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web/src'.split('/')), { recursive: true, force: true });
 
-// rename "package.web.json" -> "package.json"
-if(fs.existsSync(path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web/package.web.json'.split('/')))) {
-    fs.renameSync(
-        path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web/package.web.json'.split('/')), 
-        path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web/package.json'.split('/'))
-    );
-}
+// copy source "package.web.json" -> dist "package.json"
+// (tsc resolveJsonModule strips unknown fields like "type", so copy from source directly)
+fs.cpSync(
+    path.join('.', 'src', 'package.web.json'),
+    path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web/package.json'.split('/'))
+);
 
 // copy js/ts that include "_web_pb" in their names
 const foldersToScan = [
@@ -57,3 +56,18 @@ fs.cpSync(path.join('.','src'), path.join('.', ...'dist/@senzing/sz-sdk-typescri
         console.error(err);
     }
 });
+
+// convert CJS require('google-protobuf') in _web_pb.js files to ESM import
+const distDir = path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web'.split('/'));
+const pbFiles = glob.sync(path.join(distDir, '**/*_web_pb.js'));
+if (pbFiles.length > 0) {
+    replaceInFile({
+        files: pbFiles,
+        from: /var jspb = require\('google-protobuf'\);/g,
+        to: "import * as jspb from 'google-protobuf';",
+    }).then(results => {
+        console.log('Converted _web_pb.js require to ESM import:', results.filter(r => r.hasChanged).map(r => r.file));
+    }).catch(err => {
+        console.error('Error converting _web_pb.js files:', err);
+    });
+}
