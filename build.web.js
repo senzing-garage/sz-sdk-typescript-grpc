@@ -57,17 +57,42 @@ fs.cpSync(path.join('.','src'), path.join('.', ...'dist/@senzing/sz-sdk-typescri
     }
 });
 
-// convert CJS require('google-protobuf') in _web_pb.js files to ESM import
+// convert CJS patterns in _web_pb.js files to ESM
 const distDir = path.join('.', ...'dist/@senzing/sz-sdk-typescript-grpc-web'.split('/'));
 const pbFiles = glob.sync(path.join(distDir, '**/*_web_pb.js'));
-if (pbFiles.length > 0) {
-    replaceInFile({
-        files: pbFiles,
-        from: /var jspb = require\('google-protobuf'\);/g,
-        to: "import * as jspb from 'google-protobuf';",
-    }).then(results => {
-        console.log('Converted _web_pb.js require to ESM import:', results.filter(r => r.hasChanged).map(r => r.file));
-    }).catch(err => {
-        console.error('Error converting _web_pb.js files:', err);
-    });
+for (const file of pbFiles) {
+    let content = fs.readFileSync(file, 'utf8');
+
+    // convert require('google-protobuf') to ESM import
+    content = content.replace(
+        /var jspb = require\('google-protobuf'\);/g,
+        "import * as jspb from 'google-protobuf';"
+    );
+
+    // extract symbol names from goog.exportSymbol('proto.xxx.Name', ...)
+    const symbolRegex = /goog\.exportSymbol\('proto\.\w+\.(\w+)'/g;
+    const symbols = [];
+    let match;
+    while ((match = symbolRegex.exec(content)) !== null) {
+        symbols.push(match[1]);
+    }
+
+    // replace goog.object.extend(exports, proto.xxx) with ESM named exports
+    const extendsMatch = content.match(/goog\.object\.extend\(exports, (proto\.\w+)\);/);
+    if (extendsMatch && symbols.length > 0) {
+        const namespace = extendsMatch[1];
+        const namedExports = symbols
+            .map(s => `export const ${s} = ${namespace}.${s};`)
+            .join('\n');
+        content = content.replace(
+            /goog\.object\.extend\(exports, proto\.\w+\);/,
+            namedExports
+        );
+    } else {
+        console.warn('WARNING: Could not convert CJS exports to ESM in:', file,
+            `(extendsMatch: ${!!extendsMatch}, symbols: ${symbols.length})`);
+    }
+
+    fs.writeFileSync(file, content, 'utf8');
+    console.log('Converted to ESM:', file, `(${symbols.length} exports)`);
 }
