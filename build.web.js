@@ -88,6 +88,9 @@ for (const file of pbFiles) {
             /goog\.object\.extend\(exports, proto\.\w+\);/,
             namedExports
         );
+    } else {
+        console.warn('WARNING: Could not convert CJS exports to ESM in:', file,
+            `(extendsMatch: ${!!extendsMatch}, symbols: ${symbols.length})`);
     }
 
     fs.writeFileSync(file, content, 'utf8');
