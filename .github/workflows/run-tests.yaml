@@ -35,6 +35,10 @@ jobs:
         id: build-web-package
         run: npm run build:web
 
+      - name: Verify web package loads in Node.js
+        id: verify-web-package
+        run: node --input-type=module -e "await import('./dist/@senzing/sz-sdk-typescript-grpc-web/index.web.js')"
+
       - name: Create Archive
         id: create-archive
         run: npm run package:test
