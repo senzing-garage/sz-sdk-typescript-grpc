@@ -31,6 +31,10 @@ jobs:
         id: build-package
         run: npm run build
 
+      - name: Build Web Package
+        id: build-web-package
+        run: npm run build:web
+
       - name: Create Archive
         id: create-archive
         run: npm run package:test
