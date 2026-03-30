@@ -3,6 +3,7 @@
  * @hideconstructor
  */
 export class SzEngineFlags {
+  static SZ_INCLUDE_FEATURE_HASHES = 1n << 41n;
   static SZ_INCLUDE_FEATURE_SCORES = 1n << 26n;
   static SZ_INCLUDE_MATCH_KEY_DETAILS = 1n << 34n;
 
