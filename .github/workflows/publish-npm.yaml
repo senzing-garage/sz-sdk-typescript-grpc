@@ -13,8 +13,6 @@ permissions: {}
 jobs:
   build:
     name: Build packages
-    outputs:
-      status: ${{ job.status }}
     permissions:
       contents: read
     runs-on: ubuntu-latest
@@ -25,7 +23,7 @@ jobs:
           persist-credentials: false
 
       - name: Use Node.js 22.x
-        uses: actions/setup-node@v6.3.0
+        uses: actions/setup-node@v6.4.0
         with:
           node-version: 22.x
           cache: ""
@@ -60,8 +58,6 @@ jobs:
   publish-grpc:
     name: Publish @senzing/sz-sdk-typescript-grpc
     needs: build
-    outputs:
-      status: ${{ job.status }}
     permissions:
       contents: read
       id-token: write
@@ -74,7 +70,7 @@ jobs:
           name: grpc-package
 
       - name: Use Node.js 22.x
-        uses: actions/setup-node@v6.3.0
+        uses: actions/setup-node@v6.4.0
         with:
           node-version: 22.x
           cache: ""
@@ -87,8 +83,6 @@ jobs:
   publish-grpc-web:
     name: Publish @senzing/sz-sdk-typescript-grpc-web
     needs: build
-    outputs:
-      status: ${{ job.status }}
     permissions:
       contents: read
       id-token: write
@@ -101,7 +95,7 @@ jobs:
           name: grpc-web-package
 
       - name: Use Node.js 22.x
-        uses: actions/setup-node@v6.3.0
+        uses: actions/setup-node@v6.4.0
         with:
           node-version: 22.x
           cache: ""
@@ -113,20 +107,13 @@ jobs:
 
   slack-notification:
     needs: [build, publish-grpc, publish-grpc-web]
-    if: >-
-      ${{
-        always() && (
-          contains(fromJSON('["failure", "cancelled"]'),
-            needs.build.outputs.status) ||
-          contains(fromJSON('["failure", "cancelled"]'),
-            needs.publish-grpc.outputs.status) ||
-          contains(fromJSON('["failure", "cancelled"]'),
-            needs.publish-grpc-web.outputs.status)
-        )
-      }}
-    secrets:
-      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-      SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
-    uses: senzing-factory/build-resources/.github/workflows/build-failure-slack-notification.yaml@v4
-    with:
-      job-status: "failure"
+    if: always() && (failure() || cancelled())
+    permissions: {}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Slack on failure
+        uses: senzing-factory/build-resources/slack-failure-notification@v4
+        with:
+          job-status: failure
+          slack-channel: ${{ secrets.SLACK_CHANNEL }}
+          slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}

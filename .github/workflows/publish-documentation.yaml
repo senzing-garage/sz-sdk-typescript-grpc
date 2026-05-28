@@ -11,8 +11,6 @@ permissions: {}
 
 jobs:
   build:
-    outputs:
-      status: ${{ job.status }}
     permissions:
       contents: read
     runs-on: ubuntu-latest
@@ -26,7 +24,7 @@ jobs:
           persist-credentials: false
 
       - name: use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v6.3.0
+        uses: actions/setup-node@v6.4.0
         with:
           node-version: ${{ matrix.node-version }}
           package-manager-cache: false
@@ -49,8 +47,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     needs: build
-    outputs:
-      status: ${{ job.status }}
     permissions:
       pages: write
       id-token: write
@@ -67,10 +63,13 @@ jobs:
 
   slack-notification:
     needs: [build, publish]
-    if: ${{ always() && contains(fromJSON('["failure", "cancelled"]'), needs.build.outputs.status) && contains(fromJSON('["failure", "cancelled"]'), needs.publish.outputs.status) }}
-    secrets:
-      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-      SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
-    uses: senzing-factory/build-resources/.github/workflows/build-failure-slack-notification.yaml@v4
-    with:
-      job-status: ${{ needs.build.outputs.status && needs.publish.outputs.status }}
+    if: always() && (failure() || cancelled())
+    permissions: {}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Slack on failure
+        uses: senzing-factory/build-resources/slack-failure-notification@v4
+        with:
+          job-status: failure
+          slack-channel: ${{ secrets.SLACK_CHANNEL }}
+          slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
