@@ -7,7 +7,7 @@
   "description": "A TypeScript library for handling Senzing SDK gRPC connections.",
   "types": "./index.d.ts",
   "dependencies": {
-    "@grpc/grpc-js": "^1.12.5",
+    "@grpc/grpc-js": "^1.14.4",
     "@grpc/proto-loader": "^0.8.1",
     "google-protobuf": "^3.21.4"
   },
