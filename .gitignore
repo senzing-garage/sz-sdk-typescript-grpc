@@ -136,3 +136,4 @@ dist
 
 # temporary and log files
 *.changes.yml
+.claude/settings.local.json
